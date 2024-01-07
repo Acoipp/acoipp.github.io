@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数学学习笔记4 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,二阶递推数列若一个递推式 $f_i&amp;#x3D;af_{i-1}+bf_{i-2}(0&amp;lt;a,b)$，那么这个递推式就是一个二阶递推数列。
+我们以斐波那契数列为例来探讨一下某个特殊类型的二阶递推数,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数学学习笔记4 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,二阶递推数列若一个递推式 $f_i&amp;#x3D;af_{i-1}+bf_{i-2}(0&amp;lt;a,b)$，那么这个递推式就是一个二阶递推数列。
+我们以斐波那契数列为例来探讨一下某个特殊类型的二阶递推数,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数学学习笔记4 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,二阶递推数列若一个递推式 $f_i&amp;#x3D;af_{i-1}+bf_{i-2}(0&amp;lt;a,b)$，那么这个递推式就是一个二阶递推数列。
+我们以斐波那契数列为例来探讨一下某个特殊类型的二阶递推数,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数学学习笔记4</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数学学习笔记4</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E4%BA%8C%E9%98%B6%E9%80%92%E6%8E%A8%E6%95%B0%E5%88%97/" rel="tag">二阶递推数列</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%91%A8%E6%9C%9F/" rel="tag">周期</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%AC%A7%E6%8B%89%E5%87%86%E5%88%99/" rel="tag">欧拉准则</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="二阶递推数列"><a href="#二阶递推数列" class="headerlink" title="二阶递推数列"></a>二阶递推数列</h1><p>若一个递推式 $f_i&#x3D;af_{i-1}+bf_{i-2}(0&lt;a,b)$，那么这个递推式就是一个二阶递推数列。</p>
+<p>我们以斐波那契数列为例来探讨一下某个特殊类型的二阶递推数列的性质。</p>
+<p>$$<br>f_i&#x3D;f_{i-1}+f_{i-2}<br>$$</p>
+<p>通项公式（可由特征方程推出，此处不详细介绍）：<br>$$f_n&#x3D;\dfrac{1}{\sqrt{5}}(\dfrac{(1+\sqrt{5})^n}{2^n}-\dfrac{(1-\sqrt{5})^n}{2^n})$$</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ol>
+<li>卡西尼性质：$f_{i-1}f_{i+1}-f_i^2&#x3D;(-1)^i$。</li>
+<li>附加性：$f_{n+k}&#x3D;f_nf_{k-1}+f_{n+1}f_k$。</li>
+<li>$\forall k \in \mathbf{N},f_n \mid f_{nk}$。</li>
+<li>若 $f_a \mid f_b$ 则 $a \mid b$。</li>
+<li>最大公因数：$\gcd(f_a,f_b)&#x3D;\gcd(a,b)$。</li>
+<li>以斐波那契数列相邻两项作为输入会使欧几里德算法达到最坏复杂度。</li>
+</ol>
+<h2 id="求出第-i-个值"><a href="#求出第-i-个值" class="headerlink" title="求出第 $i$ 个值"></a>求出第 $i$ 个值</h2><p>我们可以用矩阵乘法，即：<br>$$\begin{bmatrix}f_i &amp; f_{i+1}\end{bmatrix} \times \begin{bmatrix}0 &amp; 1 \ 1 &amp; 1\end{bmatrix}&#x3D;\begin{bmatrix}f_{i+1} &amp; f_{i+2}\end{bmatrix}$$</p>
+<p>时间复杂度可以看做是 $O(\log n)$。</p>
+<p>特别的如果 $5$ 在 $\bmod$ 下有二次剩余的话，我们可以直接通过通项公式解决，时间复杂度是小常数的 $O(\log n)$。</p>
+<h2 id="求出值为-x-的最前下标"><a href="#求出值为-x-的最前下标" class="headerlink" title="求出值为 $x$ 的最前下标"></a>求出值为 $x$ 的最前下标</h2><p>即求出最小的 $i$ 使得 $f_i&#x3D;x$。</p>
+<p>首先这个情况必须满足 $5$ 有二次剩余，否则会很麻烦，此处假设 $5$ 有二次剩余。</p>
+<p>下面令 $x \gets x \times \sqrt{5}$，通过通项公式计算，设 $A&#x3D;\dfrac{(1+\sqrt{5})^n}{2^n},B&#x3D;\dfrac{(1-\sqrt{5})^n}{2^n}$，那么有 $AB&#x3D;(-1)^n$ 并且 $(A-B)^2&#x3D;x^2$。</p>
+<p>于是知二求一即可，分讨 $4$ 种情况，求一下二次剩余和 bsgs 即可。（可能还需要用到原根，详见笔记 1）</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 1000000009</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> phi (mod-1)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> inv 383008016</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;ext/pb_ds/assoc_container.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;ext/pb_ds/hash_policy.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> g 13</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_pbds;</span><br><span class="line">ll n,a,b,ans=LLONG_MAX,cnt,cnt1,cnt2,cntt;</span><br><span class="line">__gnu_pbds::gp_hash_table&lt;ll,ll&gt; op;</span><br><span class="line"><span class="function">ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">bsgs</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	op.<span class="built_in">clear</span>();</span><br><span class="line">    ll t = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(p)),now = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll j=<span class="number">0</span>;j&lt;t;j++) op[b*now%p] = j,now = now*a%p;</span><br><span class="line">    ll cnt = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=t;i++)&#123;</span><br><span class="line">		ll ans;</span><br><span class="line">		<span class="keyword">if</span>(op.<span class="built_in">find</span>(cnt)!=op.<span class="built_in">end</span>()) ans=op[cnt];</span><br><span class="line">		<span class="keyword">else</span> ans=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(ans&gt;=<span class="number">0</span>&amp;&amp;i*t-ans&gt;<span class="number">0</span>) <span class="keyword">return</span> i*t-ans;</span><br><span class="line">		cnt = cnt*now%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> p+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	n=n*inv%mod;</span><br><span class="line">	a = (<span class="number">1</span>+inv)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod,b = (<span class="number">1</span>-inv+mod)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">	cout&lt;&lt;(<span class="built_in">qmi</span>(a,<span class="number">2</span>,mod)+<span class="built_in">qmi</span>(b,<span class="number">2</span>,mod))%mod&lt;&lt;endl;</span><br><span class="line">	<span class="comment">//n is odd</span></span><br><span class="line">	cnt=n*n%mod,cnt=(cnt<span class="number">-4</span>+mod)%mod,cntt=<span class="built_in">bsgs</span>(g,cnt,mod);</span><br><span class="line">	<span class="keyword">if</span>(cntt%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">		cnt1=(<span class="built_in">qmi</span>(g,cntt/<span class="number">2</span>,mod)+n)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod,cnt2=(<span class="built_in">qmi</span>(g,cntt/<span class="number">2</span>+phi/<span class="number">2</span>,mod)+n)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">		ans=<span class="built_in">min</span>(ans,<span class="built_in">bsgs</span>(a*a%mod,cnt1*a%mod,mod)*<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">		ans=<span class="built_in">min</span>(ans,<span class="built_in">bsgs</span>(a*a%mod,cnt2*a%mod,mod)*<span class="number">2</span><span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//n is oven</span></span><br><span class="line">	cnt=n*n%mod,cnt=(cnt+<span class="number">4</span>+mod)%mod,cntt=<span class="built_in">bsgs</span>(g,cnt,mod);</span><br><span class="line">	<span class="keyword">if</span>(cntt%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">		cnt1=(<span class="built_in">qmi</span>(g,cntt/<span class="number">2</span>,mod)+n)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod,cnt2=(<span class="built_in">qmi</span>(g,cntt/<span class="number">2</span>+phi/<span class="number">2</span>,mod)+n)*<span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">		ans=<span class="built_in">min</span>(ans,<span class="built_in">bsgs</span>(a*a%mod,cnt1,mod)*<span class="number">2</span>);</span><br><span class="line">		ans=<span class="built_in">min</span>(ans,<span class="built_in">bsgs</span>(a*a%mod,cnt2,mod)*<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ans&lt;=mod) cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;-1\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模意义下周期性"><a href="#模意义下周期性" class="headerlink" title="模意义下周期性"></a>模意义下周期性</h2><p>先说结论，如果 $\sqrt{5}$ 在模 $p$ 下有可以表示的数，那么周期一定整除 $p-1$，否则周期一定整除 $2p+2$。（$p$ 是大于 $5$ 的质数）</p>
+<p>并且周期是一个环，不是 $\rho$ 形状的。</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>设 $A&#x3D;\dfrac{(1+\sqrt{5})^n}{2^n},B&#x3D;\dfrac{(1-\sqrt{5})^n}{2^n}$，如果 $\sqrt{5} \in Z_p$，那么 $A \in Z_p,B \in Z_p$，根据费马小定理，那么 $A^p \equiv A,B^p \equiv B$，立即得 $d(p) \mid p-1$。</p>
+<p>如果 $\sqrt{5} \not\in Z_p$，那么 $A,B \in Z_p[\sqrt{5}]$，此处涉及到“扩域”的知识，大概就是设 $z&#x3D;ax+by$ 其中 $y&#x3D;\sqrt{5}$，$z \in Z_p[\sqrt{5}]$，我们可以对于它定义加法乘法运算，并且满足交换律，结合律，分配律，故我们可以在这个域里面执行四则运算。</p>
+<p>但是 $AB$ 仍然等于 $-1$，所以：</p>
+<p>$$<br>\begin{aligned}<br>A^p &amp;&#x3D; (-BA)A^p\<br>&amp;&#x3D;-A^{p+1}B\<br>&amp;&#x3D;-B((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)\<br>&amp;&#x3D;B<br>\end{aligned}<br>$$</p>
+<p>解释一下为什么 $A^{p+1}&#x3D;((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)$，首先我们知道 $A^{p-1}$ 因为 $5$ 在模 $p$ 意义下没有二次剩余，所以 $A^{p-1}$ 也没有可以表示出来的数，但是因为 $p$ 是奇素数，所以 $p-1$ 是偶数，那么 $\sqrt{5}^{p-1}&#x3D;5^{\frac{p-1}{2}}$ 是可以表示出来的，它的平方就是 $5^{p-1}$，根据费马小定理可得 $5^{p-1} \equiv 1$，所以 $5^{\frac{p-1}{2}}&#x3D;1$ 或者 $-1$，如果它等于 $1$，那么 $\sqrt{5}$ 就可以表示出来，所以它等于 $-1$。（需要二项式展开，此处略过）</p>
+<h3 id="欧拉准则"><a href="#欧拉准则" class="headerlink" title="欧拉准则"></a>欧拉准则</h3><p>这里就可以推出来，如果 $p$ 是奇质数，那么当 $m^{\frac{p-1}{2}} \equiv 1$ 时，$m$ 有二次剩余，当它等于 $-1$ 时，$m$ 没有二次剩余。</p>
+<p>所以 $A^{p-1}&#x3D; -1$，所以 $A^{p+1} &#x3D; -A^2&#x3D;AB&#x3D;((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)&#x3D;-1$。</p>
+<p>同理 $B^p&#x3D;A$，所以 $A^{2p+3}&#x3D;A^{2p+2}A&#x3D;(-1)^2A&#x3D;A$，于是找到一个循环节 $2p+2$。</p>
+<p>证毕。</p>
+<p>如果要找最小周期的话，像阶一样求解即可，但是判断的时候用矩阵乘法即可。</p>
+<p>这个周期称作皮萨诺周期，如果我们要求其它数的周期的话，我们需要先分解，然后直接用 $\operatorname{lcm}$ 合并。</p>
+<p>有性质 $d(p^k)&#x3D;p \times d(p^{k-1})(2 \le k)$ 且 $p$ 是质数，特别的当 $p \le 5$ 的时候需要手动找循环节，$d(2)&#x3D;3,d(3)&#x3D;8,d(5)&#x3D;20$。</p>
+<p>那么合数的循环节也可以求了，并且可以证明 $d(m) \le 6m$，且只有在满足 $m&#x3D;2\times 5^k$ 的形式时才取到等号。</p>
+<p>特别的，如果是其它二阶递推我们把特征方程写出来之后也含有根号，如果这个根号能够在模 $p$ 意义下表示出来，也需要计算最小周期，不能认为周期一定是 $p-1$ 或者 $2p+2$。</p>
+<p>寻找周期的代码（需要特判 $1 \le p \le 5$）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,mod,n,i,ans,tempp,d[<span class="number">1000005</span>],tot,a[<span class="number">2</span>][<span class="number">2</span>],maps[<span class="number">2</span>][<span class="number">2</span>],temp[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(y==<span class="number">0</span>) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">gcd</span>(y,x%y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">char</span> <span class="title">nc</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">char</span> buf[<span class="number">1000000</span>],*p=buf,*q=buf;</span><br><span class="line">	<span class="keyword">return</span> p==q&amp;&amp;(q=(p=buf)+<span class="built_in">fread</span>(buf,<span class="number">1</span>,<span class="number">1000000</span>,stdin),p==q)?EOF:*p++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="type">char</span> c = <span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">&#x27;0&#x27;</span>||c&gt;<span class="string">&#x27;9&#x27;</span>)c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">&#x27;9&#x27;</span>&amp;&amp;c&gt;=<span class="string">&#x27;0&#x27;</span>)res=res*<span class="number">10</span>+c-<span class="string">&#x27;0&#x27;</span>,c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> obuf[<span class="number">1</span>&lt;&lt;<span class="number">21</span>],*p3=obuf; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">pc</span><span class="params">(<span class="type">char</span> c)</span></span>&#123; </span><br><span class="line">	p3-obuf&lt;=(<span class="number">1</span>&lt;&lt;<span class="number">20</span>)?(*p3++=c):(<span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout),p3=obuf,*p3++=c); </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123; </span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) <span class="built_in">pc</span>(<span class="string">&#x27;-&#x27;</span>),x=-x; </span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">9</span>) <span class="built_in">write</span>(x/<span class="number">10</span>); </span><br><span class="line">	<span class="built_in">pc</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">times</span><span class="params">(ll a[<span class="number">2</span>][<span class="number">2</span>],ll b[<span class="number">2</span>][<span class="number">2</span>])</span></span>&#123;</span><br><span class="line">	temp[<span class="number">0</span>][<span class="number">0</span>] = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>]+a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>])%mod;</span><br><span class="line">	temp[<span class="number">0</span>][<span class="number">1</span>] = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>]+a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>])%mod;</span><br><span class="line">	temp[<span class="number">1</span>][<span class="number">0</span>] = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>]+a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>])%mod;</span><br><span class="line">	temp[<span class="number">1</span>][<span class="number">1</span>] = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>]+a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>])%mod;</span><br><span class="line">	a[<span class="number">0</span>][<span class="number">0</span>] = temp[<span class="number">0</span>][<span class="number">0</span>],a[<span class="number">0</span>][<span class="number">1</span>] = temp[<span class="number">0</span>][<span class="number">1</span>],a[<span class="number">1</span>][<span class="number">0</span>] = temp[<span class="number">1</span>][<span class="number">0</span>],a[<span class="number">1</span>][<span class="number">1</span>] = temp[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">getf</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">	a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>,a[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>,a[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	maps[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>,maps[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>,maps[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>,maps[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p&amp;<span class="number">1</span>) <span class="built_in">times</span>(a,maps);</span><br><span class="line">		<span class="built_in">times</span>(maps,maps);</span><br><span class="line">		p&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(a[<span class="number">0</span>][<span class="number">0</span>]==<span class="number">0</span>&amp;&amp;a[<span class="number">0</span>][<span class="number">1</span>]==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">	ll now = p;</span><br><span class="line">	tot = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">2</span>;i*i&lt;=p;i++) <span class="keyword">while</span>(p%i==<span class="number">0</span>) d[++tot] = i,p/=i;</span><br><span class="line">	<span class="keyword">if</span>(p&gt;<span class="number">1</span>) d[++tot] = p;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=tot;i++) <span class="keyword">if</span>(<span class="built_in">getf</span>(now/d[i])) now/=d[i];</span><br><span class="line">	<span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">check</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">qmi</span>(x,(y<span class="number">-1</span>)/<span class="number">2</span>,y)==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">sol</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	mod = x;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">2</span>) <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">3</span>) <span class="keyword">return</span> <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">4</span>) <span class="keyword">return</span> <span class="number">6</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">5</span>) <span class="keyword">return</span> <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">check</span>(<span class="number">5</span>,x)?<span class="built_in">solve</span>(<span class="number">2</span>*x+<span class="number">2</span>):<span class="built_in">solve</span>(x<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">141414</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	T=<span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">1</span>;</span><br><span class="line">		n=<span class="built_in">read</span>();</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">1</span>) ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">2</span>) ans=<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">3</span>) ans=<span class="number">8</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">4</span>) ans=<span class="number">6</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">5</span>) ans=<span class="number">20</span>;</span><br><span class="line">		<span class="keyword">if</span>(n&gt;<span class="number">5</span>)&#123;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;</span><br><span class="line">					tempp = <span class="built_in">sol</span>(i);</span><br><span class="line">					n /= i;</span><br><span class="line">					<span class="keyword">while</span>(n%i==<span class="number">0</span>) n/=i,tempp*=i;</span><br><span class="line">					ans = ans*tempp/<span class="built_in">gcd</span>(ans,tempp);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(n&gt;<span class="number">1</span>) tempp=<span class="built_in">sol</span>(n),ans = ans*tempp/<span class="built_in">gcd</span>(ans,tempp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">write</span>(ans),<span class="built_in">pc</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

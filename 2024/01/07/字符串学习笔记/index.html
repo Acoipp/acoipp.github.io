@@ -10,8 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="OI/ACM 相关笔记,KMP 及其相关见 广义 KMP 以及其扩展（Broad Sense Kmp）（NOTE-7）。
-trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp,"> 
+    <meta name="description" content="OI/ACM 相关笔记,KMP 及其相关见广义 KMP 以及其扩展（Broad Sense Kmp）。
+trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp 的一个过程。
+可,"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -22,8 +23,9 @@ trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符�
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="字符串学习笔记 - Acoipp 的个人博客"/>
-    <meta name="twitter:description" content="OI/ACM 相关笔记,KMP 及其相关见 广义 KMP 以及其扩展（Broad Sense Kmp）（NOTE-7）。
-trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp,"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,KMP 及其相关见广义 KMP 以及其扩展（Broad Sense Kmp）。
+trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp 的一个过程。
+可,"/>
     
     
     
@@ -31,8 +33,9 @@ trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符�
     <meta property="og:site_name" content="Acoipp 的个人博客"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content="字符串学习笔记 - Acoipp 的个人博客"/>
-    <meta property="og:description" content="OI/ACM 相关笔记,KMP 及其相关见 广义 KMP 以及其扩展（Broad Sense Kmp）（NOTE-7）。
-trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp,"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,KMP 及其相关见广义 KMP 以及其扩展（Broad Sense Kmp）。
+trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp 的一个过程。
+可,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -74,7 +77,7 @@ trie 及其相关普通 trie这里不再赘述，主要就是插入一个字符�
 
         </div>
         <div class="content markdown">
-            <h2 id="KMP-及其相关"><a href="#KMP-及其相关" class="headerlink" title="KMP 及其相关"></a>KMP 及其相关</h2><p>见 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/674469/guang-yi-kmp-yi-ji-ji-kuo-zhan-broad-sense-kmpnote-7-post">广义 KMP 以及其扩展（Broad Sense Kmp）（NOTE-7）</a>。</p>
+            <h2 id="KMP-及其相关"><a href="#KMP-及其相关" class="headerlink" title="KMP 及其相关"></a>KMP 及其相关</h2><p>见广义 KMP 以及其扩展（Broad Sense Kmp）。</p>
 <h2 id="trie-及其相关"><a href="#trie-及其相关" class="headerlink" title="trie 及其相关"></a>trie 及其相关</h2><h3 id="普通-trie"><a href="#普通-trie" class="headerlink" title="普通 trie"></a>普通 trie</h3><p>这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp 的一个过程。</p>
 <h3 id="可持久化-trie"><a href="#可持久化-trie" class="headerlink" title="可持久化 trie"></a>可持久化 trie</h3><p>类似于可持久化线段树的建树过程，复制每个节点，然后对于相应的子节点进行递归处理（线段树是二叉，trie 是 $|C|$ 叉，$C$ 是字符集）</p>
 <p>所以建树的过程大概是 $O(\sum |S| \times |C|)$，一般把 $C$ 看做一个常数。（序列除外）</p>

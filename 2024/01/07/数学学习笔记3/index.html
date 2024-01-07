@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数学学习笔记3 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,Burnside 引理定义设 $A \times S &amp;#x3D; B$，其中 $A,B$ 是一个序列，$S$ 是一种置换，例如把 $1$ 号元素放到 $2$ 号元素的位置，把 $2$ 号元素放到 ,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数学学习笔记3 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,Burnside 引理定义设 $A \times S &amp;#x3D; B$，其中 $A,B$ 是一个序列，$S$ 是一种置换，例如把 $1$ 号元素放到 $2$ 号元素的位置，把 $2$ 号元素放到 ,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数学学习笔记3 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,Burnside 引理定义设 $A \times S &amp;#x3D; B$，其中 $A,B$ 是一个序列，$S$ 是一种置换，例如把 $1$ 号元素放到 $2$ 号元素的位置，把 $2$ 号元素放到 ,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数学学习笔记3</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数学学习笔记3</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Burnside-%E5%BC%95%E7%90%86/" rel="tag">Burnside 引理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BE%A4%E8%AE%BA/" rel="tag">群论</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="Burnside-引理"><a href="#Burnside-引理" class="headerlink" title="Burnside 引理"></a>Burnside 引理</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>设 $A \times S &#x3D; B$，其中 $A,B$ 是一个序列，$S$ 是一种置换，例如把 $1$ 号元素放到 $2$ 号元素的位置，把 $2$ 号元素放到 $3$ 号元素的位置等等。</p>
+<p>那么若这里有若干个 $S$，这些 $S$ 互相进行变换也不会产生其它的元素，则这些 $S$ 满足：</p>
+<blockquote>
+<p>一定有单位变换，即所变换前后有元素都不变。</p>
+</blockquote>
+<p>并且衍生出了一个定理，若 $A \times S&#x3D;B$，则称 $A,B$ 等价，设 $sum$ 为所有序列的等价类，则：</p>
+<p>$$<br>sum &#x3D; \dfrac{1}{cnt}\sum_{S} P(S)<br>$$</p>
+<p>其中 $cnt$ 是 $S$ 的数量，$P(S)$ 就等于<strong>经过 $S$ 这个变换后不变的序列数量</strong>。</p>
+<h2 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h2><p>有一个 $6$ 个面的正方体筛子，每个面可以染成 $k$ 种颜色种的任意一种，如果两个正方体筛子涂色后经过若干次旋转完全相同，则称这两个筛子相同，问不同的筛子有多少个？</p>
+<p>首先，直接算肯定会算重，我们考虑利用 Burnside 定理来算。</p>
+<p>因为我们讨论所有转的情况：</p>
+<blockquote>
+<p>不转，那么前后不变的染色数就是 $k^6$。  </p>
+</blockquote>
+<blockquote>
+<p>沿着两个相对面的中点的连线转 $90\degree$，前后不变的染色数是 $k^3$，因为选的两个面可以任意染色，并且剩下的四个面颜色必须相同才能通过旋转后相同。两个相对的面有 $3$ 种选择，可以向左或者向右 $90\degree$，所以这部分的代价是 $6 \times k^3$。</p>
+</blockquote>
+<blockquote>
+<p>沿着两个相对面的中点的连线转 $180\degree$，前后不变的染色数是 $k^4$，因为选的两个面可以任意染色，并且剩下的四个面中相对的面的颜色必须相同才能通过旋转后相同。两个相对的面有 $3$ 种选择，所以这部分的代价是 $3 \times k^4$。</p>
+</blockquote>
+<blockquote>
+<p>沿着两个相对面棱的中点的连线转 $180\degree$，前后不变的染色数是 $k^3$，因为有一组相对的面要染相同颜色，另外有两对相邻的面要染相同颜色，两个相对的棱有 $3$ 种选择，所以这部分的代价是 $6 \times k^3$。</p>
+</blockquote>
+<blockquote>
+<p>沿着两个相对顶点的连线转 $120\degree$，前后不变的染色数是 $k^2$，因为这两个顶点连接的 $3$ 个面颜色必须相同，两个相对的顶点有 $4$ 种选择，逆时针或者顺时针有 $2$ 个选择，所以这部分的代价是 $8 \times k^2$。</p>
+</blockquote>
+<p>因此，总的 $cnt&#x3D;1+6+3+6+8$，答案为：</p>
+<p>$$<br>sum&#x3D;\dfrac{1}{24}(k^6+6 \times k^3+3 \times k^4+6 \times k^3+8 \times k^2)<br>$$</p>
+<p>这就是一个经典的 Burnside 定理的运用。</p>
+<p>证明可以参考 Aaron_luomiao 的博客 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/Alm/burnside-yin-li-zheng-ming">here</a>，写得十分形象生动。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

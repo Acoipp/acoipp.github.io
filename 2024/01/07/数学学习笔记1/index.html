@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数学学习笔记1 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,矩阵的初等变换以下的矩阵大小都是 $n \times n$ 的，即为方阵。
+初等行变换作用：交换第 $i,j$ 行的所有元素，即构造矩阵 $T$ 使得 $TA$ 交换了 $A$ 矩阵的第 $i,j$,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数学学习笔记1 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,矩阵的初等变换以下的矩阵大小都是 $n \times n$ 的，即为方阵。
+初等行变换作用：交换第 $i,j$ 行的所有元素，即构造矩阵 $T$ 使得 $TA$ 交换了 $A$ 矩阵的第 $i,j$,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数学学习笔记1 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,矩阵的初等变换以下的矩阵大小都是 $n \times n$ 的，即为方阵。
+初等行变换作用：交换第 $i,j$ 行的所有元素，即构造矩阵 $T$ 使得 $TA$ 交换了 $A$ 矩阵的第 $i,j$,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数学学习笔记1</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数学学习笔记1</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/LGV-%E5%BC%95%E7%90%86/" rel="tag">LGV 引理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag">矩阵</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E6%A0%91%EF%BC%88Matrix-Tree%EF%BC%89%E5%AE%9A%E7%90%86/" rel="tag">矩阵树（Matrix-Tree）定理</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="tag">线性代数</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%A1%8C%E5%88%97%E5%BC%8F/" rel="tag">行列式</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="矩阵的初等变换"><a href="#矩阵的初等变换" class="headerlink" title="矩阵的初等变换"></a>矩阵的初等变换</h1><p>以下的矩阵大小都是 $n \times n$ 的，即为方阵。</p>
+<h2 id="初等行变换"><a href="#初等行变换" class="headerlink" title="初等行变换"></a>初等行变换</h2><p>作用：交换第 $i,j$ 行的所有元素，即构造矩阵 $T$ 使得 $TA$ 交换了 $A$ 矩阵的第 $i,j$ 行。（$i&lt;j$）</p>
+<p>构造方式：</p>
+<p>$$<br>T&#x3D;\begin{bmatrix}<br>I_{i-1} &amp; &amp; &amp; &amp;  \<br>&amp; 0 &amp;  &amp;1 \<br>&amp; &amp; I_{j-i-1} &amp;\<br>&amp; 1 &amp;  &amp;0 \<br> &amp; &amp; &amp; &amp; I_{n-j} \<br>\end{bmatrix}<br>$$</p>
+<p>空的地方都是 $0$。</p>
+<h2 id="倍法变换"><a href="#倍法变换" class="headerlink" title="倍法变换"></a>倍法变换</h2><p>作用：让第 $i$ 行的元素都乘上系数 $k$。</p>
+<p>构造方式：</p>
+<p>$$<br>T&#x3D;\begin{bmatrix}<br>I_{i-1} &amp; &amp;  \<br>&amp; k &amp;   \<br> &amp; &amp; I_{n-i} \<br>\end{bmatrix}<br>$$</p>
+<p>空的地方都是 $0$。</p>
+<h2 id="消法变换"><a href="#消法变换" class="headerlink" title="消法变换"></a>消法变换</h2><p>作用：让第 $i$ 行的元素都乘上系数 $k$ 并且加到第 $j$ 行上。（$i&lt;j$）</p>
+<p>构造方式：</p>
+<p>$$<br>T&#x3D;\begin{bmatrix}<br>I_{i-1} &amp; &amp; &amp; &amp;  \<br>&amp; 1 &amp;  &amp;0 \<br>&amp; &amp; I_{j-i-1} &amp;\<br>&amp; k &amp;  &amp;1 \<br> &amp; &amp; &amp; &amp; I_{n-j} \<br>\end{bmatrix}<br>$$</p>
+<p>空的地方都是 $0$。</p>
+<p>这样我们就证明了高斯消元中的所有初等变换都可以写成矩阵 $A$ 左乘某个矩阵 $T$ 的方式，即 $A \gets TA$。</p>
+<h1 id="高斯（约当）消元"><a href="#高斯（约当）消元" class="headerlink" title="高斯（约当）消元"></a>高斯（约当）消元</h1><h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>给定一组 $n$ 元一次方程，试求出这个方程的解。</p>
+<p>一般情况下可以视作给定矩阵 $A&#x3D;m \times n,B &#x3D; 1 \times m$，求出一个 $X&#x3D;n \times 1$，使得 $AX&#x3D;B$。</p>
+<p>很显然，根据初中数学学到的知识，对于第 $i$ 个方程，如果它第 $i$ 项的系数不为 $0$，则可以把其他方程第 $i$ 项的系数都消掉而且不影响其他项的非 $0$ 性。</p>
+<p>如果第 $i$ 项的系数为 $0$，那就交换一行上来，如果任意方程第 $i$ 项的系数都为 $0$，就是下面要说的一种情况。</p>
+<p>然后在理想情况下得到的方程最后是这个样子的：</p>
+<p>$$<br>\begin{bmatrix}{}<br>a_{1,1} &amp; 0 &amp; 0&amp; 0 &amp;\cdots &amp;0  \<br>0 &amp; a_{2,2} &amp; 0 &amp; 0&amp;\cdots &amp;0 \<br>\vdots &amp; \vdots &amp; \vdots &amp;\vdots &amp; \ddots  &amp; \vdots \<br>0 &amp; 0 &amp; 0 &amp; 0&amp;\cdots &amp;a_{n,n} \<br>\end{bmatrix}<br>$$</p>
+<p>那么这个时候直接用右边的值除以这个矩阵的系数就可以了。</p>
+<p>但是可能会有下列特例：</p>
+<p>$$<br>\begin{bmatrix}{}<br>a_{1,1} &amp; 0 &amp; 0&amp; 0 &amp;\cdots &amp;0  \<br>0 &amp; a_{2,2} &amp; 0 &amp; 0&amp;\cdots &amp;0 \<br>\vdots &amp; \vdots &amp; \vdots &amp;\vdots &amp; \ddots  &amp; \vdots \<br>0 &amp; 0 &amp; 0 &amp; 0&amp;\cdots &amp;a_{n-3,n-3} \<br>0 &amp; 0 &amp; 0 &amp; 0&amp;\cdots &amp;0 \<br>0 &amp; 0 &amp; 0 &amp; 0&amp;\cdots &amp;0 \<br>0 &amp; 0 &amp; 0 &amp; 0&amp;\cdots &amp;0 \<br>\end{bmatrix}<br>$$</p>
+<p>即 $n-2,n-1,n$ 没有值的限制，那么这个时候我们把这些元素称作自由元，值得注意的是：自由元互相不影响，即如果每个数字有 $P$ 种取值的话，整个方程解得个数就是 $P^\text{自由元的数量}$。</p>
+<p>如果我们要给出方程的一组解，那就需要先确定自由元的值，然后因为其它值可能不确定，就需要代入自由元的取值，从矩阵的第 $n$ 行倒推回去，这样子做肯定是对的，我们可以考虑消元的顺序。</p>
+<p>还有一种情况，就是无解，无解表现和自由元非常相似，只是后面系数都为 $0$ 的行，常数却不为 $0$，这样子方程就产生了冲突，即无解。</p>
+<p>时间复杂度：$O(N^3)$，空间复杂度：$O(N^2)$。</p>
+<h2 id="减少数量"><a href="#减少数量" class="headerlink" title="减少数量"></a>减少数量</h2><p>如果我们可以用一组变量 $a_1 \times a_n$，表示所有其它的数，且满足其它的数的方程的话，我们就可以将方程和未知数的数量缩减到 $O(n)$，而并非原来的 $O(n^2)$ 及更多。</p>
+<h2 id="应用场合"><a href="#应用场合" class="headerlink" title="应用场合"></a>应用场合</h2><p>通常只需要把方程列出来，然后减少数量之后求解。</p>
+<p>注意到消元的过程中只有加减乘除运算，故对于某个数取模意义下的方程也是同样的操作。</p>
+<p>特别是对于 $2$ 取模（bool 变量的方程），因为位运算中，单个位的加减法都是异或，乘除法都是与运算，我们可以使用 bitset 优化至 $O(\dfrac{N^3}{64})$ 的时间复杂度。</p>
+<p>或者是解一些期望概率的题。</p>
+<p>这里顺带提一下：</p>
+<p>图上随机游走类问题，如果要求点的期望，那么方程可以很轻松的列出来，即：</p>
+<p>$$<br>dp_u &#x3D; \begin{cases}\sum_{v \to u} \dfrac{dp_v}{d_v}+1 &amp; u&#x3D;1 \ \sum_{v \to u} \dfrac{dp_v}{d_v} &amp; u \ne 1\end{cases}<br>$$</p>
+<p>特别的，如果限制了终点，特判即可，因为到了终点就停止了，所以到终点的概率就是它的期望。</p>
+<p>这是最重要的结论之一。</p>
+<h1 id="矩阵的逆"><a href="#矩阵的逆" class="headerlink" title="矩阵的逆"></a>矩阵的逆</h1><p>如果一个矩阵 $A &#x3D; n \times n$ 存在另外一个 $B &#x3D; n \times n$ 的矩阵使得 $A \times B &#x3D; I$，则 $B$ 称作 $A$ 的逆。</p>
+<p>那么有一个定理，将一个矩阵 $[AI]$ 通过初等行变换成一个阶梯形最简矩阵，那么如果这个矩阵的左边是单位矩阵 $I$，代表 $A$ 这个矩阵有逆，逆就是右边的矩阵，即化简后变成 $[IA^{-1}]$ 的形式。</p>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>我们可以知道任意一种初等行变换都可以表示成矩阵 $A \gets TA$ 的形式，那么高斯消元实际上就是乘了很多个不同的 $T$，并且这些矩阵是有结合律的。</p>
+<p>最后高斯（约当）消元是需要每行除以一个系数，变成：</p>
+<p>$$<br>\begin{bmatrix}<br>1 &amp; 0 &amp; 0  &amp; \cdots &amp;0&amp; | &amp; x_1 \<br>0 &amp; 1 &amp; 0  &amp; \cdots &amp;0&amp; | &amp; x_2 \<br>0 &amp; 0 &amp; 1  &amp; \cdots &amp;0&amp; | &amp; x_3 \<br>0 &amp; 0 &amp; 0  &amp; \ddots &amp;0&amp; | &amp; x_k \<br>0 &amp; 0 &amp; 0  &amp; \ddots &amp;1&amp; | &amp; x_n \<br> \end{bmatrix}<br>$$</p>
+<p>右边的通过竖线分开的是增广矩阵，可以省略，然后左边就是单位矩阵了，这个时候我们相当于对原来的矩阵乘了一些 $T$，那么怎么找出这个 $T$ 呢？</p>
+<p>于是我们在 $A$ 的右边添加一个矩阵 $I$，变换的时候顺便在 $I$ 上记录了乘上的矩阵 $T$，最后输出就可以了。</p>
+<p>证毕。</p>
+<p>如果高斯（约当）消元中碰到了无解的情况，即有一个数字被消完了，并且其每一个系数都为 $0$，则 $A$ 没有逆矩阵。</p>
+<p>那么代码就很好写了，最后记得除以每一行的系数，总时间复杂度为 $O(n^3)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 805</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">matrix</span>&#123;ll a[N][N],n1,n2;&#125;maps,inv;</span><br><span class="line">ll n,m1,m2,i,j,k,x,K,temp,ans=LLONG_MAX,pos;</span><br><span class="line"><span class="function">ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++) cin&gt;&gt;inv.a[i][j];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) inv.a[i][i+n]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		pos = i;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++) <span class="keyword">if</span>(inv.a[j][i]&gt;inv.a[i][i]) pos=j;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*n;j++) <span class="built_in">swap</span>(inv.a[i][j],inv.a[pos][j]);</span><br><span class="line">		<span class="keyword">if</span>(inv.a[i][i]==<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;No Solution\n&quot;</span>;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==j) <span class="keyword">continue</span>;</span><br><span class="line">			temp = inv.a[j][i]*<span class="built_in">qmi</span>(inv.a[i][i],mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">			<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=<span class="number">2</span>*n;k++) inv.a[j][k]-=(inv.a[i][k]*temp)%mod,inv.a[j][k]=(inv.a[j][k]%mod+mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">qmi</span>(inv.a[i][i],mod<span class="number">-2</span>,mod);</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=<span class="number">2</span>*n;j++) inv.a[i][j] = inv.a[i][j]*temp%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			cout&lt;&lt;inv.a[i][j+n]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">4 2 2</span></span><br><span class="line"><span class="comment">1 3</span></span><br><span class="line"><span class="comment">2 4</span></span><br><span class="line"><span class="comment">1 1 1 1</span></span><br><span class="line"><span class="comment">0 0 0 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="线性相关"><a href="#线性相关" class="headerlink" title="线性相关"></a>线性相关</h1><p>如果设 $a$ 是一个长度为 $m$ 的向量，设其为 $a_1,a_2,\dots,a_m$，那么设 $ka&#x3D;{ka_1,ka_2,\dots,ka_m}$，如果若干个向量满足存在实数集 $S$ 满足：</p>
+<p>$$<br>S_1a_1+S_2a_2+S_3a_3+\dots+s_na_n&#x3D;0<br>$$</p>
+<p>则称这 $n$ 个向量线性相关，特别的我们称一个向量空间（即一个满足运算封闭性的向量集合）的线性基，为选出最多的向量空间中的向量，满足这些向量线性无关。</p>
+<p>可以证明这些向量可以表出这个向量空间内的所有数，不能表出任意一个向量空间外的数。</p>
+<blockquote>
+<p>表出代表只使用加法和乘法对于向量和实数进行操作得到另外的向量。</p>
+</blockquote>
+<h2 id="矩阵的秩"><a href="#矩阵的秩" class="headerlink" title="矩阵的秩"></a>矩阵的秩</h2><p>矩阵有两种秩：行秩和列秩。行秩就是把矩阵的每一个行看成向量，然后它所属的向量空间的线性基的大小；列秩就是把矩阵的每一个列看成向量，然后它所属的向量空间的线性基的大小。</p>
+<p>可以证明出来行秩等于列秩。</p>
+<p>证明：</p>
+<blockquote>
+<p>初等行变换不影响矩阵的行秩，最后行秩等于 $n$ 减去自由变元的数量。</p>
+</blockquote>
+<blockquote>
+<p>初等行变换也不影响矩阵的列秩。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>交换两行不影响矩阵的列秩，因为相当于交换了两个未知数。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>一行同时乘上一个数不影响矩阵的列秩，因为相当于某个未知数扩大了 $k$ 倍。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>一行乘上一个数加到另一行上也不影响矩阵的列秩，因为相当于一个方程 $ax+b$，并且通过前两者结合也可以证明。</p>
+</blockquote>
+</blockquote>
+<p>证毕。</p>
+<p>所以任意矩阵的秩可以记作 $\operatorname{rank}(A)$ 或者 $r(A)$，它既可以表示列秩，也可以表示行秩。</p>
+<p>如果一个 $n \times n$ 的方阵 $A$，如果 $r(A)&#x3D;n$，则称它满秩。</p>
+<p>如果一个 $n \times m$ 的矩阵 $A$，如果 $r(A)&#x3D;n$，则称它行满秩；如果 $r(A)&#x3D;m$，则称它列满秩。</p>
+<p>显然 $r(A) \le \min(n,m)$。</p>
+<h3 id="重要结论"><a href="#重要结论" class="headerlink" title="重要结论"></a>重要结论</h3><ul>
+<li><p>矩阵满秩、矩阵可逆、线性方程组有唯一解可以相互转化。</p>
+</li>
+<li><p>系数矩阵的秩等于增广矩阵的秩的时候，线性方程组有解。</p>
+</li>
+<li><p>满秩矩阵可以拆分成若干个初等变换矩阵的乘积。（考虑高斯消元的操作）</p>
+</li>
+<li><p>任意矩阵乘以满秩矩阵，秩不改变。（用上一条结论证明）</p>
+</li>
+<li><p>$r(A+B) \le r(A)+r(B)$</p>
+</li>
+<li><p>$\max(r(A),r(B)) \le r([A|B]) \le r(A)+r(B)$</p>
+</li>
+<li><p>$r(AB) \le \min(r(A),r(B))$</p>
+</li>
+</ul>
+<h1 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>行列式是一个 $n \times n$ 的方阵，每个方阵 $A$ 对应了一个值 $\det(A)$，这个值就叫做这个行列式的值。</p>
+<p>如果我们设 $\pi(p)$ 表示长度为 $n$ 的排列 $p$ 的逆序对数量，那么就有：</p>
+<p>$$<br>\det(A) &#x3D; \sum_{p}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n A_{i,p_i}<br>$$</p>
+<p>这是行列式的一个全排列方法定义，由此可得矩阵 $A$ 的行列式与矩阵 $A^{T}$ （$A$ 的转置）的行列式相等。</p>
+<p>或者是一种递归的解法，任取一行 $i$，则：</p>
+<p>$$<br>\det(A)&#x3D;\sum_{j&#x3D;1}^n (-1)^{i+j}A_{i,j}\det(M_{i,j})<br>$$</p>
+<p>其中 $M_{i,j}$ 表示从 $A$ 中删去第 $i$ 行和第 $j$ 列的数的矩阵，显然它是一个 $n-1 \times n-1$ 的方阵。</p>
+<p>或者我们可以任取一行 $j$，则：</p>
+<p>$$<br>\det(A)&#x3D;\sum_{i&#x3D;1}^n (-1)^{i+j}A_{i,j}\det(M_{i,j})<br>$$</p>
+<p>前者叫做按第 $i$ 行展开，后者叫做按第 $j$ 列展开，所以不论按哪一行展开或者哪一列展开，所得结果都是一样的。</p>
+<p>于是有结论：</p>
+<p>定理：行列式 $\det A$ 的某一行（或某一列）的元素与另外一行（或另外一列）对应元素的代数余子式的乘积之和等于 $0$。</p>
+<p>换句话说，当 $i\neg j$ 时：</p>
+<p>$$a_{1,i}M_{1,j}+a_{2,i}M_{2,j}+\cdots+a_{i,n}M_{j,n}&#x3D;0$$</p>
+<p>$$a_{1,i}M_{1,j}+a_{2,i}M_{2,j}+\cdots+a_{n,i}M_{n,j}&#x3D;0$$</p>
+<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>暴力计算行列式的时间复杂度达到了指数级别，我们可以利用矩阵的初等变换来减少行列式的计算时间，从而让其降为 $O(n^3)$。</p>
+<h3 id="交换两行"><a href="#交换两行" class="headerlink" title="交换两行"></a>交换两行</h3><p>如果我们交换两行，相当于对于每个排列 $p$，都交换了 $i,j$ 两个位置上的值，那么显然可得 $\pi(p)$ 会变成原来的相反数，绝对值不变。</p>
+<p>所以交换两行用一个变量来记录取反了多少次即可。</p>
+<h3 id="一行乘上-k"><a href="#一行乘上-k" class="headerlink" title="一行乘上 $k$"></a>一行乘上 $k$</h3><p>显然，行列式的值也会乘上 $k$。</p>
+<h3 id="一行乘上-k-加到另外一行"><a href="#一行乘上-k-加到另外一行" class="headerlink" title="一行乘上 $k$ 加到另外一行"></a>一行乘上 $k$ 加到另外一行</h3><p>引理，如果：</p>
+<p>$$A&#x3D;\begin{vmatrix}<br>a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>b_{i,1}+c_{i,1} &amp; b_{i,2}+c_{i,2} &amp; \cdots &amp; b_{i,n}+c_{i,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>a_{n,1} &amp; a_{n,2} &amp; \cdots &amp; a_{n,n}\<br>\end{vmatrix}$$</p>
+<p>$$B&#x3D;\begin{vmatrix}<br>a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>b_{i,1} &amp; b_{i,2} &amp; \cdots &amp; b_{i,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>a_{n,1} &amp; a_{n,2} &amp; \cdots &amp; a_{n,n}\<br>\end{vmatrix}$$</p>
+<p>$$C&#x3D;\begin{vmatrix}<br>a_{1,1} &amp; a_{1,2} &amp; \cdots &amp; a_{1,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>c_{i,1} &amp; c_{i,2} &amp; \cdots &amp; c_{i,n}\<br>\vdots &amp; \vdots &amp;  &amp; \vdots\<br>a_{n,1} &amp; a_{n,2} &amp; \cdots &amp; a_{n,n}\<br>\end{vmatrix}$$</p>
+<p>那么 $\det(A)&#x3D;\det(B)+\det(C)$，我们通过全排列的乘法分配律就可以得到。</p>
+<p>所以我们把操作的行拆成原来的部分，和 $k$ 乘上另外一行的部分，原来的部分显然行列式的值不会变，那么我们需要考虑第 $j$ 行等于第 $i$ 行乘上 $k$ 的行列式的值。（$i \ne j$）</p>
+<p>我们还是考虑全排列，因为交换两行的话 $\pi(p)$ 的奇偶性会改变，我们也可以把这一行的 $k$ 提出来，这样就有完全相同的两行，那么显然答案为 $0$。</p>
+<p>所以这种变换答案不变。</p>
+<p><strong>注意：以上行的操作通过全排列的性质也可以对列通用。</strong></p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>因此，我们可以使用高斯消元消成上三角矩阵，这个时候 $A_{i,j}&#x3D;0(i&gt;j)$，所以行列式的值显然等于主对角线的乘积。</p>
+<p>代码如下，时间复杂度为 $O(n^2(n+\log p))$，并且是没有逆元的解法，可以使用辗转相减法避免除法。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 605</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,a[N][N],i,j,k,mod,ans=<span class="number">1</span>,has,res;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++) cin&gt;&gt;a[i][j];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">while</span>(a[i][i])&#123;</span><br><span class="line">				res = a[j][i]/a[i][i];</span><br><span class="line">				<span class="keyword">for</span>(k=i;k&lt;=n;k++) a[j][k]=(a[j][k]-a[i][k]*res%mod+mod)%mod;</span><br><span class="line">				<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=n)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) ans=ans*a[i][i]%mod;</span><br><span class="line">	<span class="keyword">if</span>(has) ans=(mod-ans)%mod;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">2 998244353</span></span><br><span class="line"><span class="comment">1 4</span></span><br><span class="line"><span class="comment">1 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><h3 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h3><p>设 $k$ 维空间中存在 $k$ 个点，则这 $k$ 个点和原点构成的凸包面积 $\times k!$ 就是：</p>
+<p>$$<br>A&#x3D;\begin{vmatrix}<br>x_{1,1} &amp; x_{2,1} &amp; \cdots &amp; x_{k,1} \<br>x_{1,2} &amp; x_{2,2} &amp; \cdots &amp; x_{k,2} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>x_{1,k} &amp; x_{2,k} &amp; \cdots &amp; x_{k,k}<br>\end{vmatrix}<br>$$</p>
+<p>行列式的值为 $\det(A)$，答案就是 $|\det(A)|$ 这是一个结论，二维的情况显然可以证明，三维及以上就需要想象力了。</p>
+<p>如果是给定的 $k+1$ 个点构成的凸包，我们就需要任意指定一个点为原点建系即可。</p>
+<h3 id="柯西-比内-Cauchy–Binet-公式"><a href="#柯西-比内-Cauchy–Binet-公式" class="headerlink" title="柯西-比内 Cauchy–Binet 公式"></a>柯西-比内 Cauchy–Binet 公式</h3><p>设 $A \in R^{n \times m},B \in R^{m \times n},n \le m$，那么有：</p>
+<p>$$<br>\det(AB) &#x3D; \sum_{S} \det(A_S)\det(B_S)<br>$$</p>
+<p>其中 $S$ 表示下标集合 ${1,2,\dots,m}$ 的 $n$ 元子集，$A_S$ 表示 $A$ 取 $S$ 的列构成的 $n$ 元子式，$B$ 恰好相反。</p>
+<p>当 $A,B$ 为方阵的时候 $\det(AB)&#x3D;\det(A)\det(B)$。</p>
+<h3 id="范德蒙德-Vandermonde-行列式"><a href="#范德蒙德-Vandermonde-行列式" class="headerlink" title="范德蒙德 Vandermonde 行列式"></a>范德蒙德 Vandermonde 行列式</h3><p>定义为：</p>
+<p>$$<br>A &#x3D; \begin{vmatrix}<br>1 &amp; 1 &amp; \dots &amp; 1 \<br>x_1 &amp; x_2 &amp; \dots &amp; x_n \<br>\vdots &amp; \vdots &amp; \cdots &amp; \vdots \<br>x_1^{n-1} &amp; x_2^{n-1} &amp; \dots &amp; x_n^{n-1} \<br>\end{vmatrix}<br>$$</p>
+<p>有 $\det(A)&#x3D;\prod_{1 \le i&lt;j \le n}(x_j-x_i)$，证明可以用高斯消元直接代入求值。</p>
+<h3 id="LGV-引理"><a href="#LGV-引理" class="headerlink" title="LGV 引理"></a>LGV 引理</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>Lindström–Gessel–Viennot lemma 适用范围：有向无环图。</p>
+<p>首先设 $w(P)$ 表示 $P$ 这条路径上的边权的乘积，如果是计数类问题我们可以把所有边权设为 $1$。</p>
+<p>我们设 $e(u,v)$ 表示 $u$ 到 $v$ 的每一条路径的 $w(P)$ 之和，$A$ 为长度为 $n$ 的起点集合，$B$ 为长度为 $n$ 的终点集合。</p>
+<p>设一组 $A$ 到 $B$ 的不相交集合 $S$ 为 $S_i$ 与 $S_j$ 没有公共端点，并且每一条路径恰好连接了 $A$ 中的一个数和 $B$ 中的一个数，而每个顶点也恰好只有一条路径连接它，由此可见 $S$ 的长度一定为 $n$，也即第 $i$ 条路径 $S_i$ 的起点是 $A_i$，终点是 $B_{p_i}$，$p$ 是长度为 $n$ 的排列，设 $\pi(p)$ 表示 $p$ 中逆序对的个数。</p>
+<p>则有：</p>
+<p>$$ M &#x3D; \begin{bmatrix}e(A_1,B_1)&amp;e(A_1,B_2)&amp;\cdots&amp;e(A_1,B_n)\<br>e(A_2,B_1)&amp;e(A_2,B_2)&amp;\cdots&amp;e(A_2,B_n)\<br>\vdots&amp;\vdots&amp;\ddots&amp;\vdots\<br>e(A_n,B_1)&amp;e(A_n,B_2)&amp;\cdots&amp;e(A_n,B_n)\end{bmatrix}$$</p>
+<p>$$\det(M)&#x3D;\sum\limits_{S:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n w(S_i)$$<br>其中 $\sum\limits_{S:A\rightarrow B}$ 表示满足上文要求的 $A\rightarrow B$ 的每一组不相交路径 $S$。</p>
+<p>意思是什么呢？就是上面这个矩阵的行列式的值，等于所有可能的 $w(S)$ 的带符号和，如果 $w$ 恒为 $1$，那么就是所有合法的 $S$ 集合的带符号和。</p>
+<h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><p>首先，由定义得：</p>
+<p>$$<br>\begin{aligned}<br>\det(M)&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n w(S_i) \<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \<br>\end{aligned}<br>$$</p>
+<p>我们可以发现通过乘法分配律展开之后，因为 $w(P)$ 中的 $P$ 可以是多条路径组合，所以就是 $\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P)&#x3D;\sum_{P:p}w(P)$，表示所有起点集合和终点集合与 $p$ 相同的 $P$ 的和，$P$ 是任意路径组，不要求不相交。</p>
+<p>所以：</p>
+<p>$$<br>\begin{aligned}<br>\det(M)<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\sum_{P:p}w(P) \<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\<br>\end{aligned}<br>$$</p>
+<p>到此时 $P$ 也是任意路径组合。</p>
+<p>我们设 $U$ 是要求的集合，而 $V$ 是有相交的路径集合，那么有：</p>
+<p>$$<br>\begin{aligned}<br>&amp;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\<br>&#x3D;&amp;\sum\limits_{U:A\rightarrow B}(-1)^{\pi(u)}\prod_{i&#x3D;1}^n w(U_i)+\sum\limits_{V:A\rightarrow B}(-1)^{\pi(v)}\prod_{i&#x3D;1}^n w(V_i)\\<br>\end{aligned}<br>$$</p>
+<p>我们又可以发现：若 $P$ 存在两条相交的路径 $a_i \to u \to a_j,b_i \to u \to b_j$，那么一定有 $a_i \to u \to b_j,b_i \to u \to a_j$，这两个项符号相反，绝对值相同。（按照之前行列式交换两行的方式证明即可）</p>
+<p>所以 $\sum\limits_{V:A\rightarrow B}(-1)^{\pi(v)}\prod_{i&#x3D;1}^n w(V_i)&#x3D;0$，那么 $\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)<br>&#x3D;\sum\limits_{U:A\rightarrow B}(-1)^{\pi(u)}\prod_{i&#x3D;1}^n w(U_i)$，由此，结论得证。</p>
+<h4 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h4><p>如果是一张普通的有向无环图，是不可以直接运用 LGV 引理的，因为带符号会让问题变得不好处理。</p>
+<p>当然，有一些特殊的图满足以下性质的话我们就可以使用 LGV 引理直接求：</p>
+<ul>
+<li><p>需要求出对于每个 $i$ 找到 $a_i \to b_i$ 的路径，并且路径两两没有公共点。</p>
+</li>
+<li><p>如果排列 $p$ 中有逆序对，那么这些路径一定有交点。</p>
+</li>
+</ul>
+<p>根据 $S$ 的定义，这些情况不会被统计到答案中，因此我们可以直接计算。</p>
+<p>例题参见 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6657">LGV 引理</a>，这个图就满足上述两种情况，可以直接利用行列式求解。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 605</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> M 5000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,m,a[N],b[N],i,j,jc[M],inv[M],maps[N][N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">C</span><span class="params">(ll n,ll m)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;m) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> jc[n]*inv[m]%mod*inv[n-m]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll n)</span></span>&#123;</span><br><span class="line">	ll i,j,k,has=<span class="number">0</span>,ans=<span class="number">1</span>,res;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(maps[j][i]&gt;maps[i][i]) <span class="built_in">swap</span>(maps[i],maps[j]),has^=<span class="number">1</span>;</span><br><span class="line">			res = maps[j][i]*<span class="built_in">qmi</span>(maps[i][i],mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">			<span class="keyword">for</span>(k=i;k&lt;=n;k++) maps[j][k]=maps[j][k]-maps[i][k]*res,maps[j][k]=(maps[j][k]%mod+mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=n) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) ans=ans*maps[i][i]%mod;</span><br><span class="line">	<span class="keyword">if</span>(has) ans=(mod-ans)%mod;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	jc[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">5e6</span>;i++) jc[i]=jc[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">	inv[<span class="number">5000000</span>] = <span class="built_in">qmi</span>(jc[<span class="number">5000000</span>],mod<span class="number">-2</span>,mod);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">5e6</span>;i&gt;=<span class="number">1</span>;i--) inv[i<span class="number">-1</span>]=inv[i]*i%mod;</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) cin&gt;&gt;a[i]&gt;&gt;b[i];</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++) maps[i][j]=<span class="built_in">C</span>(b[j]-a[i]+n<span class="number">-1</span>,n<span class="number">-1</span>);</span><br><span class="line">		cout&lt;&lt;<span class="built_in">solve</span>(m)&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">3 2</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">2 3</span></span><br><span class="line"><span class="comment">5 2</span></span><br><span class="line"><span class="comment">1 3</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">10 5</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">4 7</span></span><br><span class="line"><span class="comment">5 8</span></span><br><span class="line"><span class="comment">7 9</span></span><br><span class="line"><span class="comment">9 10</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">155</span></span><br><span class="line"><span class="comment">2047320</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Matrix-Tree-定理"><a href="#Matrix-Tree-定理" class="headerlink" title="Matrix-Tree 定理"></a>Matrix-Tree 定理</h3><p>矩阵树定理。</p>
+<h4 id="定理内容"><a href="#定理内容" class="headerlink" title="定理内容"></a>定理内容</h4><p>对于一张无向图，定义它的度数矩阵为：</p>
+<p>$$<br>D&#x3D;\begin{bmatrix}<br>d_1 &amp; &amp; &amp; &amp; \<br>&amp; d_2 &amp; &amp; &amp; \<br>&amp; &amp; \ddots &amp; &amp; \<br>&amp; &amp; &amp;  d_{n-1} &amp; \<br>&amp; &amp; &amp; &amp; d_n \<br>\end{bmatrix}<br>$$</p>
+<p>$d_i$ 为 $i$ 节点的度数，同时定义它的邻接矩阵为 $E_{i,j}$ 为 $i \to j$ 的边数，那么它的 Kirchhoff 矩阵 $L$ 为 $E-D$。</p>
+<p>那么我们在行列式中学到了代数余子式 $M_r$ 表示删去第 $r$ 行和第 $r$ 列的元素之后行列式的值，那么有性质 $L_1&#x3D;L_2&#x3D;\dots&#x3D;L_n&#x3D;ans$，其中 $ans$ 就是这张无向图中的生成树的个数。</p>
+<p>于是我们只需要在 $O(n^3)$ 内求出一个行列式的值即可。</p>
+<p>并且如果边有边权（不一定是整数，有可能是向量，参见 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/674469/solution-p5296">P5296 [北京省选集训2019] 生成树计数 题解</a>），那么矩阵树定理可以求出所有生成树的边权乘积的和。</p>
+<p>对于一张有向图，根节点为 $r$，我们要找到以 $r$ 为根的外向树（边从父亲指向子节点，如果是内向树，将边反向即可），我们定义度数矩阵：</p>
+<p>$$<br>D&#x3D;\begin{bmatrix}<br>d_1 &amp; &amp; &amp; &amp; \<br>&amp; d_2 &amp; &amp; &amp; \<br>&amp; &amp; \ddots &amp; &amp; \<br>&amp; &amp; &amp;  d_{n-1} &amp; \<br>&amp; &amp; &amp; &amp; d_n \<br>\end{bmatrix}<br>$$</p>
+<p>$d_i$ 为  $i$ 点的入度，定义邻接矩阵为 $m_{i,j}$ 表示 $i \to j$ 的边数，那么它的 Kirchhoff 矩阵 $L$ 也为 $E-D$。</p>
+<p>因为指定了根节点，所以我们只能输出代数余子式 $L_{root}$ 的值，其它代数余子式的值就是以 $i$ 为根的时候，外向树的个数。</p>
+<h4 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h4><p>略，详见 OI-wiki。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>代码如下，当 $t&#x3D;0$ 的时候代表是无向图，当 $t&#x3D;1$ 的时候代表是有向图：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 605</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,t,x,y,z,a[N][N],i,j,k,mod=<span class="number">1e9</span>+<span class="number">7</span>,ans=<span class="number">1</span>,has,res;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">		x--,y--;</span><br><span class="line">		<span class="keyword">if</span>(x==y) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(t==<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>&amp;&amp;y&gt;=<span class="number">1</span>) a[x][y]-=z,a[y][x]-=z;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>) a[x][x]+=z;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;=<span class="number">1</span>) a[y][y]+=z;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>&amp;&amp;y&gt;=<span class="number">1</span>)a[x][y]-=z;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;=<span class="number">1</span>) a[y][y]+=z;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	n--;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++) a[i][j]=(a[i][j]%mod+mod)%mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">while</span>(a[i][i])&#123;</span><br><span class="line">				res = a[j][i]/a[i][i];</span><br><span class="line">				<span class="keyword">for</span>(k=i;k&lt;=n;k++) a[j][k]=(a[j][k]-a[i][k]*res%mod+mod)%mod;</span><br><span class="line">				<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=n)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) ans=ans*a[i][i]%mod;</span><br><span class="line">	<span class="keyword">if</span>(has) ans=(mod-ans)%mod;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">2 998244353</span></span><br><span class="line"><span class="comment">1 4</span></span><br><span class="line"><span class="comment">1 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

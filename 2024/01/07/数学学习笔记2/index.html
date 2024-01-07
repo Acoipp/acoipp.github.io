@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数学学习笔记2 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,阶定义整数 $a$ 如果存在一个正整数 $n$ 满足 $a^n \equiv 1 \pmod m$，那么最小的那个 $n$ 称作整数 $a$ 的阶，记作 $\operatorname{ord}_m(,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="数学学习笔记2 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,阶定义整数 $a$ 如果存在一个正整数 $n$ 满足 $a^n \equiv 1 \pmod m$，那么最小的那个 $n$ 称作整数 $a$ 的阶，记作 $\operatorname{ord}_m(,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="数学学习笔记2 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,阶定义整数 $a$ 如果存在一个正整数 $n$ 满足 $a^n \equiv 1 \pmod m$，那么最小的那个 $n$ 称作整数 $a$ 的阶，记作 $\operatorname{ord}_m(,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数学学习笔记2</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">数学学习笔记2</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/BSGS/" rel="tag">BSGS</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Millar-Rabin/" rel="tag">Millar-Rabin</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Min-25-%E7%AD%9B/" rel="tag">Min-25 筛</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Pollard-Rho/" rel="tag">Pollard-Rho</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8E%9F%E6%A0%B9/" rel="tag">原根</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%98%B6/" rel="tag">阶</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="阶"><a href="#阶" class="headerlink" title="阶"></a>阶</h1><p>定义整数 $a$ 如果存在一个正整数 $n$ 满足 $a^n \equiv 1 \pmod m$，那么最小的那个 $n$ 称作整数 $a$ 的阶，记作 $\operatorname{ord}_m(a)$ 或者 $\delta_m(a)$。</p>
+<p>容易发现，根据欧拉定理若 $\gcd(a,m)&#x3D;1$ 那么 $a^{\varphi(m)} \equiv 1 \pmod m$。</p>
+<h2 id="性质-1"><a href="#性质-1" class="headerlink" title="性质 1"></a>性质 1</h2><p>$a^1,a^2,a^3,\dots,a^{\delta_m(a)}$ 在模 $m$ 意义下两两不同余。</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>若设 $a^i \equiv a^j \pmod m$，那么 $a_{j-i} \equiv 1 \pmod m$，因为 $1 \le i &lt; j \le  \delta_m(a)$，所以 $j-i &lt; \delta_m(a)$，与阶的定义相违背。</p>
+<h2 id="性质-2"><a href="#性质-2" class="headerlink" title="性质 2"></a>性质 2</h2><p>若 $a^n \equiv 1 \pmod m$ 那么 $\delta_m(a) \mid n$。</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>若设 $n&#x3D;p\delta_m(a)+q$，则 $0 \le q &lt; \delta_m(a)$，并且 $a^{p \delta_m(a)} \equiv 1 \pmod m$，所以 $a^q \equiv 1 \pmod m$，如果 $q \ge 1$，与阶的定义相违背，所以 $q&#x3D;0$，即 $\delta_m(a) \mid n$。</p>
+<h3 id="推论"><a href="#推论" class="headerlink" title="推论"></a>推论</h3><p>若 $a^p \equiv a^q \pmod m$，那么 $p \equiv q \pmod {\delta_m(a)}$。</p>
+<h2 id="性质-3"><a href="#性质-3" class="headerlink" title="性质 3"></a>性质 3</h2><p>若 $m \in N^*$，$a,b \in Z$，$\gcd(a,m)&#x3D;\gcd(b,m)&#x3D;1$，则：</p>
+<p>$$<br>\delta_m(a)\delta_m(b)&#x3D;\delta_m(ab)<br>$$</p>
+<p>的充要条件是 $\gcd(\delta_m(a),\delta_m(b))&#x3D;1$。</p>
+<h3 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h3><h4 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h4><p>因为 $a^{\delta_m(a)} \equiv 1$，$b^{\delta_m(b)} \equiv 1$，所以 $(ab)^{[\delta_m(a),\delta_m(b)]} \equiv 1$。</p>
+<p>那么根据性质 $2$ 可得  $\delta_m(ab) \mid [\delta_m(a),\delta_m(b)]$，所以 $\delta_m(a)\delta_m(b) \mid [\delta_m(a),\delta_m(b)]$，推出 $(\delta_m(a),\delta_m(b))&#x3D;1$。</p>
+<h4 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h4><p>由 $(ab)^{\delta_m(ab)} \equiv 1$，那么 $(ab)^{\delta_m(ab)\delta_m(b)} \equiv a^{\delta_m(ab)\delta_m(b)}\equiv 1$。</p>
+<p>所以 $\delta_m(a)\mid \delta_m(ab)\delta_m(b)$，因为 $\gcd(\delta_m(a),\delta_m(b))&#x3D;1$，所以 $\delta_m(a) \mid \delta_m(ab)$。</p>
+<p>对称地，那么 $\delta_m(b) \mid \delta_m(ab)$。</p>
+<p>所以 $\delta_m(a)\delta_m(b) \mid \delta_m(ab)$。</p>
+<p>另一方面有：$(ab)^{\delta_m(a)\delta_m(b)}\equiv (a^{\delta_m(a)})^{\delta_m(b)} (b^{\delta_m(b)})^{\delta_m(a)} \equiv 1$。</p>
+<p>所以 $\delta_m(ab) \mid \delta_m(a)\delta_m(b)$。</p>
+<p>综上所述，有 $\delta_m(a)\delta_m(b)&#x3D;\delta_m(ab)$。</p>
+<h2 id="性质-4"><a href="#性质-4" class="headerlink" title="性质 4"></a>性质 4</h2><p>对于合法的 $a,k,m$，有 $\delta_m(a^k)&#x3D;\dfrac{\delta_m(a)}{\gcd(\delta_m(a),k)}$。</p>
+<h3 id="证明-3"><a href="#证明-3" class="headerlink" title="证明"></a>证明</h3><p>首先有 $a^{k\delta_m(a^k)} \equiv (a^k)^{\delta_m(a^k)} \equiv 1$，所以 $\delta_m(a) \mid k\delta_m(a^k)$，推得 $\dfrac{\delta_m(a)}{\gcd(\delta_m(a),k)} \mid \delta_m(a^k)$。</p>
+<p>还有 $a^{\delta_m(a)} \equiv 1$，可得 $(a^k)^{\frac{\delta_m(a)}{\gcd(\delta_m(a),k)}} \equiv (a^{\delta_m(a)})^{\frac{k}{\gcd(k,\delta_m(a))}} \equiv 1$。</p>
+<p>所以 $\delta_m(a^k) \mid \dfrac{\delta_m(a)}{\gcd(\delta_m(a),k)}$，综上所述，$\delta_m(a^k) &#x3D; \dfrac{\delta_m(a)}{\gcd(\delta_m(a),k)}$。</p>
+<h2 id="阶的寻找"><a href="#阶的寻找" class="headerlink" title="阶的寻找"></a>阶的寻找</h2><p>如果 $\gcd(a,m) \not&#x3D;1$ 的话，说明 $a^k \not\equiv 1 \pmod m$，可以用 $a \equiv b \pmod m$ 与 $\dfrac{a}{\gcd(a,m)} \equiv \dfrac{b}{\gcd(a,m)} \pmod {\dfrac{m}{\gcd(a,m)}}$ 等价证明。</p>
+<p>所以当 $\gcd(a,m)&#x3D;1$ 时 $a$ 才有阶，此时 $a^{\varphi(m)} \equiv 1$，根据欧拉定理及其推论可以得 $\delta_m(a) \mid \varphi(m)$。</p>
+<p>于是我们对于 $\varphi(m)$ 分解质因数，然后依次除以每个质因数，再用快速幂判断是不是为 $1$ 就可以了，如果为 $1$ 就除一下，否则继续试除即可。</p>
+<p>寻找阶的代码（没有用试除优化）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,i,j,p,q,l[<span class="number">200005</span>],tot;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;n),q=n,p=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i*i&lt;=q;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(q%i==<span class="number">0</span>)&#123;</span><br><span class="line">			p -= p/i;</span><br><span class="line">			<span class="keyword">while</span>(q%i==<span class="number">0</span>) q/=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(q&gt;<span class="number">1</span>) p-=p/q;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=p;i++) <span class="keyword">if</span>(p%i==<span class="number">0</span>) l[++tot]=i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(__gcd(i,n)!=<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;0 &quot;</span>);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">qmi</span>(i,l[j],n)==<span class="number">1</span>)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,l[j]);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j&gt;tot) <span class="built_in">printf</span>(<span class="string">&quot;0 &quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="原根"><a href="#原根" class="headerlink" title="原根"></a>原根</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>对于合法的 $g,m$，如果其满足 $\delta_m(g) &#x3D; \varphi(m)$，那么则称 $g$ 是模 $m$ 的原根。</p>
+<p>容易发现，当 $m$ 为质数时对于任意 $0&lt;i&lt;m$ 的 $g_i \bmod m$ 互不相同。</p>
+<h2 id="判定"><a href="#判定" class="headerlink" title="判定"></a>判定</h2><p>若 $g$ 是模 $m$ 的原根，首先满足 $\gcd(g,m)&#x3D;1$（欧拉定理），然后对于 $m$ 的每个质因数 $t$ 都要满足 $g^{\frac{m}{t}} \not\equiv 1$。</p>
+<p>证明显然，此处不展开叙述。</p>
+<h2 id="个数"><a href="#个数" class="headerlink" title="个数"></a>个数</h2><p>如果一个数 $m$ 有原根，那么它的个数是 $\varphi(\varphi(m))$。</p>
+<h3 id="证明-4"><a href="#证明-4" class="headerlink" title="证明"></a>证明</h3><p>设 $g$ 是 $m$ 的任意一个原根，则有：</p>
+<p>$$<br>\delta_m(g^k)&#x3D;\dfrac{\delta_m(g)}{\gcd(\delta_m(g),k)}<br>$$</p>
+<p>所以当 $\gcd(\delta_m(g),k)&#x3D;1$ 时，$\delta_m(g^k)&#x3D;\varphi(m)$，因为 $\delta_m(g)&#x3D;\varphi(m)$，所以个数是 $\varphi(\varphi(m))$。</p>
+<h2 id="原根存在定理"><a href="#原根存在定理" class="headerlink" title="原根存在定理"></a>原根存在定理</h2><p>一个数 $m$ 存在原根当且仅当它等于 $2$ 或 $4$ 或 $p^k$ 或 $2p^k$。</p>
+<p>证明略。</p>
+<h2 id="最小原根范围"><a href="#最小原根范围" class="headerlink" title="最小原根范围"></a>最小原根范围</h2><p>可证 $g$ 大概在 $m^{\frac{1}{4}}$ 左右，所以暴力找原根的时间复杂度是可以接受的。</p>
+<p>寻找原根的代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,i,j,k,p,q,l[N],tot,ans[N],id,gcd[N],pri[N],ttt,vis[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;n),q=n,p=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i])&#123;</span><br><span class="line">			pri[++ttt]=i;</span><br><span class="line">			<span class="keyword">if</span>(n%i==<span class="number">0</span>) gcd[i]=i;</span><br><span class="line">			<span class="keyword">else</span> gcd[i]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=ttt;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(pri[j]*i&gt;n) <span class="keyword">break</span>;</span><br><span class="line">			vis[i*pri[j]]=<span class="number">1</span>;</span><br><span class="line">			gcd[i*pri[j]]=gcd[i]*gcd[pri[j]];</span><br><span class="line">			<span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i*i&lt;=q;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(q%i==<span class="number">0</span>)&#123;</span><br><span class="line">			p -= p/i;</span><br><span class="line">			<span class="keyword">while</span>(q%i==<span class="number">0</span>) q/=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(q&gt;<span class="number">1</span>) p-=p/q;</span><br><span class="line">	q=p;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i*i&lt;=q;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(q%i==<span class="number">0</span>)&#123;</span><br><span class="line">			l[++tot] = p/i;</span><br><span class="line">			<span class="keyword">while</span>(q%i==<span class="number">0</span>) q/=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(q&gt;<span class="number">1</span>) l[++tot] = p/q;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(gcd[i]!=<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=tot;j++) <span class="keyword">if</span>(<span class="built_in">qmi</span>(i,l[j],n)==<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span>(j&gt;tot)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=i,k=<span class="number">1</span>;k&lt;=p;j=j*i%n,k++) <span class="keyword">if</span>(__gcd(k,p)==<span class="number">1</span>) ans[++id]=j;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(ans+<span class="number">1</span>,ans+id+<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,id);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=id;i++) <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,ans[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="BSGS-算法"><a href="#BSGS-算法" class="headerlink" title="BSGS 算法"></a>BSGS 算法</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>已知 $a,b,p$，求最小的 $t$ 满足下列公式：</p>
+<p>$$<br>a^t \equiv b \pmod{p}<br>$$</p>
+<p>普通的 BSGS 算法能够在 $\gcd(a,p)$ 互质时以 $O(\sqrt{p})$ 的时间复杂度内得出答案。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>核心思想是根号分治。</p>
+<p>设 $r &#x3D; \lceil{\sqrt{t}}\rceil$，则 $t&#x3D;rk+q(0 \leq q &lt; r)$。</p>
+<p>写到式子上就是：</p>
+<p>$$<br>a^{rk+q} \equiv b \pmod{p}<br>$$</p>
+<p>因为 $a$ 有模 $p$ 意义下的逆元，我们可以将式子转化为下面的形式：</p>
+<p>$$<br>a^{rk} \equiv b \times a^{-q} \pmod{p}<br>$$</p>
+<p>注意到左边有不超过根号种取值，右边也有不超过根号种取值，于是预处理两边中的任意一边即可，剩下的那边暴力枚举就好。</p>
+<p>时间复杂度看你存储一边的时候使用的数据结构，如果是 $\text{map}$，时间复杂度多一个 $\log$；如果是 $\text{unordered_map}$，时间复杂度多一个常数。（模运算具有较大的随机性）</p>
+<p>除此之外，我们也可以写成 $a^t&#x3D;a^{kr-q}$ 的形式，代码就是采用的这种结构，但是边界情况一定要判断好。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll p,a,b,t,i,j,cnt,ans=<span class="number">-1</span>;</span><br><span class="line">map&lt;ll,ll&gt; op;</span><br><span class="line"><span class="function">ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t = a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;p&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    t = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(p*<span class="number">1.0</span>));</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;t;j++) op[<span class="function">b*<span class="title">qmi</span><span class="params">(a,j,p)</span>%p] </span>= j;</span><br><span class="line">    a = <span class="built_in">qmi</span>(a,t,p);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=t;i++)&#123;</span><br><span class="line">		cnt = <span class="built_in">qmi</span>(a,i,p);</span><br><span class="line">		<span class="keyword">if</span>(op.<span class="built_in">find</span>(cnt)!=op.<span class="built_in">end</span>()) ans=op[cnt];</span><br><span class="line">		<span class="keyword">else</span> ans=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>(ans&gt;=<span class="number">0</span>&amp;&amp;i*t-ans&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;i*t-ans&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;no solution&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="广义-BSGS"><a href="#广义-BSGS" class="headerlink" title="广义 BSGS"></a>广义 BSGS</h2><p>如果定义一种运算 $p \times q &#x3D; k$，并且对于 $a$ 存在某个结构 $a^{-1}$ 使得 $a \times a^{-1}&#x3D;e$，$e$ 是这种运算的单位元，那么都可以采用 BSGS 求解。</p>
+<p>比如矩阵就可以采用 BSGS 求解，即把上述运算全部改成矩阵的乘法、快速幂即可，时间复杂度为 $O(\sqrt{p}) \times k$，$k$ 是执行一次我们定义的运算的时间复杂度。</p>
+<h1 id="Millar-Rabin"><a href="#Millar-Rabin" class="headerlink" title="Millar-Rabin"></a>Millar-Rabin</h1><p>判定素数经常被认为是一个 NP 问题，但是实际上有确定性多项式算法解决这个问题，但是它在算法竞赛中并不常用，而 Millar-Rabin 是一个非确定性的算法来解决素数判定问题。</p>
+<p>时间复杂度为执行判定的次数乘上 $\log n$。</p>
+<h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>有费马小定理当 $p$ 是质数的时候 $a^{p-1} \equiv 1 \pmod p(1 \le a &lt; p)$，但是反过来是否如此呢？</p>
+<p>事实上反过来会有一种数满足它仍然成立但是不是质数（$a$ 不整除它），这种数称作 Carmichael 数，例如 $561&#x3D;3 \times 11 \times 17$ 就是 Carmichael 数。</p>
+<p>Carmichael 数一定有超过三个不同的质因子，并且不包含平方因子。</p>
+<p>于是根据这点，我们得到了一个最简单的判定方法，称作 Fermat 素性测试，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">millerRabin</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n &lt; <span class="number">3</span>) <span class="keyword">return</span> n == <span class="number">2</span>;</span><br><span class="line">  <span class="comment">// test_time 为测试次数,建议设为不小于 8</span></span><br><span class="line">  <span class="comment">// 的整数以保证正确率,但也不宜过大,否则会影响效率</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= test_time; ++i) &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="built_in">rand</span>() % (n - <span class="number">2</span>) + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">quickPow</span>(a, n - <span class="number">1</span>, n) != <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是我们这个测试无法确定 Carmichael 数的素性，于是我们引进了二次探测定理。</p>
+<p>若 $p$ 是质数，则满足 $x^2 \equiv 1 \pmod p$ 的 $x$ 只可能等于 $1$ 或 $p-1$。</p>
+<p>我们可以分解一下 $(x-1)(x+1) \equiv 0 \pmod p$，因为 $p$ 是质数，所以 $x-1$ 或者 $x+1$ 等于 $p$。</p>
+<p>那么也有数可以通过二次探测定理的逆命题，但是这些数一定是 $p^k$，与 Carmichael 没有交集，故我们可以根据这两个定理设计素数判定的方案。</p>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>将 $a^{n-1} \equiv 1 \pmod n$ 中的指数 $n-1$ 分解为 $n-1&#x3D;u \times 2^t$，在每轮测试中对随机出来的 $a$ 先求出 $v &#x3D; a^{u} \bmod n$，之后对这个值执行最多 $t$ 次平方操作，若发现非平凡平方根时即可判断出其不是素数，否则再使用 Fermat 素性测试判断。</p>
+<p>有一个问题，就是如果 $v$ 在进入循环之前就等于 $1$ 了，那就直接跳过即可，如果 $t$ 次平方操作之后结果仍然不为 $1$（数字不为 $n-1$），那就返回不是素数即可。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">check</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">2</span>||x%<span class="number">2</span>==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ll u = n<span class="number">-1</span>,now = <span class="number">1</span>,temp = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(u%<span class="number">2</span>==<span class="number">0</span>) now*=<span class="number">2</span>,u/=<span class="number">2</span>,temp++;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;<span class="number">12</span>;i++)&#123;</span><br><span class="line">		ll cnt = (<span class="built_in">rnd</span>()%<span class="number">1000000000</span>+<span class="number">1</span>)*(<span class="built_in">rnd</span>()%<span class="number">1000000000</span>+<span class="number">1</span>)%(x<span class="number">-2</span>)+<span class="number">2</span>;</span><br><span class="line">		cnt = <span class="built_in">qmi</span>(cnt,u,x);</span><br><span class="line">		<span class="keyword">if</span>(cnt==<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">1</span>;j&lt;=temp;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(cnt==x<span class="number">-1</span>) <span class="keyword">break</span>;</span><br><span class="line">			cnt = (__int128)cnt*cnt%x;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(cnt!=x<span class="number">-1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>选择的数字看判断素数的范围，如果是 <code>int</code> 类型，那么取判定的底数 $a&#x3D;2,7,61$ 即可；否则取 $a$ 为前 $12$ 个质数即可。</p>
+<h1 id="Pollard-Rho"><a href="#Pollard-Rho" class="headerlink" title="Pollard-Rho"></a>Pollard-Rho</h1><p>给定一个正整数 $N \in \mathbf{N}_{+}$，试快速找到它的一个非平凡因数。</p>
+<p>首先，有一个悖论称作“生日悖论”，如果一年有 $365$ 天，那么一个班如果有至少 $23$ 个人，那么有两个人生日相同的概率将达到 $50%$，如果有至少 $56$ 个人，概率近乎 $100%$。</p>
+<p>我们还可以通过最大公因数来找出某个数的非平凡因子，即如果 $\gcd(k,n)&gt;1$，那么 $\gcd(k,n)$ 一定是大于 $1$ 的 $n$ 的因子。</p>
+<p>我们考虑一个启发式伪随机 $f(x)&#x3D;(x^2+c)\bmod n$ 来生成一个序列 $x_i$：随机取一个 $x_1$，令 $x_2&#x3D;f(x_1),x_3&#x3D;f(x_2),\cdots,x_i&#x3D;f(x_{i-1})$。其中 $c$ 是一个随机选取的常数。</p>
+<p>因为这个序列生成的数列是一个 rho 形态的，就是一个环上面掉了一个链，所以成为 Pollard-Rho。</p>
+<p>这个函数生成序列还有一个性质，如果 $x \equiv y \pmod p$，那么 $f(x) \equiv f(y) \pmod p$。</p>
+<p>证明显然。</p>
+<p>那么根据生日悖论，我们可以在这个环上任取两个数使得这两个数的差的 $n$ 的最大公因数大于 $1$，我们就可以找出来一个因数，这样的时间复杂度就是 $O(n^{\frac{1}{4}})$。</p>
+<p>我们就可以设置两个指针，一个走慢一点，一个走快一点，大概是一倍的速度差，然后判断这两个指针的差值即可。</p>
+<p>同时因为 $\gcd(a,n)&gt;1$，那么 $\gcd(ac,n)&gt;1$，我们可以通过倍增计算，即每隔 $2^k-1$ 个数，计算两个指针的差值，如果两个指针相等了，那么说明它们处在同一个位置，重新执行即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">pollard_rho</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	ll s=<span class="number">0</span>,t=<span class="number">0</span>,c=(<span class="built_in">rnd</span>()%<span class="number">1000000000</span>+<span class="number">1</span>)*(<span class="built_in">rnd</span>()%<span class="number">1000000000</span>+<span class="number">1</span>)%(x<span class="number">-1</span>)+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>,val=<span class="number">1</span>;;i*=<span class="number">2</span>,s=t,val=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">1</span>;j&lt;=i;j++)&#123;</span><br><span class="line">			t=((__int128)t*t+c)%x;</span><br><span class="line">			val=(__int128)val*(ll)(<span class="built_in">abs</span>(s-t))%x;</span><br><span class="line">			<span class="keyword">if</span>(!val) <span class="keyword">return</span> x;</span><br><span class="line">			<span class="keyword">if</span>(j%<span class="number">127</span>==<span class="number">0</span>)&#123;</span><br><span class="line">				ll temp = __gcd(val,x);</span><br><span class="line">				<span class="keyword">if</span>(temp&gt;<span class="number">1</span>) <span class="keyword">return</span> temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		ll temp = __gcd(val,x);</span><br><span class="line">		<span class="keyword">if</span>(temp&gt;<span class="number">1</span>) <span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">found</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">check</span>(x))&#123;</span><br><span class="line">		d[++tot] = x;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	ll temp = x;</span><br><span class="line">	<span class="keyword">while</span>(temp&gt;=x) temp=<span class="built_in">pollard_rho</span>(x);</span><br><span class="line">	<span class="built_in">found</span>(x/temp),<span class="built_in">found</span>(temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总的时间复杂度是小常 $\log$ 乘上 $n^{\frac{1}{4}}$。</p>
+<h1 id="MIN-25-筛"><a href="#MIN-25-筛" class="headerlink" title="MIN_25 筛"></a>MIN_25 筛</h1><h2 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h2><p>给定 $n$，求 $\pi(n)$，$n \le 10^{11}$。</p>
+<p>我们考虑埃氏筛法，那么每一轮枚举 $1 \sim n$ 的质数，但是事实上只需要枚举 $1 \le \sqrt{n}$ 的质数就可以了，因为一个数是合数的话其最小质因子 $\le \sqrt{n}$。</p>
+<p>所以对于每一轮枚举完之后剩下没有被标记的数有 $g(n,k)$ 个，$n$ 是值域，$k$ 是枚举完的轮数，设 $p_k$ 是从小到大第 $k$ 个质数，则有下面的公式：</p>
+<p>$$<br>g(n,k)&#x3D;g(n,k-1)-g(\lfloor \dfrac{n}{p_k} \rfloor,k-1)+k-1<br>$$</p>
+<p>考虑意义，首先我们考虑 $k$ 这一轮筛掉了多少数字，设它们分别为 $a_1,a_2,a_3,\dots,a_m$，那么它们的最小质因子等于 $p_k$，则让它们除以 $p_k$ 之后得到 $\dfrac{a_1}{p_k},\dfrac{a_2}{p_k},\dfrac{a_3}{p_k},\dots,\dfrac{a_m}{p_k}$，这个时候它们的最小质因子大于等于 $p_k$，则这些数的个数是 $g(\lfloor \dfrac{n}{p_k} \rfloor,k-1)-(k-1)$，为什么要减 $k-1$ 呢，是因为这一坨同时算上了质数 $2,3,5,7,\dots$，为了去除多算的，就要减去 $k$ 之前的质数个数 $k-1$ 个。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,K,i,j,r,pri[N],vis[N],tot,f1[N],f2[N],used[N],used_inv[N],utot;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">found</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;=K) <span class="keyword">return</span> f1[x];</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> f2[n/x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	K=<span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=K;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i]) pri[++tot] = i;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i*pri[j]&gt;K) <span class="keyword">break</span>;</span><br><span class="line">			vis[i*pri[j]] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;)&#123;</span><br><span class="line">		r = n/(n/i);</span><br><span class="line">		<span class="keyword">if</span>(n/i&gt;<span class="number">1</span>) used[++utot] = n/i;</span><br><span class="line">		i = r+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">reverse</span>(used+<span class="number">1</span>,used+utot+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=utot;j++)&#123;</span><br><span class="line">		used_inv[j] = n/used[j];       <span class="comment">//过多用除法会导致常数爆炸</span></span><br><span class="line">		<span class="keyword">if</span>(used[j]&lt;=K) f1[used[j]]=used[j]<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">else</span> f2[used_inv[j]]=used[j]<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>,r=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=utot;j&gt;=<span class="number">1</span>;j--)&#123;</span><br><span class="line">			<span class="keyword">if</span>(used[j]&lt;pri[i]*pri[i]) <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">if</span>(used[j]&lt;=K) f1[used[j]]=f1[used[j]]-<span class="built_in">found</span>(used[j]/pri[i])+i<span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">else</span> f2[used_inv[j]]=f2[used_inv[j]]-<span class="built_in">found</span>(used[j]/pri[i])+i<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f2[<span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">10000000000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">455052511</span></span><br><span class="line"><span class="comment">f(pk,n)=f(pk-1,n)-f(pk-1,n/pk)+k-1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度证明此处就不说了，但是总的时间复杂度大概是 $O(\dfrac{n^{\frac{3}{4}}}{\ln n})$。</p>
+<p>特别的，如果是求 $1 \sim n$ 中质数的和，把公式改为下面即可（其实就是动态规划）：</p>
+<p>$$<br>f(n,k)&#x3D;f(n,k-1)-p_k \times f(\lfloor \dfrac{n}{p_k} \rfloor,k-1)+\sum_{i&#x3D;1}^{k-1} p_i \times p_k<br>$$</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

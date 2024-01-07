@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>线性代数里的数据结构——线性基 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,定义在线性代数中我们知道了可以通过高斯消元来求解一个线性空间里面的线性基，那么我们此处考虑一个线性空间只包含若干个数，并且运算是在 $\bmod \ 2$ 下进行的，也就是说加法就是异或操作，这个线,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="线性代数里的数据结构——线性基 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,定义在线性代数中我们知道了可以通过高斯消元来求解一个线性空间里面的线性基，那么我们此处考虑一个线性空间只包含若干个数，并且运算是在 $\bmod \ 2$ 下进行的，也就是说加法就是异或操作，这个线,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="线性代数里的数据结构——线性基 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,定义在线性代数中我们知道了可以通过高斯消元来求解一个线性空间里面的线性基，那么我们此处考虑一个线性空间只包含若干个数，并且运算是在 $\bmod \ 2$ 下进行的，也就是说加法就是异或操作，这个线,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">线性代数里的数据结构——线性基</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">线性代数里的数据结构——线性基</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" rel="tag">线性代数</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/" rel="tag">线性基</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在线性代数中我们知道了可以通过高斯消元来求解一个线性空间里面的线性基，那么我们此处考虑一个线性空间只包含若干个数，并且运算是在 $\bmod \ 2$ 下进行的，也就是说加法就是异或操作，这个线性基我们可以发现很多性质。</p>
+<p>并且表出的系数必须是 $0$ 或者 $1$，不能是其它实数。</p>
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><p>我们可以一个一个把当前线性空间里面的一组基（不是线性基，就是普通的一个基，这个基也能表出线性空间里面的所有数）插入到线性基里面，过程类似于高斯消元。</p>
+<p>从高到底枚举当前这个数为 $1$ 的所有位，如果第 $i$ 位当前没有值，那就让当前的值插入到第 $i$ 位，如果第 $i$ 位当前有值，那就要让当前的值异或上第 $i$ 位的值，继续循环。</p>
+<p>如果最后还是没有插入线性基，说明这个值是可以被表出来的，那么这个值就没有用了。</p>
+<p>构造过程如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">insert</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">50</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span>((x&gt;&gt;i)&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!col[i])&#123;col[i] = x;<span class="keyword">return</span> ;&#125;</span><br><span class="line">			x ^= col[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	has=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>has</code> 是标记是否会有一个非空集合异或起来为 $0$。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>所有线性基的大小都相同，显然可得。</p>
+<p>并且先后插入线性基的顺序不影响最终线性基的大小，由上一条可得。</p>
+<p>第 $i$ 个数值的二进制下的第 $i$ 位一定为 $1$。</p>
+<p>线性基里面的所有数线性无关，任意不同集合表出来的数都不相等。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="求最大值"><a href="#求最大值" class="headerlink" title="求最大值"></a>求最大值</h3><p>我们可以从高位到低位枚举线性基的每一个位上的值，每一次都让 $ans \gets \max(ans,ans \operatorname{xor} p_i)$。</p>
+<p>当然，也可以判断 $ans$ 的第 $i$ 位和 $p_i$ 的第 $i$ 位（肯定为 $1$）异或起来是不是 $1$，如果是就异或 $p_i$ 即可。</p>
+<p>这样子的结论贪心显然可得，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=len;i&gt;=<span class="number">0</span>;i--) <span class="keyword">if</span>(((p[i]&gt;&gt;i)&amp;<span class="number">1</span>)^ans[i]) ans=ans^p[i];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="求最小值"><a href="#求最小值" class="headerlink" title="求最小值"></a>求最小值</h3><p>首先判断有没有集合异或起来等于 $0$，即前面的 <code>has</code> 变量是否为 $1$。</p>
+<p>然后输出线性基的 $i$ 最小的，$p_i$ 不为 $0$ 的 $p_i$ 即可。</p>
+<p>贪心也可证明。</p>
+<h3 id="求第-k-小值"><a href="#求第-k-小值" class="headerlink" title="求第 $k$ 小值"></a>求第 $k$ 小值</h3><p>我们这个时候需要对线性基做一定的转化。</p>
+<p>如果 $p_i$ 有值，我们要让其他 $p_j$ 的第 $i$ 位都为 $0$，这样处理很简单，只需要模拟一下高斯消元的回代即可。</p>
+<p>最后记得如果 $p_i$ 被异或成 $0$ 了需要删除掉，假如删除之后有 $l$ 个元素在线性基 $s$ 里面，并且没有异或集合为 $0$（有的话可以让 $k$ 减一），那么把 $k$ 进行二进制拆分，如果 $k$ 的第 $i$ 位为 $1$，那么答案异或上 $s$ 即可。</p>
+<p>这个方法的正确性源于线性基的所有数是线性无关的，并且通过贪心的选择可以证明从底往高按照二进制划分是对的。</p>
+<p>同时，求最大值就是全部异或起来，求最小值就是最后一个元素，也证明了上面求最小值的方案是正确的。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,s,i,col[<span class="number">51</span>],tmp[<span class="number">51</span>],tot,x,has,ans;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">insert</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">50</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span>((x&gt;&gt;i)&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!col[i])&#123;col[i] = x;<span class="keyword">return</span> ;&#125;</span><br><span class="line">			x ^= col[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	has=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=<span class="number">50</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(ll j=i<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--) <span class="keyword">if</span>((col[i]&gt;&gt;j)&amp;<span class="number">1</span>) col[i]^=col[j];</span><br><span class="line">		<span class="keyword">if</span>(col[i]!=<span class="number">0</span>) tmp[tot++]=col[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--) cin&gt;&gt;x,<span class="built_in">insert</span>(x);</span><br><span class="line">	<span class="built_in">init</span>();</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(has)&#123;</span><br><span class="line">			<span class="keyword">if</span>(x==<span class="number">1</span>)&#123;</span><br><span class="line">				cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> x--;</span><br><span class="line">		&#125; </span><br><span class="line">		<span class="keyword">if</span>(x&gt;=(<span class="number">1ll</span>&lt;&lt;tot))&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;-1\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;tot;i++) <span class="keyword">if</span>((x&gt;&gt;i)&amp;<span class="number">1</span>) ans^=tmp[i];</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="求集合异或为-0-的不同集合个数"><a href="#求集合异或为-0-的不同集合个数" class="headerlink" title="求集合异或为 $0$ 的不同集合个数"></a>求集合异或为 $0$ 的不同集合个数</h3><p>包括空集。</p>
+<p>我们首先构造线性基，那么设线性基大小为 $k$，集合大小为 $n$，那么我们在剩下 $n-k$ 个数里面随便选择一些数，根据线性基的性质都能在线性基里面找到唯一一个集合异或出来等于这个结果，那么方案数量就是 $2^{n-k}$。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>应用主要是前缀线性基，也就是第 $i$ 位不仅记录第 $i$ 位的值，也要记录第 $i$ 位是集合中哪个数插入进来得到的。</p>
+<p>例题：</p>
+<blockquote>
+<p>给定 $n$ 和 $a_{1,\dots,n}$，$q$ 次询问，每次询问在 $[l,r]$ 区间内选出若干个数异或和最大是多少。</p>
+</blockquote>
+<p>我们可以从 $1$ 遍历到 $n$，每个下标都记录一下线性基的数据，线性基大小是 $\log$ 级别的，所以空间可以承受。</p>
+<p>然后我们可以插入的时候优先保留下标靠后的数，因为越靠后越能产生贡献，并且因为线性基大小不变，所以不会产生不良影响。</p>
+<p>于是可持久化一下，外加更新的时候判断当前有数了，但是下标小于插入的数的下标就交换一下即可。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll pos[<span class="number">31</span>],p[<span class="number">31</span>];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">insert</span><span class="params">(node a,ll x,ll id)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--) pos[i]=a.pos[i],p[i]=a.p[i];</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">			<span class="keyword">if</span>((x&gt;&gt;i)&amp;<span class="number">1</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(!p[i])&#123;p[i]=x,pos[i]=id;<span class="keyword">return</span> ;&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(pos[i]&lt;id)&#123;<span class="built_in">swap</span>(pos[i],id),<span class="built_in">swap</span>(p[i],x);&#125;</span><br><span class="line">				x ^= p[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">		ll ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">30</span>;i&gt;=<span class="number">0</span>;i--) <span class="keyword">if</span>(pos[i]&gt;=x) ans=<span class="built_in">max</span>(ans,ans^p[i]);</span><br><span class="line">		<span class="keyword">return</span> ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;a[<span class="number">500005</span>];</span><br><span class="line">ll n,i,x,q,l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		a[i].<span class="built_in">insert</span>(a[i<span class="number">-1</span>],x,i);</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;q;</span><br><span class="line">	<span class="keyword">while</span>(q--)&#123;</span><br><span class="line">		cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		cout&lt;&lt;a[r].<span class="built_in">query</span>(l)&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>同时，线性基还可以运用在树上，就是根节点到某个节点路径上的异或信息。</p>
+<p>线性基还经常和 <code>bitset</code> 连用，这个时候求最大值就不能取 <code>max</code> 了，必须是判断当前位的值，不然时间会耗费很多。</p>
+<p>当然，也有结合线段树分治的做法，也就是一段时间会有一个数加入集合，这个操作方式就跟并查集一样的，只是最后弹出的时候我们可以直接通过前缀线性基的方法（记录下标）判断就可以了。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

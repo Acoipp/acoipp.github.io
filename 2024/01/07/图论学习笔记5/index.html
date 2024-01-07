@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>图论学习笔记5 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,定义平面图的定义是一张无向图如果能够画在一个平面上，使得其任意两条边不在交点处相交，那么这个无向图就是一个平面图。
+并且这个无向图需要连通。
+$K_{3,3}$ 和 $K_{5}$ 不是平面图。
+
+,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="图论学习笔记5 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,定义平面图的定义是一张无向图如果能够画在一个平面上，使得其任意两条边不在交点处相交，那么这个无向图就是一个平面图。
+并且这个无向图需要连通。
+$K_{3,3}$ 和 $K_{5}$ 不是平面图。
+
+,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="图论学习笔记5 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,定义平面图的定义是一张无向图如果能够画在一个平面上，使得其任意两条边不在交点处相交，那么这个无向图就是一个平面图。
+并且这个无向图需要连通。
+$K_{3,3}$ 和 $K_{5}$ 不是平面图。
+
+,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">图论学习笔记5</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">图论学习笔记5</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E5%9B%BE/" rel="tag">平面图</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>平面图的定义是一张无向图如果能够画在一个平面上，使得其任意两条边不在交点处相交，那么这个无向图就是一个平面图。</p>
+<p>并且这个无向图需要连通。</p>
+<p>$K_{3,3}$ 和 $K_{5}$ 不是平面图。</p>
+<blockquote>
+<p>$K_{3,3}$ 是二分图，左部右部均有 $3$ 个点，任意两个不在同一边的点都有连边。</p>
+</blockquote>
+<blockquote>
+<p>$K_{5}$ 是具有 $5$ 个顶点的完全图。</p>
+</blockquote>
+<h3 id="对偶图"><a href="#对偶图" class="headerlink" title="对偶图"></a>对偶图</h3><p>每一个平面图都有相应的对偶图，平面图的对偶图的对偶图就是它自己。</p>
+<p>对偶图是将某个平面图的所有面看做点，然后若某两个面中有边隔开，那么这两个面在对偶图中所对应的点就有连边。</p>
+<p>容易证明，平面图的对偶图也是平面图。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>设这个平面图具有 $n$ 个点，$m$ 条边，$r$ 个面（包括最外面的那个面），那么有欧拉公式：$n+r&#x3D;m-2$。</p>
+<p>证明可以用对偶图的形式来证明，即均找一棵最小生成树，然后就可以显然得证了。</p>
+<p>并且如果某个含有 $n$ 个节点的平面图，边数最大是 $3m-6$，这个在缩小数据范围规模的时候很有效果。</p>
+<h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><p>若两个图 $G_1$ 与 $G_2$ 同构，或通过反复插入或消去 2 度顶点后是同构的，则称二者是同胚的。</p>
+<p>库拉图斯基定理：</p>
+<ul>
+<li>图 $G$ 是平面图当且仅当 $G$ 不含与 K_5 或 K_{3,3} 同胚的子图。</li>
+</ul>
+<p>此处不做详解。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>如果平面图的每条边都有边权，并且有源点和汇点，那么我们可以将最大流（最小割）转化为最短路进行求解。</p>
+<p>具体例子如下，如下图（左）是一个平面图，但是有源点和汇点，每条边还有不同方向的边权：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/81x4op5r.png"></p>
+<p>设原图的源点为 $1$，汇点为 $6$，那么我们先连接 $1$ 和 $6$，方便处理，然后对于新的平面图构建对偶图，图的边权是隔开两个面的边权，然后 $S$ 就是 $1 \sim 6$ 围出来的平面所代表的点，$T$ 就是最外层一个大平面。</p>
+<p>我们可以清楚地看到，任何一条从 $S$ 到 $T$ 的路径都对应了原图的一组最小割的方案，于是我们直接从 $S$ 到 $T$ 跑最短路即可。</p>
+<p>下面的代码把 $1$ 到 $6$ 新加的边是翻到了上面的，$S$ 也在上面，所以可能会有所不同。</p>
+<p>特别地，如果是有向图，我们需要像网络流那样建立两条边，每条边的权值不一样，而题目中的图通常是网格图的形式，我们可以以 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2046">P2046 [NOI2010] 海拔</a> 为例，考虑建边，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 2000005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> K 1005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll id,x;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> node&amp; a)<span class="type">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a.x&lt;x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">ll n,m,i,j,id[K][K],id2[K][K],s,t=<span class="number">1</span>,x,la[N],ne[N],to[N],val[N],tot,dis[N],a[K][K],b[K][K],c[K][K],d[K][K];</span><br><span class="line">priority_queue&lt;node&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll z2)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = z2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dijkstra</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=s;i&lt;=t;i++) dis[i]=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	q.<span class="built_in">push</span>((node)&#123;s,<span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">		node tmp = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(dis[tmp.id]!=tmp.x) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp.id];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[to[i]]&gt;tmp.x+val[i])&#123;</span><br><span class="line">				dis[to[i]] = tmp.x+val[i];</span><br><span class="line">				q.<span class="built_in">push</span>((node)&#123;to[i],dis[to[i]]&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;dis[t]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	n++,m=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++) id[i][j]=t++;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;a[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;b[i][j];</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;c[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;d[i][j];</span><br><span class="line">   <span class="comment">//注意，从 s 连出去的边边权都是顺着的（ab数组），连向 s 的边边权都是 0；t 亦是如此。</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从上连向下的边边权就是 a，反过来边权就是 c，可以理解为不变。（ac 是从左到右，从右到左的数组）</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从左连向右的边边权就是 d，反过来边权就是 b，可以理解为反向。（bd 是从上到下，从下到上的数组）</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">0</span>) <span class="built_in">merge</span>(s,id[i+<span class="number">1</span>][j],a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(i==n<span class="number">-1</span>) <span class="built_in">merge</span>(id[i][j],t,a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i+<span class="number">1</span>][j],a[i][j],c[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==<span class="number">0</span>) <span class="built_in">merge</span>(id[i][j+<span class="number">1</span>],t,b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(j==m<span class="number">-1</span>) <span class="built_in">merge</span>(s,id[i][j],b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i][j+<span class="number">1</span>],d[i][j],b[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">dijkstra</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">7</span></span><br><span class="line"><span class="comment">8</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">10 6 7 2 1 6</span></span><br><span class="line"><span class="comment">8 9 4 5 10 7</span></span><br><span class="line"><span class="comment">1 6 1 8 6 4</span></span><br><span class="line"><span class="comment">3 1 9 9 2 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>特别地，如果是一般的平面图需要让我们找到对偶图的话，我们可能需要用到最小左转法，这个知识点的内容太过高深，不在我们的讨论范围内。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

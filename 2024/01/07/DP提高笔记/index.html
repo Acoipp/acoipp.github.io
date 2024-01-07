@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DP提高笔记 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,数位 DP即为对数字的每一位来进行 DP。
+例 1：
+
+给定两个正整数 $a$ 和 $b$，求在 $[a,b]$ 中的所有整数中，每个数码各出现了多少次。
+
+很明显，直接套数位 DP 的模板即可：
+,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="DP提高笔记 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,数位 DP即为对数字的每一位来进行 DP。
+例 1：
+
+给定两个正整数 $a$ 和 $b$，求在 $[a,b]$ 中的所有整数中，每个数码各出现了多少次。
+
+很明显，直接套数位 DP 的模板即可：
+,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="DP提高笔记 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,数位 DP即为对数字的每一位来进行 DP。
+例 1：
+
+给定两个正整数 $a$ 和 $b$，求在 $[a,b]$ 中的所有整数中，每个数码各出现了多少次。
+
+很明显，直接套数位 DP 的模板即可：
+,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">DP提高笔记</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">DP提高笔记</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8A%A8%E6%80%81dp/" rel="tag">动态dp</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%9B%9B%E8%BE%B9%E5%BD%A2%E4%B8%8D%E7%AD%89%E5%BC%8F/" rel="tag">四边形不等式</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E4%BD%8Ddp/" rel="tag">数位dp</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96/" rel="tag">斜率优化</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="数位-DP"><a href="#数位-DP" class="headerlink" title="数位 DP"></a>数位 DP</h1><p>即为对数字的每一位来进行 DP。</p>
+<p>例 1：</p>
+<blockquote>
+<p>给定两个正整数 $a$ 和 $b$，求在 $[a,b]$ 中的所有整数中，每个数码各出现了多少次。</p>
+</blockquote>
+<p>很明显，直接套数位 DP 的模板即可：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(ll pos,ll num,...,<span class="type">bool</span> limit,<span class="type">bool</span> lead)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!pos) <span class="keyword">return</span> <span class="built_in">end</span>(num,...);</span><br><span class="line">	<span class="keyword">if</span>(!limit&amp;&amp;!lead&amp;&amp;dp[...]!=<span class="number">-1</span>) <span class="keyword">return</span> dp[...];</span><br><span class="line">	ll ans = <span class="number">0</span>,up = (limit?poss[pos]:<span class="number">9</span>);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=<span class="number">9</span>;i++)&#123;</span><br><span class="line">		ans += <span class="built_in">dfs</span>(pos<span class="number">-1</span>,...,limit&amp;&amp;(i==up),lead&amp;&amp;(i==<span class="number">0</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!limit&amp;&amp;!lead) dp[...]=ans;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例 2：</p>
+<blockquote>
+<p>求满足下列所有条件的4元组（整数）  数量：<br>$a+c &gt; b+d,a+d \ge b+c,0 \le a \le A,0 \le b \le B,0 \le c \le C,0 \le d \le D$（$0 \le A,B,C,D \le 10^{18}$）</p>
+</blockquote>
+<p>还是套模板，但是此处涉及到了加法，那么很显然要再开一维表示进位，然后会发现 TLE，因为一次转移跟 $d$ 有很大的关系，考虑转化为 $2$ 进制，发现还是 TLE，原来 $limit$ 和 $lead$ 浪费的时间太多了，那么直接存在 dp 状态里面就可以了。</p>
+<p>例 3：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3281">[SCOI2013] 数数</a></p>
+<p>先套模板，然后会发现数位和会 TLE，但是发现 $i&#x3D;0,i&#x3D;up$ 和 $1 \le i &lt; up$ 分别都是相同的转移，然后去除无用状态和循环即可。</p>
+<p>例 4：</p>
+<blockquote>
+<p>对 $1$ 个 $10$ 进制数，定义它的众数为所有数位中出现次数最多的数字d，特别的，若出现次数最多的数字有多个，则认为众数不存在，例如，$114514$ 的众数为 $1$；$4396$ 则不存在众数，求 $[l,r]$ 中众数为 $d$ 的数字数量。</p>
+</blockquote>
+<p>对于每个 dfs 状态，然后如果 $limit&#x3D;0$ 那么可以直接通过每个数出现的次数 dp 出来结果。</p>
+<p>还要处理前导 $0$，那么一次询问就是 $18 \times 18 \times 10^3$ 左右的，但是我们发现对于一个数 $\overline{abcde\cdots }$，其所有 $0 \sim 99999\dots 999$，位数到达 $b$ 的位置都可以预处理得到。</p>
+<p>故时间复杂度少了一个 $18$，即可通过。</p>
+<p>例 5：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3303">[SDOI2013] 淘金</a></p>
+<p>考虑数位 dp 的模板，额外记录当前乘积中 $2,3,5,7$ 的因子个数，然后发现总状态只有 $8 \times 10^3$ 左右个，然后暴力地执行 dp 最后跑一下二路归并即可。</p>
+<p>总结：</p>
+<ul>
+<li>如果 dp 过程中在 $limit&#x3D;0$ 的时间可以 $O(d)$ 得出答案，那么一共可以在 $O(d \times T \times \text{位数}^2)$ 的时间复杂度内算出答案，如果可以记忆化可以少一个位数的时间复杂度。</li>
+<li>有些状态是完全重叠的，那么我们直接合并就可以优化时间复杂度。</li>
+<li>做数位 dp 应该像普通 dp 那样寻找重叠的子任务，然后合并而不是只套模板。</li>
+</ul>
+<h1 id="斜率优化"><a href="#斜率优化" class="headerlink" title="斜率优化"></a>斜率优化</h1><p>斜率，直线上任取两点 $(x_1,y_1),(x_2,y_2)$ 的 $\dfrac{y_2-y_1}{x_2-x_1}$。</p>
+<p>主要应用于形如下式的 1D&#x2F;1D 动态规划：</p>
+<p>$$<br>f_i &#x3D; \min&#x2F;\max{f_j+a_i \times b_j+c_i+d_j}<br>$$</p>
+<p>遇到这种情况可以选择斜率优化，李超线段树的写法在这里不做详解。</p>
+<p>斜率优化具体而言是维护一个凸包，形如下图（左边是下凸包，右边是上凸包）</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/v7hcxyou.png"></p>
+<p>对于一般的题目都是要求截距 （$y&#x3D;kx+b$ 中的 $b$）最小&#x2F;大化，故此处对斜率最小&#x2F;大化，不过多讲解，但是都可以互相转化。</p>
+<p>凸包的特点就是每条线段的斜率都是单调的，且上下凸包恰好相反。</p>
+<p>考虑在凸包上加点：</p>
+<ul>
+<li><p>如果加的点的 $x$ 坐标单调不降，那么我们可以动态维护凸包，即使用单调栈，判断线段的斜率即可。</p>
+</li>
+<li><p>如果加的点的 $x$ 坐标非单调，那么我们需要用 CDQ 分治强制让它单调，然后处理左边对右边的贡献就可以了。（左边按 $x$ 排序，右边按斜率排序就可以处理了，还有要记住添加的顺序不能打乱）</p>
+</li>
+</ul>
+<p>考虑点的斜率：</p>
+<ul>
+<li>如果斜率单调不降，那么它具有决策单调性，可以把前面的全部弹出去直到最小&#x2F;大的那个，而且同时保证了后面的点的决策正确性。</li>
+<li>否则需要在凸包上二分，二分哪个点最优，我们发现，对于下凸包而言（上凸包类似），所有点到当前决策点的线的截距一定是形如 $a_1 &gt; a_2 &gt; \dots &gt;a_i &lt; a_{i+1} &lt; \dots &lt; a_k$，二分这个符号，找到最后一个大于即可。</li>
+</ul>
+<p>综上：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">$x$ 单调不下降</th>
+<th align="center">$k$ 单调不下降</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">是</td>
+<td align="center">单调栈</td>
+<td align="center">决策单调性</td>
+</tr>
+<tr>
+<td align="center">否</td>
+<td align="center">CDQ分治</td>
+<td align="center">单调队列上二分或者CDQ分治</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ul>
+<li><strong>如果碰到 $x$ 相同的两个节点，那么如果是维护最小值的话，要丢弃 $y$ 较大的，否则丢齐较小的。</strong></li>
+</ul>
+<p>最后就是一定要把 $x,y,k$ 的公式列出来，对于斜率优化而言，上述 dp 方程中：$x&#x3D;b_j,y&#x3D;f_j+d_j,k&#x3D;a_i$，把 $j$ 这个点加到凸包里面，然后对于 $i$ 来说用斜率为 $k$ 的直线去截取凸包就可以了。</p>
+<p>特别的，李超线段树恰好相反。</p>
+<p>有时候一个等于号就能够改变整个代码的逻辑，写代码的时候一定要注意。</p>
+<h1 id="四边形不等式"><a href="#四边形不等式" class="headerlink" title="四边形不等式"></a>四边形不等式</h1><p>统一地来说，若一个函数 $w(a,b)$ 满足下列条件则称 $w$ 函数满足四边形不等式。</p>
+<p>$$<br>w(a,c)+w(b,d) \le w(a,d)+w(b,c)(a \le b \le c \le d)<br>$$</p>
+<p>通常用来解决决策单调性的问题。</p>
+<h2 id="1D-1D-动态规划"><a href="#1D-1D-动态规划" class="headerlink" title="1D&#x2F;1D 动态规划"></a>1D&#x2F;1D 动态规划</h2><p>若我们可以写成 $f_i &#x3D; \min{f_j+w(i,j)}$ 的形式，且 $w$ 函数满足四边形不等式，则称 $f$ 函数具有决策单调性。</p>
+<p>或者 $f_i &#x3D; \max{j+w(i,j)}$ 但是 $w$ 函数满足交叉<strong>大于</strong>包含，也可以用决策单调性。</p>
+<p>即设 $f_i$ 是由 $f_{k1}$ 转移过来且 $f_j$ 是由 $f_{k2}$ 转移过来，那么若 $i&gt;j$ 那么 $k1 \ge k2$。</p>
+<p>此处证明略。</p>
+<h3 id="w-函数与-f-没有关系"><a href="#w-函数与-f-没有关系" class="headerlink" title="$w$ 函数与 $f$ 没有关系"></a>$w$ 函数与 $f$ 没有关系</h3><p>如果满足上面的条件的话，那么我们可以用整体二分法求解。</p>
+<p>即函数 $\operatorname{solve}(l,r,s,t)$ 表示 $f_{l \sim r}$ 的决策点一定都是在 $s \sim t$ 内的。</p>
+<p>那么我们每次转移的时候就取中间点，然后分为两部分递归下去就行了，特别的，如果 $w_{l,r}$ 必须通过 $O(n)$ 的方式得到，那么我们可以在函数的过程中添加一个莫队的指针移动，这样的话时间复杂度是严格 $O(n \log n)$ 的。</p>
+<h3 id="w-函数与-f-有关系"><a href="#w-函数与-f-有关系" class="headerlink" title="$w$ 函数与 $f$ 有关系"></a>$w$ 函数与 $f$ 有关系</h3><p>我们考虑单调队列存储三元组 $(l,r,p)$，表示所有 $dp_{l \sim r}$ 的转移点，都是 $p$，如果我们添加进来了一个新的转移点，那就比较如果在 $dp_l$ 地方是这个新的转移点较优，那 $dp_{l \sim r}$ 一定都选这个转移点，直接 $\operatorname{pop}$ 即可；否则需要二分找到一个临界点 $k$，使得 $dp_{l \sim k}$ 的转移点都是原来的 $p$，然后 $dp_{k+1,r}$ 的转移点是新的转移点，然后 $\operatorname{push}$ 进单调队列即可。</p>
+<p>最后如果队头的 $r&lt;$ 当前决策点 $i$，直接弹出即可，时间复杂度 $O(n \log n)$。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>当然还有 $w$ 函数，满足四边形不等式，但是符号相反，即四边形不等式和 dp 转移符号相反。那样的话需要用到单调栈维护。</p>
+<p>栈顶到栈低一定也是三元组 $(l,r,p)$，且 $l,r$ 递增。（$l$ 和 $r$ 有可能会发生变化，因此不存下来，而是要用的时候二分求解）</p>
+<p>此处就不再赘述了，大概就是先看栈头的两个元素的分界点是不是小于 $i$，如果小于就弹出，最后把 $i$ 更新之后加入到栈里面，且满足决策点递增。（决策点如果不递增就直接弹出栈顶）</p>
+<p>解释：详见 Fiyuls 博客，很详细。</p>
+<h2 id="2D-1D-动态规划"><a href="#2D-1D-动态规划" class="headerlink" title="2D&#x2F;1D 动态规划"></a>2D&#x2F;1D 动态规划</h2><p>形如 $dp_{l,r} &#x3D; \min{dp_{l,k}+dp_{k+1,r}+w(l,r)}$ 的转移且 $w$ 函数满足四边形不等式和区间单调性（$w(a,b) \ge w(c,d) (a \le c \le d \le b)$，那么 $dp_{l,r}$ 也具有决策单调性。</p>
+<p>遇到这种情况，把每个决策点存下来，然后 $dp_{l,r}$ 的最优决策点一定在 $dp_{l,r-1}$ 的最优决策点和 $dp_{l+1,r}$ 的最优决策点之间，然后 for 循环枚举即可。</p>
+<p>注意到每一种区间长度的枚举总数一定不超过 $2n$，所以整个时间复杂度是 $O(n^2)$。</p>
+<p>常见的问题就是优化石子合并。</p>
+<h1 id="动态-DP"><a href="#动态-DP" class="headerlink" title="动态 DP"></a>动态 DP</h1><p>用线段树维护矩阵转移。</p>
+<p>主要是一些树上 dp 被弄上了修改点权的操作。</p>
+<p>把 dp 用广义矩阵乘法写出来，然后再来一个 $g$ 数组表示去掉重儿子的答案，再搞一个 $f$ 数组表示直接答案。</p>
+<p>$g$ 的转移矩阵一定得用关于 $x$ 和其儿子的变量表示出来（常数），然后 $f$ 一定能用 $g$ 和重儿子的信息表示出来（常数）。</p>
+<p>最后树链剖分维护一下每条重链的信息就可以了。</p>
+<p>注意：</p>
+<ul>
+<li>矩阵常数优化可以拆开乘法的过程。</li>
+<li>每条链可以单独开一个线段树，这样节省了很多时间。</li>
+<li>此处树链剖分时，线段树每个节点存储的是一段矩阵乘法。</li>
+<li>特别注意叶子节点的边界情况，一般是“单位矩阵”。</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

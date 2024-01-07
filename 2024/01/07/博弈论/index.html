@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>博弈论 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,定义此处的博弈论只研究 ICG（公平组合游戏）和反常游戏中的 ICG，很多棋类游戏都是非公平组合游戏，因为双方只能移动自己的棋子。
+一个游戏是 ICG 当且仅当：
+
+游戏有两个人参与，二者轮流做出决,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="博弈论 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,定义此处的博弈论只研究 ICG（公平组合游戏）和反常游戏中的 ICG，很多棋类游戏都是非公平组合游戏，因为双方只能移动自己的棋子。
+一个游戏是 ICG 当且仅当：
+
+游戏有两个人参与，二者轮流做出决,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="博弈论 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,定义此处的博弈论只研究 ICG（公平组合游戏）和反常游戏中的 ICG，很多棋类游戏都是非公平组合游戏，因为双方只能移动自己的棋子。
+一个游戏是 ICG 当且仅当：
+
+游戏有两个人参与，二者轮流做出决,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">博弈论</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">博弈论</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/SG%E5%87%BD%E6%95%B0/" rel="tag">SG函数</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>此处的博弈论只研究 ICG（公平组合游戏）和反常游戏中的 ICG，很多棋类游戏都是非公平组合游戏，因为双方只能移动自己的棋子。</p>
+<p>一个游戏是 ICG 当且仅当：</p>
+<ul>
+<li><p>游戏有两个人参与，二者轮流做出决策，双方均知道游戏的完整信息。</p>
+</li>
+<li><p>有明确的终止态，游戏不会无休止地进行下去。</p>
+</li>
+<li><p>每一个局面都是先手必胜（N）或者先手必败的局面（P）。</p>
+</li>
+<li><p>任意时刻双方可以执行的操作集合只与游戏的状态无关，与双方的身份无关。</p>
+</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>由第二条定义可得我们可以抽象成一个有向无环图，每个玩家操作一枚棋子往一条出边移动，谁移动不了了就输了。</p>
+<p>那么对于没有出边的位置肯定是 P 局面，那么我们考虑倒推所有位置的 N&#x2F;P 状态，从而得知整个游戏是先手必胜还是先手必败。</p>
+<ul>
+<li><p>如果一个点的出边中有 P 局面，那么这个点是 N 局面。</p>
+</li>
+<li><p>如果一个点的出边中全是 N 局面，那么这个点是 P 局面。</p>
+</li>
+</ul>
+<p>这两条性质是双向的，并且可以很显然地由 ICG 的定义得到。</p>
+<p>小例子，有一堆石子大小为 $n$，你和小 A 每次可以从中取出来 $[1,k]$ 区间中的石子，谁无法取了就失败。</p>
+<p>可以发现一个大小为 $n$ 的后继节点是 $[n-k,n-1]$，然后直接打表 SG 值即可，或者构造一种必胜的方案，方案小学生都会就不写了。</p>
+<h2 id="相关函数与模型"><a href="#相关函数与模型" class="headerlink" title="相关函数与模型"></a>相关函数与模型</h2><h3 id="Nim-游戏"><a href="#Nim-游戏" class="headerlink" title="Nim 游戏"></a>Nim 游戏</h3><blockquote>
+<p>给定 $n$ 堆石子，每堆石子有 $a_i$ 个石子，你和小 A 每次可以从任意一堆石子中选出来至少一个石子扔掉，无法操作的人输，你先手，问最后你和小 A 谁有必胜策略。</p>
+</blockquote>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p>如果 $ans&#x3D;\operatorname{xor}_{i&#x3D;1}^n a_i&gt;0$ 的话先手一定有必胜策略，否则后手必胜。</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>首先，没有后继的状态，即 $a_1&#x3D;a_2&#x3D;\dots&#x3D;a_n&#x3D;0$ 的时候一定先手必败。</p>
+<p>然后如果 $k&#x3D;\operatorname{xor}<em>{i&#x3D;1}^n a_i&gt;0$ 的话一定存在一种操作使得 $\operatorname{xor}</em>{i&#x3D;1}^n a_i&#x3D;0$，我们显然可以找到一个 $a_i \operatorname{xor} k &lt; a_i$，然后改成 $a_i \operatorname{xor} k$ 就可以了。</p>
+<p>最后需要证明如果 $k&#x3D;\operatorname{xor}<em>{i&#x3D;1}^n a_i&#x3D;0$ 的话不可能存在任何一种操作使得 $k&#x3D;\operatorname{xor}</em>{i&#x3D;1}^n a_i&#x3D;0$，显然成立。</p>
+<p>所以结论成立。</p>
+<h3 id="SG-函数"><a href="#SG-函数" class="headerlink" title="SG 函数"></a>SG 函数</h3><p>定义集合的 SG 运算为 $\operatorname{mex}{S}$ 表示 $S$ 中最小的没有出现过的自然数，那么 $SG(x) &#x3D; \operatorname{mex}{y_1,y_2,\dots,y_k}$，其中 $y$ 是 $x$ 的后继节点。</p>
+<p>如果 $SG(x)&gt;0$，那么代表先手的棋子如果在 $x$ 这个节点先手必胜，否则后手必胜。这个的证明也很显然，参考前面的 ICG 游戏的性质即可。</p>
+<p>那么如果我们是多个游戏拼在一起的怎么办呢？</p>
+<p>例如我们在有向图游戏上有多个棋子，然后每次可以移动一颗，最后不能移动者失败。</p>
+<p>我们发现 $x$ 可以移动到 $SG(y) &lt; SG(x)$ 或者 $SG(y)&gt;SG(x)$ 的节点，如果我们移动到了 $y$ 满足 $SG(y)&gt;SG(x)$，那么后手如果觉察到不优秀，肯定会从 $y$ 移动到 $z$ 满足 $SG(x)&#x3D;SG(z)$，这样的操作是不优秀的。</p>
+<p>那么我们只剩下移动到 SG 值比它小的节点，那么这就是一个 Nim 博弈，我们相当于每次可以拿走若干个大于等于 $1$ 小于等于全部的石头，于是直接把所有起点的 SG 值异或起来，然后按照 Nim 博弈的判断标准来判断就行了。</p>
+<p><strong>注意：每个局面都可以转化为含有 $SG(x)$ 个石子的 Nim 游戏，如果有多个局面，就相当于 Nim 游戏有多个石堆。</strong></p>
+<h3 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h3><ul>
+<li><p>如果我们构造了一个模型发现一个石子移动了会影响另外的石堆，那么我们可以对每个石子单独考虑得出结果。</p>
+</li>
+<li><p>SG 函数不一定是直接取若干个后继节点的 $\operatorname{mex}$，而是有可能每个后继节点又衍生出两个游戏，那么我们要把这两个游戏的 SG 值异或起来再取 $\operatorname{mex}$。</p>
+</li>
+<li><p>有些 SG 函数十分刁钻，需要打表，并且可能会出现循环节，并且只有几个特殊情况。</p>
+</li>
+</ul>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>有 $n$ 堆石子，每堆石子有 $a_i$ 个石头，每次可以选择 $i&lt;j \le k$ 且 $a_i&gt;0$，从第 $i$ 堆石头中选择一个石头扔掉，然后给第 $j$ 和 $k$ 堆石头中添加一个石头，最后无法操作的人失败，问先手是否拥有必胜策略。</p>
+<p>首先，因为一次操作会影响石堆互相的值，所以考虑对每个石头分开考虑，如果当前石头距离最后一堆石头 $k$ 堆，那么我们可以扔掉它，然后加入两个距离最后一堆石头 $&lt;k$ 的石头，就相当于可以让一个值为 $k$ 的数分裂为两个 $1 \le k_1,k_2&lt;k$ 的数，然后分开考虑，最后异或起来就可以了。</p>
+<p>因为 $n$ 只有 $20$，所以 $k$ 也只有 $20$，记忆化搜索打表即可。</p>
+<p>题目如果要求输出第一次操作的方案，我们直接暴力 $O(n^3)$ 枚举第一次操作的 $i,j,k$，拿走之后判断是否先手必败即可。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll t,n,a[<span class="number">25</span>],b[<span class="number">25</span>],i,j,k,l,ans,ans1,ans2,ans3,sg[<span class="number">22</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">19</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">25</span>,<span class="number">26</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">35</span>,<span class="number">37</span>,<span class="number">38</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll a[<span class="number">25</span>])</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]%<span class="number">2</span>==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		ans^=sg[n-i+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">		ans=<span class="built_in">solve</span>(a);</span><br><span class="line">		<span class="keyword">if</span>(ans==<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;-1 -1 -1\n0\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ans=<span class="number">0</span>,ans1=ans2=ans3=LLONG_MAX;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">				<span class="keyword">for</span>(k=j;k&lt;=n;k++)&#123;</span><br><span class="line">					<span class="keyword">for</span>(l=<span class="number">1</span>;l&lt;=n;l++) b[l]=a[l];</span><br><span class="line">					b[i]--,b[j]++,b[k]++;</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">solve</span>(b)==<span class="number">0</span>)&#123;</span><br><span class="line">						ans++;</span><br><span class="line">						<span class="keyword">if</span>(i&lt;ans1) ans1=i,ans2=j,ans3=k;</span><br><span class="line">						<span class="keyword">else</span> <span class="keyword">if</span>(i==ans1)&#123;</span><br><span class="line">							<span class="keyword">if</span>(j&lt;ans2) ans2=j,ans3=k;</span><br><span class="line">							<span class="keyword">else</span> <span class="keyword">if</span>(j==ans2)&#123;</span><br><span class="line">								<span class="keyword">if</span>(k&lt;ans3) ans3=k;</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;ans1<span class="number">-1</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans2<span class="number">-1</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans3<span class="number">-1</span>&lt;&lt;endl&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>附：有些题也不需要转化为 Nim 游戏，直接通过题目的性质转化为有向图游戏，然后通过 SG 函数计算即可。（需要去除一些无用状态或者记忆化一下）</p>
+<h2 id="取石子游戏"><a href="#取石子游戏" class="headerlink" title="取石子游戏"></a>取石子游戏</h2><p>一维翻硬币问题有一个结论:</p>
+<p>局面的 SG 值等于局面中所有反面朝上的硬币单独存在时的 SG 值的异或和。</p>
+<p>这个结论同样适用于二维的翻硬币问题。</p>
+<h2 id="删边游戏"><a href="#删边游戏" class="headerlink" title="删边游戏"></a>删边游戏</h2><blockquote>
+<p>有一幅图，每次操作可以删去图上的一条边，操作结束之后把所有没有与 $root$ 相连的边和点删去，最后无法操作者失败。</p>
+</blockquote>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>首先对于叶子结点，因为只剩一个节点，所以 SG 值为 $0$。</p>
+<p>然后对于某些其它节点 $i$，它的 SG 值经过证明可得 $SG_i &#x3D; \operatorname{xor}_{v \in son_i}{SG_v+1}$.</p>
+<p>最后整张图的 SG 值就是 $SG_{root}$。</p>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><p>首先需要找出所有的环（边双连通分量），如果一个环内的边数是偶数，那么直接将这个环缩成一个点即可。</p>
+<p>否则需要将环缩成一个点还要再新建一个点挂一条边。</p>
+<p>然后如果根属于一个环，那新的根就是环缩点的那个点。</p>
+<p>容易发现这样操作完成之后是一棵树，于是直接用树删边定理即可，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 300005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt; op[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; op2[N],op3[N],ans[N];</span><br><span class="line"><span class="type">int</span> T,n,m,x[N],y[N],i,j,tot,scc,dfn[N],low[N],cut[N],vis[N],edge[N],sg[N],root,id[N],col[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	dfn[x] = low[x] = ++tot;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[op[x][i].first])&#123;</span><br><span class="line">			<span class="built_in">tarjan</span>(op[x][i].first,op[x][i].second);</span><br><span class="line">			low[x] = <span class="built_in">min</span>(low[x],low[op[x][i].first]);</span><br><span class="line">			<span class="keyword">if</span>(low[op[x][i].first]&gt;dfn[x]) cut[op[x][i].second] = <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(r!=op[x][i].second) low[x] = <span class="built_in">min</span>(low[x],dfn[op[x][i].first]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	vis[x] = <span class="number">1</span>,ans[scc].<span class="built_in">push_back</span>(x),col[x] = scc;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op2[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		edge[scc]++;</span><br><span class="line">		<span class="keyword">if</span>(!vis[op2[x][i]]) <span class="built_in">dfs</span>(op2[x][i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op3[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(op3[x][i]==fa) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">solve</span>(op3[x][i],x);</span><br><span class="line">		sg[x] ^= (sg[op3[x][i]]+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			cin&gt;&gt;x[i]&gt;&gt;y[i];</span><br><span class="line">			op[x[i]].<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(y[i],i)),op[y[i]].<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(x[i],i));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span>(!dfn[i]) <span class="built_in">tarjan</span>(i,<span class="number">-1</span>); </span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!cut[i])&#123;</span><br><span class="line">				op2[x[i]].<span class="built_in">push_back</span>(y[i]);</span><br><span class="line">				op2[y[i]].<span class="built_in">push_back</span>(x[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span>(!vis[i]) scc++,<span class="built_in">dfs</span>(i),edge[scc]/=<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=scc;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(ans[i].<span class="built_in">size</span>()==<span class="number">1</span>&amp;&amp;edge[i]==<span class="number">0</span>)&#123;</span><br><span class="line">				id[i]=ans[i][<span class="number">0</span>];</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(edge[i]%<span class="number">2</span>==<span class="number">1</span>) id[i]=++n,++n,op3[id[i]].<span class="built_in">push_back</span>(n),op3[n].<span class="built_in">push_back</span>(id[i]);</span><br><span class="line">			<span class="keyword">else</span> id[i]=++n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(cut[i])&#123;</span><br><span class="line">				op3[id[col[x[i]]]].<span class="built_in">push_back</span>(id[col[y[i]]]);</span><br><span class="line">				op3[id[col[y[i]]]].<span class="built_in">push_back</span>(id[col[x[i]]]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		root = id[col[<span class="number">1</span>]];</span><br><span class="line">		<span class="built_in">solve</span>(root,<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">if</span>(sg[root]) cout&lt;&lt;<span class="string">&quot;Alice\n&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;Bob\n&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=<span class="number">2</span>*n;i++) op[i].<span class="built_in">clear</span>(),op2[i].<span class="built_in">clear</span>(),op3[i].<span class="built_in">clear</span>(),ans[i].<span class="built_in">clear</span>(),col[i]=id[i]=edge[i]=vis[i]=sg[i]=low[i]=dfn[i]=<span class="number">0</span>;</span><br><span class="line">		tot=<span class="number">0</span>,scc=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=m;i++) x[i]=y[i]=cut[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;                     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="反常游戏"><a href="#反常游戏" class="headerlink" title="反常游戏"></a>反常游戏</h2><blockquote>
+<p>给定 $n$ 堆石子，每堆石子有 $a_i$ 个石子，你和小 A 每次可以从任意一堆石子中选出来至少一个石子扔掉，取走最后一个石子的人输，你先手，问最后你和小 A 谁有必胜策略。</p>
+</blockquote>
+<p>设 $k&#x3D;\operatorname{xor}_{i&#x3D;1}^n a_i$。</p>
+<p>如果 $a_i$ 有的为 $0$，删去不影响答案。</p>
+<p>如果 $a_i$ 全部为 $1$，如果 $n$ 为奇数先手必败，$n$ 为偶数先手必胜。</p>
+<p>否则如果 $k&gt;0$ 先手必胜，否则先手必败。</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>第一条结论显然。</p>
+<p>第二条结论每次只能拿走一堆石子，所以显然。</p>
+<p>第三条结论：</p>
+<ul>
+<li><p>如果只有一个 $a_i&gt;1$，那么先手必胜，因为先手可以让全部 $a_i$ 为 $1$，并且控制堆数的奇偶性。</p>
+</li>
+<li><p>有至少两个 $a_i&gt;1$，那么如果 $k&gt;0$ 由 Nim 游戏可得先手可以把 $k$ 转化成 $0$。</p>
+</li>
+<li><p>若 $k&#x3D;0$，先手可以转化为至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的情况，那么这么交叉进行最后 $a_i$ 的堆数会逐渐减少，回归最开始的情况。</p>
+</li>
+<li><p>并且这种情况可以让对方必胜，也可以转化为至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的局面，并且至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的局面只能转化为 $k&#x3D;0$ 的局面，所以这种情况先手必胜。</p>
+</li>
+</ul>
+<p>得证。</p>
+<h2 id="Nim-k-游戏"><a href="#Nim-k-游戏" class="headerlink" title="Nim-k 游戏"></a>Nim-k 游戏</h2><p>给定 $n$ 堆石子，每堆有 $a_i$ 个石头，每次可以选择 $1 \sim k$ 堆，从每堆中拿走一部分石子，拿走的石子总数必须大于等于 $1$，谁无法操作就失败，问什么情况下先手必胜。</p>
+<p>结论：如果存在一位 $j$ 使得 $a_i$ 二进制下第 $j$ 位为 $1$ 的个数 $\ \bmod \ (k+1) \ne 0$，那么先手必胜，否则先手必败。</p>
+<p>容易发现，Nim 游戏就是在 $k&#x3D;1$ 的时候的特例。</p>
+<h3 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h3><p>首先如果不存在任何一位 $j$ 满足上述条件，一次操作之后不可能也不存在一位 $j$ 满足上述条件。</p>
+<p>如果存在，那就把所有的 $j$ 拿出来，然后因为 $a \bmod (k+1) \le k$，所以一定可以加入到 $k$ 个集合中，于是我们通过 Nim 游戏的证明就可以证出可以通过一次操作使得不存在任何一位 $j$ 满足上述条件。</p>
+<p>当所有元素都为 $0$ 时，不存在任何一位 $j$ 满足上述条件，先手必败。</p>
+<p>于是一来一回归纳得证。</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>如果是到达一个状态先手必胜，那么我们必须转化为到达某个状态先手必败，然后再用 Nim&#x2F;SG 的相关知识解决。</p>
+<p>例题：</p>
+<blockquote>
+<p>有 $n$ 个棋子，第 $i$ 个棋子在 $(x_i,y_i)$，每次可以移动一颗棋子到 $(x_i-k,y_i),(x_i,y_i-k),(x_i-k,y_i-k)$ 之一（$1 \le k$），$x \ge 0,y \ge 0$，AB互相博弈，A先手，如果某人移动了某颗棋子到 $(0,0)$，此人胜利，问先手是否必胜。</p>
+</blockquote>
+<p>因为是移动到 $(0,0)$ 就胜利，而且有多颗棋子，我们可以考虑什么情况下面某人必败，来转化。</p>
+<p>首先，一个人不会傻到移动棋子到 $(0,k),(k,0),(k,k)$，除非没有地方移动了。</p>
+<p>我们就会发现如果有一个棋子位于上面三个位置，先手必胜，特判掉即可。</p>
+<p>如果不，那么当且仅当棋子在 $(1,2)$ 或者 $(2,1)$ 的时候一定会移动到上面三个位置之一，这就是终止态，先手必败。</p>
+<p>然后按照 SG 函数合并即可，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 305</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,x,y,ans,i,j,sg[N][N],temp;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) <span class="keyword">return</span> <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">if</span>(sg[x][y]!=<span class="number">-1</span>) <span class="keyword">return</span> sg[x][y];</span><br><span class="line">	<span class="type">bool</span> vis[<span class="number">1005</span>];</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=x;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=<span class="built_in">min</span>(x,y);i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;;i++) <span class="keyword">if</span>(!vis[i]) <span class="keyword">return</span> sg[x][y]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">memset</span>(sg,<span class="number">-1</span>,<span class="built_in">sizeof</span>(sg));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">100</span>;j++) <span class="built_in">dfs</span>(i,j);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">0</span>,temp=<span class="number">0</span>;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) temp=<span class="number">1</span>;</span><br><span class="line">			ans^=sg[x][y];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(ans||temp) cout&lt;&lt;<span class="string">&quot;^o^\n&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;T_T\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

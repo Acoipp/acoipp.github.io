@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>图论学习笔记1 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,以下均不会过多介绍算法，主要介绍的是做题的思维。
+
+PART-1
+最小生成树最小生成树主要用于解决使用最小边权和的边连接后让图连通。
+如果有负权边，则视题目意思而定。
+1、普通使用例题：
+在一个 $,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="图论学习笔记1 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,以下均不会过多介绍算法，主要介绍的是做题的思维。
+
+PART-1
+最小生成树最小生成树主要用于解决使用最小边权和的边连接后让图连通。
+如果有负权边，则视题目意思而定。
+1、普通使用例题：
+在一个 $,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="图论学习笔记1 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,以下均不会过多介绍算法，主要介绍的是做题的思维。
+
+PART-1
+最小生成树最小生成树主要用于解决使用最小边权和的边连接后让图连通。
+如果有负权边，则视题目意思而定。
+1、普通使用例题：
+在一个 $,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">图论学习笔记1</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">图论学习笔记1</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="tag">最小生成树</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/" rel="tag">欧拉路径</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%BF%9E%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/" rel="tag">连通性相关</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>以下均不会过多介绍算法，主要介绍的是做题的思维。</p>
+<hr>
+<p>PART-1</p>
+<h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a><strong>最小生成树</strong></h1><p>最小生成树主要用于解决使用最小边权和的边连接后让图连通。</p>
+<p><strong>如果有负权边，则视题目意思而定。</strong></p>
+<h2 id="1、普通使用"><a href="#1、普通使用" class="headerlink" title="1、普通使用"></a><strong>1、普通使用</strong></h2><p>例题：</p>
+<p>在一个 $n \times m$ 的矩形区域内，外围边界存在围墙，每个 $1 \times 1$ 的正方形区域内也存在对角线方向的一堵墙，墙的方向有两种，如下图所示：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/hsp3uqod.png"></p>
+<p>对角线方向的墙可以破坏，不同的墙破坏的代价不同。</p>
+<p>支付最少的代价破坏墙，使得整个区域连通。</p>
+<p>$1 \le n,m \le 500,1 \le w_{i,j} \le 5\times 10^3$。</p>
+<p>很显然，每个 $1 \times 1$ 的小方格都分成了两个部分，这样我们把图建出来，然后对于有墙阻碍的边边权就是 $w$，否则边权为 $0$，一共 $n \times m$ 级别的边，所以用 Kruskal 就可以了。</p>
+<h2 id="2、配合倍增"><a href="#2、配合倍增" class="headerlink" title="2、配合倍增"></a><strong>2、配合倍增</strong></h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4180">P4180 [BJWC2010] 严格次小生成树</a></p>
+<p>每次考虑用一条非最小生成树上的边替换最小生成树上的边，为确保次小，肯定是替换能替换的边权最大的边。</p>
+<p>观察到非树边能够替换的边是树上两点间的路径，所以 $O(\log n)$ 用倍增或 $O(\log^2 n)$ 用树链剖分。</p>
+<p>还有其它类似的题，套路都一样。</p>
+<h2 id="3、其它"><a href="#3、其它" class="headerlink" title="3、其它"></a><strong>3、其它</strong></h2><p>例题1：</p>
+<p>求一个包含 $n$ 个点 $m$ 条边的仙人掌的 $k$ 小生成树。</p>
+<p>显然，每个环上选一条边，非环边全选，所以变成了一个 $k$ 路归并问题，可以做到 $O(nk \log k) \sim O(k \log k)$ 的时间复杂度。</p>
+<p>例题2：*神仙题</p>
+<p>Alice 和 Bob 在由 $n$ 个点 $m$ 条边构成的无向连通图上进行游戏。</p>
+<p>对于一条连接节点 $x_i$ 与 $y_i$ 的边，其边权的可选项只有 $a_i$ 或 $b_i$ 。</p>
+<p>游戏首先由 Alice 选择恰好 $k$ 条边，使其边权选择 $a_i$，而剩下的 $m-k$ 条边的边权选择 $b_i$。然后再由 Bob 选择恰好 $n-1$ 条边，构成原图的一棵生成树。最终的得分为 Bob 选择的生成树的边权之和。</p>
+<p>Alice 想让得分尽量大，而 Bob 想让得分尽量小。在双方都按最佳策略行动时，最终的得分为多少？请你分别计算 $k&#x3D;0\sim m$ 时的答案。</p>
+<p>$1 \le n \le 9,1 \le m \le 30,1 \le T \le 20$，不含重边和自环。</p>
+<p>对于 $m$ 不好维护，考虑对 $n$ 进行处理。</p>
+<p>由题得 Bob 其实就是求最小生成树，别无选择，真正有选择权的是 Alice。</p>
+<p>考虑 Kruskal 的执行过程，对边排序之后能选就选。</p>
+<p>那么我们在这道题中把 $a_i$ 和 $b_i$ 拆开排序，然后对于每个决策点设 $dp_{i,j,S}$ 表示枚举到了第 $i$ 条边，选了 $j$ 条 $a_i$ 的边（相同顶点的边一定不会重复选，所以不用担心计算重复），<strong>当前并查集的状态为 $S$</strong> 时候最小生成树最大是多少。</p>
+<p>记录了并查集的状态后，本题就很好做了，因为 $Bell_9$ 大概在 $2 \times 10^4 \sim 3\times 10^4$ 之间，所以时间空间都不是问题。</p>
+<hr>
+<h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a><strong>最短路</strong></h1><p>本节主要介绍最短路的一些小技巧。</p>
+<h2 id="1、虚点"><a href="#1、虚点" class="headerlink" title="1、虚点"></a><strong>1、虚点</strong></h2><p>例题：对于一棵有根树，两个点之间如果有边，则可以双向到达，如果没边但是深度之差等于 $k$，也可以双向到达。</p>
+<p>问 $s$ 到 $t$ 的最短路是多少，边有边权，$1 \le k \le n \le 10^6$。</p>
+<p>首先，对于任意两个深度满足差等于 $k$ 的点不能暴力连，因为时间空间都是 $O(n^2)$ 的。</p>
+<p>但是我们可以对每个深度建一个虚拟节点，这个节点连向当前深度所有节点，然后满足深度之差等于 $k$ 的两个虚拟节点连边就可以了，这下子时间和空间都优化到了 $O(n)$ 级别，而且照样可以跑最短路。</p>
+<h2 id="2、多维"><a href="#2、多维" class="headerlink" title="2、多维"></a><strong>2、多维</strong></h2><p>很多题目涉及到多维度的问题，例如上一条边的边权对于下一条经过的边的边权有影响，那么我们这时可以像 DP 一样多一个维度来记录。</p>
+<p>例题：某图由 $n$ 点 $m$ 条单向边构成，每条边都有通行所需的费用 $w_i$ 。</p>
+<p>其中某些边是特殊边，当经过特殊边从 $x_i$ 点到达 $y_i$ 点后，会触发神秘力量，可以选择使下一次的通行费用减少 $k$ ，或者直接 $0$ 费传送到某个由 $y_i$ 出发无法一步到达的点。</p>
+<p>注意：经过一条费用减少 $k$ 后的特殊边，同样也能触发神秘力量。</p>
+<p>计算从 $s$ 出发，到达每一个点所需的最少花费。</p>
+<p>很显然，设 $dp_{i,0&#x2F;1}$ 表示到达 $i$ 号点后上一条边是特殊边还是普通边，转移（Dijkstra）同普通最短路。</p>
+<p>但是还有 $0$ 费传送的情况，如何处理，这个参考数据结构板块的并查集合并区间的处理方式。</p>
+<h2 id="3、期望"><a href="#3、期望" class="headerlink" title="3、期望"></a><strong>3、期望</strong></h2><p>对于 $dp_i &#x3D; \min{\dots}$ 的类型的题目，我们有两种解决方式，一是高斯消元 $O(n^3)$，如果决策不成环的话，我们可以用 dijkstra 来解决。</p>
+<p>因为 dijkstra 有一个特性，就是每次出队的都是最小的元素，那么我们每次把已知的最小的期望 push 进堆里面，然后更新它能更新到的节点，类似于最短路，最后输出结果就行了，此处不再赘述。（详见后面的期望 DP）</p>
+<h2 id="4、最短路径树-有向无环图"><a href="#4、最短路径树-有向无环图" class="headerlink" title="4、最短路径树&#x2F;有向无环图"></a><strong>4、最短路径树&#x2F;有向无环图</strong></h2><p>对于每一条可能在以 $s$ 开头的最短路上的边（边权为正），全部拿出来就成了最短路径树，如果不保证最短路只有一条的话，那么这棵树会变成有向无环图。</p>
+<p>在这个有向无环图上，我们可以统计每个点被经过的次数，每条边在所有路径中被经过的次数，甚至可以处理动态询问修改一条边后的从 $s$ 到 $t$ 的最短路。</p>
+<p>所有用法都来自于它的几条性质：</p>
+<ul>
+<li><p>每条边都出现在至少一条最短路中。</p>
+</li>
+<li><p>结果是树或有向无环图。</p>
+</li>
+</ul>
+<hr>
+<h1 id="欧拉路径"><a href="#欧拉路径" class="headerlink" title="欧拉路径"></a><strong>欧拉路径</strong></h1><p>这个知识点难就难在建模。</p>
+<p>例1：对于一个 $n$ 个节点 $m$ 条边的无向图，找到最小的路径覆盖，使得每条边最多被覆盖 $1$ 次。（路径可以是环）</p>
+<p>很显然，剖分成 $k$ 个欧拉路径就可以了。</p>
+<p>如果图有 $k$ 个奇数度数的节点，答案为 $\frac{k}{2}$ （非整数则无解）条，否则如果图没有边答案为 $0$，有边答案为 $1$。</p>
+<p>输出答案的方式也很巧妙，可以新建一个虚点，对于图中所有个连通块的奇数节点连边，若某个连通块的节点全是偶数节点，则选择一个连双向边就可以了。</p>
+<p>最后由于整张图有一条欧拉通路，用 DFS 把欧拉通路求解出来，然后用新增的边把这些通路分成几段，段数就是答案，顺便还把方案求出来了。</p>
+<p>例2：</p>
+<p>有 $4 \times n$ 颗宝石，价值分别为 $1 \sim 4 \times n$。</p>
+<p>宝石的颜色共有 $n$ 种，每种颜色恰好有 $4$ 颗宝石。</p>
+<p>现在要将宝石装进两个箱子，满足以下两个条件：</p>
+<ul>
+<li>两个箱子的宝石总价值相等。</li>
+<li>每个箱子每种颜色恰有 $2$ 颗宝石。</li>
+</ul>
+<p>请你设计一种划分方案，数据保证一定存在符合条件的划分方案。（$1 \le n \le 2\times 10^5$）</p>
+<p>考虑构造，对于每组 $i+j&#x3D;4 \times n$ 的 $i,j$，将 $a_i$ 与 $a_j$ 连边，然后我们发现，每种颜色会连偶数条双向边（$2$ 或 $4$），就必然存在一条欧拉路径，把欧拉路径跑出来之后，因为每条边都代表两个宝藏，所以我们从这些边中选不相交的边（奇偶分类即可），输出方案。</p>
+<p>还有一道神仙题，不说解法：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/AT_agc017_e">AT-agc017e Jigsaw</a>。</p>
+<hr>
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a><strong>其它</strong></h1><p>差分约束：方程列出来就很简单了。</p>
+<p>拓扑排序：基础算法。</p>
+<hr>
+<p>PART-2</p>
+<h1 id="有向图连通性"><a href="#有向图连通性" class="headerlink" title="有向图连通性"></a><strong>有向图连通性</strong></h1><p>主要算法是 Tarjan，解决一些与连通（每个点的点权不能重复计算）相关的题目。</p>
+<p>主要步骤，任何有向图缩点后均变为有向无环图，我们这时便可以在 DAG 上 DP 出最长链等经典问题。</p>
+<p>因此，此处不介绍经典问题，均介绍变种。</p>
+<p>例1：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1407">P1407 [国家集训队] 稳定婚姻</a>。</p>
+<p>很显然，像二分图一样，如果夫妻能够找到一个环，并且满足其余夫妻能够匹配成功。</p>
+<p>所以边双的做法是错误的，我们要对于原夫妻关系从丈夫到妻子连边，其它情侣关系从女方向男方连边，判断也很简单，就判断原夫妻是否在一个强连通分量中即可。</p>
+<p>例2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2403">P2403 [SDOI2010] 所驼门王的宝藏</a>。</p>
+<p>因为只有 $n$ 个藏宝宫室，所以考虑对这 $n$ 个节点建立有向边。</p>
+<p>对于可以走 $8$ 个方向的宫室，暴力连边即可，$O(n)$。</p>
+<p>但是有些宫室可以走到一行&#x2F;一列内任意宫室，我们这时可以用到最短路的技巧，对于每行&#x2F;每列建虚点，点权为 $0$ 就可以了，然后向对应的节点连入边&#x2F;出边即可。</p>
+<p>最后 Tarjan 缩点后跑最长链。</p>
+<p>例3：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4819">P4819 [中山市选] 杀人游戏</a>。</p>
+<p>很显然，对于入度为 $0$ 的 scc，知道了一个就可以知道以它为开头的所有 scc 的身份。</p>
+<p>但是有一种特殊情况，就是会存在一个入度为 $0$ 的 scc 使得它的大小为 $1$ 并且其它入度为 $0$ 的 scc 选了之后只剩下它一个，我们就可以直接推断出它是什么身份。</p>
+<p>这种情况也很好判断，只需要知道它的儿子节点有没有除了它之外其它的入边就行了。</p>
+<p>总时间复杂度 $O(n)$。</p>
+<p>例4：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4700">P4700 [CEOI2011] Traffic</a>。</p>
+<p>这道题有一个特殊限制，所有边在平面直角坐标系中都不相交，这样就有一个结论：</p>
+<ul>
+<li>排除开不能被左边节点到达的右边节点，那么每个节点能到达的右边节点都是在某一个 $[x,y]$ 范围内的所有节点。</li>
+</ul>
+<p>（以上节点均为 scc 缩点后有向无环图上的节点）</p>
+<p>这个性质比较好证，画个图理解即可。</p>
+<p>最后在有向图上 DP，暴力合并区间即可。</p>
+<p>例5：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8328">P8328 [COCI2021-2022#5] Usmjeravanje</a>。</p>
+<p>根据 scc 的传递性，我们可以知道当两条不同航线构成一个 X 形状的时候，X 的上下两部分会互相连通。</p>
+<p>再根据一个贪心原则，有 X 形状的一定让它构成，证明不在赘述。</p>
+<p>最后确定每条边的方向后，用并查集维护或者直接跑一遍 Tarjan 就可以了。</p>
+<p>例6：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7737">P7737 [NOI2021] 庆典</a>。</p>
+<p>还是缩点之后考虑图的形态，因为如果有 $x \to z,y \to z$，一定有 $z \to y$ 或 $y\to z$。</p>
+<p>所以最后缩点之后的形态一定是一棵只有一个 $0$ 入度节点的叶向树。（从祖先连向儿子的边可以去掉，不影响连通）</p>
+<p>然后对于 $k&#x3D;0,1,2$ 的情况分类讨论，对于每个可能到达的 scc，它的祖先一定有一个可以被起点到达，它的后代一定有一个可以到达终点。</p>
+<p>我们就剖分成了几条链，最后用虚树做一下链合并就可以了，用树剖的话时间会多一个 $\log$。</p>
+<p>综上，有向图连通性是有向图的一个大板块，而且经常和 DP 一起使用，难的题做起来比较麻烦且极具挑战性。</p>
+<hr>
+<h1 id="无向图关于点的连通性"><a href="#无向图关于点的连通性" class="headerlink" title="无向图关于点的连通性"></a><strong>无向图关于点的连通性</strong></h1><p>基本上和圆方树一起使用，可以 $O(n)$ 维护删掉每个点之后的连通块的一些信息。</p>
+<p>例1：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5058">P5058 [ZJOI2004] 嗅探器</a>。</p>
+<p>从 $s$ 开始跑 Tarjan，然后对于每个在 $s$ 之下 $t$ 之上的割点，都有可能成为答案。</p>
+<p>例2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4494">P4494 [HAOI2018] 反色游戏</a>。</p>
+<p>首先对于每个连通块，如果它的 $1$ 的个数是偶数，那么答案为 $2^{m-n+1}$。</p>
+<ul>
+<li>证明：首先找到任意生成树，一定有且仅有一种情况满足要求，然后剩下 $m-n+1$ 条边随意选择 $0,1$，都可以满足条件。</li>
+</ul>
+<p>用圆方树维护删去每个节点的连通块的大小就可以了。</p>
+<p>一些性质：</p>
+<ul>
+<li><p>如果一个点双内有一个奇环，那么这个点双内的所有点都存在于一个奇环内。</p>
+</li>
+<li><p>如果一个点双内的边数等于点数，则这个点双是环的形态。</p>
+</li>
+</ul>
+<hr>
+<h1 id="无向图关于边的连通性"><a href="#无向图关于边的连通性" class="headerlink" title="无向图关于边的连通性"></a><strong>无向图关于边的连通性</strong></h1><p>更少了。</p>
+<p>所有题目大概就是缩完点之后在树上跑一个 DP 就可以了，感兴趣的可以做一下 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8867">P8867 [NOIP2022] 建造军营</a>。</p>
+<p>以上就是第一部分图论学习笔记，下一部分预计：二分图，网络流，费用流等。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

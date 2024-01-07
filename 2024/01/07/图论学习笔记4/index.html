@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>图论学习笔记4 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,网络流概念：
+
+一个边有两个权值且带有汇点与源点的无向图 $G(V,E)$，其中每条边为 $x,y,c,w$ 四个参数组成，$x,y$ 表示起始点和结束点，$c$ 表示最大容量，$w$ 表示单位时间,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="图论学习笔记4 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,网络流概念：
+
+一个边有两个权值且带有汇点与源点的无向图 $G(V,E)$，其中每条边为 $x,y,c,w$ 四个参数组成，$x,y$ 表示起始点和结束点，$c$ 表示最大容量，$w$ 表示单位时间,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="图论学习笔记4 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,网络流概念：
+
+一个边有两个权值且带有汇点与源点的无向图 $G(V,E)$，其中每条边为 $x,y,c,w$ 四个参数组成，$x,y$ 表示起始点和结束点，$c$ 表示最大容量，$w$ 表示单位时间,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">图论学习笔记4</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">图论学习笔记4</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="网络流"><a href="#网络流" class="headerlink" title="网络流"></a>网络流</h1><p>概念：</p>
+<ul>
+<li>一个边有两个权值且带有汇点与源点的无向图 $G(V,E)$，其中每条边为 $x,y,c,w$ 四个参数组成，$x,y$ 表示起始点和结束点，$c$ 表示最大容量，$w$ 表示单位时间通过容量。</li>
+</ul>
+<p>性质：</p>
+<ul>
+<li>对于任意一条边 $x,y,c,w$，满足 $w \le c$。  </li>
+<li>对于任意一条边 $x,y,c,w$，满足存在另一条边 $y,x,0,-w$。    <ul>
+<li>后面这条边可能题目没有给出，需要自己加上去。</li>
+</ul>
+</li>
+<li>设 $in_x &#x3D; \sum_{y \to x}w$，$out_x &#x3D; \sum_{x \to y}w$，若 $x$ 不为汇点和源点，那么 $in_x&#x3D;out_x$。  </li>
+<li>设源点为 $s$，汇点为 $t$，则 $out_s&#x3D;in_t$。</li>
+</ul>
+<p>上面的性质分别称作：容量限制，斜对称性和流守恒性。</p>
+<h2 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h2><p>构造一个网络，使得 $out_s&#x3D;in_t$ 最大，这个最大的值称作这个网络图的最大流。</p>
+<p>显然，开始时这个图的最大流是 $0$，每条边的流量均为 $0$。</p>
+<p>考虑找到一条从 $s \sim t$ 的路径，这条路径上的 $c-w$ 的最小值 $&gt;0$，那么我们可以使全局的最大流加上这个最小值。</p>
+<p>证明显然，只需要对应的边减一下，然后斜对称的边加一下就行了，因为有斜对称这个性质，所以相当于给了程序一个“反悔”的机会，可以把之前给各个边的流量减少一部分以扩充全局的流量。</p>
+<p>只到最后图中不存在这条增广路即可。</p>
+<h3 id="EK-算法"><a href="#EK-算法" class="headerlink" title="EK 算法"></a>EK 算法</h3><p>每次暴力枚举可能的增广路，最多增广 $O(nm)$ 次，则时间复杂度为 $O(nm^2)$。</p>
+<p>记得使用广度优先搜索。</p>
+<h3 id="Dinic"><a href="#Dinic" class="headerlink" title="Dinic"></a>Dinic</h3><p>找增广路的过程中把所有 $c-w$ 非 $0$ 的边拿出来 01 BFS 一下，那么每个节点只去寻找 $dis_y&#x3D;dis_x+1$ 的节点更新增广路，那么时间复杂度为 $O(n^2m)$。</p>
+<p>注意 $dis_x$ 表示 $x$ 在 01 BFS 的图上与 $s$ 的最短路的长度，这样做一定是正确的，因为总是可以找到一条合法的路径。</p>
+<h3 id="ISAP"><a href="#ISAP" class="headerlink" title="ISAP"></a>ISAP</h3><p>优化 Dinic 的过程，把 $dis_x$ 的定义换为在 01 BFS 的图上与 $t$ 的最短路的长度。</p>
+<p>然后如果没有某个 $dis_x&#x3D;i(1 \le i \le n-1)$，那么图出现了断层，此时返回即可。</p>
+<p>而且我们可以一边找增广路一边更新 $dis$ 数组，不用每次 BFS 一遍，常数也比较小，代码如下所示：</p>
+<p>（这里使用了当前弧优化，对于每一次更新我们经过的边就不会再选了，用链式前向星或者 <code>vector</code> 都可以）</p>
+<p><strong>通常没有 Dinic 快，请谨慎使用。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,i,x,y,z,ans,temp;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],tot=<span class="number">1</span>,sum[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z)</span></span>&#123;tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z;&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = n+<span class="number">1</span>;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;s&gt;&gt;t;</span><br><span class="line">	sum[<span class="number">0</span>] = n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">		<span class="built_in">merge</span>(x,y,z),<span class="built_in">merge</span>(y,x,<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;n) <span class="built_in">memcpy</span>(cur,la,<span class="built_in">sizeof</span>(la)),ans+=<span class="built_in">dfs</span>(s,<span class="number">1e18</span>);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="最小割"><a href="#最小割" class="headerlink" title="最小割"></a>最小割</h2><p>有一个定理，最大流 $&#x3D;$ 最小割，详见算法导论。</p>
+<p>最小割用于处理下列内容的最优解：</p>
+<blockquote>
+<p>对于一张图，把图的两个点 $s,t$ 变得不连通，至少需要割掉边权总和为多少的边。</p>
+</blockquote>
+<blockquote>
+<p>对于一些关系，如果 $a_i$ 号点划分到 $1$ 集合有 $c_i$ 的贡献，划分到 $2$ 集合有 $d_i$ 的贡献，并且有 $q$ 对关系，表示若 $u_i$ 和 $v_i$ 不在一个集合内，有 $-w_i$ 的贡献，最大化贡献。（数据都是非负整数）那么可以以此建立网络流模型。</p>
+</blockquote>
+<p>大概处理的多数情况是第一种，第一种运用也很广泛，我们可以看一下下面这道例题：</p>
+<blockquote>
+<p>有 $n \times m$ 的矩阵，每个格子可以选择 A、B 两类，如果一个格子选择 A 类，它的贡献是 $a_{i,j}$，否则贡献是 $b_{i,j}$。并且如果有 $k$ 个格子与它相邻并且类型不一样，获得 $k \times c_{i,j}$ 的收益，问收益最大是多少。</p>
+</blockquote>
+<p>数据保证点数为 $n \times m$ 的 ISAP 能过。</p>
+<p>显然的，这个矩阵是一个二分图，为了转化为最小割模型，考虑下面的操作。</p>
+<ol>
+<li><p>$ans \gets \sum a_{i,j}+\sum b_{i,j}+\sum c_{i,j} \times ([i&gt;1]+[j&gt;1]+[i&lt;n]+[j&lt;m])$</p>
+<p> 注解：这是所有的权值总和。</p>
+</li>
+<li><p>连边 $s \to (i,j),w&#x3D;b_{i,j}$，$(i,j) \to t,w&#x3D;a_{i,j}$，这是二分图左部的点；连边 $s \to (i,j),w&#x3D;a_{i,j}$，$(i,j) \to t,w&#x3D;b_{i,j}$，这是二分图右部的点；然后若两个点相邻，设左部点为 $u$，右部点为 $v$，则连接 $u \to v,w&#x3D;c_{u}+c_{v}$ 和 $v \to u,w&#x3D;c_v+c_u$</p>
+<p> 注解：如果把二分图左部的点划分到 $s$ 集合，那么 $(i,j) \to t$ 的边就会切断，减去 $a_{i,j}$，其余情况同理。如果左右部的点都划分到 A 类，那么左部的点就会划分到 $t$ 集合，右部的点就会划分到 $s$ 集合，如果它们其中有连边，那么这条边根据最小割的定义必须断开，然后就会减去之前加上的多余的 $sum$。</p>
+</li>
+<li><p>输出之前的 $sum$ 减去最小割即可，满足答案最大。</p>
+</li>
+</ol>
+<p>注意：此处连双向边（$u \to v$ 和 $v \to u$）是因为每个点都与 $s$ 和 $t$ 有连边，根据题目也是如此，有些情况是只连单向边，需要特别注意一下。</p>
+<p>还有一种题目：</p>
+<blockquote>
+<p>对于一个有向图，找到点权总和最大的子图，使得这个子图中的点的所有出点都在这个子图中，点权可能为负。（最大闭合子图）</p>
+</blockquote>
+<p>源点向点权为正的点连边，边权即为点权；图上如果有 $u \to v$ 的边，那么连接 $u \to v$，边权为 $\text{inf}$；点权为负的点向汇点连边，边权为点权的绝对值，跑最大流等于最小割即可。（点权为 $0$ 的其实不影响，可以算到点权为正的点集里面）</p>
+<p>答案要减去最小割，然后加上点权为正的点的点权之和。</p>
+<p>如果割掉源点到某个点的边，那么代表不选这个点，答案减去点权；如果割掉某个点到汇点的边，那么代表选这个点，答案减去点权的绝对值等于答案加上点权。</p>
+<p>这样做显然是正确的，可以思考一下。</p>
+<h3 id="常见建图"><a href="#常见建图" class="headerlink" title="常见建图"></a>常见建图</h3><p>这个，靠积累了，网络流 24 题和 Atcoder 的题目都可以积累。</p>
+<h3 id="最小割树"><a href="#最小割树" class="headerlink" title="最小割树"></a>最小割树</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/674469/solution-p4897">【模板】最小割树（Gomory-Hu Tree） 题解</a></p>
+<h2 id="费用流"><a href="#费用流" class="headerlink" title="费用流"></a>费用流</h2><p>我们对于每条边，如果流经它的流量为 $x$，那么答案增加 $cx$，$c$ 为这条边的边权。</p>
+<p>然后前提要求是最大流。</p>
+<h3 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h3><p>把寻找增广路的过程用 spfa 找最小费用的某条增广路就可以了。</p>
+<p>最后一定是最大流并且费用是最小的。</p>
+<p>优化：每次增广的时候找最小费用的值，然后找增广路的时候多路增广即可，详见代码。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;inf;i++) dis[i]=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	q.<span class="built_in">push</span>(s);</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">		ll tmp = q.<span class="built_in">front</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		vis[tmp] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(val[i]&gt;<span class="number">0</span>&amp;&amp;dis[to[i]]&gt;dis[tmp]+w[i])&#123;</span><br><span class="line">				dis[to[i]] = dis[tmp]+w[i];</span><br><span class="line">				<span class="keyword">if</span>(!vis[to[i]]) vis[to[i]]=<span class="number">1</span>,q.<span class="built_in">push</span>(to[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[t]&lt;=<span class="number">1e18</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	viss[x] = <span class="number">1</span>;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=la[x];i;i=ne[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(dis[x]+w[i]==dis[to[i]]&amp;&amp;val[i]&gt;<span class="number">0</span>&amp;&amp;!viss[to[i]])&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最大费用最大流"><a href="#最大费用最大流" class="headerlink" title="最大费用最大流"></a>最大费用最大流</h3><p>用 spfa 找最大费用的一条路就可以了，其余同上。</p>
+<p><strong>注：若初始的时候有未满流的边构成的正&#x2F;负环，那么后面就可能会出现环，否则一定不会出现 spfa 死循环的情况，如果出现，请检查板子是否敲错！</strong></p>
+<h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><p>精简为一句话：往往是通过最大流来限制题目中要求的个数，然后用费用来表示在达到这个个数的时候费用最小&#x2F;最大。</p>
+<p>或者是最大流越大费用就会越小&#x2F;越大，那么这个时候费用的作用就是用来保证个数一定恒为多少（赋值一个很大&#x2F;小的数就可以了），然后还能顺便得知最小&#x2F;最大费用。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>每次增广出来的路径权值总和一定是单调的，即 $dis_t$ 单调递增或者递减。</p>
+<h2 id="上下界网络流"><a href="#上下界网络流" class="headerlink" title="上下界网络流"></a>上下界网络流</h2><h3 id="无源汇上下界网络可行流"><a href="#无源汇上下界网络可行流" class="headerlink" title="无源汇上下界网络可行流"></a>无源汇上下界网络可行流</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，没有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组方案称为<strong>无源汇上下界网络可行流</strong>。</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>注意到有至少流 $l$ 个单位的限制，我们考虑去掉这个限制，首先一条边可以拆分成 $u \to v$ 容量为 $l$ 的边和 $u \to v$ 容量为 $r-l$ 的边。</p>
+<p>其中容量为 $l$ 的边必须满流，容量为 $r-l$ 的边不能超流。</p>
+<p>我们就可以考虑新建一个源点和汇点 $S$ 和 $T$，那么让 $S$ 向 $v$ 连接一条容量为 $l$ 的边，$u$ 向 $T$ 连接一条容量为 $l$ 的边，最后判断是否满流即可。（原图上的边只考虑 $r-l$ 的边，其余容量为 $l$ 的边不管就可以了）</p>
+<p>考虑这个方法的正确性：</p>
+<blockquote>
+<p>如果整张图满流，我们可以将从 $S$ 到 $v$ 的边和 $u$ 到 $T$ 的边删去，然后因为 $v$ 到 $u$ 有多出来的 $l$ 的流量，我们就可以让 $u$ 流到 $v$ 点 $l$ 的流量，并且满足流量守恒，可以证明这是充要条件。（如果这 $l$ 的流量用了其它边 $l’$ 的流量，那么因为其它边也像这样连接了源点和汇点，所以可以相互转移）</p>
+</blockquote>
+<p>于是这道题就做完了，输出方案就是遍历每条边，检查当前消耗的流量数量加上 $l$ 即可。</p>
+<p>代码如下，网络流使用 ISAP 实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,inf,i,j,x,y,l,r,z,ans,temp;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],id[N],tot=<span class="number">1</span>,sum[N],anss[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll ID)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,id[tot] = ID;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,id[tot] = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step||dis[s]&gt;=inf) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = inf;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	s=<span class="number">0</span>,t=n+<span class="number">1</span>; </span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		anss[i]=r,<span class="built_in">merge</span>(x,y,r-l,i),<span class="built_in">merge</span>(s,y,l,<span class="number">-1</span>),<span class="built_in">merge</span>(x,t,l,<span class="number">-1</span>),ans+=l;</span><br><span class="line">	&#125;</span><br><span class="line">	inf = t-s+<span class="number">1</span>;</span><br><span class="line">	sum[<span class="number">0</span>] = inf;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;inf;i++) cur[i]=la[i];</span><br><span class="line">		ans-=<span class="built_in">dfs</span>(s,<span class="number">1e18</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ans) cout&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=la[i];j;j=ne[j])&#123;</span><br><span class="line">				<span class="keyword">if</span>(id[j]!=<span class="number">-1</span>) anss[id[j]]-=val[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) cout&lt;&lt;anss[i]&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">4 6</span></span><br><span class="line"><span class="comment">1 2 1 2</span></span><br><span class="line"><span class="comment">2 3 1 2</span></span><br><span class="line"><span class="comment">3 4 1 2</span></span><br><span class="line"><span class="comment">4 1 1 2</span></span><br><span class="line"><span class="comment">1 3 1 2</span></span><br><span class="line"><span class="comment">4 2 1 2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">NO</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="有源汇上下界网络可行流"><a href="#有源汇上下界网络可行流" class="headerlink" title="有源汇上下界网络可行流"></a>有源汇上下界网络可行流</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点（除了源点和汇点）都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组方案称为<strong>有源汇上下界网络可行流</strong>。</p>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>考虑转化为<strong>无源汇上下界网络可行流</strong>，考虑连接 $t$ 到 $s$，边权无穷大，那么所有流量最后都会通过这条边回到 $s$ 点，那么对于 $s,t$ 两个点都满足了流量守恒性质。</p>
+<p>然后按照无源汇上下界网络可行流计算方法计算即可，构造方案同理，但是此时可行流的大小是 $t$ 到 $s$ 那条边的流量。（不难想到）</p>
+<p>代码就不放了，就是多了两个点和一条边。</p>
+<h3 id="有源汇上下界网络最大-小流"><a href="#有源汇上下界网络最大-小流" class="headerlink" title="有源汇上下界网络最大&#x2F;小流"></a>有源汇上下界网络最大&#x2F;小流</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点（除了源点和汇点）都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组使得流量最大&#x2F;小的方案称为<strong>有源汇上下界网络最大&#x2F;小流</strong>。</p>
+<h4 id="解决（最大流）"><a href="#解决（最大流）" class="headerlink" title="解决（最大流）"></a>解决（最大流）</h4><p>考虑先得到一组有源汇上下界网络可行流的答案。</p>
+<p>那么有源汇上下界网络最大流就是在残量网络上继续跑最大流就可以了，证明不难。</p>
+<p>跑最大流的时候一定要注意删去 $S$ 和 $T$ 的所有边并且删掉 $t$ 到 $s$ 的流量为无穷大的边，然后从原来的源点到汇点跑，并不是我们新建的源点和汇点。</p>
+<p>代码中的 $S,T,s,t$ 变量稍有不同。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 2000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,inf,i,j,x[N],y[N],z[N],l[N],r[N],ans,temp,S,T,id[N],viss[N],summ;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],tot=<span class="number">1</span>,sum[N],base;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll idd)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,id[tot] = idd;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,id[tot] = idd;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll s,ll t,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(viss[to[i]]||id[i]&lt;base) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],s,t,<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step||dis[s]&gt;=inf) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = inf;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m,S=<span class="number">1</span>,T=n;</span><br><span class="line">	s=<span class="number">0</span>,t=n+<span class="number">1</span>,<span class="built_in">merge</span>(T,S,<span class="number">1e9</span>,<span class="number">-2</span>),base=<span class="number">-3</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x[i]&gt;&gt;y[i]&gt;&gt;l[i]&gt;&gt;r[i];</span><br><span class="line">		<span class="built_in">merge</span>(x[i],y[i],r[i]-l[i],i),<span class="built_in">merge</span>(s,y[i],l[i],<span class="number">-1</span>),<span class="built_in">merge</span>(x[i],t,l[i],<span class="number">-1</span>),summ+=l[i];</span><br><span class="line">	&#125;</span><br><span class="line">	inf = t-s+<span class="number">1</span>;</span><br><span class="line">	sum[<span class="number">0</span>] = inf;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;inf;i++) cur[i]=la[i];</span><br><span class="line">		summ -= <span class="built_in">dfs</span>(s,s,t,<span class="number">1e9</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(summ!=<span class="number">0</span>)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;please go home to sleep\n&quot;</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=la[T];i;i=ne[i]) <span class="keyword">if</span>(to[i]==S&amp;&amp;id[i]==<span class="number">-2</span>) ans+=(<span class="number">1000000000</span>-val[i]);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) dis[i]=<span class="number">0</span>,sum[i]=<span class="number">0</span>;</span><br><span class="line">	inf = n,sum[<span class="number">0</span>] = inf,viss[s] = viss[t] = <span class="number">1</span>,base = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(dis[S]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=inf;i++) cur[i]=la[i];</span><br><span class="line">		ans += <span class="built_in">dfs</span>(S,S,T,<span class="number">1e9</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">4 6</span></span><br><span class="line"><span class="comment">1 2 1 2</span></span><br><span class="line"><span class="comment">2 3 1 2</span></span><br><span class="line"><span class="comment">3 4 1 2</span></span><br><span class="line"><span class="comment">4 1 1 2</span></span><br><span class="line"><span class="comment">1 3 1 2</span></span><br><span class="line"><span class="comment">4 2 1 2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">NO</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决（最小流）"><a href="#解决（最小流）" class="headerlink" title="解决（最小流）"></a>解决（最小流）</h4><p>根据斜对称性，我们可以从 $t$ 跑到 $s$ 的最大流，用可行流的流量减去这个最大流的流量就是最小流的流量了。（可能为负）</p>
+<p>代码就不放了，就改了几个变量。</p>
+<h3 id="上下界费用流"><a href="#上下界费用流" class="headerlink" title="上下界费用流"></a>上下界费用流</h3><p>求满足上下界的网络流同时花费的费用最小&#x2F;大。</p>
+<p>很简单，不管是有源汇&#x2F;无源汇建图都一样，但是要加上 $l \times cost$（底线要求）。</p>
+<p>并且我们新连接的边边权都是 $0$，对应的跑最小&#x2F;大费用最大流就可以了，并且因为没有流量的限制，甚至可以不用删边再跑一遍最大&#x2F;小流。</p>
+<p>代码以 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4043">4043 [AHOI2014&#x2F;JSOI2014] 支线剧情</a> 为例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 200005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,i,j,s,t,inf,x,y,z,ans,temp,deg[N],summ;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],w[N],viss[N],vis[N],tot=<span class="number">1</span>,q[N],he,ta;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">mergea</span><span class="params">(ll x,ll y,ll z,ll wal)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,w[tot] = wal;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,w[tot] = -wal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) dis[i]=<span class="number">2e9</span>;</span><br><span class="line">	q[he=ta=<span class="number">1</span>]=s;</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(he&lt;=ta)&#123;</span><br><span class="line">		ll tmp = q[he++];</span><br><span class="line">		vis[tmp] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(val[i]&gt;<span class="number">0</span>&amp;&amp;dis[to[i]]&gt;dis[tmp]+w[i])&#123;</span><br><span class="line">				dis[to[i]] = dis[tmp]+w[i];</span><br><span class="line">				<span class="keyword">if</span>(!vis[to[i]]) vis[to[i]]=<span class="number">1</span>,q[++ta]=to[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[t]&lt;=<span class="number">1e9</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	viss[x] = <span class="number">1</span>;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=la[x];i;i=ne[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(viss[to[i]]) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]==dis[x]+w[i]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">(ll S,ll T,ll INF)</span></span>&#123;</span><br><span class="line">	s = S,t = T,inf = INF;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) viss[i]=<span class="number">0</span>;</span><br><span class="line">		ans += <span class="built_in">dfs</span>(s,<span class="number">1e9</span>)*dis[t];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		<span class="keyword">while</span>(x--) cin&gt;&gt;y&gt;&gt;z,deg[i]--,deg[y]++,ans+=z,<span class="built_in">mergea</span>(i,y,<span class="number">1e9</span>,z);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++) <span class="built_in">mergea</span>(i,n+<span class="number">1</span>,<span class="number">1e9</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(deg[i]&lt;<span class="number">0</span>) <span class="built_in">mergea</span>(i,n+<span class="number">2</span>,-deg[i],<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span>(deg[i]&gt;<span class="number">0</span>) <span class="built_in">mergea</span>(<span class="number">0</span>,i,deg[i],<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">mergea</span>(n+<span class="number">1</span>,<span class="number">1</span>,<span class="number">1e9</span>,<span class="number">0</span>);</span><br><span class="line">	ans += <span class="built_in">solve</span>(<span class="number">0</span>,n+<span class="number">2</span>,n+<span class="number">3</span>);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">2 2 1 3 2</span></span><br><span class="line"><span class="comment">2 4 3 5 4</span></span><br><span class="line"><span class="comment">2 5 5 6 6</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">24</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="模拟网络流"><a href="#模拟网络流" class="headerlink" title="模拟网络流"></a>模拟网络流</h2><h3 id="模拟最大流"><a href="#模拟最大流" class="headerlink" title="模拟最大流"></a>模拟最大流</h3><p>我们一般不直接模拟最大流（有的题目亦是如此），而是把它转化为最小割进行计算。</p>
+<p>模拟最大流，就是利用各种手段（一般是 dp，或者其他的方式）来模拟网络流增加流的过程，但是如果是模拟最小割的话就是模拟割边的过程。</p>
+<p>比如一道例题：</p>
+<blockquote>
+<p>小明升任了 CF 国的大总管，他管辖的 $n$ 个城市，编号为 $1 \dots n$ 。每个城市生产了 $p_i$ 个货物，限制最多可以卖掉 $s_i$ 个货物。对于每两个城市 $i,j$，如果 $i&lt;j$，则可以最多从 $i$ 运送 $c$ 个货物到 $j$ 。注意不能反向运送，却可以在多个城市之间送来送去。现在小明想知道，经过运输后，最多能卖掉多少个货物。</p>
+</blockquote>
+<p>我们可以建出来图，图就是源点向所有点都连接了一条边权为 $p_i$ 的边，所有点都向汇点连接了一条边权为 $s_i$ 的边，然后每个 $i&lt;j$ 都连接了 $c$ 的边。</p>
+<p>图是十分规范的，我们可以用 dp 求解。</p>
+<p>设 $dp_{i,j}$ 表示前 $i$ 个点，有 $j$ 个点到 $S$ 的边没有被割掉的最小花费，那么转移就是要么保留这个点到 $S$ 的边，要么保留这个点到 $T$ 的边就可以了，方程很好列出来：</p>
+<p>$$<br>f_{i,j}&#x3D;\min(f_{i-1,j}+p_i+c \times j,f_{i-1,j-1}+s_i)<br>$$</p>
+<p>最后 $O(n^2)$ 就解决了，需要滚动数组优化，当然还有贪心的做法，此处就不强调了。</p>
+<h3 id="模拟费用流"><a href="#模拟费用流" class="headerlink" title="模拟费用流"></a>模拟费用流</h3><p>这才是重点，模拟最大流的题很少，但是模拟费用流的题目却很多。</p>
+<p>模拟费用流也是通过贪心等手段维护每次增广的流量以及反悔边的选择，一般需要用到优先队列，线段树等可删除结构，视具体的题目而定。</p>
+<p>解决这种题可以从两个方面入手：</p>
+<ul>
+<li><p>直接贪心。</p>
+</li>
+<li><p>建出来费用流的图，然后再根据反悔边判断，但是必须要保证增广次数乘上每次增广的代价可以忍受。</p>
+</li>
+</ul>
+<p>这种题需要多练习，可以参考一下 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/solution/P5470">P5470 [NOI2019] 序列 题解</a> 或者 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/674469/solution-p4217">P4217 [CTSC2010] 产品销售 题解</a>，这两道题目一个是用了优先队列维护退流，一个是用了线段树维护流量，都是好的例子。</p>
+<p>并且它们都是先建图，然后考虑各种反悔边，值得一提的是这些图一般都很有规律（忽略边权），便于维护。</p>
+<p>还可以直接用贪心来做的题目，但是这个不是重点就跳过了。</p>
+<p>那么，网络流就到此结束了。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

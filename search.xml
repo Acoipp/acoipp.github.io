@@ -449,4 +449,970 @@
         <tag>插入dp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>DP提高笔记</title>
+    <url>/2024/01/07/DP%E6%8F%90%E9%AB%98%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="数位-DP"><a href="#数位-DP" class="headerlink" title="数位 DP"></a>数位 DP</h1><p>即为对数字的每一位来进行 DP。</p>
+<p>例 1：</p>
+<blockquote>
+<p>给定两个正整数 $a$ 和 $b$，求在 $[a,b]$ 中的所有整数中，每个数码各出现了多少次。</p>
+</blockquote>
+<p>很明显，直接套数位 DP 的模板即可：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(ll pos,ll num,...,<span class="type">bool</span> limit,<span class="type">bool</span> lead)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!pos) <span class="keyword">return</span> <span class="built_in">end</span>(num,...);</span><br><span class="line">	<span class="keyword">if</span>(!limit&amp;&amp;!lead&amp;&amp;dp[...]!=<span class="number">-1</span>) <span class="keyword">return</span> dp[...];</span><br><span class="line">	ll ans = <span class="number">0</span>,up = (limit?poss[pos]:<span class="number">9</span>);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=<span class="number">9</span>;i++)&#123;</span><br><span class="line">		ans += <span class="built_in">dfs</span>(pos<span class="number">-1</span>,...,limit&amp;&amp;(i==up),lead&amp;&amp;(i==<span class="number">0</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!limit&amp;&amp;!lead) dp[...]=ans;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例 2：</p>
+<blockquote>
+<p>求满足下列所有条件的4元组（整数）  数量：<br>$a+c &gt; b+d,a+d \ge b+c,0 \le a \le A,0 \le b \le B,0 \le c \le C,0 \le d \le D$（$0 \le A,B,C,D \le 10^{18}$）</p>
+</blockquote>
+<p>还是套模板，但是此处涉及到了加法，那么很显然要再开一维表示进位，然后会发现 TLE，因为一次转移跟 $d$ 有很大的关系，考虑转化为 $2$ 进制，发现还是 TLE，原来 $limit$ 和 $lead$ 浪费的时间太多了，那么直接存在 dp 状态里面就可以了。</p>
+<p>例 3：<a href="https://www.luogu.com.cn/problem/P3281">[SCOI2013] 数数</a></p>
+<p>先套模板，然后会发现数位和会 TLE，但是发现 $i&#x3D;0,i&#x3D;up$ 和 $1 \le i &lt; up$ 分别都是相同的转移，然后去除无用状态和循环即可。</p>
+<p>例 4：</p>
+<blockquote>
+<p>对 $1$ 个 $10$ 进制数，定义它的众数为所有数位中出现次数最多的数字d，特别的，若出现次数最多的数字有多个，则认为众数不存在，例如，$114514$ 的众数为 $1$；$4396$ 则不存在众数，求 $[l,r]$ 中众数为 $d$ 的数字数量。</p>
+</blockquote>
+<p>对于每个 dfs 状态，然后如果 $limit&#x3D;0$ 那么可以直接通过每个数出现的次数 dp 出来结果。</p>
+<p>还要处理前导 $0$，那么一次询问就是 $18 \times 18 \times 10^3$ 左右的，但是我们发现对于一个数 $\overline{abcde\cdots }$，其所有 $0 \sim 99999\dots 999$，位数到达 $b$ 的位置都可以预处理得到。</p>
+<p>故时间复杂度少了一个 $18$，即可通过。</p>
+<p>例 5：<a href="https://www.luogu.com.cn/problem/P3303">[SDOI2013] 淘金</a></p>
+<p>考虑数位 dp 的模板，额外记录当前乘积中 $2,3,5,7$ 的因子个数，然后发现总状态只有 $8 \times 10^3$ 左右个，然后暴力地执行 dp 最后跑一下二路归并即可。</p>
+<p>总结：</p>
+<ul>
+<li>如果 dp 过程中在 $limit&#x3D;0$ 的时间可以 $O(d)$ 得出答案，那么一共可以在 $O(d \times T \times \text{位数}^2)$ 的时间复杂度内算出答案，如果可以记忆化可以少一个位数的时间复杂度。</li>
+<li>有些状态是完全重叠的，那么我们直接合并就可以优化时间复杂度。</li>
+<li>做数位 dp 应该像普通 dp 那样寻找重叠的子任务，然后合并而不是只套模板。</li>
+</ul>
+<h1 id="斜率优化"><a href="#斜率优化" class="headerlink" title="斜率优化"></a>斜率优化</h1><p>斜率，直线上任取两点 $(x_1,y_1),(x_2,y_2)$ 的 $\dfrac{y_2-y_1}{x_2-x_1}$。</p>
+<p>主要应用于形如下式的 1D&#x2F;1D 动态规划：</p>
+<p>$$<br>f_i &#x3D; \min&#x2F;\max{f_j+a_i \times b_j+c_i+d_j}<br>$$</p>
+<p>遇到这种情况可以选择斜率优化，李超线段树的写法在这里不做详解。</p>
+<p>斜率优化具体而言是维护一个凸包，形如下图（左边是下凸包，右边是上凸包）</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/v7hcxyou.png"></p>
+<p>对于一般的题目都是要求截距 （$y&#x3D;kx+b$ 中的 $b$）最小&#x2F;大化，故此处对斜率最小&#x2F;大化，不过多讲解，但是都可以互相转化。</p>
+<p>凸包的特点就是每条线段的斜率都是单调的，且上下凸包恰好相反。</p>
+<p>考虑在凸包上加点：</p>
+<ul>
+<li><p>如果加的点的 $x$ 坐标单调不降，那么我们可以动态维护凸包，即使用单调栈，判断线段的斜率即可。</p>
+</li>
+<li><p>如果加的点的 $x$ 坐标非单调，那么我们需要用 CDQ 分治强制让它单调，然后处理左边对右边的贡献就可以了。（左边按 $x$ 排序，右边按斜率排序就可以处理了，还有要记住添加的顺序不能打乱）</p>
+</li>
+</ul>
+<p>考虑点的斜率：</p>
+<ul>
+<li>如果斜率单调不降，那么它具有决策单调性，可以把前面的全部弹出去直到最小&#x2F;大的那个，而且同时保证了后面的点的决策正确性。</li>
+<li>否则需要在凸包上二分，二分哪个点最优，我们发现，对于下凸包而言（上凸包类似），所有点到当前决策点的线的截距一定是形如 $a_1 &gt; a_2 &gt; \dots &gt;a_i &lt; a_{i+1} &lt; \dots &lt; a_k$，二分这个符号，找到最后一个大于即可。</li>
+</ul>
+<p>综上：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">$x$ 单调不下降</th>
+<th align="center">$k$ 单调不下降</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">是</td>
+<td align="center">单调栈</td>
+<td align="center">决策单调性</td>
+</tr>
+<tr>
+<td align="center">否</td>
+<td align="center">CDQ分治</td>
+<td align="center">单调队列上二分或者CDQ分治</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ul>
+<li><strong>如果碰到 $x$ 相同的两个节点，那么如果是维护最小值的话，要丢弃 $y$ 较大的，否则丢齐较小的。</strong></li>
+</ul>
+<p>最后就是一定要把 $x,y,k$ 的公式列出来，对于斜率优化而言，上述 dp 方程中：$x&#x3D;b_j,y&#x3D;f_j+d_j,k&#x3D;a_i$，把 $j$ 这个点加到凸包里面，然后对于 $i$ 来说用斜率为 $k$ 的直线去截取凸包就可以了。</p>
+<p>特别的，李超线段树恰好相反。</p>
+<p>有时候一个等于号就能够改变整个代码的逻辑，写代码的时候一定要注意。</p>
+<h1 id="四边形不等式"><a href="#四边形不等式" class="headerlink" title="四边形不等式"></a>四边形不等式</h1><p>统一地来说，若一个函数 $w(a,b)$ 满足下列条件则称 $w$ 函数满足四边形不等式。</p>
+<p>$$<br>w(a,c)+w(b,d) \le w(a,d)+w(b,c)(a \le b \le c \le d)<br>$$</p>
+<p>通常用来解决决策单调性的问题。</p>
+<h2 id="1D-1D-动态规划"><a href="#1D-1D-动态规划" class="headerlink" title="1D&#x2F;1D 动态规划"></a>1D&#x2F;1D 动态规划</h2><p>若我们可以写成 $f_i &#x3D; \min{f_j+w(i,j)}$ 的形式，且 $w$ 函数满足四边形不等式，则称 $f$ 函数具有决策单调性。</p>
+<p>或者 $f_i &#x3D; \max{j+w(i,j)}$ 但是 $w$ 函数满足交叉<strong>大于</strong>包含，也可以用决策单调性。</p>
+<p>即设 $f_i$ 是由 $f_{k1}$ 转移过来且 $f_j$ 是由 $f_{k2}$ 转移过来，那么若 $i&gt;j$ 那么 $k1 \ge k2$。</p>
+<p>此处证明略。</p>
+<h3 id="w-函数与-f-没有关系"><a href="#w-函数与-f-没有关系" class="headerlink" title="$w$ 函数与 $f$ 没有关系"></a>$w$ 函数与 $f$ 没有关系</h3><p>如果满足上面的条件的话，那么我们可以用整体二分法求解。</p>
+<p>即函数 $\operatorname{solve}(l,r,s,t)$ 表示 $f_{l \sim r}$ 的决策点一定都是在 $s \sim t$ 内的。</p>
+<p>那么我们每次转移的时候就取中间点，然后分为两部分递归下去就行了，特别的，如果 $w_{l,r}$ 必须通过 $O(n)$ 的方式得到，那么我们可以在函数的过程中添加一个莫队的指针移动，这样的话时间复杂度是严格 $O(n \log n)$ 的。</p>
+<h3 id="w-函数与-f-有关系"><a href="#w-函数与-f-有关系" class="headerlink" title="$w$ 函数与 $f$ 有关系"></a>$w$ 函数与 $f$ 有关系</h3><p>我们考虑单调队列存储三元组 $(l,r,p)$，表示所有 $dp_{l \sim r}$ 的转移点，都是 $p$，如果我们添加进来了一个新的转移点，那就比较如果在 $dp_l$ 地方是这个新的转移点较优，那 $dp_{l \sim r}$ 一定都选这个转移点，直接 $\operatorname{pop}$ 即可；否则需要二分找到一个临界点 $k$，使得 $dp_{l \sim k}$ 的转移点都是原来的 $p$，然后 $dp_{k+1,r}$ 的转移点是新的转移点，然后 $\operatorname{push}$ 进单调队列即可。</p>
+<p>最后如果队头的 $r&lt;$ 当前决策点 $i$，直接弹出即可，时间复杂度 $O(n \log n)$。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>当然还有 $w$ 函数，满足四边形不等式，但是符号相反，即四边形不等式和 dp 转移符号相反。那样的话需要用到单调栈维护。</p>
+<p>栈顶到栈低一定也是三元组 $(l,r,p)$，且 $l,r$ 递增。（$l$ 和 $r$ 有可能会发生变化，因此不存下来，而是要用的时候二分求解）</p>
+<p>此处就不再赘述了，大概就是先看栈头的两个元素的分界点是不是小于 $i$，如果小于就弹出，最后把 $i$ 更新之后加入到栈里面，且满足决策点递增。（决策点如果不递增就直接弹出栈顶）</p>
+<p>解释：详见 Fiyuls 博客，很详细。</p>
+<h2 id="2D-1D-动态规划"><a href="#2D-1D-动态规划" class="headerlink" title="2D&#x2F;1D 动态规划"></a>2D&#x2F;1D 动态规划</h2><p>形如 $dp_{l,r} &#x3D; \min{dp_{l,k}+dp_{k+1,r}+w(l,r)}$ 的转移且 $w$ 函数满足四边形不等式和区间单调性（$w(a,b) \ge w(c,d) (a \le c \le d \le b)$，那么 $dp_{l,r}$ 也具有决策单调性。</p>
+<p>遇到这种情况，把每个决策点存下来，然后 $dp_{l,r}$ 的最优决策点一定在 $dp_{l,r-1}$ 的最优决策点和 $dp_{l+1,r}$ 的最优决策点之间，然后 for 循环枚举即可。</p>
+<p>注意到每一种区间长度的枚举总数一定不超过 $2n$，所以整个时间复杂度是 $O(n^2)$。</p>
+<p>常见的问题就是优化石子合并。</p>
+<h1 id="动态-DP"><a href="#动态-DP" class="headerlink" title="动态 DP"></a>动态 DP</h1><p>用线段树维护矩阵转移。</p>
+<p>主要是一些树上 dp 被弄上了修改点权的操作。</p>
+<p>把 dp 用广义矩阵乘法写出来，然后再来一个 $g$ 数组表示去掉重儿子的答案，再搞一个 $f$ 数组表示直接答案。</p>
+<p>$g$ 的转移矩阵一定得用关于 $x$ 和其儿子的变量表示出来（常数），然后 $f$ 一定能用 $g$ 和重儿子的信息表示出来（常数）。</p>
+<p>最后树链剖分维护一下每条重链的信息就可以了。</p>
+<p>注意：</p>
+<ul>
+<li>矩阵常数优化可以拆开乘法的过程。</li>
+<li>每条链可以单独开一个线段树，这样节省了很多时间。</li>
+<li>此处树链剖分时，线段树每个节点存储的是一段矩阵乘法。</li>
+<li>特别注意叶子节点的边界情况，一般是“单位矩阵”。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>动态规划</tag>
+        <tag>数位dp</tag>
+        <tag>斜率优化</tag>
+        <tag>四边形不等式</tag>
+        <tag>动态dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>四大离线算法笔记</title>
+    <url>/2024/01/07/%E5%9B%9B%E5%A4%A7%E7%A6%BB%E7%BA%BF%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="四大离线算法"><a href="#四大离线算法" class="headerlink" title="四大离线算法"></a>四大离线算法</h1><ul>
+<li>莫队（略）<ul>
+<li>普通莫队</li>
+<li>带修改莫队</li>
+<li>回滚莫队</li>
+<li>树上莫队</li>
+</ul>
+</li>
+<li>线段树分治（略）</li>
+<li>CDQ 分治（基于时间的整体二分算法）</li>
+<li>整体二分（基于值域的整体二分算法）</li>
+</ul>
+<h1 id="CDQ-分治"><a href="#CDQ-分治" class="headerlink" title="CDQ 分治"></a>CDQ 分治</h1><p>简单来说，即为对于时间进行分治。</p>
+<p>对于某段操作序列 $[l,r]$，分裂成 $[l,mid]$ 和 $[mid+1,r]$，分别执行分治，最后考虑 $[l,mid]$ 中的修改操作对 $[mid+1,r]$ 中的查询操作的影响。</p>
+<p>对于每一个 $i$ 号，查询操作，容易证明，在它前面的修改操作都统计到了它的答案里面。</p>
+<p>例 1：<a href="https://www.luogu.com.cn/problem/P4169">[Violet] 天使玩偶&#x2F;SJY摆棋子</a></p>
+<p>很显然，如果暴力计算对于每个询问的贡献的话，枚举在它前面加入集合的坐标，然后计算 $|x_1-x_2|+|y_1-y_2|$ 的最小值就行了，注意到最小值是可以合并起来计算的，即不会相互影响，那么我们就可以用 CDQ 分治优化。</p>
+<p>对于每个区间 $[l,r]$，先分裂，再递归，最后合并。</p>
+<p>主要处理合并的问题，左边的修改可以对右边造成影响，且为了保证时间复杂度，这里的查询必须是 $O(\log)$ 级别的，这样的话整体时间复杂度才能是 $O(\log^2)$ 级别。</p>
+<p>很显然，两边分别按 $x$ 排序，然后假设当前算某个询问点左下角距离它最近的点的答案，那么要求 $x_{add} \le x_{que}$ 且 $y_{add} \le y_{que}$。</p>
+<p>然后用树状数组维护 $y$ 轴就可以了。</p>
+<p>一共跑 $4$ 遍，但是写得好的话可以减少很多时间复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(ll l,ll r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l==r) <span class="keyword">return</span> ;</span><br><span class="line">	ll mid = (l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">solve</span>(l,mid),<span class="built_in">solve</span>(mid+<span class="number">1</span>,r);   <span class="comment">//递归 </span></span><br><span class="line">	<span class="comment">//处理 </span></span><br><span class="line">	<span class="comment">//清空数据结构 </span></span><br><span class="line">	<span class="built_in">merge</span>(p+l,p+mid+<span class="number">1</span>,p+mid+<span class="number">1</span>,p+r+<span class="number">1</span>,temp+l,cmp);  <span class="comment">//合并（此处也可以直接排序，特别是左右部分关键字不同的情况）</span></span><br><span class="line">	<span class="keyword">for</span>(ll i=l;i&lt;=r;i++) p[i]=temp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于普通的 CDQ 分治，核心代码就这样。</p>
+<p>例 2：</p>
+<blockquote>
+<p>给定 $n$ 个三维空间中的点，对于每个点 $i$，找到 $j$ 使得 $x_j &lt;x_i,y_j &lt; y_i,z_j&lt;z_i$ 的数量。（$1 \le n \le 10^5,1 \le x_i,y_i,z_i \le 10^9$）</p>
+</blockquote>
+<p>还是像上面的问题一样，将每个点看做一次询问加一次修改，注意到如果我们按点的 $x$ 轴大小顺序去加点的话是不会对答案产生影响的，因此我们先按 $x$ 从小到大排序，然后用 CDQ 分治处理 $[l,mid]$ 对 $[mid+1,r]$ 的答案。</p>
+<p>很容易发现所有位于 $[l,mid]$ 的点的 $x$ 总是小于等于 $[mid+1,r]$ 的点，那么我们仍然按 $y$ 坐标合并上来，然后<strong>双指针</strong>维护 $z$ 坐标的大小关系就可以了。</p>
+<p>例 3：<a href="https://www.luogu.com.cn/problem/P4093">[HEOI2016&#x2F;TJOI2016] 序列</a></p>
+<p>设 $b_i$ 表示 $a_i$ 的最小可能值，$c_i$ 表示 $a_i$ 的最大可能值，那么 $i,j$ 可以连接起来当且仅当 $i&lt;j,c_i \le a_j,a_i \le b_j$。</p>
+<p>这又是一个类似于上面问题的“偏序”问题，那么还是像上面一样处理答案，不过这次我们要先递归 $[l,mid]$，然后处理 $[l,mid]$ 对于 $[mid+1,r]$ 的贡献，最后递归 $[mid+1,r]$。</p>
+<p>原因是因为 DP 的顺序是从小到大的，因此 CDQ 的顺序也得从小到大来计算，当然统计方案一般不存在这种问题，所以两种写法都是可以的。</p>
+<p>总结一下：</p>
+<ul>
+<li>CDQ 用于处理左边的贡献可以合并且仅对于右边的询问产生影响的问题。</li>
+<li>CDQ 也用于求解一些偏序问题。</li>
+<li>CDQ 实际上是遍历一棵线段树，前序、中序和后序三种遍历方式需要视问题的不同而处理。</li>
+</ul>
+<p>（CDQ 分治也可以用来动态维护凸包，即优化斜率优化 DP，当然这种情况一般能被李超线段树代替，时间空间均差不了多少）</p>
+<h1 id="整体二分"><a href="#整体二分" class="headerlink" title="整体二分"></a>整体二分</h1><p>简单来说，即为对值域进行分治求解。</p>
+<p>假设我们知道了某些的询问的答案在 $[l,r]$ 内，而且可以通过 $O(\log)$ 的判定每个询问的答案在 $[l,mid]$ 还是在 $[mid+1,r]$ 内，那么可以在 $O(n \log^2 n)$ 的时间复杂度内求解每个询问。</p>
+<p>一些条件：</p>
+<ul>
+<li>询问具有可二分性。</li>
+<li>询问次数和数据的大小级别相当。</li>
+</ul>
+<p>时间复杂度：每个询问最多被遍历 $\log$ 次，每次需要 $O(\log)$ 的时间判定，即 $O(\log^2)$ 级别。</p>
+<p>例 1：</p>
+<blockquote>
+<p>查询某个区间第 $k$ 小的数，没有修改，要求 $O(n \log^2 n)$ 内的时间，空间 $O(n)$。</p>
+</blockquote>
+<p>很明显每个询问具有可二分性，那么我们可以整体二分。</p>
+<p>假设答案小于等于 $mid$，那么把 $a$ 序列中的所有小于等于 $mid$ 且大于等于 $l$ 的数都设为 $1$，那么如果询问区间内的 $1$ 的个数大于等于 $k$，那么这个询问的答案就在 $[l,mid]$ 内，否则在 $[mid+1,r]$ 内。</p>
+<p>注意：如果这个询问被划到了 $[mid+1,r]$ 区间，那么 $k$ 要减去当前区间 $1$ 的个数，即去掉 $[1,mid]$ 内的数。</p>
+<p>例 2：<a href="https://www.luogu.com.cn/problem/P4602">[CTSC2018] 混合果汁</a></p>
+<p>判定就很简单了，用线段树上二分即可，此处不啰嗦。</p>
+<p>类似于 CDQ 分治的第三道题目，我们在整体二分的时候需要先判定，然后处理在 $[l,mid]$ 里面的询问，然后清空，最后再处理 $[mid+1,r]$ 里面的询问。</p>
+<p>至于为什么要这么做，因为每次判定必须用到 $[mid+1,n]$ 里面的信息，而我们不可能每次判定都循环 $mid+1 \sim n$，只能从前面的判定获取有用信息，$k$ 小值也可以用这种方法。</p>
+<p>这样的话时间复杂度依然是 $O(n \log^2 n)$。</p>
+<p>例 3：<a href="https://www.luogu.com.cn/problem/CF868F">Yet Another Minimization Problem</a></p>
+<p>四边形不等式：</p>
+<p>$$<br>w(a,c)+w(b,d) \le w(a,d)+w(b,c)<br>$$</p>
+<p>我们可以简记为：交叉小于包含。</p>
+<p>如果对于某个 dp 转移形如这种形式：</p>
+<p>$$<br>f_r &#x3D; \max{f_l+\operatorname{value}(l,r)}<br>$$</p>
+<p>如果 $\operatorname{value}$ 满足四边形不等式，那么 $f$ 函数满足决策单调性。</p>
+<p>这里讲解 $f$ 函数是分阶段得到的，才能满足可用整体二分求解，否则需要用单调队列，后面再说。</p>
+<p>整体二分求解很简单，$\operatorname{solve}(l,r,s,t)$ 表示 $f_l \sim f_r$ 的决策点一定位于 $s \sim t$ 中，然后每次找到 $mid &#x3D; \dfrac{l+r}{2}$ 的决策点进行递归，层数一共有 $n$ 层，每层遍历 $s \sim t$，故时间复杂度为 $n \log n$。</p>
+<p>注意，每层仅可遍历 $l \sim r$ 和 $s \sim t$，不可遍历其它内容，除非时间复杂度确定，不然的话无法保证 $\log$ 级别的消耗。（类似于遍历 $l \sim t$）</p>
+<p>最后转移即可。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>离线算法</tag>
+        <tag>莫队</tag>
+        <tag>线段树分治</tag>
+        <tag>CDQ 分治</tag>
+        <tag>整体二分</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图论学习笔记2</title>
+    <url>/2024/01/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/</url>
+    <content><![CDATA[<h1 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a><strong>二分图</strong></h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><p>二分图，又称二部图，英文名叫 Bipartite graph。</p>
+<p>二分图是什么？节点由两个集合组成，且两个集合内部没有边的图。</p>
+<p>换言之，存在一种方案，将节点划分成满足以上性质的两个集合。</p>
+<h2 id="性质-判定"><a href="#性质-判定" class="headerlink" title="性质&amp;判定"></a><strong>性质&amp;判定</strong></h2><p>如果两个集合的各个节点分别表示不同的颜色，那么每条边都连接不同颜色的节点。</p>
+<p>且没有奇环的无向图一定是二分图。</p>
+<p>判定二分图可以遵循以上的过程对每条边的两个端点染不同的颜色，如果发现无法满足上述条件即不是二分图。</p>
+<h2 id="二分图最大匹配"><a href="#二分图最大匹配" class="headerlink" title="二分图最大匹配"></a><strong>二分图最大匹配</strong></h2><ul>
+<li><p>匹配的定义：选出一些边，使这些边两两之间不具备相同的端点。</p>
+</li>
+<li><p>最大匹配：在上述限制下使选出的边的数量尽可能大。</p>
+</li>
+</ul>
+<h3 id="增广路算法-Augmenting-Path-Algorithm"><a href="#增广路算法-Augmenting-Path-Algorithm" class="headerlink" title="增广路算法 Augmenting Path Algorithm"></a><strong>增广路算法 Augmenting Path Algorithm</strong></h3><p>也叫匈牙利算法。</p>
+<p>对于二分图左部未匹配到的点，如果存在一条增广路，那么匹配数量就增加 $1$，最后没有增广路了那么就是最大匹配。（增广路定理）</p>
+<p>*增广路：以非匹配边开始，以非匹配边结束的一条<strong>路径</strong>，使得路径上的边是非匹配边，匹配边交错出现。</p>
+<p>那么代码就很容易写出来了，注意此处可以在更新右部匹配的时候顺便更新左部匹配，这样的话更好处理以后的内容。</p>
+<p>（以下是时间戳优化的版本）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(ll x,ll r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;op[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[op[x][i]]==r) <span class="keyword">continue</span>;</span><br><span class="line">		vis[op[x][i]] = r;</span><br><span class="line">		<span class="keyword">if</span>(!link[op[x][i]]||<span class="built_in">dfs</span>(link[op[x][i]],r))&#123;</span><br><span class="line">			link[op[x][i]] = x;</span><br><span class="line">			link2[x] = op[x][i];</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同理，可以转化为 Dinic 求网络流，此处不展开讨论。</p>
+<h2 id="二分图最小点覆盖（Konig-定理）"><a href="#二分图最小点覆盖（Konig-定理）" class="headerlink" title="二分图最小点覆盖（König 定理）"></a><strong>二分图最小点覆盖（König 定理）</strong></h2><ul>
+<li>最小点覆盖：选最少的点，满足每条边至少有一个端点被选。</li>
+</ul>
+<p>二分图中，最小点覆盖 $&#x3D;$ 最大匹配。</p>
+<p>首先最小点覆盖一定 $\ge$ 最大匹配，因为最大匹配的每条边至少选一个端点。</p>
+<p>考虑构造性算法：</p>
+<blockquote>
+<p>假设我们求出了一组最大匹配，然后对于左部未被匹配到的点执行 dfs，但是规定从左部到右部的边只能经过非匹配边，从右部到左部的边只能经过匹配边。那么最后左部未被访问到的点和右部访问到的点构成一组最小点覆盖。</p>
+</blockquote>
+<p>证明：</p>
+<blockquote>
+<p>首先这个方法的大小肯定是等于最大匹配的，一个匹配边要么两个端点都没有访问到，要么都访问到了，并且最小点覆盖肯定不包含不在最大匹配上的点。</p>
+</blockquote>
+<blockquote>
+<p>其次一定可以满足在上述 dfs 中所经过的所有边都有一个点是右部访问到的点（非增广路以非匹配边开始一定以匹配边结束），然后剩下的就是左部未访问到的点，恰好能够满足覆盖所有边。</p>
+</blockquote>
+<h2 id="二分图最大独立集"><a href="#二分图最大独立集" class="headerlink" title="二分图最大独立集"></a><strong>二分图最大独立集</strong></h2><ul>
+<li>最大独立集：选最多的点，满足这些点两两无边连接。</li>
+</ul>
+<p>引理：最小点覆盖 $+$ 最大独立集 $&#x3D;$ 总点数。</p>
+<p>证明很显然，把最小点覆盖中的点及其连接的边删去，图中就没有边了，剩下的点构成最大独立集。</p>
+<p>因为，二分图最大独立集 $&#x3D;$ 总点数 $-$ 最大匹配数。</p>
+<h2 id="有向无环图最小路径划分-覆盖"><a href="#有向无环图最小路径划分-覆盖" class="headerlink" title="有向无环图最小路径划分&#x2F;覆盖"></a><strong>有向无环图最小路径划分&#x2F;覆盖</strong></h2><ul>
+<li>路径划分：选出若干条不相交的路径，使得每个点恰好被经过 $1$ 次。</li>
+<li>路径覆盖：选出若干条路径，使得每个点被经过至少 $1$ 次。</li>
+</ul>
+<h3 id="划分"><a href="#划分" class="headerlink" title="划分"></a><strong>划分</strong></h3><p>将每个点拆成入点和出点，那么对于每一条 $u \to v$ 的边，连接 $u_{out}\to v_{in}$，形成一个二分图，那么这个有向无环图最小路径划分就是 $n-$ 二分图最大匹配数。</p>
+<p>证明：</p>
+<blockquote>
+<p>我们可以将这个有向图最开始看做 $n$ 条路径，然后二分图最大匹配中的每一条边就可以看做将末尾是 $a$ 的路径和开头是 $b$ 的路径连接，总路径就会减少一条，并且因为每个 $u$ 结尾的路径最多连接一条以 $v$ 结尾的路径，每个 $v$ 开头的路径最多连接一条 $u$ 结尾的路径，故最大匹配是正确的。</p>
+</blockquote>
+<h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a><strong>覆盖</strong></h3><p>对原图跑一个传递闭包，然后对 $w_{i,j}&#x3D;1$ 的 $i,j$ 连接一条 $i \to j$ 的边，容易发现，新图也是一个有向无环图在新图上再跑上面的最小路径划分就行了。</p>
+<p>正确性证明：</p>
+<blockquote>
+<p>其实就是将有相交的路径中的相交的地方保留了一处，其它路径直接越过这个地方，就转化为了最小路径划分。</p>
+</blockquote>
+<p>注：如果是有向图就会出现环的情况会被判作 $0$ 条链（匹配数是 $n$，节点数是 $n$，剩下 $n-n&#x3D;0$），但实际上需要至少 $1$ 条链。</p>
+<h2 id="有向图环覆盖"><a href="#有向图环覆盖" class="headerlink" title="有向图环覆盖"></a><strong>有向图环覆盖</strong></h2><p>类似于上面的情况，还是对每个点拆成入点和出点，连边后跑二分图匹配判断是否有完美匹配即可。证明同上，只不过在最后一次合并的时候一定会合并成至少一个环，恰好满足要求。</p>
+<p>以上三种有向图上的问题均可以输出方案，只需要存储经过了哪些边即可。（二分图匹配上的边）</p>
+<h2 id="有向无环图最大反链"><a href="#有向无环图最大反链" class="headerlink" title="有向无环图最大反链"></a><strong>有向无环图最大反链</strong></h2><p>根据 Dilworth 定理，有向无环图最大反链 $&#x3D;$ 有向无环图最小路径划分。</p>
+<p>此处主要讲述输出方案：</p>
+<blockquote>
+<p>首先像最小路径划分一样求出二分图的最大独立集的方案（点集 $-$ 最小点覆盖）。<br>若 $x_{in}$ 和 $x_{out}$ 都在二分图的最大独立集里，那么 $x$ 就存在于当前二分图最大匹配所对应的有向无环图最大反链。</p>
+</blockquote>
+<p>证明同最小点覆盖，用作复习。</p>
+<p>如果要求出每个点是否可能存在于一种最大反链，那么可以把这个点以及与其含有偏序关系的点去掉，然后再跑出来最大反链，如果此时最大反链的大小只减少了 $1$，那么就可以存在于一种最大反链之中。</p>
+<h2 id="二分图博弈"><a href="#二分图博弈" class="headerlink" title="二分图博弈"></a><strong>二分图博弈</strong></h2><p>两个人操控二分图上的一颗棋子，每个人移动这个棋子到另一个未被移动到过的点，若不能移动则失败。</p>
+<p>定理：对于某个节点若先手必胜当且仅当这个节点一定存在于这个二分图的最大匹配中。</p>
+<p>证明：</p>
+<ul>
+<li><p>如果这个节点存在于二分图的最大匹配中，那么先手移动的一定是沿着匹配边走，后手一定移动到一个匹配点。如果走到了非匹配点，那么设当前的路径是 $s \to p_1 \to p_2 \to \dots \to p_k$，那么把当前的匹配边 $(S,p_1),(p_2,p_3),\dots,(p_{k-2},p_{k-1})$ 右移一位变为 $(p_1,p_2),(p_3,p_4),\dots,(p_{k-1},p_k)$，后面的点不变，那么与 $S$ 一定在最大匹配上矛盾。</p>
+</li>
+<li><p>反之，如果不在二分图的最大匹配上，那么先手一走，一定走到匹配点上，后手就必胜了。</p>
+</li>
+</ul>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a><strong>后记</strong></h2><p>二分图有很多技巧：求一个点是否一定在最大匹配中，一条边是否一定在最大匹配中等等。</p>
+<p>这些问题通常通过修改匈牙利算法的顺序或者重复执行查找增广路的过程得出。</p>
+<p>并且还可以通过二分得到二分图最大匹配的前提下最大的边权最小是多少。</p>
+<p>需要灵活运用匈牙利算法。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>图论</tag>
+        <tag>二分图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图论学习笔记3</title>
+    <url>/2024/01/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03/</url>
+    <content><![CDATA[<h1 id="Prufer-序列"><a href="#Prufer-序列" class="headerlink" title="Prüfer 序列"></a>Prüfer 序列</h1><p>Prüfer 序列 (Prüfer code)，这是一种将带标号的树用一个唯一的整数序列表示的方法。</p>
+<p>注意：我们不考虑含有 $1$ 个结点的树。</p>
+<h2 id="构建方式"><a href="#构建方式" class="headerlink" title="构建方式"></a>构建方式</h2><p>找到一个编号最小的叶子节点，从树上删除，然后把它唯一指向的节点添加到一个序列 $a$ 中，直到树上只剩 $2$ 个节点。</p>
+<p>堆的构造过程很简单，此处介绍线性构造过程：</p>
+<blockquote>
+<p>首先找到当前最小的叶子，删去添加进序列后，如果他唯一指向的节点这时也变成了一个叶子且这个节点的编号小于当前编号，那就递归下去。</p>
+</blockquote>
+<blockquote>
+<p>否则编号自增继续检查。</p>
+</blockquote>
+<p>一共执行 $n-2$ 次，刚好删去了 $n-2$ 个叶子结点。</p>
+<h2 id="反构建"><a href="#反构建" class="headerlink" title="反构建"></a>反构建</h2><p>给出 Prüfer 序列，然后让你构造出一棵树满足这个序列。</p>
+<p>堆的做法很简单，此处不讲。</p>
+<p>那么我们肯定取出来不在这个序列里的最小的数，然后连向第一个点，然后把第一个点删掉，然后持续这个过程即可。</p>
+<p>那么我们还是尝试指针的算法解决。</p>
+<blockquote>
+<p>首先找到当前最小的节点，连边之后如果它连的那个边的端点也没有在后面的序列出现过且节点编号小于当前节点编号，那么递归下去。</p>
+</blockquote>
+<blockquote>
+<p>否则编号自增继续检查。</p>
+</blockquote>
+<p>一共执行 $n-2$ 次，最后一条边手动连即可，刚好 $n-1$ 条边。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>每个序列的元素都可以随便取，且一定能够构成一棵树，那么一张完全图的生成树个数就有 $n^{n-2}$ 种。</p>
+<p>可以通过这个性质解决很多关于树的计数问题。</p>
+<h1 id="同余最短路"><a href="#同余最短路" class="headerlink" title="同余最短路"></a>同余最短路</h1><p>设 $f_{i}(0 \le i &lt;x)$，表示状态，状态大多数定义为 $y \bmod x&#x3D;i$ 下每个 $y$ 的某个附带参数的最小值。</p>
+<p>那么我们可以根据类似于动态规划之间的相互转移来构建出一幅图，根据图的边权决定最短路的时候是用 $\texttt{SPFA}$ 还是 $\texttt{dijkstra}$。</p>
+<p>用一道例题就可以解决这个知识点：</p>
+<blockquote>
+<p>求一个 $y \bmod x &#x3D; 0(y&gt;0)$ 使得 $y$ 的各个位数之和（10 进制）最小。（$1 \le x \le 10^5$）</p>
+</blockquote>
+<p>很明显，我们用 $f_i$ 表示模 $x$ 为 $i$ 的所有 $y$ 位数之和最小是多少。</p>
+<p>那么每个 $i$ 都可以转移到 $(10i+k) \bmod x(0 \le k \le 9)$，然后边权是 $k$。</p>
+<p>最后跑最短路就可以了，答案是 $f_0$，初值需要注意一下，不能把 $0$ 弄进去，所以最开始 $\texttt{push}$ 进 $1 \sim 9$ 即可，需要 $\bmod \  x$。</p>
+<p>大概这种思想就是同余最短路，旨在去掉相同和无用的状态，促进题目的解决。</p>
+<h1 id="Kruskal-重构树"><a href="#Kruskal-重构树" class="headerlink" title="Kruskal 重构树"></a>Kruskal 重构树</h1><p>主要是把从 $x$ 到 $y$ 路径上最大值的最小值或者最小值的最大值转化为点权，最后构成一棵 $2n-1$ 个节点的树。</p>
+<p>在执行 kruskal 的过程中，如果需要连接 $x$ 和 $y$ 的边，然后新建一个节点 $p$，$p$ 的权值为这条边的权值，然后 $ls_p \gets x,rs_p \gets y$。</p>
+<p>我们最后发现这样子构建出来的树也是一棵二叉树，然后就可以执行最大值的最小值或者最小值的最大值的一些 dp 问题。</p>
+<p>或者是一棵树上的边权最小值或者最大值之类的题目。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Prüfer 序列</tag>
+        <tag>同余最短路</tag>
+        <tag>Kruskal</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博弈论</title>
+    <url>/2024/01/07/%E5%8D%9A%E5%BC%88%E8%AE%BA/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>此处的博弈论只研究 ICG（公平组合游戏）和反常游戏中的 ICG，很多棋类游戏都是非公平组合游戏，因为双方只能移动自己的棋子。</p>
+<p>一个游戏是 ICG 当且仅当：</p>
+<ul>
+<li><p>游戏有两个人参与，二者轮流做出决策，双方均知道游戏的完整信息。</p>
+</li>
+<li><p>有明确的终止态，游戏不会无休止地进行下去。</p>
+</li>
+<li><p>每一个局面都是先手必胜（N）或者先手必败的局面（P）。</p>
+</li>
+<li><p>任意时刻双方可以执行的操作集合只与游戏的状态无关，与双方的身份无关。</p>
+</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>由第二条定义可得我们可以抽象成一个有向无环图，每个玩家操作一枚棋子往一条出边移动，谁移动不了了就输了。</p>
+<p>那么对于没有出边的位置肯定是 P 局面，那么我们考虑倒推所有位置的 N&#x2F;P 状态，从而得知整个游戏是先手必胜还是先手必败。</p>
+<ul>
+<li><p>如果一个点的出边中有 P 局面，那么这个点是 N 局面。</p>
+</li>
+<li><p>如果一个点的出边中全是 N 局面，那么这个点是 P 局面。</p>
+</li>
+</ul>
+<p>这两条性质是双向的，并且可以很显然地由 ICG 的定义得到。</p>
+<p>小例子，有一堆石子大小为 $n$，你和小 A 每次可以从中取出来 $[1,k]$ 区间中的石子，谁无法取了就失败。</p>
+<p>可以发现一个大小为 $n$ 的后继节点是 $[n-k,n-1]$，然后直接打表 SG 值即可，或者构造一种必胜的方案，方案小学生都会就不写了。</p>
+<h2 id="相关函数与模型"><a href="#相关函数与模型" class="headerlink" title="相关函数与模型"></a>相关函数与模型</h2><h3 id="Nim-游戏"><a href="#Nim-游戏" class="headerlink" title="Nim 游戏"></a>Nim 游戏</h3><blockquote>
+<p>给定 $n$ 堆石子，每堆石子有 $a_i$ 个石子，你和小 A 每次可以从任意一堆石子中选出来至少一个石子扔掉，无法操作的人输，你先手，问最后你和小 A 谁有必胜策略。</p>
+</blockquote>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p>如果 $ans&#x3D;\operatorname{xor}_{i&#x3D;1}^n a_i&gt;0$ 的话先手一定有必胜策略，否则后手必胜。</p>
+<h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><p>首先，没有后继的状态，即 $a_1&#x3D;a_2&#x3D;\dots&#x3D;a_n&#x3D;0$ 的时候一定先手必败。</p>
+<p>然后如果 $k&#x3D;\operatorname{xor}<em>{i&#x3D;1}^n a_i&gt;0$ 的话一定存在一种操作使得 $\operatorname{xor}</em>{i&#x3D;1}^n a_i&#x3D;0$，我们显然可以找到一个 $a_i \operatorname{xor} k &lt; a_i$，然后改成 $a_i \operatorname{xor} k$ 就可以了。</p>
+<p>最后需要证明如果 $k&#x3D;\operatorname{xor}<em>{i&#x3D;1}^n a_i&#x3D;0$ 的话不可能存在任何一种操作使得 $k&#x3D;\operatorname{xor}</em>{i&#x3D;1}^n a_i&#x3D;0$，显然成立。</p>
+<p>所以结论成立。</p>
+<h3 id="SG-函数"><a href="#SG-函数" class="headerlink" title="SG 函数"></a>SG 函数</h3><p>定义集合的 SG 运算为 $\operatorname{mex}{S}$ 表示 $S$ 中最小的没有出现过的自然数，那么 $SG(x) &#x3D; \operatorname{mex}{y_1,y_2,\dots,y_k}$，其中 $y$ 是 $x$ 的后继节点。</p>
+<p>如果 $SG(x)&gt;0$，那么代表先手的棋子如果在 $x$ 这个节点先手必胜，否则后手必胜。这个的证明也很显然，参考前面的 ICG 游戏的性质即可。</p>
+<p>那么如果我们是多个游戏拼在一起的怎么办呢？</p>
+<p>例如我们在有向图游戏上有多个棋子，然后每次可以移动一颗，最后不能移动者失败。</p>
+<p>我们发现 $x$ 可以移动到 $SG(y) &lt; SG(x)$ 或者 $SG(y)&gt;SG(x)$ 的节点，如果我们移动到了 $y$ 满足 $SG(y)&gt;SG(x)$，那么后手如果觉察到不优秀，肯定会从 $y$ 移动到 $z$ 满足 $SG(x)&#x3D;SG(z)$，这样的操作是不优秀的。</p>
+<p>那么我们只剩下移动到 SG 值比它小的节点，那么这就是一个 Nim 博弈，我们相当于每次可以拿走若干个大于等于 $1$ 小于等于全部的石头，于是直接把所有起点的 SG 值异或起来，然后按照 Nim 博弈的判断标准来判断就行了。</p>
+<p><strong>注意：每个局面都可以转化为含有 $SG(x)$ 个石子的 Nim 游戏，如果有多个局面，就相当于 Nim 游戏有多个石堆。</strong></p>
+<h3 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h3><ul>
+<li><p>如果我们构造了一个模型发现一个石子移动了会影响另外的石堆，那么我们可以对每个石子单独考虑得出结果。</p>
+</li>
+<li><p>SG 函数不一定是直接取若干个后继节点的 $\operatorname{mex}$，而是有可能每个后继节点又衍生出两个游戏，那么我们要把这两个游戏的 SG 值异或起来再取 $\operatorname{mex}$。</p>
+</li>
+<li><p>有些 SG 函数十分刁钻，需要打表，并且可能会出现循环节，并且只有几个特殊情况。</p>
+</li>
+</ul>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>有 $n$ 堆石子，每堆石子有 $a_i$ 个石头，每次可以选择 $i&lt;j \le k$ 且 $a_i&gt;0$，从第 $i$ 堆石头中选择一个石头扔掉，然后给第 $j$ 和 $k$ 堆石头中添加一个石头，最后无法操作的人失败，问先手是否拥有必胜策略。</p>
+<p>首先，因为一次操作会影响石堆互相的值，所以考虑对每个石头分开考虑，如果当前石头距离最后一堆石头 $k$ 堆，那么我们可以扔掉它，然后加入两个距离最后一堆石头 $&lt;k$ 的石头，就相当于可以让一个值为 $k$ 的数分裂为两个 $1 \le k_1,k_2&lt;k$ 的数，然后分开考虑，最后异或起来就可以了。</p>
+<p>因为 $n$ 只有 $20$，所以 $k$ 也只有 $20$，记忆化搜索打表即可。</p>
+<p>题目如果要求输出第一次操作的方案，我们直接暴力 $O(n^3)$ 枚举第一次操作的 $i,j,k$，拿走之后判断是否先手必败即可。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll t,n,a[<span class="number">25</span>],b[<span class="number">25</span>],i,j,k,l,ans,ans1,ans2,ans3,sg[<span class="number">22</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">19</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">25</span>,<span class="number">26</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">35</span>,<span class="number">37</span>,<span class="number">38</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll a[<span class="number">25</span>])</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]%<span class="number">2</span>==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		ans^=sg[n-i+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">		ans=<span class="built_in">solve</span>(a);</span><br><span class="line">		<span class="keyword">if</span>(ans==<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;-1 -1 -1\n0\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ans=<span class="number">0</span>,ans1=ans2=ans3=LLONG_MAX;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">				<span class="keyword">for</span>(k=j;k&lt;=n;k++)&#123;</span><br><span class="line">					<span class="keyword">for</span>(l=<span class="number">1</span>;l&lt;=n;l++) b[l]=a[l];</span><br><span class="line">					b[i]--,b[j]++,b[k]++;</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">solve</span>(b)==<span class="number">0</span>)&#123;</span><br><span class="line">						ans++;</span><br><span class="line">						<span class="keyword">if</span>(i&lt;ans1) ans1=i,ans2=j,ans3=k;</span><br><span class="line">						<span class="keyword">else</span> <span class="keyword">if</span>(i==ans1)&#123;</span><br><span class="line">							<span class="keyword">if</span>(j&lt;ans2) ans2=j,ans3=k;</span><br><span class="line">							<span class="keyword">else</span> <span class="keyword">if</span>(j==ans2)&#123;</span><br><span class="line">								<span class="keyword">if</span>(k&lt;ans3) ans3=k;</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;ans1<span class="number">-1</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans2<span class="number">-1</span>&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans3<span class="number">-1</span>&lt;&lt;endl&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>附：有些题也不需要转化为 Nim 游戏，直接通过题目的性质转化为有向图游戏，然后通过 SG 函数计算即可。（需要去除一些无用状态或者记忆化一下）</p>
+<h2 id="取石子游戏"><a href="#取石子游戏" class="headerlink" title="取石子游戏"></a>取石子游戏</h2><p>一维翻硬币问题有一个结论:</p>
+<p>局面的 SG 值等于局面中所有反面朝上的硬币单独存在时的 SG 值的异或和。</p>
+<p>这个结论同样适用于二维的翻硬币问题。</p>
+<h2 id="删边游戏"><a href="#删边游戏" class="headerlink" title="删边游戏"></a>删边游戏</h2><blockquote>
+<p>有一幅图，每次操作可以删去图上的一条边，操作结束之后把所有没有与 $root$ 相连的边和点删去，最后无法操作者失败。</p>
+</blockquote>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>首先对于叶子结点，因为只剩一个节点，所以 SG 值为 $0$。</p>
+<p>然后对于某些其它节点 $i$，它的 SG 值经过证明可得 $SG_i &#x3D; \operatorname{xor}_{v \in son_i}{SG_v+1}$.</p>
+<p>最后整张图的 SG 值就是 $SG_{root}$。</p>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><p>首先需要找出所有的环（边双连通分量），如果一个环内的边数是偶数，那么直接将这个环缩成一个点即可。</p>
+<p>否则需要将环缩成一个点还要再新建一个点挂一条边。</p>
+<p>然后如果根属于一个环，那新的根就是环缩点的那个点。</p>
+<p>容易发现这样操作完成之后是一棵树，于是直接用树删边定理即可，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 300005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt; op[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; op2[N],op3[N],ans[N];</span><br><span class="line"><span class="type">int</span> T,n,m,x[N],y[N],i,j,tot,scc,dfn[N],low[N],cut[N],vis[N],edge[N],sg[N],root,id[N],col[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	dfn[x] = low[x] = ++tot;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[op[x][i].first])&#123;</span><br><span class="line">			<span class="built_in">tarjan</span>(op[x][i].first,op[x][i].second);</span><br><span class="line">			low[x] = <span class="built_in">min</span>(low[x],low[op[x][i].first]);</span><br><span class="line">			<span class="keyword">if</span>(low[op[x][i].first]&gt;dfn[x]) cut[op[x][i].second] = <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(r!=op[x][i].second) low[x] = <span class="built_in">min</span>(low[x],dfn[op[x][i].first]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	vis[x] = <span class="number">1</span>,ans[scc].<span class="built_in">push_back</span>(x),col[x] = scc;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op2[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		edge[scc]++;</span><br><span class="line">		<span class="keyword">if</span>(!vis[op2[x][i]]) <span class="built_in">dfs</span>(op2[x][i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;op3[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(op3[x][i]==fa) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">solve</span>(op3[x][i],x);</span><br><span class="line">		sg[x] ^= (sg[op3[x][i]]+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			cin&gt;&gt;x[i]&gt;&gt;y[i];</span><br><span class="line">			op[x[i]].<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(y[i],i)),op[y[i]].<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(x[i],i));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span>(!dfn[i]) <span class="built_in">tarjan</span>(i,<span class="number">-1</span>); </span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!cut[i])&#123;</span><br><span class="line">				op2[x[i]].<span class="built_in">push_back</span>(y[i]);</span><br><span class="line">				op2[y[i]].<span class="built_in">push_back</span>(x[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">if</span>(!vis[i]) scc++,<span class="built_in">dfs</span>(i),edge[scc]/=<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=scc;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(ans[i].<span class="built_in">size</span>()==<span class="number">1</span>&amp;&amp;edge[i]==<span class="number">0</span>)&#123;</span><br><span class="line">				id[i]=ans[i][<span class="number">0</span>];</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(edge[i]%<span class="number">2</span>==<span class="number">1</span>) id[i]=++n,++n,op3[id[i]].<span class="built_in">push_back</span>(n),op3[n].<span class="built_in">push_back</span>(id[i]);</span><br><span class="line">			<span class="keyword">else</span> id[i]=++n;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(cut[i])&#123;</span><br><span class="line">				op3[id[col[x[i]]]].<span class="built_in">push_back</span>(id[col[y[i]]]);</span><br><span class="line">				op3[id[col[y[i]]]].<span class="built_in">push_back</span>(id[col[x[i]]]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		root = id[col[<span class="number">1</span>]];</span><br><span class="line">		<span class="built_in">solve</span>(root,<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">if</span>(sg[root]) cout&lt;&lt;<span class="string">&quot;Alice\n&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;Bob\n&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=<span class="number">2</span>*n;i++) op[i].<span class="built_in">clear</span>(),op2[i].<span class="built_in">clear</span>(),op3[i].<span class="built_in">clear</span>(),ans[i].<span class="built_in">clear</span>(),col[i]=id[i]=edge[i]=vis[i]=sg[i]=low[i]=dfn[i]=<span class="number">0</span>;</span><br><span class="line">		tot=<span class="number">0</span>,scc=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=m;i++) x[i]=y[i]=cut[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;                     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="反常游戏"><a href="#反常游戏" class="headerlink" title="反常游戏"></a>反常游戏</h2><blockquote>
+<p>给定 $n$ 堆石子，每堆石子有 $a_i$ 个石子，你和小 A 每次可以从任意一堆石子中选出来至少一个石子扔掉，取走最后一个石子的人输，你先手，问最后你和小 A 谁有必胜策略。</p>
+</blockquote>
+<p>设 $k&#x3D;\operatorname{xor}_{i&#x3D;1}^n a_i$。</p>
+<p>如果 $a_i$ 有的为 $0$，删去不影响答案。</p>
+<p>如果 $a_i$ 全部为 $1$，如果 $n$ 为奇数先手必败，$n$ 为偶数先手必胜。</p>
+<p>否则如果 $k&gt;0$ 先手必胜，否则先手必败。</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>第一条结论显然。</p>
+<p>第二条结论每次只能拿走一堆石子，所以显然。</p>
+<p>第三条结论：</p>
+<ul>
+<li><p>如果只有一个 $a_i&gt;1$，那么先手必胜，因为先手可以让全部 $a_i$ 为 $1$，并且控制堆数的奇偶性。</p>
+</li>
+<li><p>有至少两个 $a_i&gt;1$，那么如果 $k&gt;0$ 由 Nim 游戏可得先手可以把 $k$ 转化成 $0$。</p>
+</li>
+<li><p>若 $k&#x3D;0$，先手可以转化为至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的情况，那么这么交叉进行最后 $a_i$ 的堆数会逐渐减少，回归最开始的情况。</p>
+</li>
+<li><p>并且这种情况可以让对方必胜，也可以转化为至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的局面，并且至少两个 $a_i&gt;1$ 并且 $k&gt;0$ 的局面只能转化为 $k&#x3D;0$ 的局面，所以这种情况先手必胜。</p>
+</li>
+</ul>
+<p>得证。</p>
+<h2 id="Nim-k-游戏"><a href="#Nim-k-游戏" class="headerlink" title="Nim-k 游戏"></a>Nim-k 游戏</h2><p>给定 $n$ 堆石子，每堆有 $a_i$ 个石头，每次可以选择 $1 \sim k$ 堆，从每堆中拿走一部分石子，拿走的石子总数必须大于等于 $1$，谁无法操作就失败，问什么情况下先手必胜。</p>
+<p>结论：如果存在一位 $j$ 使得 $a_i$ 二进制下第 $j$ 位为 $1$ 的个数 $\ \bmod \ (k+1) \ne 0$，那么先手必胜，否则先手必败。</p>
+<p>容易发现，Nim 游戏就是在 $k&#x3D;1$ 的时候的特例。</p>
+<h3 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h3><p>首先如果不存在任何一位 $j$ 满足上述条件，一次操作之后不可能也不存在一位 $j$ 满足上述条件。</p>
+<p>如果存在，那就把所有的 $j$ 拿出来，然后因为 $a \bmod (k+1) \le k$，所以一定可以加入到 $k$ 个集合中，于是我们通过 Nim 游戏的证明就可以证出可以通过一次操作使得不存在任何一位 $j$ 满足上述条件。</p>
+<p>当所有元素都为 $0$ 时，不存在任何一位 $j$ 满足上述条件，先手必败。</p>
+<p>于是一来一回归纳得证。</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>如果是到达一个状态先手必胜，那么我们必须转化为到达某个状态先手必败，然后再用 Nim&#x2F;SG 的相关知识解决。</p>
+<p>例题：</p>
+<blockquote>
+<p>有 $n$ 个棋子，第 $i$ 个棋子在 $(x_i,y_i)$，每次可以移动一颗棋子到 $(x_i-k,y_i),(x_i,y_i-k),(x_i-k,y_i-k)$ 之一（$1 \le k$），$x \ge 0,y \ge 0$，AB互相博弈，A先手，如果某人移动了某颗棋子到 $(0,0)$，此人胜利，问先手是否必胜。</p>
+</blockquote>
+<p>因为是移动到 $(0,0)$ 就胜利，而且有多颗棋子，我们可以考虑什么情况下面某人必败，来转化。</p>
+<p>首先，一个人不会傻到移动棋子到 $(0,k),(k,0),(k,k)$，除非没有地方移动了。</p>
+<p>我们就会发现如果有一个棋子位于上面三个位置，先手必胜，特判掉即可。</p>
+<p>如果不，那么当且仅当棋子在 $(1,2)$ 或者 $(2,1)$ 的时候一定会移动到上面三个位置之一，这就是终止态，先手必败。</p>
+<p>然后按照 SG 函数合并即可，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 305</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,x,y,ans,i,j,sg[N][N],temp;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) <span class="keyword">return</span> <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">if</span>(sg[x][y]!=<span class="number">-1</span>) <span class="keyword">return</span> sg[x][y];</span><br><span class="line">	<span class="type">bool</span> vis[<span class="number">1005</span>];</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=x;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=<span class="built_in">min</span>(x,y);i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;;i++) <span class="keyword">if</span>(!vis[i]) <span class="keyword">return</span> sg[x][y]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">memset</span>(sg,<span class="number">-1</span>,<span class="built_in">sizeof</span>(sg));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">100</span>;j++) <span class="built_in">dfs</span>(i,j);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">0</span>,temp=<span class="number">0</span>;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) temp=<span class="number">1</span>;</span><br><span class="line">			ans^=sg[x][y];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(ans||temp) cout&lt;&lt;<span class="string">&quot;^o^\n&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;T_T\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>博弈论</tag>
+        <tag>SG函数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图论学习笔记5</title>
+    <url>/2024/01/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>平面图的定义是一张无向图如果能够画在一个平面上，使得其任意两条边不在交点处相交，那么这个无向图就是一个平面图。</p>
+<p>并且这个无向图需要连通。</p>
+<p>$K_{3,3}$ 和 $K_{5}$ 不是平面图。</p>
+<blockquote>
+<p>$K_{3,3}$ 是二分图，左部右部均有 $3$ 个点，任意两个不在同一边的点都有连边。</p>
+</blockquote>
+<blockquote>
+<p>$K_{5}$ 是具有 $5$ 个顶点的完全图。</p>
+</blockquote>
+<h3 id="对偶图"><a href="#对偶图" class="headerlink" title="对偶图"></a>对偶图</h3><p>每一个平面图都有相应的对偶图，平面图的对偶图的对偶图就是它自己。</p>
+<p>对偶图是将某个平面图的所有面看做点，然后若某两个面中有边隔开，那么这两个面在对偶图中所对应的点就有连边。</p>
+<p>容易证明，平面图的对偶图也是平面图。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>设这个平面图具有 $n$ 个点，$m$ 条边，$r$ 个面（包括最外面的那个面），那么有欧拉公式：$n+r&#x3D;m-2$。</p>
+<p>证明可以用对偶图的形式来证明，即均找一棵最小生成树，然后就可以显然得证了。</p>
+<p>并且如果某个含有 $n$ 个节点的平面图，边数最大是 $3m-6$，这个在缩小数据范围规模的时候很有效果。</p>
+<h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><p>若两个图 $G_1$ 与 $G_2$ 同构，或通过反复插入或消去 2 度顶点后是同构的，则称二者是同胚的。</p>
+<p>库拉图斯基定理：</p>
+<ul>
+<li>图 $G$ 是平面图当且仅当 $G$ 不含与 K_5 或 K_{3,3} 同胚的子图。</li>
+</ul>
+<p>此处不做详解。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>如果平面图的每条边都有边权，并且有源点和汇点，那么我们可以将最大流（最小割）转化为最短路进行求解。</p>
+<p>具体例子如下，如下图（左）是一个平面图，但是有源点和汇点，每条边还有不同方向的边权：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/81x4op5r.png"></p>
+<p>设原图的源点为 $1$，汇点为 $6$，那么我们先连接 $1$ 和 $6$，方便处理，然后对于新的平面图构建对偶图，图的边权是隔开两个面的边权，然后 $S$ 就是 $1 \sim 6$ 围出来的平面所代表的点，$T$ 就是最外层一个大平面。</p>
+<p>我们可以清楚地看到，任何一条从 $S$ 到 $T$ 的路径都对应了原图的一组最小割的方案，于是我们直接从 $S$ 到 $T$ 跑最短路即可。</p>
+<p>下面的代码把 $1$ 到 $6$ 新加的边是翻到了上面的，$S$ 也在上面，所以可能会有所不同。</p>
+<p>特别地，如果是有向图，我们需要像网络流那样建立两条边，每条边的权值不一样，而题目中的图通常是网格图的形式，我们可以以 <a href="https://www.luogu.com.cn/problem/P2046">P2046 [NOI2010] 海拔</a> 为例，考虑建边，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 2000005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> K 1005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll id,x;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> node&amp; a)<span class="type">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a.x&lt;x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">ll n,m,i,j,id[K][K],id2[K][K],s,t=<span class="number">1</span>,x,la[N],ne[N],to[N],val[N],tot,dis[N],a[K][K],b[K][K],c[K][K],d[K][K];</span><br><span class="line">priority_queue&lt;node&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll z2)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = z2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dijkstra</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=s;i&lt;=t;i++) dis[i]=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	q.<span class="built_in">push</span>((node)&#123;s,<span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">		node tmp = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(dis[tmp.id]!=tmp.x) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp.id];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[to[i]]&gt;tmp.x+val[i])&#123;</span><br><span class="line">				dis[to[i]] = tmp.x+val[i];</span><br><span class="line">				q.<span class="built_in">push</span>((node)&#123;to[i],dis[to[i]]&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;dis[t]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	n++,m=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++) id[i][j]=t++;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;a[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;b[i][j];</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;c[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;d[i][j];</span><br><span class="line">   <span class="comment">//注意，从 s 连出去的边边权都是顺着的（ab数组），连向 s 的边边权都是 0；t 亦是如此。</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从上连向下的边边权就是 a，反过来边权就是 c，可以理解为不变。（ac 是从左到右，从右到左的数组）</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从左连向右的边边权就是 d，反过来边权就是 b，可以理解为反向。（bd 是从上到下，从下到上的数组）</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">0</span>) <span class="built_in">merge</span>(s,id[i+<span class="number">1</span>][j],a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(i==n<span class="number">-1</span>) <span class="built_in">merge</span>(id[i][j],t,a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i+<span class="number">1</span>][j],a[i][j],c[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==<span class="number">0</span>) <span class="built_in">merge</span>(id[i][j+<span class="number">1</span>],t,b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(j==m<span class="number">-1</span>) <span class="built_in">merge</span>(s,id[i][j],b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i][j+<span class="number">1</span>],d[i][j],b[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">dijkstra</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">7</span></span><br><span class="line"><span class="comment">8</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">10 6 7 2 1 6</span></span><br><span class="line"><span class="comment">8 9 4 5 10 7</span></span><br><span class="line"><span class="comment">1 6 1 8 6 4</span></span><br><span class="line"><span class="comment">3 1 9 9 2 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>特别地，如果是一般的平面图需要让我们找到对偶图的话，我们可能需要用到最小左转法，这个知识点的内容太过高深，不在我们的讨论范围内。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>图论</tag>
+        <tag>平面图</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图论学习笔记4</title>
+    <url>/2024/01/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04/</url>
+    <content><![CDATA[<h1 id="网络流"><a href="#网络流" class="headerlink" title="网络流"></a>网络流</h1><p>概念：</p>
+<ul>
+<li>一个边有两个权值且带有汇点与源点的无向图 $G(V,E)$，其中每条边为 $x,y,c,w$ 四个参数组成，$x,y$ 表示起始点和结束点，$c$ 表示最大容量，$w$ 表示单位时间通过容量。</li>
+</ul>
+<p>性质：</p>
+<ul>
+<li>对于任意一条边 $x,y,c,w$，满足 $w \le c$。  </li>
+<li>对于任意一条边 $x,y,c,w$，满足存在另一条边 $y,x,0,-w$。    <ul>
+<li>后面这条边可能题目没有给出，需要自己加上去。</li>
+</ul>
+</li>
+<li>设 $in_x &#x3D; \sum_{y \to x}w$，$out_x &#x3D; \sum_{x \to y}w$，若 $x$ 不为汇点和源点，那么 $in_x&#x3D;out_x$。  </li>
+<li>设源点为 $s$，汇点为 $t$，则 $out_s&#x3D;in_t$。</li>
+</ul>
+<p>上面的性质分别称作：容量限制，斜对称性和流守恒性。</p>
+<h2 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h2><p>构造一个网络，使得 $out_s&#x3D;in_t$ 最大，这个最大的值称作这个网络图的最大流。</p>
+<p>显然，开始时这个图的最大流是 $0$，每条边的流量均为 $0$。</p>
+<p>考虑找到一条从 $s \sim t$ 的路径，这条路径上的 $c-w$ 的最小值 $&gt;0$，那么我们可以使全局的最大流加上这个最小值。</p>
+<p>证明显然，只需要对应的边减一下，然后斜对称的边加一下就行了，因为有斜对称这个性质，所以相当于给了程序一个“反悔”的机会，可以把之前给各个边的流量减少一部分以扩充全局的流量。</p>
+<p>只到最后图中不存在这条增广路即可。</p>
+<h3 id="EK-算法"><a href="#EK-算法" class="headerlink" title="EK 算法"></a>EK 算法</h3><p>每次暴力枚举可能的增广路，最多增广 $O(nm)$ 次，则时间复杂度为 $O(nm^2)$。</p>
+<p>记得使用广度优先搜索。</p>
+<h3 id="Dinic"><a href="#Dinic" class="headerlink" title="Dinic"></a>Dinic</h3><p>找增广路的过程中把所有 $c-w$ 非 $0$ 的边拿出来 01 BFS 一下，那么每个节点只去寻找 $dis_y&#x3D;dis_x+1$ 的节点更新增广路，那么时间复杂度为 $O(n^2m)$。</p>
+<p>注意 $dis_x$ 表示 $x$ 在 01 BFS 的图上与 $s$ 的最短路的长度，这样做一定是正确的，因为总是可以找到一条合法的路径。</p>
+<h3 id="ISAP"><a href="#ISAP" class="headerlink" title="ISAP"></a>ISAP</h3><p>优化 Dinic 的过程，把 $dis_x$ 的定义换为在 01 BFS 的图上与 $t$ 的最短路的长度。</p>
+<p>然后如果没有某个 $dis_x&#x3D;i(1 \le i \le n-1)$，那么图出现了断层，此时返回即可。</p>
+<p>而且我们可以一边找增广路一边更新 $dis$ 数组，不用每次 BFS 一遍，常数也比较小，代码如下所示：</p>
+<p>（这里使用了当前弧优化，对于每一次更新我们经过的边就不会再选了，用链式前向星或者 <code>vector</code> 都可以）</p>
+<p><strong>通常没有 Dinic 快，请谨慎使用。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,i,x,y,z,ans,temp;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],tot=<span class="number">1</span>,sum[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z)</span></span>&#123;tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z;&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = n+<span class="number">1</span>;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;s&gt;&gt;t;</span><br><span class="line">	sum[<span class="number">0</span>] = n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">		<span class="built_in">merge</span>(x,y,z),<span class="built_in">merge</span>(y,x,<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;n) <span class="built_in">memcpy</span>(cur,la,<span class="built_in">sizeof</span>(la)),ans+=<span class="built_in">dfs</span>(s,<span class="number">1e18</span>);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="最小割"><a href="#最小割" class="headerlink" title="最小割"></a>最小割</h2><p>有一个定理，最大流 $&#x3D;$ 最小割，详见算法导论。</p>
+<p>最小割用于处理下列内容的最优解：</p>
+<blockquote>
+<p>对于一张图，把图的两个点 $s,t$ 变得不连通，至少需要割掉边权总和为多少的边。</p>
+</blockquote>
+<blockquote>
+<p>对于一些关系，如果 $a_i$ 号点划分到 $1$ 集合有 $c_i$ 的贡献，划分到 $2$ 集合有 $d_i$ 的贡献，并且有 $q$ 对关系，表示若 $u_i$ 和 $v_i$ 不在一个集合内，有 $-w_i$ 的贡献，最大化贡献。（数据都是非负整数）那么可以以此建立网络流模型。</p>
+</blockquote>
+<p>大概处理的多数情况是第一种，第一种运用也很广泛，我们可以看一下下面这道例题：</p>
+<blockquote>
+<p>有 $n \times m$ 的矩阵，每个格子可以选择 A、B 两类，如果一个格子选择 A 类，它的贡献是 $a_{i,j}$，否则贡献是 $b_{i,j}$。并且如果有 $k$ 个格子与它相邻并且类型不一样，获得 $k \times c_{i,j}$ 的收益，问收益最大是多少。</p>
+</blockquote>
+<p>数据保证点数为 $n \times m$ 的 ISAP 能过。</p>
+<p>显然的，这个矩阵是一个二分图，为了转化为最小割模型，考虑下面的操作。</p>
+<ol>
+<li><p>$ans \gets \sum a_{i,j}+\sum b_{i,j}+\sum c_{i,j} \times ([i&gt;1]+[j&gt;1]+[i&lt;n]+[j&lt;m])$</p>
+<p> 注解：这是所有的权值总和。</p>
+</li>
+<li><p>连边 $s \to (i,j),w&#x3D;b_{i,j}$，$(i,j) \to t,w&#x3D;a_{i,j}$，这是二分图左部的点；连边 $s \to (i,j),w&#x3D;a_{i,j}$，$(i,j) \to t,w&#x3D;b_{i,j}$，这是二分图右部的点；然后若两个点相邻，设左部点为 $u$，右部点为 $v$，则连接 $u \to v,w&#x3D;c_{u}+c_{v}$ 和 $v \to u,w&#x3D;c_v+c_u$</p>
+<p> 注解：如果把二分图左部的点划分到 $s$ 集合，那么 $(i,j) \to t$ 的边就会切断，减去 $a_{i,j}$，其余情况同理。如果左右部的点都划分到 A 类，那么左部的点就会划分到 $t$ 集合，右部的点就会划分到 $s$ 集合，如果它们其中有连边，那么这条边根据最小割的定义必须断开，然后就会减去之前加上的多余的 $sum$。</p>
+</li>
+<li><p>输出之前的 $sum$ 减去最小割即可，满足答案最大。</p>
+</li>
+</ol>
+<p>注意：此处连双向边（$u \to v$ 和 $v \to u$）是因为每个点都与 $s$ 和 $t$ 有连边，根据题目也是如此，有些情况是只连单向边，需要特别注意一下。</p>
+<p>还有一种题目：</p>
+<blockquote>
+<p>对于一个有向图，找到点权总和最大的子图，使得这个子图中的点的所有出点都在这个子图中，点权可能为负。（最大闭合子图）</p>
+</blockquote>
+<p>源点向点权为正的点连边，边权即为点权；图上如果有 $u \to v$ 的边，那么连接 $u \to v$，边权为 $\text{inf}$；点权为负的点向汇点连边，边权为点权的绝对值，跑最大流等于最小割即可。（点权为 $0$ 的其实不影响，可以算到点权为正的点集里面）</p>
+<p>答案要减去最小割，然后加上点权为正的点的点权之和。</p>
+<p>如果割掉源点到某个点的边，那么代表不选这个点，答案减去点权；如果割掉某个点到汇点的边，那么代表选这个点，答案减去点权的绝对值等于答案加上点权。</p>
+<p>这样做显然是正确的，可以思考一下。</p>
+<h3 id="常见建图"><a href="#常见建图" class="headerlink" title="常见建图"></a>常见建图</h3><p>这个，靠积累了，网络流 24 题和 Atcoder 的题目都可以积累。</p>
+<h3 id="最小割树"><a href="#最小割树" class="headerlink" title="最小割树"></a>最小割树</h3><p><a href="https://www.luogu.com.cn/blog/674469/solution-p4897">【模板】最小割树（Gomory-Hu Tree） 题解</a></p>
+<h2 id="费用流"><a href="#费用流" class="headerlink" title="费用流"></a>费用流</h2><p>我们对于每条边，如果流经它的流量为 $x$，那么答案增加 $cx$，$c$ 为这条边的边权。</p>
+<p>然后前提要求是最大流。</p>
+<h3 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h3><p>把寻找增广路的过程用 spfa 找最小费用的某条增广路就可以了。</p>
+<p>最后一定是最大流并且费用是最小的。</p>
+<p>优化：每次增广的时候找最小费用的值，然后找增广路的时候多路增广即可，详见代码。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;inf;i++) dis[i]=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	q.<span class="built_in">push</span>(s);</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">		ll tmp = q.<span class="built_in">front</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		vis[tmp] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(val[i]&gt;<span class="number">0</span>&amp;&amp;dis[to[i]]&gt;dis[tmp]+w[i])&#123;</span><br><span class="line">				dis[to[i]] = dis[tmp]+w[i];</span><br><span class="line">				<span class="keyword">if</span>(!vis[to[i]]) vis[to[i]]=<span class="number">1</span>,q.<span class="built_in">push</span>(to[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[t]&lt;=<span class="number">1e18</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	viss[x] = <span class="number">1</span>;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=la[x];i;i=ne[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(dis[x]+w[i]==dis[to[i]]&amp;&amp;val[i]&gt;<span class="number">0</span>&amp;&amp;!viss[to[i]])&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="最大费用最大流"><a href="#最大费用最大流" class="headerlink" title="最大费用最大流"></a>最大费用最大流</h3><p>用 spfa 找最大费用的一条路就可以了，其余同上。</p>
+<p><strong>注：若初始的时候有未满流的边构成的正&#x2F;负环，那么后面就可能会出现环，否则一定不会出现 spfa 死循环的情况，如果出现，请检查板子是否敲错！</strong></p>
+<h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><p>精简为一句话：往往是通过最大流来限制题目中要求的个数，然后用费用来表示在达到这个个数的时候费用最小&#x2F;最大。</p>
+<p>或者是最大流越大费用就会越小&#x2F;越大，那么这个时候费用的作用就是用来保证个数一定恒为多少（赋值一个很大&#x2F;小的数就可以了），然后还能顺便得知最小&#x2F;最大费用。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>每次增广出来的路径权值总和一定是单调的，即 $dis_t$ 单调递增或者递减。</p>
+<h2 id="上下界网络流"><a href="#上下界网络流" class="headerlink" title="上下界网络流"></a>上下界网络流</h2><h3 id="无源汇上下界网络可行流"><a href="#无源汇上下界网络可行流" class="headerlink" title="无源汇上下界网络可行流"></a>无源汇上下界网络可行流</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，没有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组方案称为<strong>无源汇上下界网络可行流</strong>。</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><p>注意到有至少流 $l$ 个单位的限制，我们考虑去掉这个限制，首先一条边可以拆分成 $u \to v$ 容量为 $l$ 的边和 $u \to v$ 容量为 $r-l$ 的边。</p>
+<p>其中容量为 $l$ 的边必须满流，容量为 $r-l$ 的边不能超流。</p>
+<p>我们就可以考虑新建一个源点和汇点 $S$ 和 $T$，那么让 $S$ 向 $v$ 连接一条容量为 $l$ 的边，$u$ 向 $T$ 连接一条容量为 $l$ 的边，最后判断是否满流即可。（原图上的边只考虑 $r-l$ 的边，其余容量为 $l$ 的边不管就可以了）</p>
+<p>考虑这个方法的正确性：</p>
+<blockquote>
+<p>如果整张图满流，我们可以将从 $S$ 到 $v$ 的边和 $u$ 到 $T$ 的边删去，然后因为 $v$ 到 $u$ 有多出来的 $l$ 的流量，我们就可以让 $u$ 流到 $v$ 点 $l$ 的流量，并且满足流量守恒，可以证明这是充要条件。（如果这 $l$ 的流量用了其它边 $l’$ 的流量，那么因为其它边也像这样连接了源点和汇点，所以可以相互转移）</p>
+</blockquote>
+<p>于是这道题就做完了，输出方案就是遍历每条边，检查当前消耗的流量数量加上 $l$ 即可。</p>
+<p>代码如下，网络流使用 ISAP 实现。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,inf,i,j,x,y,l,r,z,ans,temp;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],id[N],tot=<span class="number">1</span>,sum[N],anss[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll ID)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,id[tot] = ID;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,id[tot] = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step||dis[s]&gt;=inf) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = inf;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	s=<span class="number">0</span>,t=n+<span class="number">1</span>; </span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		anss[i]=r,<span class="built_in">merge</span>(x,y,r-l,i),<span class="built_in">merge</span>(s,y,l,<span class="number">-1</span>),<span class="built_in">merge</span>(x,t,l,<span class="number">-1</span>),ans+=l;</span><br><span class="line">	&#125;</span><br><span class="line">	inf = t-s+<span class="number">1</span>;</span><br><span class="line">	sum[<span class="number">0</span>] = inf;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;inf;i++) cur[i]=la[i];</span><br><span class="line">		ans-=<span class="built_in">dfs</span>(s,<span class="number">1e18</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ans) cout&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=la[i];j;j=ne[j])&#123;</span><br><span class="line">				<span class="keyword">if</span>(id[j]!=<span class="number">-1</span>) anss[id[j]]-=val[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) cout&lt;&lt;anss[i]&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">4 6</span></span><br><span class="line"><span class="comment">1 2 1 2</span></span><br><span class="line"><span class="comment">2 3 1 2</span></span><br><span class="line"><span class="comment">3 4 1 2</span></span><br><span class="line"><span class="comment">4 1 1 2</span></span><br><span class="line"><span class="comment">1 3 1 2</span></span><br><span class="line"><span class="comment">4 2 1 2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">NO</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="有源汇上下界网络可行流"><a href="#有源汇上下界网络可行流" class="headerlink" title="有源汇上下界网络可行流"></a>有源汇上下界网络可行流</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点（除了源点和汇点）都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组方案称为<strong>有源汇上下界网络可行流</strong>。</p>
+<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p>考虑转化为<strong>无源汇上下界网络可行流</strong>，考虑连接 $t$ 到 $s$，边权无穷大，那么所有流量最后都会通过这条边回到 $s$ 点，那么对于 $s,t$ 两个点都满足了流量守恒性质。</p>
+<p>然后按照无源汇上下界网络可行流计算方法计算即可，构造方案同理，但是此时可行流的大小是 $t$ 到 $s$ 那条边的流量。（不难想到）</p>
+<p>代码就不放了，就是多了两个点和一条边。</p>
+<h3 id="有源汇上下界网络最大-小流"><a href="#有源汇上下界网络最大-小流" class="headerlink" title="有源汇上下界网络最大&#x2F;小流"></a>有源汇上下界网络最大&#x2F;小流</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>有一个 $n$ 个点 $m$ 条边的无向图，有源点和汇点。</p>
+<p>对于每一条边都设置一个流量 $c$ 使得 $l \le c \le r$ 且对于每个点（除了源点和汇点）都要满足流量守恒。（$l$ 和 $r$ 是这条边的上下界）</p>
+<p>这样的一组使得流量最大&#x2F;小的方案称为<strong>有源汇上下界网络最大&#x2F;小流</strong>。</p>
+<h4 id="解决（最大流）"><a href="#解决（最大流）" class="headerlink" title="解决（最大流）"></a>解决（最大流）</h4><p>考虑先得到一组有源汇上下界网络可行流的答案。</p>
+<p>那么有源汇上下界网络最大流就是在残量网络上继续跑最大流就可以了，证明不难。</p>
+<p>跑最大流的时候一定要注意删去 $S$ 和 $T$ 的所有边并且删掉 $t$ 到 $s$ 的流量为无穷大的边，然后从原来的源点到汇点跑，并不是我们新建的源点和汇点。</p>
+<p>代码中的 $S,T,s,t$ 变量稍有不同。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 2000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,s,t,inf,i,j,x[N],y[N],z[N],l[N],r[N],ans,temp,S,T,id[N],viss[N],summ;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],cur[N],tot=<span class="number">1</span>,sum[N],base;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll idd)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,id[tot] = idd;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,id[tot] = idd;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll s,ll t,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=cur[x];i;i=ne[i])&#123;</span><br><span class="line">		cur[x] = i;</span><br><span class="line">		<span class="keyword">if</span>(viss[to[i]]||id[i]&lt;base) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]+<span class="number">1</span>==dis[x]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],s,t,<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step||dis[s]&gt;=inf) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(--sum[dis[x]]==<span class="number">0</span>) dis[s] = inf;</span><br><span class="line">	sum[++dis[x]]++;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m,S=<span class="number">1</span>,T=n;</span><br><span class="line">	s=<span class="number">0</span>,t=n+<span class="number">1</span>,<span class="built_in">merge</span>(T,S,<span class="number">1e9</span>,<span class="number">-2</span>),base=<span class="number">-3</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x[i]&gt;&gt;y[i]&gt;&gt;l[i]&gt;&gt;r[i];</span><br><span class="line">		<span class="built_in">merge</span>(x[i],y[i],r[i]-l[i],i),<span class="built_in">merge</span>(s,y[i],l[i],<span class="number">-1</span>),<span class="built_in">merge</span>(x[i],t,l[i],<span class="number">-1</span>),summ+=l[i];</span><br><span class="line">	&#125;</span><br><span class="line">	inf = t-s+<span class="number">1</span>;</span><br><span class="line">	sum[<span class="number">0</span>] = inf;</span><br><span class="line">	<span class="keyword">while</span>(dis[s]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;inf;i++) cur[i]=la[i];</span><br><span class="line">		summ -= <span class="built_in">dfs</span>(s,s,t,<span class="number">1e9</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(summ!=<span class="number">0</span>)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;please go home to sleep\n&quot;</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=la[T];i;i=ne[i]) <span class="keyword">if</span>(to[i]==S&amp;&amp;id[i]==<span class="number">-2</span>) ans+=(<span class="number">1000000000</span>-val[i]);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) dis[i]=<span class="number">0</span>,sum[i]=<span class="number">0</span>;</span><br><span class="line">	inf = n,sum[<span class="number">0</span>] = inf,viss[s] = viss[t] = <span class="number">1</span>,base = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(dis[S]&lt;inf)&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=inf;i++) cur[i]=la[i];</span><br><span class="line">		ans += <span class="built_in">dfs</span>(S,S,T,<span class="number">1e9</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">4 6</span></span><br><span class="line"><span class="comment">1 2 1 2</span></span><br><span class="line"><span class="comment">2 3 1 2</span></span><br><span class="line"><span class="comment">3 4 1 2</span></span><br><span class="line"><span class="comment">4 1 1 2</span></span><br><span class="line"><span class="comment">1 3 1 2</span></span><br><span class="line"><span class="comment">4 2 1 2</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">NO</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="解决（最小流）"><a href="#解决（最小流）" class="headerlink" title="解决（最小流）"></a>解决（最小流）</h4><p>根据斜对称性，我们可以从 $t$ 跑到 $s$ 的最大流，用可行流的流量减去这个最大流的流量就是最小流的流量了。（可能为负）</p>
+<p>代码就不放了，就改了几个变量。</p>
+<h3 id="上下界费用流"><a href="#上下界费用流" class="headerlink" title="上下界费用流"></a>上下界费用流</h3><p>求满足上下界的网络流同时花费的费用最小&#x2F;大。</p>
+<p>很简单，不管是有源汇&#x2F;无源汇建图都一样，但是要加上 $l \times cost$（底线要求）。</p>
+<p>并且我们新连接的边边权都是 $0$，对应的跑最小&#x2F;大费用最大流就可以了，并且因为没有流量的限制，甚至可以不用删边再跑一遍最大&#x2F;小流。</p>
+<p>代码以 <a href="https://www.luogu.com.cn/problem/P4043">4043 [AHOI2014&#x2F;JSOI2014] 支线剧情</a> 为例：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll int</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 200005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,i,j,s,t,inf,x,y,z,ans,temp,deg[N],summ;</span><br><span class="line">ll la[N],ne[N],to[N],val[N],dis[N],w[N],viss[N],vis[N],tot=<span class="number">1</span>,q[N],he,ta;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">mergea</span><span class="params">(ll x,ll y,ll z,ll wal)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z,w[tot] = wal;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = <span class="number">0</span>,w[tot] = -wal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) dis[i]=<span class="number">2e9</span>;</span><br><span class="line">	q[he=ta=<span class="number">1</span>]=s;</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(he&lt;=ta)&#123;</span><br><span class="line">		ll tmp = q[he++];</span><br><span class="line">		vis[tmp] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(val[i]&gt;<span class="number">0</span>&amp;&amp;dis[to[i]]&gt;dis[tmp]+w[i])&#123;</span><br><span class="line">				dis[to[i]] = dis[tmp]+w[i];</span><br><span class="line">				<span class="keyword">if</span>(!vis[to[i]]) vis[to[i]]=<span class="number">1</span>,q[++ta]=to[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[t]&lt;=<span class="number">1e9</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll step)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==t) <span class="keyword">return</span> step;</span><br><span class="line">	viss[x] = <span class="number">1</span>;</span><br><span class="line">	ll used = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=la[x];i;i=ne[i])&#123;</span><br><span class="line">		<span class="keyword">if</span>(viss[to[i]]) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(dis[to[i]]==dis[x]+w[i]&amp;&amp;val[i]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			ll temp = <span class="built_in">dfs</span>(to[i],<span class="built_in">min</span>(val[i],step-used));</span><br><span class="line">			val[i] -= temp,val[i^<span class="number">1</span>] += temp,used += temp;</span><br><span class="line">			<span class="keyword">if</span>(used==step) <span class="keyword">return</span> used;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">(ll S,ll T,ll INF)</span></span>&#123;</span><br><span class="line">	s = S,t = T,inf = INF;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">		<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;=n+<span class="number">2</span>;i++) viss[i]=<span class="number">0</span>;</span><br><span class="line">		ans += <span class="built_in">dfs</span>(s,<span class="number">1e9</span>)*dis[t];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		<span class="keyword">while</span>(x--) cin&gt;&gt;y&gt;&gt;z,deg[i]--,deg[y]++,ans+=z,<span class="built_in">mergea</span>(i,y,<span class="number">1e9</span>,z);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++) <span class="built_in">mergea</span>(i,n+<span class="number">1</span>,<span class="number">1e9</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(deg[i]&lt;<span class="number">0</span>) <span class="built_in">mergea</span>(i,n+<span class="number">2</span>,-deg[i],<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span>(deg[i]&gt;<span class="number">0</span>) <span class="built_in">mergea</span>(<span class="number">0</span>,i,deg[i],<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">mergea</span>(n+<span class="number">1</span>,<span class="number">1</span>,<span class="number">1e9</span>,<span class="number">0</span>);</span><br><span class="line">	ans += <span class="built_in">solve</span>(<span class="number">0</span>,n+<span class="number">2</span>,n+<span class="number">3</span>);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">2 2 1 3 2</span></span><br><span class="line"><span class="comment">2 4 3 5 4</span></span><br><span class="line"><span class="comment">2 5 5 6 6</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">24</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="模拟网络流"><a href="#模拟网络流" class="headerlink" title="模拟网络流"></a>模拟网络流</h2><h3 id="模拟最大流"><a href="#模拟最大流" class="headerlink" title="模拟最大流"></a>模拟最大流</h3><p>我们一般不直接模拟最大流（有的题目亦是如此），而是把它转化为最小割进行计算。</p>
+<p>模拟最大流，就是利用各种手段（一般是 dp，或者其他的方式）来模拟网络流增加流的过程，但是如果是模拟最小割的话就是模拟割边的过程。</p>
+<p>比如一道例题：</p>
+<blockquote>
+<p>小明升任了 CF 国的大总管，他管辖的 $n$ 个城市，编号为 $1 \dots n$ 。每个城市生产了 $p_i$ 个货物，限制最多可以卖掉 $s_i$ 个货物。对于每两个城市 $i,j$，如果 $i&lt;j$，则可以最多从 $i$ 运送 $c$ 个货物到 $j$ 。注意不能反向运送，却可以在多个城市之间送来送去。现在小明想知道，经过运输后，最多能卖掉多少个货物。</p>
+</blockquote>
+<p>我们可以建出来图，图就是源点向所有点都连接了一条边权为 $p_i$ 的边，所有点都向汇点连接了一条边权为 $s_i$ 的边，然后每个 $i&lt;j$ 都连接了 $c$ 的边。</p>
+<p>图是十分规范的，我们可以用 dp 求解。</p>
+<p>设 $dp_{i,j}$ 表示前 $i$ 个点，有 $j$ 个点到 $S$ 的边没有被割掉的最小花费，那么转移就是要么保留这个点到 $S$ 的边，要么保留这个点到 $T$ 的边就可以了，方程很好列出来：</p>
+<p>$$<br>f_{i,j}&#x3D;\min(f_{i-1,j}+p_i+c \times j,f_{i-1,j-1}+s_i)<br>$$</p>
+<p>最后 $O(n^2)$ 就解决了，需要滚动数组优化，当然还有贪心的做法，此处就不强调了。</p>
+<h3 id="模拟费用流"><a href="#模拟费用流" class="headerlink" title="模拟费用流"></a>模拟费用流</h3><p>这才是重点，模拟最大流的题很少，但是模拟费用流的题目却很多。</p>
+<p>模拟费用流也是通过贪心等手段维护每次增广的流量以及反悔边的选择，一般需要用到优先队列，线段树等可删除结构，视具体的题目而定。</p>
+<p>解决这种题可以从两个方面入手：</p>
+<ul>
+<li><p>直接贪心。</p>
+</li>
+<li><p>建出来费用流的图，然后再根据反悔边判断，但是必须要保证增广次数乘上每次增广的代价可以忍受。</p>
+</li>
+</ul>
+<p>这种题需要多练习，可以参考一下 <a href="https://www.luogu.com.cn/problem/solution/P5470">P5470 [NOI2019] 序列 题解</a> 或者 <a href="https://www.luogu.com.cn/blog/674469/solution-p4217">P4217 [CTSC2010] 产品销售 题解</a>，这两道题目一个是用了优先队列维护退流，一个是用了线段树维护流量，都是好的例子。</p>
+<p>并且它们都是先建图，然后考虑各种反悔边，值得一提的是这些图一般都很有规律（忽略边权），便于维护。</p>
+<p>还可以直接用贪心来做的题目，但是这个不是重点就跳过了。</p>
+<p>那么，网络流就到此结束了。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>图论</tag>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串学习笔记</title>
+    <url>/2024/01/07/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="KMP-及其相关"><a href="#KMP-及其相关" class="headerlink" title="KMP 及其相关"></a>KMP 及其相关</h2><p>见 <a href="https://www.luogu.com.cn/blog/674469/guang-yi-kmp-yi-ji-ji-kuo-zhan-broad-sense-kmpnote-7-post">广义 KMP 以及其扩展（Broad Sense Kmp）（NOTE-7）</a>。</p>
+<h2 id="trie-及其相关"><a href="#trie-及其相关" class="headerlink" title="trie 及其相关"></a>trie 及其相关</h2><h3 id="普通-trie"><a href="#普通-trie" class="headerlink" title="普通 trie"></a>普通 trie</h3><p>这里不再赘述，主要就是插入一个字符串（一个数字），然后进行树上 dp 的一个过程。</p>
+<h3 id="可持久化-trie"><a href="#可持久化-trie" class="headerlink" title="可持久化 trie"></a>可持久化 trie</h3><p>类似于可持久化线段树的建树过程，复制每个节点，然后对于相应的子节点进行递归处理（线段树是二叉，trie 是 $|C|$ 叉，$C$ 是字符集）</p>
+<p>所以建树的过程大概是 $O(\sum |S| \times |C|)$，一般把 $C$ 看做一个常数。（序列除外）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(string s,ll s1,ll s2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;s.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">		cnt[s1] = cnt[s2];</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++) trie[s1][j]=trie[s2][j];</span><br><span class="line">		cnt[s1]++;</span><br><span class="line">		trie[s1][(ll)(s[i]-<span class="string">&#x27;a&#x27;</span>)] = ++tot;</span><br><span class="line">		s1 = trie[s1][s[i]-<span class="string">&#x27;a&#x27;</span>],s2 = trie[s2][s[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	cnt[s1] = cnt[s2];</span><br><span class="line">	<span class="keyword">for</span>(ll j=<span class="number">0</span>;j&lt;<span class="number">26</span>;j++) trie[s1][j]=trie[s2][j];</span><br><span class="line">	cnt[s1]++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$cnt$ 是子树元素个数，然后 $trie_{i,j}$ 就是从 $i$ 经过字符为 $j$ 的边到达的节点，我们就可以愉快地树上 统计&#x2F;dp 了。</p>
+<p>具体操作同线段树，也是处理一个前缀的序列问题（字符串的前后缀，异或的结果等）。</p>
+<p>可持久化 trie 大概就是这些。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>字符串</tag>
+        <tag>KMP</tag>
+        <tag>trie</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小技巧</title>
+    <url>/2024/01/07/%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<h1 id="随机染色"><a href="#随机染色" class="headerlink" title="随机染色"></a>随机染色</h1><p>有若干组线段，每组线段没有交集，然后求出每组线段至少选一个，求最后这些线段最大的交集。</p>
+<p>我们尝试对不同线段集合的覆盖区分开来，比较显然的就是每个不同的线段分配一个权值 $a_i$，然后取一下覆盖当前小段的线段权值和，排序区分即可。</p>
+<p>但是这样的正确性可能会有所问题，我们可以考虑将加法换成异或，这样子的话，如果 $0 \le a_i \le 2^{63}-1$ 的话，出问题的可能性就近乎为 $0$ 了。</p>
+<p>如果需要离散化的话，一样的，把点转化为开区间的形式就可以了。</p>
+<p>模板代码：<br>（每个集合只有两个线段）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=X;i++) lenth[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    <span class="comment">//随机赋值</span></span><br><span class="line">		ll temp;</span><br><span class="line">		temp = <span class="built_in">rnd</span>();</span><br><span class="line">		lenth[tx1[i]] ^= temp;</span><br><span class="line">		lenth[tx2[i]+<span class="number">1</span>] ^= temp;</span><br><span class="line">		temp = <span class="built_in">rnd</span>();</span><br><span class="line">		lenth[<span class="number">1</span>] ^= temp;</span><br><span class="line">		lenth[tx1[i]] ^= temp;</span><br><span class="line">		lenth[tx2[i]+<span class="number">1</span>] ^= temp;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//差分排序找相同</span></span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">2</span>;i&lt;=X;i++) lenth[i]^=lenth[i<span class="number">-1</span>];</span><br><span class="line">	<span class="built_in">sort</span>(lenth+<span class="number">1</span>,lenth+X+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>,j=<span class="number">1</span>;i&lt;=X;i=j)&#123;</span><br><span class="line">		<span class="keyword">while</span>(j&lt;=X)&#123;</span><br><span class="line">			<span class="keyword">if</span>(lenth[j]!=lenth[i]) <span class="keyword">break</span>;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//取最大就可以了</span></span><br><span class="line">		ans = <span class="built_in">max</span>(ans,j-i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="光速乘法"><a href="#光速乘法" class="headerlink" title="光速乘法"></a>光速乘法</h1><p>如果我们对于两个数相乘要模上一个数，那么我们可以写成下面这个样子：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">mul</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (x*y-(ll)((__float128)x/mod*y)*mod+mod)%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用于 $x$ 和 $y$ 相乘大于 <code>__int128</code> 的时候。</p>
+<p>常数偏大，谨慎使用。</p>
+<h1 id="快读快写"><a href="#快读快写" class="headerlink" title="快读快写"></a>快读快写</h1><p>用于快速读入和输出一些数据，在 <code>.in</code> 和 <code>.out</code> 文件较大的时候加速明显。</p>
+<h2 id="快速读入"><a href="#快速读入" class="headerlink" title="快速读入"></a>快速读入</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">char</span> <span class="title">nc</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">char</span> buf[<span class="number">1000000</span>],*p=buf,*q=buf;</span><br><span class="line">	<span class="keyword">return</span> p==q&amp;&amp;(q=(p=buf)+<span class="built_in">fread</span>(buf,<span class="number">1</span>,<span class="number">1000000</span>,stdin),p==q)?EOF:*p++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="type">char</span> c = <span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">&#x27;0&#x27;</span>||c&gt;<span class="string">&#x27;9&#x27;</span>)c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">&#x27;9&#x27;</span>&amp;&amp;c&gt;=<span class="string">&#x27;0&#x27;</span>)res=res*<span class="number">10</span>+c-<span class="string">&#x27;0&#x27;</span>,c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这份快速读入没有判断负数的情况，运用的时候应当小心。</p>
+<h2 id="快速输出"><a href="#快速输出" class="headerlink" title="快速输出"></a>快速输出</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> obuf[<span class="number">1</span>&lt;&lt;<span class="number">21</span>],*p3=obuf; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">pc</span><span class="params">(<span class="type">char</span> c)</span></span>&#123; </span><br><span class="line">	p3-obuf&lt;=(<span class="number">1</span>&lt;&lt;<span class="number">20</span>)?(*p3++=c):(<span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout),p3=obuf,*p3++=c); </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123; </span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) <span class="built_in">pc</span>(<span class="string">&#x27;-&#x27;</span>),x=-x; </span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">9</span>) <span class="built_in">write</span>(x/<span class="number">10</span>); </span><br><span class="line">	<span class="built_in">pc</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用快速输出的时候程序<strong>结尾</strong>一定要使用这句话：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout);</span><br></pre></td></tr></table></figure>
+
+<p>否则会没有输出。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>随机染色</tag>
+        <tag>技巧</tag>
+        <tag>光速乘</tag>
+        <tag>快速读写</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>广义 KMP 以及其扩展（Broad Sense Kmp）</title>
+    <url>/2024/01/07/%E5%B9%BF%E4%B9%89-KMP-%E4%BB%A5%E5%8F%8A%E5%85%B6%E6%89%A9%E5%B1%95%EF%BC%88Broad-Sense-Kmp%EF%BC%89/</url>
+    <content><![CDATA[<p>写在前面：这篇文章不介绍普通的 KMP 算法，主要介绍这个算法的一些扩展。</p>
+<blockquote>
+<p>Update：其实是针对于一些字符串算法的扩展并且对字符串和普通数字序列的一些性质的挖掘和分析、解决。</p>
+</blockquote>
+<h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><p>众所周知，我们认为下面这份代码是 KMP 算法：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k+<span class="number">1</span>]) k=ne[k];</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k+<span class="number">1</span>]) k++;</span><br><span class="line">	ne[i] = k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>实际上它是 MP 算法，Knuth 则在 MP 算法的基础上提出了优化，同时改变了 $\text{next}$ 数组的含义。</p>
+<p>但是如果判断一个串是不是包含另外一个串，则还是判断是否有 $\text{next}_i &#x3D; m$（$m$ 为另一个串的长度）。</p>
+<p>如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k]) k=ne[k];</span><br><span class="line">	i++,k++;</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k]) ne[i]=ne[k];</span><br><span class="line">	<span class="keyword">else</span> ne[i]=k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>前面那份代码可以求出来最小循环节，但是后面那份代码就不可以，而且前面那份代码如果在字符串末尾增减字符，再次跑 <code>while</code> 循环的时候时间会爆，即不满足单次复杂度严格低于 $O(n)$。</p>
+<p>后面这份代码不可以求最小循环节，但是增减字符后，再跑 <code>while</code> 循环的时候时间就爆不了（至少目前卡不掉）。</p>
+<p>但是这并不是文章的重点。</p>
+<h1 id="广义-KMP"><a href="#广义-KMP" class="headerlink" title="广义 KMP"></a>广义 KMP</h1><p>众所周知，KMP 是跑子串匹配的算法。</p>
+<p>普通的 (K)MP 算法，是指找到 $S$ 的一个前缀等于后缀的字符串的最大长度，这个字符串的长度必须小于 $S$ 的长度。</p>
+<p>我们则可以尝试找到字符串的一些性质：</p>
+<ul>
+<li>字符串的等于判断具有传递性，即如果 $a&#x3D;b,b&#x3D;c$ 那么 $a&#x3D;c$。</li>
+<li>如果 $a&#x3D;b$ 那么对于任意 $a_{l \sim r} &#x3D; b_{l \sim r}$ 。</li>
+<li>字符串的每个元素一定只有 $26$ 种。</li>
+</ul>
+<p>我们需要发挥想象力，不妨把字母换成数字，再重新定义任意两个序列相同的条件，满足上面两条性质，我们就可以根据 (K)MP 来找 $b$ 这个序列在 $a$ 中出现的次数以及位置，特别的，如果不要求最长的前后缀长度，我们甚至可以运用 KMP 算法来支持末尾添加数字删除数字的操作。</p>
+<h2 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h2><p>比如这道题：</p>
+<blockquote>
+<p>序列 $a$ 和序列 $b$ 相同，当且仅当对于所有 $a_i &#x3D; a_j$，$b_i &#x3D; b_j$；否则 $b_i \ne b_j$（$j&lt;i$），求 $b$ 在 $a$ 中出现了多少次。</p>
+</blockquote>
+<p>我们可以发现这个规定满足上面两条性质，那么可以修改一下 KMP 的代码，使得时间复杂度在 $O(n \log n)$ 以内。</p>
+<p>比较好的做法是对于每个 $a_i$ 找出前面第一个与它相同的数字，记录一下他们之间的距离为 $a’_i$，$b$ 数组同理，如果 $a’&#x3D;b’$ 那么 $a&#x3D;b$。（如果找不到，那么距离为 $-1$ 即可，只需要不与可能出现的距离相同就可以）</p>
+<p>于是我们直接判断即可，在 (K)MP 的算法执行过程当中：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k+<span class="number">1</span>]) k=ne[k];</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k+<span class="number">1</span>]) k++;</span><br><span class="line">	ne[i]=k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>如果 $s_i&#x3D;s_{k+1}$ ，那么有一个隐含的条件就是 $s_{1 \sim k}&#x3D;s_{i-k \sim i-1}$。</p>
+<p>相当于我们在跑 (K)MP 的时候，只需要判断新加进去的数与之前加进去的数的关系就可以了。</p>
+<p>对于这道题来说，如果 $a_{1 \sim k}&#x3D;a_{i-k \sim i-1}$，那么我们需要判断 $a_{k+1}$ 加到前面一个子串末尾和 $a_i$ 加到后面的子串末尾相不相同就可以了。</p>
+<p>把他们分别距离之前在这个串里面与他们的值相等的数找出来，计算距离就可以了。</p>
+<p>那么模式串和文本串匹配也是这样的一个道理。</p>
+<p>所以算法的时间复杂度为 $O(n \times \text{check 的时间复杂度})$，在这里总时间复杂度为 $O(n)$，因为不需要更多的信息，同时可以扩展到在末尾添加删除的操作。</p>
+<h1 id="广义-KMP-及其扩展"><a href="#广义-KMP-及其扩展" class="headerlink" title="广义 KMP 及其扩展"></a>广义 KMP 及其扩展</h1><p>我们发现，运用了广义 KMP，那么就可以解决一些比较难以解决的问题。</p>
+<p>类似于上面两个例子，如果没有这个广义 KMP 几乎上无法做出来，甚至可以加上求最长的前缀等于后缀的问题，然而我们还有更多的东西可以扩展：</p>
+<blockquote>
+<p><a href="https://oi.wiki/string/ac-automaton/">AC 自动机</a>，<a href="https://oi.wiki/string/z-func/">Z 函数</a> 等与 KMP 有关的算法。</p>
+</blockquote>
+<p>对于 Z 函数的构建，我们依然可以采用这种方法；但是 AC 自动机仅接受 $26$ 的字符，还不如直接用暴力。</p>
+<p>因此，最直接的地方是用在 Z 函数上。</p>
+<p>Z 函数的运用和 KMP 的运用差不多，此处就不再赘述了，大概也是运用到了字符串的一些性质。</p>
+<h2 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h2><blockquote>
+<p>承袭例 1 中 $a&#x3D;b$ 的条件，对于给定的序列 $c$ 的每个 $1 \le i \le n$，找到最大的一个 $k$，使得 $i+k-1 \le n$ 且 $c_{1 \sim k}&#x3D;c_{i \sim i+k-1}$。</p>
+</blockquote>
+<p>很显然，把 Z 函数构建过程中移动左右端点的判断条件改成之前的条件就可以了。</p>
+<p>时间复杂度依然为这个算法时间复杂度乘上 $\text{check}$ 的时间复杂度。</p>
+<p>最后输出 Z 函数的值即可。</p>
+<h1 id="其它字符串相关扩展"><a href="#其它字符串相关扩展" class="headerlink" title="其它字符串相关扩展"></a>其它字符串相关扩展</h1><p>这里则主要介绍另外一种字符串相关的算法 manacher。</p>
+<p>manacher 也是用于求解回文串的问题，我们依然可以把这个方法加到 manacher 的移动左右端点上面。</p>
+<h2 id="例-3"><a href="#例-3" class="headerlink" title="例 3"></a>例 3</h2><blockquote>
+<p>承袭例 1 中 $a&#x3D;b$ 的条件，对于给定的序列 $c$ 的每个 $1 \le i \le n$，找到最大的一个 $k$，使得 $i+k-1 \le n,i \ge k$ 且 $c_{i-k+1 \sim i}&#x3D;c_{i+k-1 \sim i}$。（后一个字符串是倒过来的）</p>
+</blockquote>
+<p>这就是一个模板的 manacher 题目，那么我们依然加上 $\text{check}$ 函数就可以了。</p>
+<p>时间复杂度依然为这个算法时间复杂度乘上 $\text{check}$ 的时间复杂度。</p>
+<p>甚至可以在现有 manacher 题目上做出进一步修改，此处的例题仅为注重展示此算法，而不是为了难住读者。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们此处就是把一个字符串改变成了一个序列，并且重载了字符串的 $&#x3D;$ 运算符，使得序列满足了上述算法的一些性质来解决较为困难的问题。</p>
+<p>然后与上述算法相关的自动机们和所有靠移动指针判断是否相等（一次常数以内）的算法，都可以适用到这个方法。（AC 自动机则在条件允许的情况下可以用这个方法，回文自动机同理）</p>
+<p>但是我们的后缀相关数据结构就不能使用这种方法，因为它们主要解决的是字典序排名的问题，与字符串匹配没有太大关系，因此不行。</p>
+<p>对于这篇文章，旨在对 KMP 的一些相关习题进行总结，比如很多题目都可用这个方法解决，而我们也可以用这种方法出一些质量较高的题目。</p>
+<blockquote>
+<p>比如：<a href="https://www.luogu.com.cn/problem/P8085">[COCI2011-2012#4] KRIPTOGRAM</a>。</p>
+</blockquote>
+<p>即使很多题目都可以用奇奇怪怪的 hash AC，但是这种方法也不失于一种正确性稳定的算法。</p>
+<p>综上，这是我在学习 KMP 时候的一些想法，如有不足请大家多多指出，笔者也好修改这篇文章，以免误导更多的读者。</p>
+<p>—The End—</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>字符串</tag>
+        <tag>KMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图论学习笔记1</title>
+    <url>/2024/01/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</url>
+    <content><![CDATA[<p>以下均不会过多介绍算法，主要介绍的是做题的思维。</p>
+<hr>
+<p>PART-1</p>
+<h1 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a><strong>最小生成树</strong></h1><p>最小生成树主要用于解决使用最小边权和的边连接后让图连通。</p>
+<p><strong>如果有负权边，则视题目意思而定。</strong></p>
+<h2 id="1、普通使用"><a href="#1、普通使用" class="headerlink" title="1、普通使用"></a><strong>1、普通使用</strong></h2><p>例题：</p>
+<p>在一个 $n \times m$ 的矩形区域内，外围边界存在围墙，每个 $1 \times 1$ 的正方形区域内也存在对角线方向的一堵墙，墙的方向有两种，如下图所示：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/hsp3uqod.png"></p>
+<p>对角线方向的墙可以破坏，不同的墙破坏的代价不同。</p>
+<p>支付最少的代价破坏墙，使得整个区域连通。</p>
+<p>$1 \le n,m \le 500,1 \le w_{i,j} \le 5\times 10^3$。</p>
+<p>很显然，每个 $1 \times 1$ 的小方格都分成了两个部分，这样我们把图建出来，然后对于有墙阻碍的边边权就是 $w$，否则边权为 $0$，一共 $n \times m$ 级别的边，所以用 Kruskal 就可以了。</p>
+<h2 id="2、配合倍增"><a href="#2、配合倍增" class="headerlink" title="2、配合倍增"></a><strong>2、配合倍增</strong></h2><p><a href="https://www.luogu.com.cn/problem/P4180">P4180 [BJWC2010] 严格次小生成树</a></p>
+<p>每次考虑用一条非最小生成树上的边替换最小生成树上的边，为确保次小，肯定是替换能替换的边权最大的边。</p>
+<p>观察到非树边能够替换的边是树上两点间的路径，所以 $O(\log n)$ 用倍增或 $O(\log^2 n)$ 用树链剖分。</p>
+<p>还有其它类似的题，套路都一样。</p>
+<h2 id="3、其它"><a href="#3、其它" class="headerlink" title="3、其它"></a><strong>3、其它</strong></h2><p>例题1：</p>
+<p>求一个包含 $n$ 个点 $m$ 条边的仙人掌的 $k$ 小生成树。</p>
+<p>显然，每个环上选一条边，非环边全选，所以变成了一个 $k$ 路归并问题，可以做到 $O(nk \log k) \sim O(k \log k)$ 的时间复杂度。</p>
+<p>例题2：*神仙题</p>
+<p>Alice 和 Bob 在由 $n$ 个点 $m$ 条边构成的无向连通图上进行游戏。</p>
+<p>对于一条连接节点 $x_i$ 与 $y_i$ 的边，其边权的可选项只有 $a_i$ 或 $b_i$ 。</p>
+<p>游戏首先由 Alice 选择恰好 $k$ 条边，使其边权选择 $a_i$，而剩下的 $m-k$ 条边的边权选择 $b_i$。然后再由 Bob 选择恰好 $n-1$ 条边，构成原图的一棵生成树。最终的得分为 Bob 选择的生成树的边权之和。</p>
+<p>Alice 想让得分尽量大，而 Bob 想让得分尽量小。在双方都按最佳策略行动时，最终的得分为多少？请你分别计算 $k&#x3D;0\sim m$ 时的答案。</p>
+<p>$1 \le n \le 9,1 \le m \le 30,1 \le T \le 20$，不含重边和自环。</p>
+<p>对于 $m$ 不好维护，考虑对 $n$ 进行处理。</p>
+<p>由题得 Bob 其实就是求最小生成树，别无选择，真正有选择权的是 Alice。</p>
+<p>考虑 Kruskal 的执行过程，对边排序之后能选就选。</p>
+<p>那么我们在这道题中把 $a_i$ 和 $b_i$ 拆开排序，然后对于每个决策点设 $dp_{i,j,S}$ 表示枚举到了第 $i$ 条边，选了 $j$ 条 $a_i$ 的边（相同顶点的边一定不会重复选，所以不用担心计算重复），<strong>当前并查集的状态为 $S$</strong> 时候最小生成树最大是多少。</p>
+<p>记录了并查集的状态后，本题就很好做了，因为 $Bell_9$ 大概在 $2 \times 10^4 \sim 3\times 10^4$ 之间，所以时间空间都不是问题。</p>
+<hr>
+<h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a><strong>最短路</strong></h1><p>本节主要介绍最短路的一些小技巧。</p>
+<h2 id="1、虚点"><a href="#1、虚点" class="headerlink" title="1、虚点"></a><strong>1、虚点</strong></h2><p>例题：对于一棵有根树，两个点之间如果有边，则可以双向到达，如果没边但是深度之差等于 $k$，也可以双向到达。</p>
+<p>问 $s$ 到 $t$ 的最短路是多少，边有边权，$1 \le k \le n \le 10^6$。</p>
+<p>首先，对于任意两个深度满足差等于 $k$ 的点不能暴力连，因为时间空间都是 $O(n^2)$ 的。</p>
+<p>但是我们可以对每个深度建一个虚拟节点，这个节点连向当前深度所有节点，然后满足深度之差等于 $k$ 的两个虚拟节点连边就可以了，这下子时间和空间都优化到了 $O(n)$ 级别，而且照样可以跑最短路。</p>
+<h2 id="2、多维"><a href="#2、多维" class="headerlink" title="2、多维"></a><strong>2、多维</strong></h2><p>很多题目涉及到多维度的问题，例如上一条边的边权对于下一条经过的边的边权有影响，那么我们这时可以像 DP 一样多一个维度来记录。</p>
+<p>例题：某图由 $n$ 点 $m$ 条单向边构成，每条边都有通行所需的费用 $w_i$ 。</p>
+<p>其中某些边是特殊边，当经过特殊边从 $x_i$ 点到达 $y_i$ 点后，会触发神秘力量，可以选择使下一次的通行费用减少 $k$ ，或者直接 $0$ 费传送到某个由 $y_i$ 出发无法一步到达的点。</p>
+<p>注意：经过一条费用减少 $k$ 后的特殊边，同样也能触发神秘力量。</p>
+<p>计算从 $s$ 出发，到达每一个点所需的最少花费。</p>
+<p>很显然，设 $dp_{i,0&#x2F;1}$ 表示到达 $i$ 号点后上一条边是特殊边还是普通边，转移（Dijkstra）同普通最短路。</p>
+<p>但是还有 $0$ 费传送的情况，如何处理，这个参考数据结构板块的并查集合并区间的处理方式。</p>
+<h2 id="3、期望"><a href="#3、期望" class="headerlink" title="3、期望"></a><strong>3、期望</strong></h2><p>对于 $dp_i &#x3D; \min{\dots}$ 的类型的题目，我们有两种解决方式，一是高斯消元 $O(n^3)$，如果决策不成环的话，我们可以用 dijkstra 来解决。</p>
+<p>因为 dijkstra 有一个特性，就是每次出队的都是最小的元素，那么我们每次把已知的最小的期望 push 进堆里面，然后更新它能更新到的节点，类似于最短路，最后输出结果就行了，此处不再赘述。（详见后面的期望 DP）</p>
+<h2 id="4、最短路径树-有向无环图"><a href="#4、最短路径树-有向无环图" class="headerlink" title="4、最短路径树&#x2F;有向无环图"></a><strong>4、最短路径树&#x2F;有向无环图</strong></h2><p>对于每一条可能在以 $s$ 开头的最短路上的边（边权为正），全部拿出来就成了最短路径树，如果不保证最短路只有一条的话，那么这棵树会变成有向无环图。</p>
+<p>在这个有向无环图上，我们可以统计每个点被经过的次数，每条边在所有路径中被经过的次数，甚至可以处理动态询问修改一条边后的从 $s$ 到 $t$ 的最短路。</p>
+<p>所有用法都来自于它的几条性质：</p>
+<ul>
+<li><p>每条边都出现在至少一条最短路中。</p>
+</li>
+<li><p>结果是树或有向无环图。</p>
+</li>
+</ul>
+<hr>
+<h1 id="欧拉路径"><a href="#欧拉路径" class="headerlink" title="欧拉路径"></a><strong>欧拉路径</strong></h1><p>这个知识点难就难在建模。</p>
+<p>例1：对于一个 $n$ 个节点 $m$ 条边的无向图，找到最小的路径覆盖，使得每条边最多被覆盖 $1$ 次。（路径可以是环）</p>
+<p>很显然，剖分成 $k$ 个欧拉路径就可以了。</p>
+<p>如果图有 $k$ 个奇数度数的节点，答案为 $\frac{k}{2}$ （非整数则无解）条，否则如果图没有边答案为 $0$，有边答案为 $1$。</p>
+<p>输出答案的方式也很巧妙，可以新建一个虚点，对于图中所有个连通块的奇数节点连边，若某个连通块的节点全是偶数节点，则选择一个连双向边就可以了。</p>
+<p>最后由于整张图有一条欧拉通路，用 DFS 把欧拉通路求解出来，然后用新增的边把这些通路分成几段，段数就是答案，顺便还把方案求出来了。</p>
+<p>例2：</p>
+<p>有 $4 \times n$ 颗宝石，价值分别为 $1 \sim 4 \times n$。</p>
+<p>宝石的颜色共有 $n$ 种，每种颜色恰好有 $4$ 颗宝石。</p>
+<p>现在要将宝石装进两个箱子，满足以下两个条件：</p>
+<ul>
+<li>两个箱子的宝石总价值相等。</li>
+<li>每个箱子每种颜色恰有 $2$ 颗宝石。</li>
+</ul>
+<p>请你设计一种划分方案，数据保证一定存在符合条件的划分方案。（$1 \le n \le 2\times 10^5$）</p>
+<p>考虑构造，对于每组 $i+j&#x3D;4 \times n$ 的 $i,j$，将 $a_i$ 与 $a_j$ 连边，然后我们发现，每种颜色会连偶数条双向边（$2$ 或 $4$），就必然存在一条欧拉路径，把欧拉路径跑出来之后，因为每条边都代表两个宝藏，所以我们从这些边中选不相交的边（奇偶分类即可），输出方案。</p>
+<p>还有一道神仙题，不说解法：<a href="https://www.luogu.com.cn/problem/AT_agc017_e">AT-agc017e Jigsaw</a>。</p>
+<hr>
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a><strong>其它</strong></h1><p>差分约束：方程列出来就很简单了。</p>
+<p>拓扑排序：基础算法。</p>
+<hr>
+<p>PART-2</p>
+<h1 id="有向图连通性"><a href="#有向图连通性" class="headerlink" title="有向图连通性"></a><strong>有向图连通性</strong></h1><p>主要算法是 Tarjan，解决一些与连通（每个点的点权不能重复计算）相关的题目。</p>
+<p>主要步骤，任何有向图缩点后均变为有向无环图，我们这时便可以在 DAG 上 DP 出最长链等经典问题。</p>
+<p>因此，此处不介绍经典问题，均介绍变种。</p>
+<p>例1：<a href="https://www.luogu.com.cn/problem/P1407">P1407 [国家集训队] 稳定婚姻</a>。</p>
+<p>很显然，像二分图一样，如果夫妻能够找到一个环，并且满足其余夫妻能够匹配成功。</p>
+<p>所以边双的做法是错误的，我们要对于原夫妻关系从丈夫到妻子连边，其它情侣关系从女方向男方连边，判断也很简单，就判断原夫妻是否在一个强连通分量中即可。</p>
+<p>例2：<a href="https://www.luogu.com.cn/problem/P2403">P2403 [SDOI2010] 所驼门王的宝藏</a>。</p>
+<p>因为只有 $n$ 个藏宝宫室，所以考虑对这 $n$ 个节点建立有向边。</p>
+<p>对于可以走 $8$ 个方向的宫室，暴力连边即可，$O(n)$。</p>
+<p>但是有些宫室可以走到一行&#x2F;一列内任意宫室，我们这时可以用到最短路的技巧，对于每行&#x2F;每列建虚点，点权为 $0$ 就可以了，然后向对应的节点连入边&#x2F;出边即可。</p>
+<p>最后 Tarjan 缩点后跑最长链。</p>
+<p>例3：<a href="https://www.luogu.com.cn/problem/P4819">P4819 [中山市选] 杀人游戏</a>。</p>
+<p>很显然，对于入度为 $0$ 的 scc，知道了一个就可以知道以它为开头的所有 scc 的身份。</p>
+<p>但是有一种特殊情况，就是会存在一个入度为 $0$ 的 scc 使得它的大小为 $1$ 并且其它入度为 $0$ 的 scc 选了之后只剩下它一个，我们就可以直接推断出它是什么身份。</p>
+<p>这种情况也很好判断，只需要知道它的儿子节点有没有除了它之外其它的入边就行了。</p>
+<p>总时间复杂度 $O(n)$。</p>
+<p>例4：<a href="https://www.luogu.com.cn/problem/P4700">P4700 [CEOI2011] Traffic</a>。</p>
+<p>这道题有一个特殊限制，所有边在平面直角坐标系中都不相交，这样就有一个结论：</p>
+<ul>
+<li>排除开不能被左边节点到达的右边节点，那么每个节点能到达的右边节点都是在某一个 $[x,y]$ 范围内的所有节点。</li>
+</ul>
+<p>（以上节点均为 scc 缩点后有向无环图上的节点）</p>
+<p>这个性质比较好证，画个图理解即可。</p>
+<p>最后在有向图上 DP，暴力合并区间即可。</p>
+<p>例5：<a href="https://www.luogu.com.cn/problem/P8328">P8328 [COCI2021-2022#5] Usmjeravanje</a>。</p>
+<p>根据 scc 的传递性，我们可以知道当两条不同航线构成一个 X 形状的时候，X 的上下两部分会互相连通。</p>
+<p>再根据一个贪心原则，有 X 形状的一定让它构成，证明不在赘述。</p>
+<p>最后确定每条边的方向后，用并查集维护或者直接跑一遍 Tarjan 就可以了。</p>
+<p>例6：<a href="https://www.luogu.com.cn/problem/P7737">P7737 [NOI2021] 庆典</a>。</p>
+<p>还是缩点之后考虑图的形态，因为如果有 $x \to z,y \to z$，一定有 $z \to y$ 或 $y\to z$。</p>
+<p>所以最后缩点之后的形态一定是一棵只有一个 $0$ 入度节点的叶向树。（从祖先连向儿子的边可以去掉，不影响连通）</p>
+<p>然后对于 $k&#x3D;0,1,2$ 的情况分类讨论，对于每个可能到达的 scc，它的祖先一定有一个可以被起点到达，它的后代一定有一个可以到达终点。</p>
+<p>我们就剖分成了几条链，最后用虚树做一下链合并就可以了，用树剖的话时间会多一个 $\log$。</p>
+<p>综上，有向图连通性是有向图的一个大板块，而且经常和 DP 一起使用，难的题做起来比较麻烦且极具挑战性。</p>
+<hr>
+<h1 id="无向图关于点的连通性"><a href="#无向图关于点的连通性" class="headerlink" title="无向图关于点的连通性"></a><strong>无向图关于点的连通性</strong></h1><p>基本上和圆方树一起使用，可以 $O(n)$ 维护删掉每个点之后的连通块的一些信息。</p>
+<p>例1：<a href="https://www.luogu.com.cn/problem/P5058">P5058 [ZJOI2004] 嗅探器</a>。</p>
+<p>从 $s$ 开始跑 Tarjan，然后对于每个在 $s$ 之下 $t$ 之上的割点，都有可能成为答案。</p>
+<p>例2：<a href="https://www.luogu.com.cn/problem/P4494">P4494 [HAOI2018] 反色游戏</a>。</p>
+<p>首先对于每个连通块，如果它的 $1$ 的个数是偶数，那么答案为 $2^{m-n+1}$。</p>
+<ul>
+<li>证明：首先找到任意生成树，一定有且仅有一种情况满足要求，然后剩下 $m-n+1$ 条边随意选择 $0,1$，都可以满足条件。</li>
+</ul>
+<p>用圆方树维护删去每个节点的连通块的大小就可以了。</p>
+<p>一些性质：</p>
+<ul>
+<li><p>如果一个点双内有一个奇环，那么这个点双内的所有点都存在于一个奇环内。</p>
+</li>
+<li><p>如果一个点双内的边数等于点数，则这个点双是环的形态。</p>
+</li>
+</ul>
+<hr>
+<h1 id="无向图关于边的连通性"><a href="#无向图关于边的连通性" class="headerlink" title="无向图关于边的连通性"></a><strong>无向图关于边的连通性</strong></h1><p>更少了。</p>
+<p>所有题目大概就是缩完点之后在树上跑一个 DP 就可以了，感兴趣的可以做一下 <a href="https://www.luogu.com.cn/problem/P8867">P8867 [NOIP2022] 建造军营</a>。</p>
+<p>以上就是第一部分图论学习笔记，下一部分预计：二分图，网络流，费用流等。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>图论</tag>
+        <tag>最小生成树</tag>
+        <tag>最短路</tag>
+        <tag>欧拉路径</tag>
+        <tag>连通性相关</tag>
+      </tags>
+  </entry>
 </search>

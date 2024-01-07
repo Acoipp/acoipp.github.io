@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>广义 KMP 以及其扩展（Broad Sense Kmp） - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,写在前面：这篇文章不介绍普通的 KMP 算法，主要介绍这个算法的一些扩展。
+
+Update：其实是针对于一些字符串算法的扩展并且对字符串和普通数字序列的一些性质的挖掘和分析、解决。
+
+KMP众所周知,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="广义 KMP 以及其扩展（Broad Sense Kmp） - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,写在前面：这篇文章不介绍普通的 KMP 算法，主要介绍这个算法的一些扩展。
+
+Update：其实是针对于一些字符串算法的扩展并且对字符串和普通数字序列的一些性质的挖掘和分析、解决。
+
+KMP众所周知,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="广义 KMP 以及其扩展（Broad Sense Kmp） - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,写在前面：这篇文章不介绍普通的 KMP 算法，主要介绍这个算法的一些扩展。
+
+Update：其实是针对于一些字符串算法的扩展并且对字符串和普通数字序列的一些性质的挖掘和分析、解决。
+
+KMP众所周知,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">广义 KMP 以及其扩展（Broad Sense Kmp）</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">广义 KMP 以及其扩展（Broad Sense Kmp）</h1>
+        <div class="stuff">
+            <span>一月 07, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/KMP/" rel="tag">KMP</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>写在前面：这篇文章不介绍普通的 KMP 算法，主要介绍这个算法的一些扩展。</p>
+<blockquote>
+<p>Update：其实是针对于一些字符串算法的扩展并且对字符串和普通数字序列的一些性质的挖掘和分析、解决。</p>
+</blockquote>
+<h1 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h1><p>众所周知，我们认为下面这份代码是 KMP 算法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k+<span class="number">1</span>]) k=ne[k];</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k+<span class="number">1</span>]) k++;</span><br><span class="line">	ne[i] = k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>实际上它是 MP 算法，Knuth 则在 MP 算法的基础上提出了优化，同时改变了 $\text{next}$ 数组的含义。</p>
+<p>但是如果判断一个串是不是包含另外一个串，则还是判断是否有 $\text{next}_i &#x3D; m$（$m$ 为另一个串的长度）。</p>
+<p>如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k]) k=ne[k];</span><br><span class="line">	i++,k++;</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k]) ne[i]=ne[k];</span><br><span class="line">	<span class="keyword">else</span> ne[i]=k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>前面那份代码可以求出来最小循环节，但是后面那份代码就不可以，而且前面那份代码如果在字符串末尾增减字符，再次跑 <code>while</code> 循环的时候时间会爆，即不满足单次复杂度严格低于 $O(n)$。</p>
+<p>后面这份代码不可以求最小循环节，但是增减字符后，再跑 <code>while</code> 循环的时候时间就爆不了（至少目前卡不掉）。</p>
+<p>但是这并不是文章的重点。</p>
+<h1 id="广义-KMP"><a href="#广义-KMP" class="headerlink" title="广义 KMP"></a>广义 KMP</h1><p>众所周知，KMP 是跑子串匹配的算法。</p>
+<p>普通的 (K)MP 算法，是指找到 $S$ 的一个前缀等于后缀的字符串的最大长度，这个字符串的长度必须小于 $S$ 的长度。</p>
+<p>我们则可以尝试找到字符串的一些性质：</p>
+<ul>
+<li>字符串的等于判断具有传递性，即如果 $a&#x3D;b,b&#x3D;c$ 那么 $a&#x3D;c$。</li>
+<li>如果 $a&#x3D;b$ 那么对于任意 $a_{l \sim r} &#x3D; b_{l \sim r}$ 。</li>
+<li>字符串的每个元素一定只有 $26$ 种。</li>
+</ul>
+<p>我们需要发挥想象力，不妨把字母换成数字，再重新定义任意两个序列相同的条件，满足上面两条性质，我们就可以根据 (K)MP 来找 $b$ 这个序列在 $a$ 中出现的次数以及位置，特别的，如果不要求最长的前后缀长度，我们甚至可以运用 KMP 算法来支持末尾添加数字删除数字的操作。</p>
+<h2 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h2><p>比如这道题：</p>
+<blockquote>
+<p>序列 $a$ 和序列 $b$ 相同，当且仅当对于所有 $a_i &#x3D; a_j$，$b_i &#x3D; b_j$；否则 $b_i \ne b_j$（$j&lt;i$），求 $b$ 在 $a$ 中出现了多少次。</p>
+</blockquote>
+<p>我们可以发现这个规定满足上面两条性质，那么可以修改一下 KMP 的代码，使得时间复杂度在 $O(n \log n)$ 以内。</p>
+<p>比较好的做法是对于每个 $a_i$ 找出前面第一个与它相同的数字，记录一下他们之间的距离为 $a’_i$，$b$ 数组同理，如果 $a’&#x3D;b’$ 那么 $a&#x3D;b$。（如果找不到，那么距离为 $-1$ 即可，只需要不与可能出现的距离相同就可以）</p>
+<p>于是我们直接判断即可，在 (K)MP 的算法执行过程当中：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,k=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	<span class="keyword">while</span>(k&amp;&amp;s[i]!=s[k+<span class="number">1</span>]) k=ne[k];</span><br><span class="line">	<span class="keyword">if</span>(s[i]==s[k+<span class="number">1</span>]) k++;</span><br><span class="line">	ne[i]=k;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>如果 $s_i&#x3D;s_{k+1}$ ，那么有一个隐含的条件就是 $s_{1 \sim k}&#x3D;s_{i-k \sim i-1}$。</p>
+<p>相当于我们在跑 (K)MP 的时候，只需要判断新加进去的数与之前加进去的数的关系就可以了。</p>
+<p>对于这道题来说，如果 $a_{1 \sim k}&#x3D;a_{i-k \sim i-1}$，那么我们需要判断 $a_{k+1}$ 加到前面一个子串末尾和 $a_i$ 加到后面的子串末尾相不相同就可以了。</p>
+<p>把他们分别距离之前在这个串里面与他们的值相等的数找出来，计算距离就可以了。</p>
+<p>那么模式串和文本串匹配也是这样的一个道理。</p>
+<p>所以算法的时间复杂度为 $O(n \times \text{check 的时间复杂度})$，在这里总时间复杂度为 $O(n)$，因为不需要更多的信息，同时可以扩展到在末尾添加删除的操作。</p>
+<h1 id="广义-KMP-及其扩展"><a href="#广义-KMP-及其扩展" class="headerlink" title="广义 KMP 及其扩展"></a>广义 KMP 及其扩展</h1><p>我们发现，运用了广义 KMP，那么就可以解决一些比较难以解决的问题。</p>
+<p>类似于上面两个例子，如果没有这个广义 KMP 几乎上无法做出来，甚至可以加上求最长的前缀等于后缀的问题，然而我们还有更多的东西可以扩展：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://oi.wiki/string/ac-automaton/">AC 自动机</a>，<a target="_blank" rel="noopener" href="https://oi.wiki/string/z-func/">Z 函数</a> 等与 KMP 有关的算法。</p>
+</blockquote>
+<p>对于 Z 函数的构建，我们依然可以采用这种方法；但是 AC 自动机仅接受 $26$ 的字符，还不如直接用暴力。</p>
+<p>因此，最直接的地方是用在 Z 函数上。</p>
+<p>Z 函数的运用和 KMP 的运用差不多，此处就不再赘述了，大概也是运用到了字符串的一些性质。</p>
+<h2 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h2><blockquote>
+<p>承袭例 1 中 $a&#x3D;b$ 的条件，对于给定的序列 $c$ 的每个 $1 \le i \le n$，找到最大的一个 $k$，使得 $i+k-1 \le n$ 且 $c_{1 \sim k}&#x3D;c_{i \sim i+k-1}$。</p>
+</blockquote>
+<p>很显然，把 Z 函数构建过程中移动左右端点的判断条件改成之前的条件就可以了。</p>
+<p>时间复杂度依然为这个算法时间复杂度乘上 $\text{check}$ 的时间复杂度。</p>
+<p>最后输出 Z 函数的值即可。</p>
+<h1 id="其它字符串相关扩展"><a href="#其它字符串相关扩展" class="headerlink" title="其它字符串相关扩展"></a>其它字符串相关扩展</h1><p>这里则主要介绍另外一种字符串相关的算法 manacher。</p>
+<p>manacher 也是用于求解回文串的问题，我们依然可以把这个方法加到 manacher 的移动左右端点上面。</p>
+<h2 id="例-3"><a href="#例-3" class="headerlink" title="例 3"></a>例 3</h2><blockquote>
+<p>承袭例 1 中 $a&#x3D;b$ 的条件，对于给定的序列 $c$ 的每个 $1 \le i \le n$，找到最大的一个 $k$，使得 $i+k-1 \le n,i \ge k$ 且 $c_{i-k+1 \sim i}&#x3D;c_{i+k-1 \sim i}$。（后一个字符串是倒过来的）</p>
+</blockquote>
+<p>这就是一个模板的 manacher 题目，那么我们依然加上 $\text{check}$ 函数就可以了。</p>
+<p>时间复杂度依然为这个算法时间复杂度乘上 $\text{check}$ 的时间复杂度。</p>
+<p>甚至可以在现有 manacher 题目上做出进一步修改，此处的例题仅为注重展示此算法，而不是为了难住读者。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们此处就是把一个字符串改变成了一个序列，并且重载了字符串的 $&#x3D;$ 运算符，使得序列满足了上述算法的一些性质来解决较为困难的问题。</p>
+<p>然后与上述算法相关的自动机们和所有靠移动指针判断是否相等（一次常数以内）的算法，都可以适用到这个方法。（AC 自动机则在条件允许的情况下可以用这个方法，回文自动机同理）</p>
+<p>但是我们的后缀相关数据结构就不能使用这种方法，因为它们主要解决的是字典序排名的问题，与字符串匹配没有太大关系，因此不行。</p>
+<p>对于这篇文章，旨在对 KMP 的一些相关习题进行总结，比如很多题目都可用这个方法解决，而我们也可以用这种方法出一些质量较高的题目。</p>
+<blockquote>
+<p>比如：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8085">[COCI2011-2012#4] KRIPTOGRAM</a>。</p>
+</blockquote>
+<p>即使很多题目都可以用奇奇怪怪的 hash AC，但是这种方法也不失于一种正确性稳定的算法。</p>
+<p>综上，这是我在学习 KMP 时候的一些想法，如有不足请大家多多指出，笔者也好修改这篇文章，以免误导更多的读者。</p>
+<p>—The End—</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

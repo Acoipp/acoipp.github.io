@@ -244,8 +244,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>THUSC2023游记</title>
-    <url>/2024/01/06/%E6%8F%92%E5%85%A5%E7%B1%BB%E5%9E%8B-DP-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <title>插入类型 dp</title>
+    <url>/2024/01/07/%E6%8F%92%E5%85%A5%E7%B1%BB%E5%9E%8B-DP-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="插入类型-DP"><a href="#插入类型-DP" class="headerlink" title="插入类型 DP"></a><strong>插入类型 DP</strong></h1><h2 id="形式"><a href="#形式" class="headerlink" title="形式"></a><strong>形式</strong></h2><ul>
 <li><p>多为 $n$ 个元素无法重复使用，需要给定一个排列，满足一定条件或是求有多少个排列满足一定条件。</p>
 </li>

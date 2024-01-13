@@ -2080,7 +2080,7 @@
 <h1 id="狄利克雷卷积"><a href="#狄利克雷卷积" class="headerlink" title="狄利克雷卷积"></a>狄利克雷卷积</h1><p>卷积是定义与两个数论函数之间的操作：</p>
 <p>$$<br>h &#x3D; f*g<br>$$</p>
 <p>其中 $h(n) &#x3D; \sum_{d \mid n}f(d)g(\frac nd)$。</p>
-<p>狄利克雷卷积显然满足交换律 $f<em>g&#x3D;g</em>f$，结合律 $(f<em>g)<em>h&#x3D;f</em>(g</em>h)$，对加法的分配律 $(f+g)<em>h&#x3D;f</em>h+g*h$。</p>
+<p>狄利克雷卷积显然满足交换律 $f*g&#x3D;g*f$，结合律 $(f*g)*h&#x3D;f*(g*h)$，对加法的分配律 $(f+g)*h&#x3D;f*h+g*h$。</p>
 <p>如果是三个函数一起做卷积，那么可以写成：</p>
 <p>$$<br>ff(n)&#x3D;\sum_{d_1d_2d_3&#x3D;n}f(d_1)g(d_2)h(d_3)<br>$$</p>
 <h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>暴力算两个函数的卷积可以直接枚举倍数 $O(n \log n)$ 计算。</p>

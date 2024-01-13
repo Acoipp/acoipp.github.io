@@ -1529,13 +1529,13 @@
 <p>$$\det(M)&#x3D;\sum\limits_{S:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n w(S_i)$$<br>其中 $\sum\limits_{S:A\rightarrow B}$ 表示满足上文要求的 $A\rightarrow B$ 的每一组不相交路径 $S$。</p>
 <p>意思是什么呢？就是上面这个矩阵的行列式的值，等于所有可能的 $w(S)$ 的带符号和，如果 $w$ 恒为 $1$，那么就是所有合法的 $S$ 集合的带符号和。</p>
 <h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><p>首先，由定义得：</p>
-<p>$$<br>\begin{aligned}<br>\det(M)&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n w(S_i) \<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\det(M)&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n w(S_i) \\<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \\<br>\end{aligned}<br>$$</p>
 <p>我们可以发现通过乘法分配律展开之后，因为 $w(P)$ 中的 $P$ 可以是多条路径组合，所以就是 $\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P)&#x3D;\sum_{P:p}w(P)$，表示所有起点集合和终点集合与 $p$ 相同的 $P$ 的和，$P$ 是任意路径组，不要求不相交。</p>
 <p>所以：</p>
-<p>$$<br>\begin{aligned}<br>\det(M)<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\sum_{P:p}w(P) \<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\det(M)<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\prod\limits_{i&#x3D;1}^n \sum_{P:a_i \to b_{p_i}}w(P) \\<br>&amp;&#x3D;\sum\limits_{p:A\rightarrow B}(-1)^{\pi(p)}\sum_{P:p}w(P) \\<br>&amp;&#x3D;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\\<br>\end{aligned}<br>$$</p>
 <p>到此时 $P$ 也是任意路径组合。</p>
 <p>我们设 $U$ 是要求的集合，而 $V$ 是有相交的路径集合，那么有：</p>
-<p>$$<br>\begin{aligned}<br>&amp;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\<br>&#x3D;&amp;\sum\limits_{U:A\rightarrow B}(-1)^{\pi(u)}\prod_{i&#x3D;1}^n w(U_i)+\sum\limits_{V:A\rightarrow B}(-1)^{\pi(v)}\prod_{i&#x3D;1}^n w(V_i)\\<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp;\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)\\<br>&#x3D;&amp;\sum\limits_{U:A\rightarrow B}(-1)^{\pi(u)}\prod_{i&#x3D;1}^n w(U_i)+\sum\limits_{V:A\rightarrow B}(-1)^{\pi(v)}\prod_{i&#x3D;1}^n w(V_i)\\<br>\end{aligned}<br>$$</p>
 <p>我们又可以发现：若 $P$ 存在两条相交的路径 $a_i \to u \to a_j,b_i \to u \to b_j$，那么一定有 $a_i \to u \to b_j,b_i \to u \to a_j$，这两个项符号相反，绝对值相同。（按照之前行列式交换两行的方式证明即可）</p>
 <p>所以 $\sum\limits_{V:A\rightarrow B}(-1)^{\pi(v)}\prod_{i&#x3D;1}^n w(V_i)&#x3D;0$，那么 $\sum\limits_{P:A\rightarrow B}(-1)^{\pi(p)}\prod_{i&#x3D;1}^n w(P_i)<br>&#x3D;\sum\limits_{U:A\rightarrow B}(-1)^{\pi(u)}\prod_{i&#x3D;1}^n w(U_i)$，由此，结论得证。</p>
 <h4 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h4><p>如果是一张普通的有向无环图，是不可以直接运用 LGV 引理的，因为带符号会让问题变得不好处理。</p>

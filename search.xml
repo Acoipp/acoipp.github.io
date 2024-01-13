@@ -1965,7 +1965,7 @@
 <li>最大公因数：$\gcd(f_a,f_b)&#x3D;\gcd(a,b)$。</li>
 <li>以斐波那契数列相邻两项作为输入会使欧几里德算法达到最坏复杂度。</li>
 </ol>
-<h2 id="求出第-i-个值"><a href="#求出第-i-个值" class="headerlink" title="求出第 $i$ 个值"></a>求出第 $i$ 个值</h2><p>我们可以用矩阵乘法，即：<br>$$\begin{bmatrix}f_i &amp; f_{i+1}\end{bmatrix} \times \begin{bmatrix}0 &amp; 1 \ 1 &amp; 1\end{bmatrix}&#x3D;\begin{bmatrix}f_{i+1} &amp; f_{i+2}\end{bmatrix}$$</p>
+<h2 id="求出第-i-个值"><a href="#求出第-i-个值" class="headerlink" title="求出第 $i$ 个值"></a>求出第 $i$ 个值</h2><p>我们可以用矩阵乘法，即：<br>$$\begin{bmatrix}f_i &amp; f_{i+1}\end{bmatrix} \times \begin{bmatrix}0 &amp; 1 \\ 1 &amp; 1\end{bmatrix}&#x3D;\begin{bmatrix}f_{i+1} &amp; f_{i+2}\end{bmatrix}$$</p>
 <p>时间复杂度可以看做是 $O(\log n)$。</p>
 <p>特别的如果 $5$ 在 $\bmod$ 下有二次剩余的话，我们可以直接通过通项公式解决，时间复杂度是小常数的 $O(\log n)$。</p>
 <h2 id="求出值为-x-的最前下标"><a href="#求出值为-x-的最前下标" class="headerlink" title="求出值为 $x$ 的最前下标"></a>求出值为 $x$ 的最前下标</h2><p>即求出最小的 $i$ 使得 $f_i&#x3D;x$。</p>
@@ -1980,7 +1980,7 @@
 <h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>设 $A&#x3D;\dfrac{(1+\sqrt{5})^n}{2^n},B&#x3D;\dfrac{(1-\sqrt{5})^n}{2^n}$，如果 $\sqrt{5} \in Z_p$，那么 $A \in Z_p,B \in Z_p$，根据费马小定理，那么 $A^p \equiv A,B^p \equiv B$，立即得 $d(p) \mid p-1$。</p>
 <p>如果 $\sqrt{5} \not\in Z_p$，那么 $A,B \in Z_p[\sqrt{5}]$，此处涉及到“扩域”的知识，大概就是设 $z&#x3D;ax+by$ 其中 $y&#x3D;\sqrt{5}$，$z \in Z_p[\sqrt{5}]$，我们可以对于它定义加法乘法运算，并且满足交换律，结合律，分配律，故我们可以在这个域里面执行四则运算。</p>
 <p>但是 $AB$ 仍然等于 $-1$，所以：</p>
-<p>$$<br>\begin{aligned}<br>A^p &amp;&#x3D; (-BA)A^p\<br>&amp;&#x3D;-A^{p+1}B\<br>&amp;&#x3D;-B((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)\<br>&amp;&#x3D;B<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>A^p &amp;&#x3D; (-BA)A^p\\<br>&amp;&#x3D;-A^{p+1}B\\<br>&amp;&#x3D;-B((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)\\<br>&amp;&#x3D;B<br>\end{aligned}<br>$$</p>
 <p>解释一下为什么 $A^{p+1}&#x3D;((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)$，首先我们知道 $A^{p-1}$ 因为 $5$ 在模 $p$ 意义下没有二次剩余，所以 $A^{p-1}$ 也没有可以表示出来的数，但是因为 $p$ 是奇素数，所以 $p-1$ 是偶数，那么 $\sqrt{5}^{p-1}&#x3D;5^{\frac{p-1}{2}}$ 是可以表示出来的，它的平方就是 $5^{p-1}$，根据费马小定理可得 $5^{p-1} \equiv 1$，所以 $5^{\frac{p-1}{2}}&#x3D;1$ 或者 $-1$，如果它等于 $1$，那么 $\sqrt{5}$ 就可以表示出来，所以它等于 $-1$。（需要二项式展开，此处略过）</p>
 <h3 id="欧拉准则"><a href="#欧拉准则" class="headerlink" title="欧拉准则"></a>欧拉准则</h3><p>这里就可以推出来，如果 $p$ 是奇质数，那么当 $m^{\frac{p-1}{2}} \equiv 1$ 时，$m$ 有二次剩余，当它等于 $-1$ 时，$m$ 没有二次剩余。</p>
 <p>所以 $A^{p-1}&#x3D; -1$，所以 $A^{p+1} &#x3D; -A^2&#x3D;AB&#x3D;((\dfrac12)^2-(\dfrac{\sqrt{5}}{2})^2)&#x3D;-1$。</p>

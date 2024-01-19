@@ -2691,7 +2691,7 @@
 <p>综上所述，旋转 Treap 的功能大概就这样，接下来我们介绍一种更强大的平衡树：fhq-treap，它可以维护更多区间的信息，并且更好写。</p>
 <h2 id="非旋-Treap"><a href="#非旋-Treap" class="headerlink" title="非旋 Treap"></a>非旋 Treap</h2><p>非旋 Treap 的操作只有三个，但是我们可以通过这两个操作实现很多其他的技巧。</p>
 <h3 id="分裂-split"><a href="#分裂-split" class="headerlink" title="分裂-split"></a>分裂-split</h3><p>这是非旋 Treap 的核心操作，可以看一下下面那幅图，依然来自于 <a href="https://oi.wiki/">OI-wiki</a>：</p>
-<p><img src="/imp/5.png"></p>
+<p><img src="/img/5.png"></p>
 <p>这是按照权值分裂成左右两棵树，当然我们也可以按照树的大小来分裂，后者更为常用，我们可以控制前 $k$ 个元素分裂出来，并且分裂的时间复杂度也是 $O(\log)$ 的。</p>
 <p>代码很简单，分类讨论一下根节点是要分裂到左边子树还是右边子树即可：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">split</span><span class="params">(ll x,ll k,ll &amp;p1,ll &amp;p2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!x)&#123;p1=p2=<span class="number">0</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(k&lt;=tr[tr[x].l].siz) <span class="built_in">split</span>(tr[x].l,k,p1,tr[x].l),<span class="built_in">upd</span>(x),p2=x;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">split</span>(tr[x].r,k-tr[tr[x].l].siz<span class="number">-1</span>,tr[x].r,p2),<span class="built_in">upd</span>(x),p1=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

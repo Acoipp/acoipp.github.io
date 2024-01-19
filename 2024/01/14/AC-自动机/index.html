@@ -74,7 +74,7 @@
             <h1 id="AC-自动机"><a href="#AC-自动机" class="headerlink" title="AC 自动机"></a>AC 自动机</h1><h2 id="自动机"><a href="#自动机" class="headerlink" title="自动机"></a>自动机</h2><p>自动机的概念：自动机是一个有向图，它接收字符（信号）序列，并对其进行处理（识别和判定），以确定其能到达的最终状态和路径。图中的点对应字符，存在一个起始状态点，多个结束状态点。如果图中任意一个点，连出去的对应某字符 ch 的边最多只有一条，则称该自动机是确定性的（DFA）。如果图中任意一个点，连出去的对应某字符 ch 的边可能有多条，甚至存在不对应任何字符的边，则称该自动机是非确定的（NFA）。</p>
 <h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>首先像 trie 树一样插入字符串，树上的每个节点代表的是根节点到这个节点经过的边上的字符所构成的字符串。</p>
 <p>这些边称为“树边”，每个节点还有 <code>fail</code> 指针，这个指针指向了一个节点，这个节点代表的字符串是当前节点代表字符串的后缀，也是<strong>最长后缀</strong>。</p>
-<p>这里引用一下 <a href="oi.wiki">OI-wiki</a> 的 AC 自动机部分的图：</p>
+<p>这里引用一下 <a target="_blank" rel="noopener" href="https://oi.wiki/">OI-wiki</a> 的 AC 自动机部分的图：</p>
 <p><img src="https://cdn.luogu.com.cn/upload/image_hosting/tcwblh5x.png"></p>
 <p>其中灰色的边就是字典树上的边，黄色的边就是 <code>fail</code> 指针，我们观察发现 $8$ 号节点代表的字符串是 $\texttt{sh}$，它的 <code>fail</code> 指针就是 $1$ 号节点，因为 $1$ 号节点代表的字符串是 $\texttt{h}$，是它的最长后缀。</p>
 <p>但是 $3$ 号节点的 <code>fail</code> 指向根节点，代表没有任何一个字典树上的节点代表的字符串是它代表字符串的后缀。</p>

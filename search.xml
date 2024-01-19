@@ -2649,4 +2649,22 @@
         <tag>AC 自动机</tag>
       </tags>
   </entry>
+  <entry>
+    <title>平衡树</title>
+    <url>/2024/01/19/%E5%B9%B3%E8%A1%A1%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
+<p>例如下面这棵树：</p>
+<p><img src="/img/1.png"></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>数据结构</tag>
+        <tag>平衡树</tag>
+        <tag>Treap</tag>
+        <tag>可持久化</tag>
+      </tags>
+  </entry>
 </search>

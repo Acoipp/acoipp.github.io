@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>标签: OI - Acoipp 的个人博客</title>
+    <title>平衡树 - Acoipp 的个人博客</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="OI/ACM 相关笔记,"> 
+    <meta name="description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下面这棵树：
+
+"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -20,16 +23,22 @@
     
     
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:title" content="标签: OI - Acoipp 的个人博客"/>
-    <meta name="twitter:description" content="OI/ACM 相关笔记,"/>
+    <meta name="twitter:title" content="平衡树 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下面这棵树：
+
+"/>
     
     
     
     
     <meta property="og:site_name" content="Acoipp 的个人博客"/>
     <meta property="og:type" content="object"/>
-    <meta property="og:title" content="标签: OI - Acoipp 的个人博客"/>
-    <meta property="og:description" content="OI/ACM 相关笔记,"/>
+    <meta property="og:title" content="平衡树 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下面这棵树：
+
+"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -42,130 +51,66 @@
 <body class="loading">
     <span id="config-title" style="display:none">Acoipp 的个人博客</span>
     <div id="loader"></div>
-    <div class="nav">
-    <ul id="menu-menu" class="menu">
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
-        </li>
-        
-        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
-            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
-        </li>
-        
-    </ul>
-	<span class="target"></span>
-	<center>
-	<div class="hitokoto">
-		<span class="typed" id="hitokoto" data-st="true"></span>
-	</div>
-	</center>
-	
-	<p class="footerlinks">
-		<a href="#" class="iconfont icon-null"></a>
-		
-            <a href="/" title="facebook" class="iconfont icon-facebook" target="_blank" rel="noopener"> </a>
-        
-            <a href="/" title="twitter" class="iconfont icon-twitter" target="_blank" rel="noopener"> </a>
-        
-            <a href="/" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
-        
-            <a href="/img/logo.png" title="wechat" class="iconfont icon-wechat" target="_blank" rel="noopener"> </a>
-        
-            <a href="mailto:873501154@qq.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
-        
-		<a href="#" class="iconfont icon-null"></a>
-	</p>
-	
-    <p id="copyright">
-        &copy; 2024 Acoipp.
-        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
-		
-    </p>
-</div>
-
-<div id="container">
-    
-<div id="screen">
-    <div id="mark">
-        <div class="layer" data-depth="0.4">
-            <img src="/img/welcome-cover.jpg" id="cover" crossorigin="anonymous" width="1920" height="1080">
-        </div>
-    </div>
-    <div id="vibrant">
-        <svg viewbox="0 0 2880 1620" height="100%" preserveaspectratio="xMaxYMax slice">
-            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
-        </svg>
-        <div></div>
-    </div>
-    <div id="header">
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">平衡树</h3>
+    <div class="social">
         <div>
-            <a class="image-logo" href="/"></a>
-			
-			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
-			
-            <div class="iconfont icon-menu switchmenu"></div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
         </div>
     </div>
-    
-    <div id="post0">
-        <p>一月 07, 2024</p>
-        <h2><a href="/2024/01/07/2023-NOIP-%E6%B8%B8%E8%AE%B0/" title="2023 NOIP 游记" class="posttitle">2023 NOIP 游记</a></h2>
-        <p class="summary">Day-0摆烂，吃多了水母，开始随机发电。
-虽然没有比赛，但是我知道我已经 AK 了 $\color{white}...</p>
-    </div>
-    
+    <div class="scrollbar"></div>
 </div>
 
-    <div id="primary">
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">平衡树</h1>
+        <div class="stuff">
+            <span>一月 19, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Treap/" rel="tag">Treap</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/" rel="tag">可持久化</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/" rel="tag">平衡树</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
+<p>例如下面这棵树：</p>
+<p><img src="/img/1.png"></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
         
-<div class="post">
-    <a href="/2024/01/07/2023-NOIP-%E6%B8%B8%E8%AE%B0/" title="2023 NOIP 游记">
-        <img src="/img/cover3.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>一月 07, 2024</p>
-        <h3><a href="/2024/01/07/2023-NOIP-%E6%B8%B8%E8%AE%B0/" title="2023 NOIP 游记" class="posttitle">2023 NOIP 游记</a></h3>
-        <p>Day-0摆烂，吃多了水母，开始随机发电。
-虽然没有比赛，但是我知道我已经 AK 了 $\color{white}{\text{cos 温迪}}$
-至于摆...</p>
-    </div>
-</div>
-
-
-<div class="post">
-    <a href="/2024/01/07/2023-CSP-J-S%EF%BC%88%E6%B8%B8%E8%AE%B0%EF%BC%89/" title="2023 CSP-J/S（游记）">
-        <img src="/img/cover2.jpg" class="cover" width="680" height="440">
-    </a>
-    <div class="else">
-        <p>一月 07, 2024</p>
-        <h3><a href="/2024/01/07/2023-CSP-J-S%EF%BC%88%E6%B8%B8%E8%AE%B0%EF%BC%89/" title="2023 CSP-J&#x2F;S（游记）" class="posttitle">2023 CSP-J&#x2F;S（游记）</a></h3>
-        <p>Day-0第二次进入 CSP-J&#x2F;S 的考场。
-我不是很好评价，有电梯不让我们坐电梯，还好楼层不高，不然的话真的要再次领略到 2022 年 cq...</p>
-    </div>
-</div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="false"
+        data-ci="4f0f514b5d4011d75af9"
+        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-r="acoipp.github.io"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="false"
+    >查看评论</div>
 
 
     </div>
     
 </div>
-<div id="preview"></div>
 
 
-
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>

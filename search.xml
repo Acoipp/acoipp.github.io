@@ -2663,6 +2663,15 @@
 <p>首先，我们定义左旋为把右儿子节点变到根节点；右旋为把左儿子节点变到根节点。如图所示（节点上的数字是编号，不是权值）：</p>
 <p><img src="/img/3.png"></p>
 <p>根据平衡树的定义，我们发现这样旋转完全不会影响中序遍历的结果。</p>
+<p>于是就有了旋转代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">zig</span><span class="params">(ll &amp;p)</span></span>&#123;</span><br><span class="line">	ll q = tr[p].l;</span><br><span class="line">	tr[p].l = tr[q].r,tr[q].r = p;</span><br><span class="line">	p = q;</span><br><span class="line">	<span class="built_in">Update</span>(tr[p].r),<span class="built_in">Update</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">zag</span><span class="params">(ll &amp;p)</span></span>&#123;</span><br><span class="line">	ll q = tr[p].r;</span><br><span class="line">	tr[p].r = tr[q].l,tr[q].l = p;</span><br><span class="line">	p = q;</span><br><span class="line">	<span class="built_in">Update</span>(tr[p].l),<span class="built_in">Update</span>(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>zig</code> 是左旋，<code>zag</code> 是右旋。</p>
+<p>那什么时候旋转呢？考虑我们学习过的笛卡尔树，它每个节点有两个值，其中一个的中序遍历单调，另外一个则满足堆性质，如果我们给 Treap 上的每个节点给一个堆的键值，如果随机赋值，那么期望高度就是 $O(\log)$ 级别的，这也是 Treap（Tree+heap）名字的由来。</p>
+<p>考虑用小根堆的维护，如果父亲节点的堆的键值大于当前节点堆的键值，就往上旋转。（左旋或者右旋视当前节点是父亲的左&#x2F;右儿子而定）</p>
+<p>最后的结果就是这样的：</p>
+<p><img src="/img/4.png"></p>
+<p>（第一个值是中序遍历到的值，第二个值是堆的键值）</p>
 ]]></content>
       <categories>
         <category>笔记</category>

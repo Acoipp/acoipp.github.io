@@ -120,8 +120,8 @@
     <div id="gitalk-container" class="comment link"
 		data-enable="true"
         data-ae="false"
-        data-ci="4f0f514b5d4011d75af9"
-        data-cs="3afb0647640d2109ab25e8d84a70811268ab5d0f"
+        data-ci="c141c1d70dbc1d65a4ac"
+        data-cs="152808da1f1caf642f66190c5546b0565eb10be5"
         data-r="acoipp.github.io"
         data-o="Acoipp"
         data-a="Acoipp"
@@ -136,6 +136,10 @@
 
     </div>
 </div>
+
+{% if theme.git_talk.enabled and not is_index %}  
+<div>{% include 'git-talk.swig' %}</div>  
+{% endif %}
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>

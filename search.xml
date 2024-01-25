@@ -2748,4 +2748,75 @@
         <tag>年总结</tag>
       </tags>
   </entry>
+  <entry>
+    <title>二次同余式与平方剩余</title>
+    <url>/2024/01/25/%E4%BA%8C%E6%AC%A1%E5%90%8C%E4%BD%99%E5%BC%8F%E4%B8%8E%E5%B9%B3%E6%96%B9%E5%89%A9%E4%BD%99/</url>
+    <content><![CDATA[<h1 id="二次同余式与平方剩余"><a href="#二次同余式与平方剩余" class="headerlink" title="二次同余式与平方剩余"></a>二次同余式与平方剩余</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一般二次同余式是形如 $ax^2+bx+c \equiv 0 \pmod m$ 的方程，需要在 $\log$ 时间内求出方程的解。</p>
+<p>接下来我们分类讨论一下这个方程的解法。</p>
+<p>首先由中国剩余定理得对于 $m&#x3D;p_1^{c_1}p_2^{c_2}\dots p_k^{c_k}$，如果 $ax^2+bx+c \equiv 0 \pmod {p^k}$ 都有解，那就可以合并出来一组合法的 $x$。</p>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>首先我们只需要解决 $ax^2+bx+c \equiv 0 \pmod {p^k}$ 的问题，如果 $p^{\alpha} \le p_k$ 并且 $p^{\alpha} \mid \gcd(a,b,c)$ 那么我们可以得到另外一个方程 $\frac a {p^{\alpha}}x^2+\frac b {p^{\alpha}}x+c \equiv 0 \pmod {p^{k-\alpha}}$，这两个方程完全等价，故问题缩小到了 $p \not\mid \gcd(a,b,c)$ 的问题。</p>
+<p>如果 $p \mid a$ 且 $p \mid b$，那么 $p \not\mid c$，所以方程无解。</p>
+<p>如果 $p \mid a$ 并且 $p \not\mid b$，那么 $f’(x)&#x3D;2ax+b \equiv 0 \pmod p$ 无解，根据同余式的一些性质，它有解的充分必要条件是 $ax^2+bx+c \equiv 0 \pmod p$ 有解，因为 $\gcd(b,p)&#x3D;1$，所以此方程一定有解。</p>
+<p>还有 $p \not\mid a$ 和 $p&#x3D;2$ 的时候的情况，这些情况最终可以归约成 $x^2 \equiv a \pmod {p^k}$ 的情况，具体推导就不展开了，留作以后补充或者复习。</p>
+<h2 id="再优化"><a href="#再优化" class="headerlink" title="再优化"></a>再优化</h2><p>因为问题缩小到了 $x^2 \equiv a \pmod {p^k}$，如果 $p^k$ 很大，那么我们可以使用 BSGS 求解。</p>
+<p>下面我们假设 $k&#x3D;1$，并且介绍一种 $\log$ 的解法，下面的 $p$ 都是任意奇质数。</p>
+<h3 id="Euler-判别法"><a href="#Euler-判别法" class="headerlink" title="Euler 判别法"></a>Euler 判别法</h3><p>如果 $a^{\frac {p-1}2} \equiv 1 \pmod p$，那么 $a$ 在模 $p$ 意义下有二次剩余，否则没有。</p>
+<p>先有一个引理：</p>
+<blockquote>
+<p>如果 $n \le p$，那么方程 $x^n+\sum_{i&#x3D;0}^{n-1} a_ix^i \equiv 0 \pmod p$ 有 $n$ 个解当且仅当存在整系数多项式 $q(x),r(x)(\deg r&lt;n)$ 使得 $x^p-x&#x3D;f(x)q(x)+pr(x)$。</p>
+<p>这个引理的证明参见 <a href="https://oi.wiki/math/number-theory/congruence-equation/#%E5%AE%9A%E7%90%86-5">OI-wiki</a>。</p>
+</blockquote>
+<p>证明如下：</p>
+<blockquote>
+<p>如果 $\gcd(a,p) \not&#x3D; 1$，那么显然不可能满足上式，也不可能有二次剩余。（$a&#x3D;0$）</p>
+<p>否则 $\gcd(a,p)&#x3D;1$，那么由费马小定理得 $a^{p-1} \equiv 1 \pmod p$，那么 $(a^{\frac {p-1}2}-1)(a^{\frac {p-1}2}+1) \equiv 0 \pmod p$。</p>
+<p>所以因为 $x^2 \equiv a \pmod p$，所以 $x^{p-1}-a^{\frac {p-1}2}&#x3D;(x^2)^{\frac {p-1}{2}}-a^{\frac {p-1}2}&#x3D;(x^2-a)P(x)$，其中 $P(x)$ 是某整系数多项式，就有：</p>
+<ul>
+<li>$x^p-x&#x3D;x(x^{p-1}-a^{\frac {p-1}{2}})+x(a^{\frac {p-1}2}-1)&#x3D;(x^2-a)xP(x)+(a^{\frac {p-1}2}-1)x$。</li>
+</ul>
+<p>由引理得 $a$ 是模 $p$ 的二次剩余当且仅当 $a^{\frac {p-1}2} \equiv 1 \pmod p$，所以 $a$ 是模 $p$ 的非二次剩余当且仅当 $a^{\frac {p-1}{2}} \not \equiv 1 \pmod p$。</p>
+</blockquote>
+<h3 id="相关定理"><a href="#相关定理" class="headerlink" title="相关定理"></a>相关定理</h3><p>设 $n \not \mid p-1,p \not\mid a$，那么方程 $x^n \equiv a \pmod p$ 有解当且仅当 $a^{\frac {p-1}n} \equiv 1 \pmod p$，且解数为 $n$。</p>
+<p>证明如下（很像上面的证明）：</p>
+<blockquote>
+<p>充分性：</p>
+<p>因为 $x^n \equiv a \pmod p$，所以 $x^{p-1}-a^{\frac {p-1}n}&#x3D;(x^n)^{\frac {p-1}{n}}-a^{\frac {p-1}n}&#x3D;(x^n-a)P(x)$，其中 $P(x)$ 是某整系数多项式，就有：</p>
+<ul>
+<li>$x^p-x&#x3D;x(x^{p-1}-a^{\frac {p-1}{n}})+x(a^{\frac {p-1}n}-1)&#x3D;(x^n-a)xP(x)+(a^{\frac {p-1}n}-1)x$。</li>
+</ul>
+<p>由引理得 $a$ 是模 $p$ 的 $n$ 次剩余当且仅当 $a^{\frac {p-1}n} \equiv 1 \pmod p$，所以 $a$ 是模 $p$ 的非 $n$ 次剩余当且仅当 $a^{\frac {p-1}{n}} \not \equiv 1 \pmod p$，并且有 $n$ 个解。</p>
+<p>必要性：</p>
+<p>如果 $x_0$ 是一解，那么 $(x_0^n)^{\frac {p-1}{n}} \equiv 1$，那么 $a^{\frac {p-1}n} \equiv 1$。</p>
+</blockquote>
+<h3 id="二次剩余的数量"><a href="#二次剩余的数量" class="headerlink" title="二次剩余的数量"></a>二次剩余的数量</h3><p>根据欧拉判别法，我们需要计算 $a^{\frac {p-1}2} \equiv 1 \pmod p$ 的 $a$ 有多少个，由上面的相关定理，所以 $a$ 有 $\frac {p-1}{2}$ 个，并且这几个的恰好与 $1^2,2^2,\dots,({\frac {p-1}{2}})^2$ 中的一个同余，并且形成一个排列的关系。（两两不重复）</p>
+<p>证明如下：</p>
+<blockquote>
+<p>如果 $1 \le k &lt; l \le \frac {p-1}2$，那么说明 $x^2 \equiv k^2$ 有四个解 $x&#x3D;+k,-k+l,-l \pmod p$，与前面的只有两个解相违背，所以此条件成立。</p>
+</blockquote>
+<h3 id="Cipolla-算法"><a href="#Cipolla-算法" class="headerlink" title="Cipolla 算法"></a>Cipolla 算法</h3><p>为了解决 $x^2 \equiv a \pmod p$ 的问题，我们首先随机一个数 $r$ 满足 $r^2-a$ 为二次非剩余，因为二次剩余和非二次剩余的数量差不多，所以这个 $r$ 可以很快找到。</p>
+<p>然后因为不存在 $i$ 使得 $i^2 \equiv r^2-a$，那么就像 $\sqrt{-1}$ 一样扩域，即在模 $p$ 的简化剩余系加一个元素 $i$，新的域中的每个数都可以写成 $a+bi$ 的形式。</p>
+<p>同理我们可以定义加法 $A+B&#x3D;(A_a+B_a)+(A_b+B_b)i$，乘法 $AB&#x3D;(A_aB_a+A_bB_bi^2)+(A_aB_b+A_bB_a)i$，同时还有逆元。</p>
+<p>引理 $1$：$i^p&#x3D;-i$，证明：$i^p&#x3D;i(i^2)^{\frac {p-1}2}&#x3D;i(r^2-a)^{\frac {p-1}2}&#x3D;-i$。</p>
+<p>引理 $2$：$(A+B)^p \equiv A^p+B^p$，考虑使用二项式展开，因为 $p$ 是质数，所以二项式展开之后 $C_p^i$ 中只有 $i&#x3D;0,p$ 的项不包含 $p$ 因子，所以证明显然。</p>
+<p>那么 $(a+i)^{p+1} \equiv n$，证明如下：</p>
+<blockquote>
+<p>$(a+i)^{p+1} \equiv (a^p+i^p)(a+i) \equiv (a-i)(a+i) \equiv a^2-(a^2-n) \equiv n$。</p>
+</blockquote>
+<p>于是 $(a+i)^{\frac {p+1}{2}}$ 就是一个解，另外一个解就是这个解的相反数，如果这个数的虚部不为 $0$，那么我们就可以拿这个当做答案了。</p>
+<p>感性理解一下这个数的虚部确实不为 $0$，当然你也可以用反证法证明一下。</p>
+<p>于是代码就很好写了，定义一个复数类即可：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,p,x,y,ans1,ans2;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">poly</span>&#123;ll a,b;&#125;res,t;</span><br><span class="line">poly <span class="keyword">operator</span>*(poly a,poly b)&#123;<span class="keyword">return</span> (poly)&#123;((a.a*b.a+a.b*b.b%p*((x*x-n)%p))+p)%p,(a.b*b.a+a.a*b.b)%p&#125;;&#125;</span><br><span class="line"><span class="function">ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(time(<span class="number">0</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">		n%=p;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">qmi</span>(n,(p<span class="number">-1</span>)/<span class="number">2</span>,p)==p<span class="number">-1</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;Hola!\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">			x=<span class="built_in">rnd</span>()%p;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">qmi</span>((((x*x-n)%p)+p)%p,(p<span class="number">-1</span>)/<span class="number">2</span>,p)==p<span class="number">-1</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res.a = <span class="number">1</span>,res.b = <span class="number">0</span>,t.a = x,t.b = <span class="number">1</span>;</span><br><span class="line">		y = (p+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span>(y)&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&amp;<span class="number">1</span>) res=res*t;</span><br><span class="line">			t=t*t;</span><br><span class="line">			y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ans1 = res.a,ans2 = (p-ans1)%p;</span><br><span class="line">		<span class="keyword">if</span>(ans1==ans2) cout&lt;&lt;ans1&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(ans1&gt;ans2) <span class="built_in">swap</span>(ans1,ans2);</span><br><span class="line">			cout&lt;&lt;ans1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans2&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>数学</tag>
+        <tag>数论</tag>
+        <tag>二次剩余</tag>
+        <tag>Cipolla</tag>
+      </tags>
+  </entry>
 </search>

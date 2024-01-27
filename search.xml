@@ -2819,4 +2819,24 @@
         <tag>Cipolla</tag>
       </tags>
   </entry>
+  <entry>
+    <title>类欧几里得算法</title>
+    <url>/2024/01/26/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="类欧几里得算法"><a href="#类欧几里得算法" class="headerlink" title="类欧几里得算法"></a>类欧几里得算法</h1><p>本题以 <a href="https://www.luogu.com.cn/problem/P5170">P5170 【模板】类欧几里得算法</a> 为例，深入讲解类欧几里得算法的本质。</p>
+<p>首先，设 $f(n,a,b,c)&#x3D;\sum_{i&#x3D;0}^n \lfloor \frac {ai+b}{c} \rfloor$，我们想在 $\log$ 时间范围内求出这个函数的值。</p>
+<p>首先考虑把 $a \ge c$ 或者 $b \ge c$ 的情况规约到 $a&lt;c$ 并且 $b&lt;c$ 的情况，容易发现，如果 $a&gt;c$，式子可以化成这样：<br>$$<br>\sum_{i&#x3D;0}^n \lfloor \frac {(a \bmod c)i+b}{c} \rfloor + \sum_{i&#x3D;0}^n \lfloor \frac ac \rfloor i<br>$$<br>后面的一堆可以用等差数列的求和公式计算，如果 $b&gt;c$，式子可以化成这样：<br>$$<br>\sum_{i&#x3D;0}^n \lfloor \frac {ai+b \bmod c}{c} \rfloor+\sum_{i&#x3D;0}^n \lfloor \frac bc \rfloor<br>$$<br>后面一堆可以直接计算，于是我们只需要考虑 $a&lt;c$ 并且 $b&lt;c$ 的情况。</p>
+<p>我们来推一下式子：<br>$$<br>\begin{aligned}<br>&amp; \ \ \ \ \ \sum_{i&#x3D;0}^n \lfloor \frac {ai+b}{c} \rfloor \<br>&amp;&#x3D;\sum_{j&#x3D;0}^{\lfloor \frac {an+b}{c} \rfloor} \sum_{i&#x3D;0}^n []<br>\end{aligned}<br>$$</p>
+<h1 id="万能欧几里得算法"><a href="#万能欧几里得算法" class="headerlink" title="万能欧几里得算法"></a>万能欧几里得算法</h1><p>待补。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>数学</tag>
+        <tag>欧几里得算法</tag>
+        <tag>类欧几里得算法</tag>
+        <tag>万能欧几里得算法</tag>
+      </tags>
+  </entry>
 </search>

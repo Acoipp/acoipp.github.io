@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Acoipp 的个人博客 - 只要不失去你的崇高，整个世界都会为你敞开</title>
+    <title>类欧几里得算法 - Acoipp 的个人博客</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="OI/ACM 相关笔记,"> 
+    <meta name="description" content="OI/ACM 相关笔记,类欧几里得算法本题以 P5170 【模板】类欧几里得算法 为例，深入讲解类欧几里得算法的本质。
+首先，设 $f(n,a,b,c)&amp;#x3D;\sum_{i&amp;#x3D;0}^n \lfloor \fr,"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -20,16 +21,18 @@
     
     
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:title" content="Acoipp 的个人博客 - 只要不失去你的崇高，整个世界都会为你敞开"/>
-    <meta name="twitter:description" content="OI/ACM 相关笔记,"/>
+    <meta name="twitter:title" content="类欧几里得算法 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,类欧几里得算法本题以 P5170 【模板】类欧几里得算法 为例，深入讲解类欧几里得算法的本质。
+首先，设 $f(n,a,b,c)&amp;#x3D;\sum_{i&amp;#x3D;0}^n \lfloor \fr,"/>
     
     
     
     
     <meta property="og:site_name" content="Acoipp 的个人博客"/>
     <meta property="og:type" content="object"/>
-    <meta property="og:title" content="Acoipp 的个人博客 - 只要不失去你的崇高，整个世界都会为你敞开"/>
-    <meta property="og:description" content="OI/ACM 相关笔记,"/>
+    <meta property="og:title" content="类欧几里得算法 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,类欧几里得算法本题以 P5170 【模板】类欧几里得算法 为例，深入讲解类欧几里得算法的本质。
+首先，设 $f(n,a,b,c)&amp;#x3D;\sum_{i&amp;#x3D;0}^n \lfloor \fr,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -42,27 +45,68 @@
 <body class="loading">
     <span id="config-title" style="display:none">Acoipp 的个人博客</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                
-                    <div class="set">
-  <h2>分类</h2>
-  <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%BB%E7%BB%93/">总结</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E8%AE%B0/">游记</a><span class="category-list-count">4</span></li></ul>
-</div>
-
-                
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">类欧几里得算法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">类欧几里得算法</h1>
+        <div class="stuff">
+            <span>一月 26, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E4%B8%87%E8%83%BD%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" rel="tag">万能欧几里得算法</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" rel="tag">欧几里得算法</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" rel="tag">类欧几里得算法</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="类欧几里得算法"><a href="#类欧几里得算法" class="headerlink" title="类欧几里得算法"></a>类欧几里得算法</h1><p>本题以 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5170">P5170 【模板】类欧几里得算法</a> 为例，深入讲解类欧几里得算法的本质。</p>
+<p>首先，设 $f(n,a,b,c)&#x3D;\sum_{i&#x3D;0}^n \lfloor \frac {ai+b}{c} \rfloor$，我们想在 $\log$ 时间范围内求出这个函数的值。</p>
+<p>首先考虑把 $a \ge c$ 或者 $b \ge c$ 的情况规约到 $a&lt;c$ 并且 $b&lt;c$ 的情况，容易发现，如果 $a&gt;c$，式子可以化成这样：<br>$$<br>\sum_{i&#x3D;0}^n \lfloor \frac {(a \bmod c)i+b}{c} \rfloor + \sum_{i&#x3D;0}^n \lfloor \frac ac \rfloor i<br>$$<br>后面的一堆可以用等差数列的求和公式计算，如果 $b&gt;c$，式子可以化成这样：<br>$$<br>\sum_{i&#x3D;0}^n \lfloor \frac {ai+b \bmod c}{c} \rfloor+\sum_{i&#x3D;0}^n \lfloor \frac bc \rfloor<br>$$<br>后面一堆可以直接计算，于是我们只需要考虑 $a&lt;c$ 并且 $b&lt;c$ 的情况。</p>
+<p>我们来推一下式子：<br>$$<br>\begin{aligned}<br>&amp; \ \ \ \ \ \sum_{i&#x3D;0}^n \lfloor \frac {ai+b}{c} \rfloor \<br>&amp;&#x3D;\sum_{j&#x3D;0}^{\lfloor \frac {an+b}{c} \rfloor} \sum_{i&#x3D;0}^n []<br>\end{aligned}<br>$$</p>
+<h1 id="万能欧几里得算法"><a href="#万能欧几里得算法" class="headerlink" title="万能欧几里得算法"></a>万能欧几里得算法</h1><p>待补。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="true"
+        data-ae="true"
+        data-ci="5716fc2235b32d5b5e82"
+        data-cs="907f96f6afbbcc0aca96b83eb204923010538f26"
+        data-r="acoipp.github.io-"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="true"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>

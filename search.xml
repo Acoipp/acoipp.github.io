@@ -2928,6 +2928,547 @@
 <p>后面就是发纸，我们拿过的因为视频还没有接受审核，还拿不到奖状，所以只有等教练的消息，而我们学校的也是一些人欢喜，一些人忧愁，但是还是祝贺一下 Xseventh 和 naoliaok_lovely。</p>
 <p>最后集合解散的时候看到一个人身上别了很多洛谷知名人物的徽章，十分羡慕，但是很无奈没有手机无法确认身份，这是今年最大的一个遗憾。</p>
 <p>总之，过去就过去了，下次得想办法让今年的遗憾不在下次比赛中继续产生，尽管如此，我仍然期待着 THUSC 或者 PKUSC 的赛场！</p>
+<p>以下是附录：</p>
+<h1 id="Day-1-题面"><a href="#Day-1-题面" class="headerlink" title="Day-1 题面"></a>Day-1 题面</h1><h2 id="t1-—-小-R-的项目"><a href="#t1-—-小-R-的项目" class="headerlink" title="t1 — 小 R 的项目"></a>t1 — 小 R 的项目</h2><p><strong>时间限制：</strong> 1.0 秒</p>
+<p><strong>空间限制：</strong> 1024 MiB</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>小 R 有一个项目，这个项目由 $n$ 项任务构成。由于时间紧迫，他需要请一些同学协助他完成。</p>
+<p>小 R 有 $m$ 位同学，请第 $i$ 位同学协助的费用为 $c_i$。不同的同学完成同一项任务的效果可能不同，具体来说，请第 $i$ 位同学完成第 $j$ 项任务的收益为 $a_{i,j}$。</p>
+<p>小 R 可以请若干名同学协助他完成这个项目。对于每项任务，小 R 会从他请来的同学中选出收益<strong>最高</strong>的一位来完成。具体来说，他的总收入将以如下方式计算：</p>
+<ul>
+<li>每项任务的收益为：所有他请的同学完成该项任务的收益的最大值；</li>
+<li>小 R 的总收入为：所有任务的收益之和，减去每位他请的同学的费用。</li>
+</ul>
+<p>注意，小 R 请一位同学的费用与这位同学最终完成的任务数<strong>无关</strong>，他请来的每位同学都可以完成零项或大于一项任务，但是费用<strong>只计入答案一次</strong>。</p>
+<p>特别地，如果小 R 没有请任何同学，他的总收入为 $0$。</p>
+<p>你需要帮助小 R 求出他能获得的最大总收入。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>从标准输入读入数据。</p>
+<p>输入的第一行包含两个正整数 $n,m$。</p>
+<p>接下来 $m$ 行，第 $i$ 行包含 $n$ 个正整数 $a_{i,1},a_{i,2},\dots,a_{i,n}$。</p>
+<p>接下来一行包含 $m$ 个正整数 $c_1,c_2,\dots,c_m$。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出到标准输出。</p>
+<p>输出共一行，包含一个非负整数，分别表示小 R 能获得的最大总收入。</p>
+<h3 id="样例-1-输入"><a href="#样例-1-输入" class="headerlink" title="样例 1 输入"></a>样例 1 输入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3 3</span><br><span class="line">2 1 4</span><br><span class="line">1 4 2</span><br><span class="line">4 2 1</span><br><span class="line">3 3 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-输出"><a href="#样例-1-输出" class="headerlink" title="样例 1 输出"></a>样例 1 输出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-解释"><a href="#样例-1-解释" class="headerlink" title="样例 1 解释"></a>样例 1 解释</h3><p>小 R 能获得的最大总收入是 $4$，共有以下 $6$ 种方式使他获得最大总收入：</p>
+<ul>
+<li>请第 $1$ 位同学，总收入为 $2+1+4-3&#x3D;4$；</li>
+<li>请第 $2$ 位同学，总收入为 $1+4+2-3&#x3D;4$；</li>
+<li>请第 $3$ 位同学，总收入为 $4+2+1-3&#x3D;4$；</li>
+<li>请第 $1,2$ 位同学，总收入为 $\max⁡(2,1)+\max⁡(1,4)+\max⁡(4,2)-3-3&#x3D;4$；</li>
+<li>请第 $1,3$ 位同学，总收入为 $\max⁡(2,4)+\max⁡(1,2)+\max⁡(4,1)-3-3&#x3D;4$；</li>
+<li>请第 $2,3$ 位同学，总收入为 $\max⁡(1,4)+\max⁡(4,2)+\max⁡(2,1)-3-3&#x3D;4$。</li>
+</ul>
+<h3 id="样例-2"><a href="#样例-2" class="headerlink" title="样例 2"></a>样例 2</h3><p>见题目目录下的 <em>2.in</em> 与 <em>2.ans</em>。</p>
+<p>该样例满足子任务 1 的限制。</p>
+<h3 id="样例-3"><a href="#样例-3" class="headerlink" title="样例 3"></a>样例 3</h3><p>见题目目录下的 <em>3.in</em> 与 <em>3.ans</em>。</p>
+<p>该样例满足子任务 5 的限制。</p>
+<h3 id="子任务"><a href="#子任务" class="headerlink" title="子任务"></a>子任务</h3><p>对于所有测试数据，满足 $1 \le n \le 15$，$1 \le m \le 3000$，$1 \le c_i,a_{i,j} \le 100$。</p>
+<table>
+<thead>
+<tr>
+<th align="center">子任务编号</th>
+<th align="center">分值</th>
+<th align="center">$n \le $</th>
+<th align="center">$m \le$</th>
+<th align="center">特殊性质</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">$21$</td>
+<td align="center">$15$</td>
+<td align="center">$16$</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">$24$</td>
+<td align="center">$4$</td>
+<td align="center">$50$</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$13$</td>
+<td align="center">$15$</td>
+<td align="center">$3000$</td>
+<td align="center">保证 $c_{i,j}&#x3D;1$ 或 $c_{i,j}&#x3D;50$</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">$32$</td>
+<td align="center">$10$</td>
+<td align="center">$3000$</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">$10$</td>
+<td align="center">$15$</td>
+<td align="center">$3000$</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="t2-—-小-R-的序列"><a href="#t2-—-小-R-的序列" class="headerlink" title="t2 — 小 R 的序列"></a>t2 — 小 R 的序列</h2><p><strong>时间限制：</strong> 2.0 秒</p>
+<p><strong>空间限制：</strong> 1024 MiB</p>
+<h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>小 R 有一个长度为 $n$ 的非负整数环状序列 $a_0,a_1,\dots,a_{n-1}$。</p>
+<p>小 C 将小 R 的序列拿去做了 $m$ 次操作。小 R 并不知道这些操作是什么，但他知道小 C 会随机选择一段环上的区间，并将区间内的所有数随机打乱。</p>
+<p>具体而言，小 C 的每次操作按照如下过程进行：</p>
+<ol>
+<li>在 $[0,n)$ 中等概率随机选择一个非负整数 $p$，在 $[1,n]$ 中等概率随机选择一个正整数 $l$；</li>
+<li>将 $a_p,a_{(p+1) \bmod n},\dots,a_{(p+l-1)\bmod n}$ 随机打乱，即在 $0 \sim l-1$ 的所有排列中等概率随机选择排列 $q_0,q_1,\dots,q_{l-1}$，然后将 $a_p,a_{(p+1) \bmod n},\dots,a_{(p+l-1)\bmod n}$ <strong>同时</strong>替换为 $a_{(p+q_0) \bmod n},a_{(p+q_1) \bmod n},\dots,a_{(p+q_{l-1}) \bmod n}$。</li>
+</ol>
+<p>小 R 想知道小 C 进行 $m$ 次操作后序列上每个位置的数的期望，你只需要告诉他期望对 $998244353$ 取模后的结果。</p>
+<h3 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h3><p>从标准输入读入数据。</p>
+<p>输入的第一行包含两个正整数 $n,m$。</p>
+<p>输入的第二行包含 $n$ 个非负整数 $a_0,a_1,\dots,a_{n-1}$。</p>
+<h3 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出到标准输出。</p>
+<p>输出共一行，包含 $n$ 个非负整数，用空格隔开，分别表示 $m$ 次操作后序列上每个位置的数的期望。</p>
+<h3 id="样例-1-输入-1"><a href="#样例-1-输入-1" class="headerlink" title="样例 1 输入"></a>样例 1 输入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3 1</span><br><span class="line">1 2 3</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-输出-1"><a href="#样例-1-输出-1" class="headerlink" title="样例 1 输出"></a>样例 1 输出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">499122178 2 499122179</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-解释-1"><a href="#样例-1-解释-1" class="headerlink" title="样例 1 解释"></a>样例 1 解释</h3><p>在这个样例中，小 C 进行了一次操作：</p>
+<ul>
+<li>若 $l&#x3D;1$，得到 ${1,2,3}$；</li>
+<li>若 $l&#x3D;2$，有 $\frac 12$ 的概率得到 ${1,2,3}$，各 $\frac 16$ 的概率得到 ${2,1,3},{1,3,2},{3,2,1}$；</li>
+<li>若 $l&#x3D;3$，等概率得到 ${1,2,3}$ 的所有排列中的一个。</li>
+</ul>
+<p>最终每个位置的期望如下：</p>
+<ul>
+<li>$a_0$ 的期望为 $\frac 13 \times 1+\frac 1 3 \times(\frac 12 \times 1+\frac 16×(2+1+3))+\frac 13\times \frac 16 \times (1+1+2+2+3+3)&#x3D;\frac 32$；</li>
+<li>$a_1$ 的期望为 $\frac 13 \times 2+\frac 13\times (\frac 12\times2+\frac 16\times(1+3+2))+\frac13\times \frac 16\times(1+1+2+2+3+3)&#x3D;2$；</li>
+<li>$a_2$ 的期望为 $\frac 13 \times 3+\frac 13\times(\frac 12\times 3+\frac 16\times (3+2+1))+\frac 13\times \frac 16 \times(1+1+2+2+3+3)&#x3D;\frac 52$；</li>
+</ul>
+<h3 id="样例-2-1"><a href="#样例-2-1" class="headerlink" title="样例 2"></a>样例 2</h3><p>见题目目录下的 <em>2.in</em> 与 <em>2.ans</em>。</p>
+<p>该样例满足子任务 3 的限制。</p>
+<h3 id="样例-3-1"><a href="#样例-3-1" class="headerlink" title="样例 3"></a>样例 3</h3><p>见题目目录下的 <em>3.in</em> 与 <em>3.ans</em>。</p>
+<p>该样例满足子任务 5 的限制。</p>
+<h3 id="样例-4"><a href="#样例-4" class="headerlink" title="样例 4"></a>样例 4</h3><p>见题目目录下的 <em>4.in</em> 与 <em>4.ans</em>。</p>
+<p>该样例满足子任务 9 的限制。</p>
+<h3 id="子任务-1"><a href="#子任务-1" class="headerlink" title="子任务"></a>子任务</h3><p>对于所有测试数据，满足 $2 \le n \le 131072$，$1 \le m \le 10^9$，$0 \le a_i &lt; 998244353$。</p>
+<table>
+<thead>
+<tr>
+<th align="center">子任务编号</th>
+<th align="center">分值</th>
+<th align="center">$n&#x3D;$</th>
+<th align="center">$m \le$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">$3$</td>
+<td align="center">$2$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">$9$</td>
+<td align="center">$2$</td>
+<td align="center">$10^9$</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$14$</td>
+<td align="center">$8$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">$8$</td>
+<td align="center">$128$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">$15$</td>
+<td align="center">$128$</td>
+<td align="center">$10$</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">$9$</td>
+<td align="center">$128$</td>
+<td align="center">$10^9$</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">$12$</td>
+<td align="center">$2048$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">$20$</td>
+<td align="center">$2048$</td>
+<td align="center">$10^9$</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">$6$</td>
+<td align="center">$16384$</td>
+<td align="center">$10^9$</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">$4$</td>
+<td align="center">$131072$</td>
+<td align="center">$10^9$</td>
+</tr>
+</tbody></table>
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p><strong>期望</strong>：对于离散型随机变量 $x$，其期望 $E[x]$ 定义为以概率为权，$x$ 所有可能取值的加权平均数，即<br>$$<br>E[x]&#x3D;\sum_{k}Pr[x&#x3D;k] \cdot k<br>$$<br>其中 $Pr[x&#x3D;k]$ 表示 $x$ 取值为 $k$ 的概率。</p>
+<h2 id="t3-—-小-C-的矩阵"><a href="#t3-—-小-C-的矩阵" class="headerlink" title="t3 — 小 C 的矩阵"></a>t3 — 小 C 的矩阵</h2><p><strong>时间限制：</strong> 1.0 秒</p>
+<p><strong>空间限制：</strong> 1024 MiB</p>
+<p><strong>这是一道交互题。</strong></p>
+<h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>小 C 有一个 $n \times m$ 的 01 矩阵 $A$，他想让小 R 猜一猜，矩阵中最接近 $(n,m)$ 的 $1$ 在哪里。形式化地说，他想让小 R 猜出满足 $A_{i,j}&#x3D;1$ 的最大的 $i+j$。小 C 保证了他的矩阵里至少有一个 $1$。</p>
+<p>小 C 允许小 R 询问他一个子矩形内是否有 $1$。每次询问小 R 可以选定 $1 \le u \le d \le n,1 \le l \le r \le m$，小 C 将会告诉他 $\sum_{i&#x3D;u}^d \sum_{j&#x3D;l}^r A_{i,j}$ 是否非零。</p>
+<p>小 C 不希望小 R 问他太多个问题，也不希望小 R 询问的子矩形过大。他决定统计小 R 询问的次数（记作 $c_1$），以及小 R 所有询问的 $\max(d-u+1,r-l+1)$ 之和（记作 $c_2$）。</p>
+<p>你需要帮助小 R 问出满足 $A_{i,j}&#x3D;1$ 的最大的 $i+j$，同时保证 $c_1,c_2$ 不超过小 C 的限制。当然，只要你的询问次数不超过 $10^6$，小 C 都会根据 $c_1,c_2$ 给出一部分的分数。如果你的询问次数超过 $10^6$，小 C 将会拒绝你之后的询问并直接判定你回答错误。</p>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>你不需要，也不应该实现主函数，你只需要实现如下函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Find (int n, int m, int id);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$n,m$ 的含义如【题目描述】中所示，$id$ 表示该测试点所属的子任务编号。特别地，样例的子任务编号为 $0$。</li>
+<li>你需要返回一个正整数表示满足 $A_{i,j}$ 的最大的 $i+j$。</li>
+</ul>
+<p>你可以通过调用以下函数来和交互库进行交互：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int Ask (int u, int d, int l, int r);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$u,d,l,r$ 的含义如【题目描述】中所示，你需要保证 $1 \le u \le d \le n$，$1 \le l \le r \le m$。</li>
+<li>该函数返回一个非负整数 $0$ 或 $1$，返回值为 $0$ 代表该子矩形中没有 $1$，返回值为 $1$ 代表该子矩形中有 $1$。</li>
+</ul>
+<p>评测时，交互库会恰好调用 <code>Find</code> 一次。</p>
+<p>本题保证所使用的矩阵在交互开始之前已经完全确定，不会根据和你的程序的交互过程动态构造，因此题目中的交互操作都是确定性的，你不需要关心这些操作在交互库中的具体实现。</p>
+<p>数据保证在调用次数限制下，交互库运行所需的时间不超过 0.1 s；交互库使用的内存大小固定，且不超过 80 MB。</p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><p>该题目录下已经提供了一个 <code>sample_matrix.cpp</code>，请将这个文件拷贝一份，重命名为 <code>matrix.cpp</code>，然后在其基础上答题。</p>
+<p>请确保你的程序开头有 <code>#include &quot;matrix.h&quot;</code>。</p>
+<p>你需要在本题目录下使用如下命令编译得到可执行程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ -o matrix matrix.cpp grader.cpp matrix.h -static -O2 -std=c++17</span><br></pre></td></tr></table></figure>
+
+<p>对于编译得到的可执行程序：</p>
+<ul>
+<li>可执行文件将从标准输入读入以下格式的数据：<ul>
+<li>输入的第一行包含三个正整数 $n,m,id$，含义如【题目描述】与【实现细节】中所示；</li>
+<li>接下来 $n$ 行，每行包含一个长度为 $m$ 的 01 串，表示 $A_{i,1},A_{i,2},\dots,A_{i,m}$。</li>
+</ul>
+</li>
+<li>读入完成之后，交互库将调用恰好一次函数 <code>Find</code>，用输入的数据测试你的函数。你的函数正确返回后，交互库会判断你的计算是否正确，若正确则会输出 <code>Correct.</code> 和评分参数 $c_1,c_2$，否则会输出相应的错误信息。</li>
+</ul>
+<p>试题目录下的 <code>grader.cpp</code> 是我们提供的交互库参考实现，<strong>最终测试时所用的交互库实现与该参考实现有所不同，因此选手的解法不应该依赖交互库实现。</strong></p>
+<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3 3 0</span><br><span class="line">010</span><br><span class="line">001</span><br><span class="line">100</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Correct.</span><br><span class="line">C_1 = 3, C_2 = 4.</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h3><p>以下是一种可能的交互过程：</p>
+<table>
+<thead>
+<tr>
+<th align="center">选手程序</th>
+<th align="center">交互库</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center">调用 <code>Find(3, 3, 0)</code></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">调用 <code>Ask(2, 3, 2, 3)</code></td>
+<td align="center">返回 1</td>
+<td align="center">$A_{2,2}+A_{2,3}+A_{3,2}+A_{3,3}&#x3D;1 &gt; 0$</td>
+</tr>
+<tr>
+<td align="center">调用 <code>Ask(3, 3, 3, 3)</code></td>
+<td align="center">返回 0</td>
+<td align="center">$A_{3,3}&#x3D;0$</td>
+</tr>
+<tr>
+<td align="center">调用 <code>Ask(2, 2, 2, 2)</code></td>
+<td align="center">返回 0</td>
+<td align="center">$A_{2,2}&#x3D;0$</td>
+</tr>
+<tr>
+<td align="center">返回 5</td>
+<td align="center">输出 <code>Correct.</code></td>
+<td align="center">$A_{2,3}&#x3D;1,2+3&#x3D;5$</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">输出 <code>C_1 = 3, C_2 = 4.</code></td>
+<td align="center">评分参数 $c_1&#x3D;3,c_2&#x3D;4$</td>
+</tr>
+</tbody></table>
+<h3 id="子任务-2"><a href="#子任务-2" class="headerlink" title="子任务"></a>子任务</h3><table>
+<thead>
+<tr>
+<th align="center">子任务编号</th>
+<th align="center">分值</th>
+<th align="center">$n&#x3D;$</th>
+<th align="center">$m&#x3D;$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">$4$</td>
+<td align="center">$2$</td>
+<td align="center">$2$</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">$20$</td>
+<td align="center">$1$</td>
+<td align="center">$4096$</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$76$</td>
+<td align="center">$4096$</td>
+<td align="center">$4096$</td>
+</tr>
+</tbody></table>
+<h3 id="评分方式"><a href="#评分方式" class="headerlink" title="评分方式"></a>评分方式</h3><p>对于每个子任务，该子任务得分为其中所有测试点得分的最小值。</p>
+<p>对于所有测试点，若询问不符合要求或 $c_1 &gt; 10^6$ 或答案不正确，得 $0$ 分。否则，将根据该测试点所属的子任务编号，按照评分参数 $c_1,c_2$ 分别给出分数 $s_1,s_2$，该测试点的最终得分为 $s_1+s_2$。</p>
+<p>对于第一个子任务，$s_1,s_2$ 的计算方式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">$c_1 \in$</th>
+<th align="center">$s_1&#x3D;$</th>
+<th align="center">$c_2 \in$</th>
+<th align="center">$s_2&#x3D;$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$(3,+ \infty)$</td>
+<td align="center">$0$</td>
+<td align="center">$(4,+\infty)$</td>
+<td align="center">$0$</td>
+</tr>
+<tr>
+<td align="center">$(2,3]$</td>
+<td align="center">$1$</td>
+<td align="center">$(3,4]$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">$[0,2]$</td>
+<td align="center">$2$</td>
+<td align="center">$[0,3]$</td>
+<td align="center">$2$</td>
+</tr>
+</tbody></table>
+<p>对于第二个子任务，$s_1,s_2$ 的计算方式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">$c_1 \in$</th>
+<th align="center">$s_1&#x3D;$</th>
+<th align="center">$c_2 \in$</th>
+<th align="center">$s_2&#x3D;$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$(4096,+\infty)$</td>
+<td align="center">$0$</td>
+<td align="center">$(10^6,+\infty)$</td>
+<td align="center">$0$</td>
+</tr>
+<tr>
+<td align="center">$(2048,4096]$</td>
+<td align="center">$2$</td>
+<td align="center">$(10^5,10^6]$</td>
+<td align="center">$1$</td>
+</tr>
+<tr>
+<td align="center">$(1024,2048]$</td>
+<td align="center">$3$</td>
+<td align="center">$(5\times 10^4,10^5]$</td>
+<td align="center">$2$</td>
+</tr>
+<tr>
+<td align="center">$(160,1024]$</td>
+<td align="center">$4$</td>
+<td align="center">$(2\times 10^4,5\times10^4]$</td>
+<td align="center">$3$</td>
+</tr>
+<tr>
+<td align="center">$(80,160]$</td>
+<td align="center">$5$</td>
+<td align="center">$(10^4,2 \times 10^4]$</td>
+<td align="center">$5$</td>
+</tr>
+<tr>
+<td align="center">$(16,80]$</td>
+<td align="center">$6$</td>
+<td align="center">$(8192,10^4]$</td>
+<td align="center">$7$</td>
+</tr>
+<tr>
+<td align="center">$(13,16]$</td>
+<td align="center">$7$</td>
+<td align="center">$(6144,8192]$</td>
+<td align="center">$8$</td>
+</tr>
+<tr>
+<td align="center">$(12,13]$</td>
+<td align="center">$8$</td>
+<td align="center">$(4096,6144]$</td>
+<td align="center">$9$</td>
+</tr>
+<tr>
+<td align="center">$[0,12]$</td>
+<td align="center">$10$</td>
+<td align="center">$[0,4096$]</td>
+<td align="center">$10$</td>
+</tr>
+</tbody></table>
+<p>对于第三个子任务，$s_1,s_2$ 的计算方式如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">$c_1 \in$</th>
+<th align="center">$s_1&#x3D;$</th>
+<th align="center">$c_2 \in$</th>
+<th align="center">$s_2&#x3D;$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$(10^6,+\infty)$</td>
+<td align="center">$0$</td>
+<td align="center">$(10^9,+\infty)$</td>
+<td align="center">$0$</td>
+</tr>
+<tr>
+<td align="center">$(6\times 10^5,10^6]$</td>
+<td align="center">$4$</td>
+<td align="center">$(4 \times 10^7,10^9]$</td>
+<td align="center">$3$</td>
+</tr>
+<tr>
+<td align="center">$(3 \times 10^5,6 \times 10^5]$</td>
+<td align="center">$6$</td>
+<td align="center">$(1.7 \times10^7,4 \times 10^7]$</td>
+<td align="center">$5$</td>
+</tr>
+<tr>
+<td align="center">$(10^5,3 \times 10^5]$</td>
+<td align="center">$7$</td>
+<td align="center">$(2\times 10^6,1.7 \times 10^7]$</td>
+<td align="center">$7$</td>
+</tr>
+<tr>
+<td align="center">$(5 \times 10^4,10^5]$</td>
+<td align="center">$9$</td>
+<td align="center">$(10^6,2 \times 10^6]$</td>
+<td align="center">$25$</td>
+</tr>
+<tr>
+<td align="center">$(3.5\times10^4,5 \times 10^4]$</td>
+<td align="center">$10$</td>
+<td align="center">$(3 \times 10^5,10^6]$</td>
+<td align="center">$29$</td>
+</tr>
+<tr>
+<td align="center">$(2\times 10^4,3.5\times 10^4]$</td>
+<td align="center">$13$</td>
+<td align="center">$(2 \times 10^5,3 \times 10^5]$</td>
+<td align="center">$31$</td>
+</tr>
+<tr>
+<td align="center">$(1.3 \times 10^4,2 \times 10^4]$</td>
+<td align="center">$15$</td>
+<td align="center">$(10^5,2 \times 10^5]$</td>
+<td align="center">$36$</td>
+</tr>
+<tr>
+<td align="center">$(8300,1.3 \times 10^4]$</td>
+<td align="center">$17$</td>
+<td align="center">$(8 \times 10^4,10^5]$</td>
+<td align="center">$46$</td>
+</tr>
+<tr>
+<td align="center">$(8192,8300]$</td>
+<td align="center">$19$</td>
+<td align="center">$(7.4 \times 10^4,8 \times 10^4]$</td>
+<td align="center">$50$</td>
+</tr>
+<tr>
+<td align="center">$[0,8192]$</td>
+<td align="center">$20$</td>
+<td align="center">$[0,7.4 \times 10^4]$</td>
+<td align="center">$56$</td>
+</tr>
+</tbody></table>
+<h2 id="t4-—-小-C-的连廊"><a href="#t4-—-小-C-的连廊" class="headerlink" title="t4 — 小 C 的连廊"></a>t4 — 小 C 的连廊</h2><p><strong>时间限制：</strong> 2.0 秒</p>
+<p><strong>空间限制：</strong> 1024 MiB</p>
+<h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>小 C 有一块 $n \times m$ 的网格状草坪。由于风雨会使在草坪上行动不便，他计划在草坪上修建一些连廊。</p>
+<p>这块草坪上的风向是固定的，而风速可以看做一个<strong>非负整数</strong> $c$。对于风速 $c$，位于 $(x,y)$ 处的草坪可以经过当且仅当 $(x,y),(x,y+1),\dots,(x+y+c)$ 都已经修建了连廊。<strong>注意，当 $c&#x3D;0$ 时，位于 $(x,y)$ 处的草坪可以经过也需要 $(x,y)$ 已经修建了连廊。</strong></p>
+<p>小 C 每次移动能从一块可经过的草坪移动到一条边相邻的另一块可经过草坪，即两块草坪能相互抵达当且仅当这两块草坪属于同一个可以经过的草坪构成的四连通块。</p>
+<p>小 C 共有 $q$ 个计划，每个计划为以下两种之一：</p>
+<ol>
+<li>修建计划：修建一条 $(x,y_l)$ 到 $(x,y_r)$ 的连廊，即在 $(x,y_l),(x,y_l+1),\dots,(x,y_r)$ 处的草坪上修建连廊。</li>
+<li>出行计划：他想从 $(x_1,y_1)$ 处的草坪走到 $(x_2,y_2)$ 处的草坪。请你帮助他求出最大的非负整数 $c$，使得风速为 $c$ 时这两块草坪能够相互抵达；或者报告无论如何都无法互相抵达。</li>
+</ol>
+<h3 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h3><p>从标准输入读入数据。</p>
+<p>输入的第一行包含三个正整数 $q,n,m$。</p>
+<p>接下来 $q$ 行，每行包含若干个正整数，表示一个计划：</p>
+<ul>
+<li>输入的第一个正整数 $o$ 描述这个计划的类型。保证 $o \in {1,2}$。</li>
+<li>若 $o&#x3D;1$，接下来给出三个正整数 $x,y_l,y_r$，表示一个修建计划；</li>
+<li>若 $o&#x3D;2$，接下来给出四个正整数 $x_1,y_1,x_2,y_2$，表示一个出行计划。</li>
+</ul>
+<h3 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出到标准输出。</p>
+<p>对于每一个出行计划，输出一行一个整数，表示满足这两块草坪能够相互抵达的最大的风速 $c$。特别地，如果两块草坪无论风速如何都不能够相互抵达，输出 $-1$。</p>
+<h3 id="样例-1-输入-2"><a href="#样例-1-输入-2" class="headerlink" title="样例 1 输入"></a>样例 1 输入</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">6 3 10</span><br><span class="line">1 1 4 10</span><br><span class="line">1 2 1 4</span><br><span class="line">2 1 4 2 1</span><br><span class="line">1 3 2 9</span><br><span class="line">1 2 6 10</span><br><span class="line">2 1 4 2 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-输出-2"><a href="#样例-1-输出-2" class="headerlink" title="样例 1 输出"></a>样例 1 输出</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<h3 id="样例-1-解释-2"><a href="#样例-1-解释-2" class="headerlink" title="样例 1 解释"></a>样例 1 解释</h3><p>第一个出行计划中，当风速为 $0$ 时，小 C 可以沿 $(1,4)-(2,4)-(2,3)-(2,2)-(2,1)$ 的路径相互抵达；当风速大于 $0$ 时，$(2,4)$ 无法经过。</p>
+<p>第二个出行计划中，当风速为 $2$ 时，小 C 可以沿 $(1,4)-(1,5)-(1,6)-(2,6)-(3,6)-(3,5)-(3,4)-(3,3)-(3,2)-(2,2)-(2,1)$ 的路径相互抵达；当风速大于 $2$ 时，$(2,2)$ 无法经过。</p>
+<h3 id="样例-2-2"><a href="#样例-2-2" class="headerlink" title="样例 2"></a>样例 2</h3><p>见题目目录下的 <em>2.in</em> 与 <em>2.ans</em>。</p>
+<p>该样例满足子任务 1 的限制。</p>
+<h3 id="样例-3-2"><a href="#样例-3-2" class="headerlink" title="样例 3"></a>样例 3</h3><p>见题目目录下的 <em>3.in</em> 与 <em>3.ans</em>。</p>
+<p>该样例满足子任务 4 的限制。</p>
+<h3 id="子任务-3"><a href="#子任务-3" class="headerlink" title="子任务"></a>子任务</h3><p>对于所有测试数据，满足 $1 \le n \le 10^5$，$1 \le m \le 10^9$，$1 \le q \le 3 \times 10^5$，$1 \le x,x_1,x_2 \le n$，$1 \le y_1,y_2,y_l,y_r \le m$，$y_l \le y_r$。保证修建计划的个数不超过 $10^5$，保证出行计划中 $(x_1,y_1),(x_2,y_2)$ 处的草坪均已修建连廊，保证 $(x_1,y_1) \ne (x_2,y_2)$。</p>
+<table>
+<thead>
+<tr>
+<th align="center">子任务编号</th>
+<th align="center">分值</th>
+<th align="center">限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">$15$</td>
+<td align="center">$n \le 30$，$m,q \le 100$</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">$21$</td>
+<td align="center">保证所有的出行计划在修建计划之后</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$30$</td>
+<td align="center">保证任意两个修建计划所修建的连廊不相连</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">$34$</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>两个修建计划所修建的连廊 $(x,y_l,y_r),(x’,y_l’,y_r’)$ 不相连当且仅当 $x \ne x’$ 或 $y_r+1&lt;y_l’$ 或 $y_r’+1 &lt;y_l$。</p>
+<h1 id="Day-2-文件"><a href="#Day-2-文件" class="headerlink" title="Day-2 文件"></a>Day-2 文件</h1><p><a href="/text/t1.zip"></a></p>
+<h1 id="合影"><a href="#合影" class="headerlink" title="合影"></a>合影</h1><p><img src="/img/THUWC2024.jpg"></p>
+<p><img src="/img/PKUWC2024.jpg"></p>
 ]]></content>
       <categories>
         <category>游记</category>

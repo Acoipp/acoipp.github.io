@@ -3520,7 +3520,6 @@ var gitment = new Gitment({
 });
 gitment.render('gitmentContainer');
 </script>
-
 ]]></content>
       <categories>
         <category>笔记</category>

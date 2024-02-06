@@ -5,13 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hello-World - Acoipp 的个人博客</title>
+    <title>标签: 边分治 - Acoipp 的个人博客</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="OI/ACM 相关笔记,Hello World!这里是 Acoipp（洛谷 uid：674469）的 github 个人博客！
-这里存放了 Acoipp 的游记，学习笔记和总结等大部分与 OI 相关的资料，你可以在每一个博,"> 
+    <meta name="description" content="OI/ACM 相关笔记,"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -21,18 +20,16 @@
     
     
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:title" content="Hello-World - Acoipp 的个人博客"/>
-    <meta name="twitter:description" content="OI/ACM 相关笔记,Hello World!这里是 Acoipp（洛谷 uid：674469）的 github 个人博客！
-这里存放了 Acoipp 的游记，学习笔记和总结等大部分与 OI 相关的资料，你可以在每一个博,"/>
+    <meta name="twitter:title" content="标签: 边分治 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,"/>
     
     
     
     
     <meta property="og:site_name" content="Acoipp 的个人博客"/>
     <meta property="og:type" content="object"/>
-    <meta property="og:title" content="Hello-World - Acoipp 的个人博客"/>
-    <meta property="og:description" content="OI/ACM 相关笔记,Hello World!这里是 Acoipp（洛谷 uid：674469）的 github 个人博客！
-这里存放了 Acoipp 的游记，学习笔记和总结等大部分与 OI 相关的资料，你可以在每一个博,"/>
+    <meta property="og:title" content="标签: 边分治 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -45,70 +42,102 @@
 <body class="loading">
     <span id="config-title" style="display:none">Acoipp 的个人博客</span>
     <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
-    <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">Hello-World</h3>
-    <div class="social">
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
-    </div>
-    <div class="scrollbar"></div>
+    <div class="nav">
+    <ul id="menu-menu" class="menu">
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
+        </li>
+        
+    </ul>
+	<span class="target"></span>
+	<center>
+	<div class="hitokoto">
+		<span class="typed" id="hitokoto" data-st="true"></span>
+	</div>
+	</center>
+	
+	<p class="footerlinks">
+		<a href="#" class="iconfont icon-null"></a>
+		
+            <a href="/" title="facebook" class="iconfont icon-facebook" target="_blank" rel="noopener"> </a>
+        
+            <a href="/" title="twitter" class="iconfont icon-twitter" target="_blank" rel="noopener"> </a>
+        
+            <a href="/" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
+        
+            <a href="/img/logo.png" title="wechat" class="iconfont icon-wechat" target="_blank" rel="noopener"> </a>
+        
+            <a href="mailto:873501154@qq.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
+        
+		<a href="#" class="iconfont icon-null"></a>
+	</p>
+	
+    <p id="copyright">
+        &copy; 2024 Acoipp.
+        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
+		
+    </p>
 </div>
 
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">Hello-World</h1>
-        <div class="stuff">
-            <span>十二月 31, 9999</span>
-            
-
+<div id="container">
+    
+<div id="screen">
+    <div id="mark">
+        <div class="layer" data-depth="0.4">
+            <img src="/img/welcome-cover.jpg" id="cover" crossorigin="anonymous" width="1920" height="1080">
         </div>
-        <div class="content markdown">
-            <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><p>这里是 Acoipp（洛谷 uid：674469）的 github 个人博客！</p>
-<p>这里存放了 Acoipp 的游记，学习笔记和总结等大部分与 OI 相关的资料，你可以在每一个博客的下方评论，发表自己的见解。</p>
-<p>同时，你也可以通过右上角的搜索按钮来精确定位你想要的内容。</p>
-<p>我的联系方式为邮箱 <a href="mailto:&#x38;&#55;&#51;&#53;&#48;&#49;&#x31;&#x35;&#x34;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;">&#x38;&#55;&#51;&#53;&#48;&#49;&#x31;&#x35;&#x34;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#x6d;</a>，你随时可以向这个邮箱里发送消息。</p>
-<p>所有在洛谷博客上的文章（题解除外），都会陆续搬运到此博客中。</p>
-<p>希望我们在信息学这条道路上越走越远！</p>
-<p>2024-01-07 11:26:25</p>
-<p>Acoipp 于重庆</p>
-
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="https://music.163.com/outchain/player?type=2&id=459944758">
-            </audio>
-            
+    </div>
+    <div id="vibrant">
+        <svg viewbox="0 0 2880 1620" height="100%" preserveaspectratio="xMaxYMax slice">
+            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
+        </svg>
+        <div></div>
+    </div>
+    <div id="header">
+        <div>
+            <a class="image-logo" href="/"></a>
+			
+			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
+			
+            <div class="iconfont icon-menu switchmenu"></div>
         </div>
-        
-        
-    <div id="gitalk-container" class="comment link"
-		data-enable="true"
-        data-ae="true"
-        data-ci="5716fc2235b32d5b5e82"
-        data-cs="907f96f6afbbcc0aca96b83eb204923010538f26"
-        data-r="acoipp.github.io-"
-        data-o="Acoipp"
-        data-a="Acoipp"
-        data-d="true"
-        data-p="https://proxy-gitalk-api.netlify.app/github_access_token"
-    >查看评论</div>
-
-
+    </div>
+    
+    <div id="post0">
+        <p>二月 04, 2024</p>
+        <h2><a href="/2024/02/04/%E6%A0%91%E5%88%86%E6%B2%BB/" title="树分治" class="posttitle">树分治</a></h2>
+        <p class="summary">树分治树分治将分治技术运用到了树上，可以更好地维护两点间的路径问题，如果整棵树是一个序列，则可以看做是 CDQ 分...</p>
     </div>
     
 </div>
 
-
+    <div id="primary">
+        
     </div>
+    
 </div>
+<div id="preview"></div>
+
+
+
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>

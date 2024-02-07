@@ -3563,4 +3563,32 @@
         <tag>年总结</tag>
       </tags>
   </entry>
+  <entry>
+    <title>图论学习笔记6</title>
+    <url>/2024/02/07/%E5%9B%BE%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06/</url>
+    <content><![CDATA[<h1 id="Stoer–Wagner-算法"><a href="#Stoer–Wagner-算法" class="headerlink" title="Stoer–Wagner 算法"></a>Stoer–Wagner 算法</h1><script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>图论</tag>
+        <tag>最小割</tag>
+        <tag>Stoer–Wagner</tag>
+      </tags>
+  </entry>
 </search>

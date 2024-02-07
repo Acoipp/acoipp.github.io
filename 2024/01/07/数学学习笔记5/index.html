@@ -86,6 +86,21 @@
 <p>然后上面的 $\prod_{j \ne i}(x-x_j)$ 就不需要连续整数这个限制，预处理 $\prod(x-x_j)$ 的前后缀积，调用的时候把第 $i$ 项排除掉即可。</p>
 <p>这样的话即可做到 $O(k)$ 求某多项式任意点的值，同时小学数学也告诉我们 $k+1$ 个点唯一确定一个 $k$ 次函数，并且这个函数有唯一解，故算法正确。</p>
 <p>最后就是注意取模和逆元的问题，特别的，有 $f(x)\equiv f(x \bmod p)\pmod p$，这样也能解决大部分模数是质数的问题了。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

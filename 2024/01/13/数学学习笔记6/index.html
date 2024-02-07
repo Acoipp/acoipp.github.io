@@ -134,6 +134,21 @@ $f$ 函数必须是数论函数。（仅限于下面的讨论）
 <p>$$<br>\begin{aligned}<br>&amp; \ \ \ \ \ \sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} [(i,k)&#x3D;1][(j,k)&#x3D;1]k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} [(k,ij)&#x3D;1]k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} k \sum_{d \mid k,d \mid ij} \mu(d) \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{d \mid ij} \mu(d)d \sum_{k&#x3D;1}^{\frac {ij} d}k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{d \mid ij}  \mu(d)\frac {(d+ij)\frac {ij} d}{2}\\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n ij\varphi(ij)\\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} d^n \sum_{i&#x3D;1}^{\frac nd}\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]ijd^2\varphi(ijd^2) \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} d^n \sum_{i&#x3D;1}^{\frac nd}\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]ijd^2\frac{\varphi(id)\varphi(jd)d}{\varphi(d)} \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac nd}id\varphi(id)\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]jd\varphi(jd) \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac nd}id\varphi(id)\sum_{j&#x3D;1}^{\frac md}jd\varphi(jd) \sum_{k \mid i,k \mid j} \mu(k)\\<br>&amp;&#x3D; \sum_{1 \le k\le n} \mu(k) \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac n{dk}}idk\varphi(idk)\sum_{j&#x3D;1}^{\frac m{dk}}jdk\varphi(jdk) \\<br>T \gets dk \\<br>&amp;&#x3D; \sum_{T&#x3D;1}^{n} \sum_{d \mid T} \mu(\frac Td )\frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac n{T}}iT\varphi(iT)\sum_{j&#x3D;1}^{\frac m{T}}jT\varphi(jT)<br>\end{aligned}<br>$$</p>
 <p>$ f(T)&#x3D;\sum_{d \mid T} \mu(\frac Td )\frac{d^{n+1}}{\varphi(d)}$ 是一个积性函数和积性函数的狄利克雷卷积，所以仍然是积性函数，我们求出 $f(p^k)$，再用线性筛合并即可。</p>
 <p>后面两堆是一个狄利克雷后缀和，时间复杂度为 $O(n+n \log \log n)&#x3D;O(n \log \log n)$。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

@@ -279,6 +279,21 @@ $n$ 一般在 $100 \sim 5 \times 10^3$ 左右。
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,mod,i,j,dp[<span class="number">405</span>][<span class="number">405</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;mod;</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = (dp[i+<span class="number">1</span>][j+<span class="number">1</span>]+dp[i][j]*(j+<span class="number">1</span>))%mod;</span><br><span class="line">			dp[i+<span class="number">1</span>][j] = (dp[i+<span class="number">1</span>][j]+dp[i][j]*<span class="number">2</span>*j)%mod;</span><br><span class="line">			dp[i+<span class="number">2</span>][j] = (dp[i+<span class="number">2</span>][j]+dp[i][j]*<span class="number">2</span>*j)%mod;</span><br><span class="line">			<span class="keyword">if</span>(j&gt;=<span class="number">2</span>)&#123;</span><br><span class="line">				dp[i+<span class="number">2</span>][j<span class="number">-1</span>] = (dp[i+<span class="number">2</span>][j<span class="number">-1</span>]+dp[i][j]*(j<span class="number">-1</span>)*<span class="number">2</span>)%mod;</span><br><span class="line">				dp[i+<span class="number">3</span>][j<span class="number">-1</span>] = (dp[i+<span class="number">3</span>][j<span class="number">-1</span>]+dp[i][j]*(j<span class="number">-1</span>))%mod;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;dp[n][<span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结其实都写在例题和习题讲评里面了，复制粘贴一遍其实没有用，重要的是去理解，并且收获自己的感受，这样才能让做题的思路更加敏捷精确。这就是插入 DP，一个非常巧妙但是很难理解的 DP 类型。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

@@ -44,6 +44,21 @@
 <p>这种情况一般都需要理解 AC 自动机每个节点指向的下一个节点一定是当前节点的字符串后面接一个字符，前面砍掉一些字符所代表的节点。</p>
 <p>例如 $\text{aabbb}$ 可以转移到 $\texttt{aabbbh}$（如果有），否则就在 $\texttt{abbbh}$，$\texttt{bbbh}$，$\texttt{bbh}$，$\texttt{bh}$，$\texttt{h}$，$\emptyset$ 选存在的较前的元素。</p>
 <p>fail 树则通常运用到字符串计数问题里面去，它的性质就是如果 $T$ 在遍历字典树的过程中经过的节点都加上 $1$ 的话，模板串 $S$ 出现的次数就是它在 fail 树上代表的节点的子树的和。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -95,6 +110,21 @@
 </ul>
 <p>行吧，虽然 CSP-S 失利了，但是我相信后面的比赛一定能够稳定发挥，越打越好。</p>
 <p>$\color{white}{\text{加油！}}$</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>游记</category>
@@ -161,6 +191,21 @@
 <p>我还是想用一句话结尾，就是：一切都像做了一场梦一样。</p>
 <p>突然想到了三体中也有类似的话：在短暂的魔法时代过后，这个世界又落到了预定的轨道上。（可能会有所偏差，大概是这个意思）</p>
 <p><code>I&#39;m still looking forward to joining the competition with each other!</code></p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>游记</category>
@@ -281,6 +326,21 @@
 <li>此处树链剖分时，线段树每个节点存储的是一段矩阵乘法。</li>
 <li>特别注意叶子节点的边界情况，一般是“单位矩阵”。</li>
 </ul>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -359,6 +419,21 @@
 </blockquote>
 <p>第二天 z* 来上课的时候发现他好像没什么异常，但是 gy* 没有来上课。</p>
 <p>$\color{white}{\text{没了，真的没了，再也没有什么可写的了。}}$</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>游记</category>
@@ -374,11 +449,26 @@
     <content><![CDATA[<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World!"></a>Hello World!</h2><p>这里是 Acoipp（洛谷 uid：674469）的 github 个人博客！</p>
 <p>这里存放了 Acoipp 的游记，学习笔记和总结等大部分与 OI 相关的资料，你可以在每一个博客的下方评论，发表自己的见解。</p>
 <p>同时，你也可以通过右上角的搜索按钮来精确定位你想要的内容。</p>
-<p>我的联系方式为邮箱 <a href="mailto:&#x38;&#55;&#x33;&#53;&#48;&#49;&#49;&#53;&#x34;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#x6d;">&#x38;&#55;&#x33;&#53;&#48;&#49;&#49;&#53;&#x34;&#64;&#113;&#113;&#x2e;&#x63;&#111;&#x6d;</a>，你随时可以向这个邮箱里发送消息。</p>
+<p>我的联系方式为邮箱 <a href="mailto:&#x38;&#55;&#51;&#53;&#x30;&#49;&#x31;&#x35;&#x34;&#x40;&#113;&#113;&#46;&#99;&#111;&#x6d;">&#x38;&#55;&#51;&#53;&#x30;&#49;&#x31;&#x35;&#x34;&#x40;&#113;&#113;&#46;&#99;&#111;&#x6d;</a>，你随时可以向这个邮箱里发送消息。</p>
 <p>所有在洛谷博客上的文章（题解除外），都会陆续搬运到此博客中。</p>
 <p>希望我们在信息学这条道路上越走越远！</p>
 <p>2024-01-07 11:26:25</p>
 <p>Acoipp 于重庆</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
   </entry>
   <entry>
@@ -412,6 +502,21 @@
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a><strong>后记</strong></h2><p>希望能进 JK，而且希望每次考试稳住，不要挂分。</p>
 <p>以后一定会拓宽知识面，做题的时候深入理解，不只是 AC 就过了。</p>
 <p>综上，I LOVE NK！</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>总结</category>
@@ -451,6 +556,21 @@
 <h1 id="Day-5-8"><a href="#Day-5-8" class="headerlink" title="Day-5.8"></a><strong>Day-5.8</strong></h1><p>起床比较晚，然后又开始玩，玩到9:00，后面下去吃早饭，打个车去了机场，在机场里面吃了午饭。登机之后又在飞机上吃了一顿。。。最后安全回到重庆，下午回学校上了一节晚自习。</p>
 <p>感觉就像做了一场梦。。。</p>
 <p>期待下次 Travel！</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>游记</category>
@@ -520,6 +640,23 @@
 <p>于是代码就很好写了，定义一个复数类即可：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,p,x,y,ans1,ans2;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">poly</span>&#123;ll a,b;&#125;res,t;</span><br><span class="line">poly <span class="keyword">operator</span>*(poly a,poly b)&#123;<span class="keyword">return</span> (poly)&#123;((a.a*b.a+a.b*b.b%p*((x*x-n)%p))+p)%p,(a.b*b.a+a.a*b.b)%p&#125;;&#125;</span><br><span class="line"><span class="function">ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(time(<span class="number">0</span>))</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;p;</span><br><span class="line">		n%=p;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">0</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">qmi</span>(n,(p<span class="number">-1</span>)/<span class="number">2</span>,p)==p<span class="number">-1</span>)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;Hola!\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">			x=<span class="built_in">rnd</span>()%p;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">qmi</span>((((x*x-n)%p)+p)%p,(p<span class="number">-1</span>)/<span class="number">2</span>,p)==p<span class="number">-1</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res.a = <span class="number">1</span>,res.b = <span class="number">0</span>,t.a = x,t.b = <span class="number">1</span>;</span><br><span class="line">		y = (p+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span>(y)&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&amp;<span class="number">1</span>) res=res*t;</span><br><span class="line">			t=t*t;</span><br><span class="line">			y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ans1 = res.a,ans2 = (p-ans1)%p;</span><br><span class="line">		<span class="keyword">if</span>(ans1==ans2) cout&lt;&lt;ans1&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(ans1&gt;ans2) <span class="built_in">swap</span>(ans1,ans2);</span><br><span class="line">			cout&lt;&lt;ans1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans2&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -643,6 +780,24 @@
 <p>如果不，那么当且仅当棋子在 $(1,2)$ 或者 $(2,1)$ 的时候一定会移动到上面三个位置之一，这就是终止态，先手必败。</p>
 <p>然后按照 SG 函数合并即可，代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 305</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,n,x,y,ans,i,j,sg[N][N],temp;</span><br><span class="line"><span class="function">ll <span class="title">dfs</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) <span class="keyword">return</span> <span class="number">10000</span>;</span><br><span class="line">	<span class="keyword">if</span>(sg[x][y]!=<span class="number">-1</span>) <span class="keyword">return</span> sg[x][y];</span><br><span class="line">	<span class="type">bool</span> vis[<span class="number">1005</span>];</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=x;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=y;i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=<span class="built_in">min</span>(x,y);i++)&#123;</span><br><span class="line">		ll temp = <span class="built_in">dfs</span>(x-i,y-i);</span><br><span class="line">		<span class="keyword">if</span>(temp&lt;=<span class="number">1000</span>) vis[temp]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;;i++) <span class="keyword">if</span>(!vis[i]) <span class="keyword">return</span> sg[x][y]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">memset</span>(sg,<span class="number">-1</span>,<span class="built_in">sizeof</span>(sg));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">100</span>;j++) <span class="built_in">dfs</span>(i,j);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">0</span>,temp=<span class="number">0</span>;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">while</span>(n--)&#123;</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">			<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>||(x==y)) temp=<span class="number">1</span>;</span><br><span class="line">			ans^=sg[x][y];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(ans||temp) cout&lt;&lt;<span class="string">&quot;^o^\n&quot;</span>;</span><br><span class="line">		<span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;T_T\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -716,6 +871,21 @@
 <p>3、做题时不能焦躁，这样子会导致简单的题反而想复杂做不起。</p>
 <p>4、还要善于发现题目的性质，数学功底要扎实，最好把题目内容用公式表达出来，这样更加清晰明了。</p>
 <p>5、最后，本周总评：85&#x2F;100分。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>总结</category>
@@ -1315,6 +1485,21 @@
 <h1 id="Day-2-文件"><a href="#Day-2-文件" class="headerlink" title="Day-2 文件"></a>Day-2 文件</h1><p><a href="/text/t1.zip">here</a></p>
 <h1 id="合影"><a href="#合影" class="headerlink" title="合影"></a>合影</h1><p><img src="/img/THUWC2024.jpg"></p>
 <p><img src="/img/PKUWC2024.jpg"></p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>游记</category>
@@ -1400,6 +1585,21 @@
 <p>整体二分求解很简单，$\operatorname{solve}(l,r,s,t)$ 表示 $f_l \sim f_r$ 的决策点一定位于 $s \sim t$ 中，然后每次找到 $mid &#x3D; \dfrac{l+r}{2}$ 的决策点进行递归，层数一共有 $n$ 层，每层遍历 $s \sim t$，故时间复杂度为 $n \log n$。</p>
 <p>注意，每层仅可遍历 $l \sim r$ 和 $s \sim t$，不可遍历其它内容，除非时间复杂度确定，不然的话无法保证 $\log$ 级别的消耗。（类似于遍历 $l \sim t$）</p>
 <p>最后转移即可。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1548,6 +1748,21 @@
 <h1 id="无向图关于边的连通性"><a href="#无向图关于边的连通性" class="headerlink" title="无向图关于边的连通性"></a><strong>无向图关于边的连通性</strong></h1><p>更少了。</p>
 <p>所有题目大概就是缩完点之后在树上跑一个 DP 就可以了，感兴趣的可以做一下 <a href="https://www.luogu.com.cn/problem/P8867">P8867 [NOIP2022] 建造军营</a>。</p>
 <p>以上就是第一部分图论学习笔记，下一部分预计：二分图，网络流，费用流等。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1602,6 +1817,21 @@
 <p>在执行 kruskal 的过程中，如果需要连接 $x$ 和 $y$ 的边，然后新建一个节点 $p$，$p$ 的权值为这条边的权值，然后 $ls_p \gets x,rs_p \gets y$。</p>
 <p>我们最后发现这样子构建出来的树也是一棵二叉树，然后就可以执行最大值的最小值或者最小值的最大值的一些 dp 问题。</p>
 <p>或者是一棵树上的边权最小值或者最大值之类的题目。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1647,6 +1877,21 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 2000005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> K 1005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	ll id,x;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> node&amp; a)<span class="type">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a.x&lt;x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">ll n,m,i,j,id[K][K],id2[K][K],s,t=<span class="number">1</span>,x,la[N],ne[N],to[N],val[N],tot,dis[N],a[K][K],b[K][K],c[K][K],d[K][K];</span><br><span class="line">priority_queue&lt;node&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">merge</span><span class="params">(ll x,ll y,ll z,ll z2)</span></span>&#123;</span><br><span class="line">	tot++,ne[tot] = la[x],la[x] = tot,to[tot] = y,val[tot] = z;</span><br><span class="line">	tot++,ne[tot] = la[y],la[y] = tot,to[tot] = x,val[tot] = z2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dijkstra</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ll i=s;i&lt;=t;i++) dis[i]=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	dis[s]=<span class="number">0</span>;</span><br><span class="line">	q.<span class="built_in">push</span>((node)&#123;s,<span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())&#123;</span><br><span class="line">		node tmp = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(dis[tmp.id]!=tmp.x) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll i=la[tmp.id];i;i=ne[i])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[to[i]]&gt;tmp.x+val[i])&#123;</span><br><span class="line">				dis[to[i]] = tmp.x+val[i];</span><br><span class="line">				q.<span class="built_in">push</span>((node)&#123;to[i],dis[to[i]]&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;dis[t]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	n++,m=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++) id[i][j]=t++;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;a[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;b[i][j];</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++) <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;m;i++) cin&gt;&gt;c[j][i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++) <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++) cin&gt;&gt;d[i][j];</span><br><span class="line">   <span class="comment">//注意，从 s 连出去的边边权都是顺着的（ab数组），连向 s 的边边权都是 0；t 亦是如此。</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从上连向下的边边权就是 a，反过来边权就是 c，可以理解为不变。（ac 是从左到右，从右到左的数组）</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">//但是从左连向右的边边权就是 d，反过来边权就是 b，可以理解为反向。（bd 是从上到下，从下到上的数组）</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">0</span>) <span class="built_in">merge</span>(s,id[i+<span class="number">1</span>][j],a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(i==n<span class="number">-1</span>) <span class="built_in">merge</span>(id[i][j],t,a[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i+<span class="number">1</span>][j],a[i][j],c[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(j==<span class="number">0</span>) <span class="built_in">merge</span>(id[i][j+<span class="number">1</span>],t,b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(j==m<span class="number">-1</span>) <span class="built_in">merge</span>(s,id[i][j],b[i][j],<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">merge</span>(id[i][j],id[i][j+<span class="number">1</span>],d[i][j],b[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">dijkstra</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">7</span></span><br><span class="line"><span class="comment">8</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">10 6 7 2 1 6</span></span><br><span class="line"><span class="comment">8 9 4 5 10 7</span></span><br><span class="line"><span class="comment">1 6 1 8 6 4</span></span><br><span class="line"><span class="comment">3 1 9 9 2 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
 <p>特别地，如果是一般的平面图需要让我们找到对偶图的话，我们可能需要用到最小左转法，这个知识点的内容太过高深，不在我们的讨论范围内。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1739,6 +1984,21 @@
 <p>这些问题通常通过修改匈牙利算法的顺序或者重复执行查找增广路的过程得出。</p>
 <p>并且还可以通过二分得到二分图最大匹配的前提下最大的边权最小是多少。</p>
 <p>需要灵活运用匈牙利算法。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1844,6 +2104,21 @@
 <li><p>一定要沉下气应战，能打的暴力就要打了，而且不要把题目想得太复杂。</p>
 </li>
 </ul>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>总结</category>
@@ -1995,6 +2270,21 @@
 <p>并且它们都是先建图，然后考虑各种反悔边，值得一提的是这些图一般都很有规律（忽略边权），便于维护。</p>
 <p>还可以直接用贪心来做的题目，但是这个不是重点就跳过了。</p>
 <p>那么，网络流就到此结束了。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2017,6 +2307,21 @@
 <p>$cnt$ 是子树元素个数，然后 $trie_{i,j}$ 就是从 $i$ 经过字符为 $j$ 的边到达的节点，我们就可以愉快地树上 统计&#x2F;dp 了。</p>
 <p>具体操作同线段树，也是处理一个前缀的序列问题（字符串的前后缀，异或的结果等）。</p>
 <p>可持久化 trie 大概就是这些。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2053,6 +2358,21 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout);</span><br></pre></td></tr></table></figure>
 
 <p>否则会没有输出。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2139,6 +2459,21 @@
 <p>即使很多题目都可以用奇奇怪怪的 hash AC，但是这种方法也不失于一种正确性稳定的算法。</p>
 <p>综上，这是我在学习 KMP 时候的一些想法，如有不足请大家多多指出，笔者也好修改这篇文章，以免误导更多的读者。</p>
 <p>—The End—</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2345,6 +2680,21 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,mod,i,j,dp[<span class="number">405</span>][<span class="number">405</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;mod;</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">			dp[i+<span class="number">1</span>][j+<span class="number">1</span>] = (dp[i+<span class="number">1</span>][j+<span class="number">1</span>]+dp[i][j]*(j+<span class="number">1</span>))%mod;</span><br><span class="line">			dp[i+<span class="number">1</span>][j] = (dp[i+<span class="number">1</span>][j]+dp[i][j]*<span class="number">2</span>*j)%mod;</span><br><span class="line">			dp[i+<span class="number">2</span>][j] = (dp[i+<span class="number">2</span>][j]+dp[i][j]*<span class="number">2</span>*j)%mod;</span><br><span class="line">			<span class="keyword">if</span>(j&gt;=<span class="number">2</span>)&#123;</span><br><span class="line">				dp[i+<span class="number">2</span>][j<span class="number">-1</span>] = (dp[i+<span class="number">2</span>][j<span class="number">-1</span>]+dp[i][j]*(j<span class="number">-1</span>)*<span class="number">2</span>)%mod;</span><br><span class="line">				dp[i+<span class="number">3</span>][j<span class="number">-1</span>] = (dp[i+<span class="number">3</span>][j<span class="number">-1</span>]+dp[i][j]*(j<span class="number">-1</span>))%mod;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;dp[n][<span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>总结其实都写在例题和习题讲评里面了，复制粘贴一遍其实没有用，重要的是去理解，并且收获自己的感受，这样才能让做题的思路更加敏捷精确。这就是插入 DP，一个非常巧妙但是很难理解的 DP 类型。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2563,6 +2913,26 @@
 <h4 id="证明-3"><a href="#证明-3" class="headerlink" title="证明"></a>证明</h4><p>略，详见 OI-wiki。</p>
 <h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>代码如下，当 $t&#x3D;0$ 的时候代表是无向图，当 $t&#x3D;1$ 的时候代表是有向图：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 605</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,t,x,y,z,a[N][N],i,j,k,mod=<span class="number">1e9</span>+<span class="number">7</span>,ans=<span class="number">1</span>,has,res;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">		x--,y--;</span><br><span class="line">		<span class="keyword">if</span>(x==y) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(t==<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>&amp;&amp;y&gt;=<span class="number">1</span>) a[x][y]-=z,a[y][x]-=z;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>) a[x][x]+=z;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;=<span class="number">1</span>) a[y][y]+=z;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=<span class="number">1</span>&amp;&amp;y&gt;=<span class="number">1</span>)a[x][y]-=z;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;=<span class="number">1</span>) a[y][y]+=z;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	n--;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++) a[i][j]=(a[i][j]%mod+mod)%mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">while</span>(a[i][i])&#123;</span><br><span class="line">				res = a[j][i]/a[i][i];</span><br><span class="line">				<span class="keyword">for</span>(k=i;k&lt;=n;k++) a[j][k]=(a[j][k]-a[i][k]*res%mod+mod)%mod;</span><br><span class="line">				<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">swap</span>(a[i],a[j]),has^=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=n)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) ans=ans*a[i][i]%mod;</span><br><span class="line">	<span class="keyword">if</span>(has) ans=(mod-ans)%mod;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Input:</span></span><br><span class="line"><span class="comment">2 998244353</span></span><br><span class="line"><span class="comment">1 4</span></span><br><span class="line"><span class="comment">1 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Output:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2612,6 +2982,21 @@
 <p>$$<br>sum&#x3D;\dfrac{1}{24}(k^6+6 \times k^3+3 \times k^4+6 \times k^3+8 \times k^2)<br>$$</p>
 <p>这就是一个经典的 Burnside 定理的运用。</p>
 <p>证明可以参考 Aaron_luomiao 的博客 <a href="https://www.luogu.com.cn/blog/Alm/burnside-yin-li-zheng-ming">here</a>，写得十分形象生动。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2666,6 +3051,26 @@
 <p>特别的，如果是其它二阶递推我们把特征方程写出来之后也含有根号，如果这个根号能够在模 $p$ 意义下表示出来，也需要计算最小周期，不能认为周期一定是 $p-1$ 或者 $2p+2$。</p>
 <p>寻找周期的代码（需要特判 $1 \le p \le 5$）：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,mod,n,i,ans,tempp,d[<span class="number">1000005</span>],tot,a[<span class="number">2</span>][<span class="number">2</span>],maps[<span class="number">2</span>][<span class="number">2</span>],temp[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(y==<span class="number">0</span>) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">gcd</span>(y,x%y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">char</span> <span class="title">nc</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">char</span> buf[<span class="number">1000000</span>],*p=buf,*q=buf;</span><br><span class="line">	<span class="keyword">return</span> p==q&amp;&amp;(q=(p=buf)+<span class="built_in">fread</span>(buf,<span class="number">1</span>,<span class="number">1000000</span>,stdin),p==q)?EOF:*p++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="type">char</span> c = <span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">&#x27;0&#x27;</span>||c&gt;<span class="string">&#x27;9&#x27;</span>)c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">&#x27;9&#x27;</span>&amp;&amp;c&gt;=<span class="string">&#x27;0&#x27;</span>)res=res*<span class="number">10</span>+c-<span class="string">&#x27;0&#x27;</span>,c=<span class="built_in">nc</span>();</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> obuf[<span class="number">1</span>&lt;&lt;<span class="number">21</span>],*p3=obuf; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">pc</span><span class="params">(<span class="type">char</span> c)</span></span>&#123; </span><br><span class="line">	p3-obuf&lt;=(<span class="number">1</span>&lt;&lt;<span class="number">20</span>)?(*p3++=c):(<span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout),p3=obuf,*p3++=c); </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123; </span><br><span class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) <span class="built_in">pc</span>(<span class="string">&#x27;-&#x27;</span>),x=-x; </span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">9</span>) <span class="built_in">write</span>(x/<span class="number">10</span>); </span><br><span class="line">	<span class="built_in">pc</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">times</span><span class="params">(ll a[<span class="number">2</span>][<span class="number">2</span>],ll b[<span class="number">2</span>][<span class="number">2</span>])</span></span>&#123;</span><br><span class="line">	temp[<span class="number">0</span>][<span class="number">0</span>] = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>]+a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>])%mod;</span><br><span class="line">	temp[<span class="number">0</span>][<span class="number">1</span>] = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>]+a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>])%mod;</span><br><span class="line">	temp[<span class="number">1</span>][<span class="number">0</span>] = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>]+a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>])%mod;</span><br><span class="line">	temp[<span class="number">1</span>][<span class="number">1</span>] = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>]+a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>])%mod;</span><br><span class="line">	a[<span class="number">0</span>][<span class="number">0</span>] = temp[<span class="number">0</span>][<span class="number">0</span>],a[<span class="number">0</span>][<span class="number">1</span>] = temp[<span class="number">0</span>][<span class="number">1</span>],a[<span class="number">1</span>][<span class="number">0</span>] = temp[<span class="number">1</span>][<span class="number">0</span>],a[<span class="number">1</span>][<span class="number">1</span>] = temp[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">getf</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">	a[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>,a[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>,a[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	maps[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>,maps[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>,maps[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>,maps[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p&amp;<span class="number">1</span>) <span class="built_in">times</span>(a,maps);</span><br><span class="line">		<span class="built_in">times</span>(maps,maps);</span><br><span class="line">		p&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(a[<span class="number">0</span>][<span class="number">0</span>]==<span class="number">0</span>&amp;&amp;a[<span class="number">0</span>][<span class="number">1</span>]==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">solve</span><span class="params">(ll p)</span></span>&#123;</span><br><span class="line">	ll now = p;</span><br><span class="line">	tot = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">2</span>;i*i&lt;=p;i++) <span class="keyword">while</span>(p%i==<span class="number">0</span>) d[++tot] = i,p/=i;</span><br><span class="line">	<span class="keyword">if</span>(p&gt;<span class="number">1</span>) d[++tot] = p;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=tot;i++) <span class="keyword">if</span>(<span class="built_in">getf</span>(now/d[i])) now/=d[i];</span><br><span class="line">	<span class="keyword">return</span> now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">check</span><span class="params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">qmi</span>(x,(y<span class="number">-1</span>)/<span class="number">2</span>,y)==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">sol</span><span class="params">(ll x)</span></span>&#123;</span><br><span class="line">	mod = x;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">2</span>) <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">3</span>) <span class="keyword">return</span> <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">4</span>) <span class="keyword">return</span> <span class="number">6</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">5</span>) <span class="keyword">return</span> <span class="number">20</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">check</span>(<span class="number">5</span>,x)?<span class="built_in">solve</span>(<span class="number">2</span>*x+<span class="number">2</span>):<span class="built_in">solve</span>(x<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">mt19937 <span class="title">rnd</span><span class="params">(<span class="number">141414</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	T=<span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">1</span>;</span><br><span class="line">		n=<span class="built_in">read</span>();</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">1</span>) ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">2</span>) ans=<span class="number">3</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">3</span>) ans=<span class="number">8</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">4</span>) ans=<span class="number">6</span>;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">5</span>) ans=<span class="number">20</span>;</span><br><span class="line">		<span class="keyword">if</span>(n&gt;<span class="number">5</span>)&#123;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;</span><br><span class="line">					tempp = <span class="built_in">sol</span>(i);</span><br><span class="line">					n /= i;</span><br><span class="line">					<span class="keyword">while</span>(n%i==<span class="number">0</span>) n/=i,tempp*=i;</span><br><span class="line">					ans = ans*tempp/<span class="built_in">gcd</span>(ans,tempp);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(n&gt;<span class="number">1</span>) tempp=<span class="built_in">sol</span>(n),ans = ans*tempp/<span class="built_in">gcd</span>(ans,tempp);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">write</span>(ans),<span class="built_in">pc</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">fwrite</span>(obuf,p3-obuf,<span class="number">1</span>,stdout);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2766,6 +3171,21 @@
 
 <p><strong>最后提醒一下，若操作节点编号为 $0$ 请不要操作，因为这是边界情况。</strong> </p>
 <p>学到这里，才算是真正入门了平衡树。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2793,6 +3213,21 @@
 <p>然后上面的 $\prod_{j \ne i}(x-x_j)$ 就不需要连续整数这个限制，预处理 $\prod(x-x_j)$ 的前后缀积，调用的时候把第 $i$ 项排除掉即可。</p>
 <p>这样的话即可做到 $O(k)$ 求某多项式任意点的值，同时小学数学也告诉我们 $k+1$ 个点唯一确定一个 $k$ 次函数，并且这个函数有唯一解，故算法正确。</p>
 <p>最后就是注意取模和逆元的问题，特别的，有 $f(x)\equiv f(x \bmod p)\pmod p$，这样也能解决大部分模数是质数的问题了。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2864,6 +3299,21 @@
 <p>$$<br>\begin{aligned}<br>&amp; \ \ \ \ \ \sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} [(i,k)&#x3D;1][(j,k)&#x3D;1]k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} [(k,ij)&#x3D;1]k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{k&#x3D;1}^{ij} k \sum_{d \mid k,d \mid ij} \mu(d) \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{d \mid ij} \mu(d)d \sum_{k&#x3D;1}^{\frac {ij} d}k \\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n \sum_{d \mid ij}  \mu(d)\frac {(d+ij)\frac {ij} d}{2}\\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \gcd(i,j)^n ij\varphi(ij)\\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} d^n \sum_{i&#x3D;1}^{\frac nd}\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]ijd^2\varphi(ijd^2) \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} d^n \sum_{i&#x3D;1}^{\frac nd}\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]ijd^2\frac{\varphi(id)\varphi(jd)d}{\varphi(d)} \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac nd}id\varphi(id)\sum_{j&#x3D;1}^{\frac md}[\gcd(i,j)&#x3D;1]jd\varphi(jd) \\<br>&amp;&#x3D; \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac nd}id\varphi(id)\sum_{j&#x3D;1}^{\frac md}jd\varphi(jd) \sum_{k \mid i,k \mid j} \mu(k)\\<br>&amp;&#x3D; \sum_{1 \le k\le n} \mu(k) \sum_{d&#x3D;1}^{n} \frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac n{dk}}idk\varphi(idk)\sum_{j&#x3D;1}^{\frac m{dk}}jdk\varphi(jdk) \\<br>T \gets dk \\<br>&amp;&#x3D; \sum_{T&#x3D;1}^{n} \sum_{d \mid T} \mu(\frac Td )\frac{d^{n+1}}{\varphi(d)} \sum_{i&#x3D;1}^{\frac n{T}}iT\varphi(iT)\sum_{j&#x3D;1}^{\frac m{T}}jT\varphi(jT)<br>\end{aligned}<br>$$</p>
 <p>$ f(T)&#x3D;\sum_{d \mid T} \mu(\frac Td )\frac{d^{n+1}}{\varphi(d)}$ 是一个积性函数和积性函数的狄利克雷卷积，所以仍然是积性函数，我们求出 $f(p^k)$，再用线性筛合并即可。</p>
 <p>后面两堆是一个狄利克雷后缀和，时间复杂度为 $O(n+n \log \log n)&#x3D;O(n \log \log n)$。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2981,6 +3431,21 @@
 <p>时间复杂度证明此处就不说了，但是总的时间复杂度大概是 $O(\dfrac{n^{\frac{3}{4}}}{\ln n})$。</p>
 <p>特别的，如果是求 $1 \sim n$ 中质数的和，把公式改为下面即可（其实就是动态规划）：</p>
 <p>$$<br>f(n,k)&#x3D;f(n,k-1)-p_k \times f(\lfloor \dfrac{n}{p_k} \rfloor,k-1)+\sum_{i&#x3D;1}^{k-1} p_i \times p_k<br>$$</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -3021,6 +3486,21 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;ll f,g,h;&#125;;</span><br><span class="line">ll T,n,a,b,c,inv2,inv6;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">node <span class="title">solve</span><span class="params">(ll n,ll a,ll b,ll c)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a==<span class="number">0</span>) <span class="keyword">return</span> (node)&#123;(b/c)*(n+<span class="number">1</span>)%mod,(b/c)%mod*(b/c)%mod*(n+<span class="number">1</span>)%mod,(b/c)*n%mod*(n+<span class="number">1</span>)%mod*inv2%mod&#125;;</span><br><span class="line">	<span class="keyword">if</span>(a&gt;=c||b&gt;=c)&#123;</span><br><span class="line">		node temp = <span class="built_in">solve</span>(n,a%c,b%c,c);</span><br><span class="line">		temp.g = (temp.g+<span class="number">2</span>*(b/c)%mod*temp.f%mod+<span class="number">2</span>*(a/c)%mod*temp.h%mod+(a/c)%mod*(a/c)%mod*n%mod*(n+<span class="number">1</span>)%mod*(<span class="number">2</span>*n+<span class="number">1</span>)%mod*inv6%mod+(b/c)*(b/c)%mod*(n+<span class="number">1</span>)%mod+(a/c)*(b/c)%mod*n%mod*(n+<span class="number">1</span>)%mod)%mod;</span><br><span class="line">		temp.h = (temp.h+(a/c)*n%mod*(n+<span class="number">1</span>)%mod*(<span class="number">2</span>*n+<span class="number">1</span>)%mod*inv6%mod+(b/c)*n%mod*(n+<span class="number">1</span>)%mod*inv2%mod)%mod;</span><br><span class="line">		temp.f = (temp.f+(a/c)*n%mod*(n+<span class="number">1</span>)%mod*inv2%mod+(b/c)*(n+<span class="number">1</span>)%mod)%mod;</span><br><span class="line">		<span class="keyword">return</span> temp;</span><br><span class="line">	&#125;</span><br><span class="line">	ll m = (a*n+b)/c;</span><br><span class="line">	node temp = <span class="built_in">solve</span>(m<span class="number">-1</span>,c,c-b<span class="number">-1</span>,a),ans;</span><br><span class="line">	ans.h = ((n*m%mod*(n+<span class="number">1</span>)%mod-temp.g-temp.f)*inv2%mod+mod)%mod;</span><br><span class="line">	ans.f = (n*m%mod-temp.f+mod)%mod;</span><br><span class="line">	ans.g = ((n*m%mod*(m+<span class="number">1</span>)%mod<span class="number">-2</span>*temp.h%mod<span class="number">-2</span>*temp.f%mod-ans.f)%mod+mod)%mod;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	inv2 = <span class="built_in">qmi</span>(<span class="number">2</span>,mod<span class="number">-2</span>,mod),inv6 = <span class="built_in">qmi</span>(<span class="number">6</span>,mod<span class="number">-2</span>,mod);</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">		node ans = <span class="built_in">solve</span>(n,a,b,c);</span><br><span class="line">		cout&lt;&lt;ans.f&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans.g&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;ans.h&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
 <h1 id="万能欧几里得算法"><a href="#万能欧几里得算法" class="headerlink" title="万能欧几里得算法"></a>万能欧几里得算法</h1><p>待补。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -3080,6 +3560,21 @@
 <p>同时，线性基还可以运用在树上，就是根节点到某个节点路径上的异或信息。</p>
 <p>线性基还经常和 <code>bitset</code> 连用，这个时候求最大值就不能取 <code>max</code> 了，必须是判断当前位的值，不然时间会耗费很多。</p>
 <p>当然，也有结合线段树分治的做法，也就是一段时间会有一个数加入集合，这个操作方式就跟并查集一样的，只是最后弹出的时候我们可以直接通过前缀线性基的方法（记录下标）判断就可以了。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -3150,6 +3645,21 @@
 <p>涉及到链相关的询问，一般都是剖分成 $u \to lca,lca \to v$ 的信息进行合并处理。</p>
 <p>涉及到层数&#x2F;深度相关的询问，一般都是利用一些区间的数据结构处理，并且还需要小小的容斥一下，即上文”经过 $y$ 到达 $pos$ 的节点“，因为 $x$ 内的节点已经处理过了，删除掉 $x$ 子树对于答案的贡献即可。</p>
 <p>点分树转化成普通的链的情况就是线段树，我们可以思考成树上的分治（本质也是如此）。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -3182,6 +3692,21 @@
 <li>2、如果某些选手最高排名相同，那么这些选手不超过3位（3个场地），枚举一下即可。</li>
 </ul>
 <p>Updating…</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>总结</category>
@@ -3605,6 +4130,21 @@
 <p>C 题不做评价，一眼线性规划，众所周知线性规划要么使用对偶性解决，要么用 dp 或者网络流，前两者据说都可以做，但是我怼了一个最小割上去，想了半天发现伪了，然后想了一下 dp，发现最后剩下来的是一个凸多边形，这个凸多边形的端点都是 <code>#</code>，结果第二个样例就把我 hack 了。</p>
 <p>D 题没来得及看，C 题耽误太多时间了，考试把那份 2000+b 的代码交上去，没想到得了 10 分。</p>
 <p>寒假期间做什么题都有点吃力，不知道为什么。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
 ]]></content>
       <categories>
         <category>总结</category>

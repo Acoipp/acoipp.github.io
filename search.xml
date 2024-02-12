@@ -4271,7 +4271,7 @@
   <entry>
     <title>后缀数组 &amp; 后缀自动机</title>
     <url>/2024/02/12/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84-%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</url>
-    <content><![CDATA[<h1 id="后缀数组"><a href="#后缀数组" class="headerlink" title="后缀数组"></a>后缀数组</h1><h1 id="后缀自动机"><a href="#后缀自动机" class="headerlink" title="后缀自动机"></a>后缀自动机</h1><p>待补。</p>
+    <content><![CDATA[<h1 id="后缀数组"><a href="#后缀数组" class="headerlink" title="后缀数组"></a>后缀数组</h1><h1 id="后缀平衡树"><a href="#后缀平衡树" class="headerlink" title="后缀平衡树"></a>后缀平衡树</h1><h1 id="后缀自动机"><a href="#后缀自动机" class="headerlink" title="后缀自动机"></a>后缀自动机</h1><p>待补。</p>
 <script src="https://giscus.app/client.js"
         data-repo="acoipp/blog_pl"
         data-repo-id="R_kgDOLPCpEQ"
@@ -4296,6 +4296,7 @@
         <tag>OI</tag>
         <tag>后缀数组</tag>
         <tag>后缀自动机</tag>
+        <tag>后缀平衡树</tag>
       </tags>
   </entry>
 </search>

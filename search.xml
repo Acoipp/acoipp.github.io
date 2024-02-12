@@ -3531,7 +3531,7 @@
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="求最大值"><a href="#求最大值" class="headerlink" title="求最大值"></a>求最大值</h3><p>我们可以从高位到低位枚举线性基的每一个位上的值，每一次都让 $ans \gets \max(ans,ans \operatorname{xor} p_i)$。</p>
 <p>当然，也可以判断 $ans$ 的第 $i$ 位和 $p_i$ 的第 $i$ 位（肯定为 $1$）异或起来是不是 $1$，如果是就异或 $p_i$ 即可。</p>
 <p>这样子的结论贪心显然可得，代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ll ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=len;i&gt;=<span class="number">0</span>;i--) <span class="keyword">if</span>(((p[i]&gt;&gt;i)&amp;<span class="number">1</span>)^ans[i]) ans=ans^p[i];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll i=len;i&gt;=<span class="number">0</span>;i--) <span class="keyword">if</span>(((p[i]&gt;&gt;i)&amp;<span class="number">1</span>)^ans[i]) ans=ans^p[i];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="求最小值"><a href="#求最小值" class="headerlink" title="求最小值"></a>求最小值</h3><p>首先判断有没有集合异或起来等于 $0$，即前面的 <code>has</code> 变量是否为 $1$。</p>
 <p>然后输出线性基的 $i$ 最小的，$p_i$ 不为 $0$ 的 $p_i$ 即可。</p>
@@ -4138,6 +4138,12 @@
 <p>C 题 K-D Tree 写得比较快，但是算了空间铁定 MLE，没事，先交上去，MLE 72，然后根据中间 $4$ 个点的特殊性质做了一下优化就 MLE 88 了。</p>
 <p>最后 $100+100+88$ 结束，补完题之后思考了一下，B 题其实是可以做到通过 Hack 数据的，但是当时不知道为什么想不出来（</p>
 <p>C 题确实比较神仙，K-D Tree 上可以用 tag 来剪枝，并且 K-D Tree 就是现成的一个堆，学到了。</p>
+<h1 id="2024-2-11-比赛总结"><a href="#2024-2-11-比赛总结" class="headerlink" title="2024-2-11 比赛总结"></a>2024-2-11 比赛总结</h1><p>A 题一如既往卡常，而且是道原神题目（</p>
+<p>A 题两个做法，线段树&#x2F;并查集，主要是要维护 <code>pushup</code> 比较困难，时间复杂度是 $O(n \log n)$。（数据随机性较强）</p>
+<p>或者是长链剖分可以做到 $O(n)$，最后用 <code>nth_element</code> 解决第 $k$ 大的数就可以了，甚至不需要考虑相等的情况，因为数据随机，相等的情况概率小到可以忽略不计。</p>
+<p>B 题在做 A 题的时候看了一下，大概知道怎么做，但是很难写，于是就去想 A 题了。</p>
+<p>C 题没看，在全力搞 A 题，怪就怪在当时没有对长链剖分吃透导致的。</p>
+<p>学知识点还是吃透为好，不然后患无穷，就像这样。</p>
 <script src="https://giscus.app/client.js"
         data-repo="acoipp/blog_pl"
         data-repo-id="R_kgDOLPCpEQ"
@@ -4260,6 +4266,36 @@
         <tag>OI</tag>
         <tag>数据结构</tag>
         <tag>K-D Tree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>后缀数组 &amp; 后缀自动机</title>
+    <url>/2024/02/12/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84-%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</url>
+    <content><![CDATA[<h1 id="后缀数组"><a href="#后缀数组" class="headerlink" title="后缀数组"></a>后缀数组</h1><h1 id="后缀自动机"><a href="#后缀自动机" class="headerlink" title="后缀自动机"></a>后缀自动机</h1><p>待补。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>OI</tag>
+        <tag>后缀数组</tag>
+        <tag>后缀自动机</tag>
       </tags>
   </entry>
 </search>

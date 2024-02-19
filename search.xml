@@ -4427,4 +4427,86 @@
         <tag>吉司机线段树</tag>
       </tags>
   </entry>
+  <entry>
+    <title>鞅 &amp; 停时定理</title>
+    <url>/2024/02/19/%E9%9E%85-%E5%81%9C%E6%97%B6%E5%AE%9A%E7%90%86/</url>
+    <content><![CDATA[<h1 id="鞅-停时定理"><a href="#鞅-停时定理" class="headerlink" title="鞅 &amp; 停时定理"></a>鞅 &amp; 停时定理</h1><h2 id="期望-概率"><a href="#期望-概率" class="headerlink" title="期望 &amp; 概率"></a>期望 &amp; 概率</h2><p>先复习一下期望和概率，设 $P(A)$ 表示 $A$ 时间发生的概率，容易发现 $P(A) \in [0,1]$，并且 $\sum P(A)&#x3D;1$。（对于同一个事件的不同衍生）</p>
+<p>设 $E(A)$ 表示 $A$ 事件发生的期望，设 $P_1(A),P_2(A),\dots,P_k(A)$ 表示 $A$ 这个事件所有衍生的概率，每个衍生有一个权值为 $val_i$，则 $E(A)&#x3D; P_1(A)val_1+P_2(A)val_2 + \dots P_k(A)val_k$。</p>
+<p>我们也可以把 $A$ 看做一个变量，此时 $E(A)$ 表示 $A$ 最后的带权平均值。</p>
+<blockquote>
+<p>例如：$A$ 有 $0.3$ 的概率取 $5$，有 $0.7$ 的概率取 $10$，则 $E(A)&#x3D;5 \times 0.3+10 \times 0.7&#x3D;8.5$。</p>
+</blockquote>
+<p>这时设 $x,y$ 为任意实数，则 $E(Ax+y)&#x3D;xE(A)+y$，$B$ 为另外一个随机变量，则 $E(A+B)&#x3D;E(A)+E(B)$。</p>
+<p>上面这条性质叫做 <strong>期望的线性性</strong>。</p>
+<p>如果随机变量 $X,Y$ 的期望存在，并且 <strong>$X,Y$ 相互独立</strong>，那么还有 $E(XY)&#x3D;E(X)E(Y)$，这个可以用上面的 $\sum P(A)&#x3D;1$​ 展开证明。</p>
+<h2 id="鞅"><a href="#鞅" class="headerlink" title="鞅"></a>鞅</h2><p>对于一组随机的过程，即一步一步执行的各个状态 $X_0,X_1,X_2,\dots,X_k$，也称作<strong>离散型随机变量</strong>，不离散的是什么呢，那需要用到积分，因为积分是研究面积，就是连续的变量取值范围之和，此处不展开讨论。</p>
+<p>如果 $E(X_{k+1}|X_0,X_1,\dots,X_k)&#x3D;X_k$，那么我们称 $X$ 这组随机变量为<strong>鞅</strong>。</p>
+<p>上面这句话就是说如果我们根据 $X_0,X_1,\dots,X_k$ 这一些变量的取值，算出 $X_{k+1}$（下一个变量）的期望值<strong>恰好等于</strong> $X_k$，那么这就是鞅。</p>
+<blockquote>
+<p>假设我们抛硬币，正面获得 $1$ 的收益，反面获得 $-1$ 的收益，假设当前收益为 $a$，下一步收益的期望也是 $a$，于是抛硬币各个时间段我们的得分构成的一组离散型随机变量就被称作鞅。</p>
+</blockquote>
+<p>同时这也被称作<strong>公平博弈游戏</strong>。</p>
+<h2 id="停时定理"><a href="#停时定理" class="headerlink" title="停时定理"></a>停时定理</h2><p>因为 $E(X_{k+1}|X_0,X_1,\dots,X_k)&#x3D;X_k$，采用数学归纳法我们可得 $E(X_t)&#x3D;X_0$，这就被称作停时定理。</p>
+<p>对于任何一个鞅都有上面的这种定理，可以理解成不论什么时间停止观测（抛硬币）的期望收获都等于自己最开始的代价。</p>
+<h2 id="势能函数"><a href="#势能函数" class="headerlink" title="势能函数"></a>势能函数</h2><p>对于一组局面 $(A_0,A_1,A_2,\dots,A_k)$，设 $\phi(A_i)$ 表示 $A_i$ 这个局面的一个函数，这个函数本质上是对每个局面规定了一个键值，用于之后的探讨。</p>
+<p>例如当前有 $5$ 堆石子，每堆石子的数量分别是 $1,2,3,4,5$，那么这个局面的 $\phi$ 就可以声明为 $f(1)+f(2)+f(3)+f(4)+f(5)$，值得注意的是，$\phi$ 不仅可以是一个值，还可以是另外的函数的取值之和，我们待会要做的就是解出来 $f$，进而算出 $\phi$ 值。</p>
+<p>考虑构造一个势能函数，设 $A_t$ 是终止态，我们需要求出到达终止态的期望时间，也就是 $E(t)$。</p>
+<p>构造一个 $\phi$ 函数使得 $E(\phi(A_{i+1})| \phi(A_0),\phi(A_1),\dots,\phi(A_i))&#x3D;A_i-1$，那么我们可以发现：</p>
+<ul>
+<li>$E(\phi(A_i))$ 随着时间减少，可以理解为，随着时间势能会减少。</li>
+</ul>
+<p>我们同时需要保证终止态的 $\phi$ 值是唯一的并且是常数，不然我们无法判断哪个是终止态，也就是 $\forall 0 \le i&lt;t,\phi(A_i) \ne \phi(A_t)$。</p>
+<p>再次构造序列 $X_i&#x3D;\phi(A_i)+i$，那么我们发现 $E(X_{n+1} | X_0,X_1,\dots,X_n)&#x3D;X_n$，即 $X$ 是一个鞅，那么就有 $E(X_t)&#x3D;E(X_0)$，所以我们得到：<br>$$<br>E(X_t)&#x3D;E(\phi(A_t)+t)&#x3D;E(\phi(A_t))+E(t)<br>$$<br>所以：<br>$$<br>E(t)&#x3D;E(X_0)-E(\phi(A_t))&#x3D;E(\phi(A_0))-E(\phi(A_t))<br>$$<br>因为 $\phi(A_t)$ 和 $\phi(A_0)$ 是定值，所以 $E(\phi(A_0))&#x3D;\phi(A_0),E(\phi(A_t))&#x3D;\phi(A_t)$。</p>
+<p>最后得到：<br>$$<br>E(t)&#x3D;\phi(A_0)-\phi(A_t)<br>$$<br>于是我们只需要知道我们定义的 $\phi$ 函数初始局面的值和最终局面的值就可以算出来初始局面到最终局面的期望时间了。</p>
+<p><strong>注意：$\phi$ 函数不是随机变量，只有 $X$ 序列是一组随机变量，因为我们不知道 $A_i$ 和 $i$ 具体是多少。</strong></p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="例题-1"><a href="#例题-1" class="headerlink" title="例题 1"></a>例题 1</h3><p><a href="https://www.luogu.com.cn/problem/CF1025G">CF1025G-Company Acquisitions</a></p>
+<p>首先按照上面的形式，设 $\phi(A)$ 表示 $A$ 这个局面的势能函数，因为每次操作跟每个节点后接了多少节点有关，设 $i$ 号节点后接了 $a_i$ 个节点，设 $f(i)$ 表示后接 $i$ 个节点的势能函数，那么 $\phi(A)&#x3D;\sum_{i&#x3D;1}^n f(a_i)$，这里的 $a_i$ 是在 $A$ 局面下的值。</p>
+<p>因为 $E(\phi(A’))&#x3D;\phi(A)-1$，那么设两次操作的节点分别后接了 $x,y$ 个节点，那么：<br>$$<br>f(x)+f(y)-1&#x3D; \frac {1}{2}((f(x+1)+yf(0))+(f(y+1)+xf(0)))<br>$$<br>因为 $f$ 和 $\phi$ 函数我们都可以自定义，所以设 $f(0)&#x3D;0$，那么上式变为 $f(x)+f(y)-1&#x3D;\frac 12(f(x+1)+f(y+1))$。</p>
+<p>因为 $f(x)$ 和 $f(y)$ 相互独立，所以 $2f(x)-1&#x3D; f(x+1)$，归纳一下就是 $f(x)&#x3D;1-2^x(1 \le x)$​。</p>
+<p>$\phi(P_0) &#x3D; \sum_{i&#x3D;1}^n f(d_i)$，$\phi(P_t) &#x3D; f(n-1)$，答案就是 $\phi(P_0)-\phi(P_t)$。</p>
+<p>所以这道题 $O(n \log n)$ 做即可。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 505</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,a[N],x,i,f[N],ans;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t=a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); </span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;x,a[<span class="built_in">max</span>(x,<span class="number">0ll</span>)]++;</span><br><span class="line">	f[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) f[i]=(<span class="built_in">qmi</span>(<span class="number">2</span>,i,mod)<span class="number">-1</span>+mod)%mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) ans=(ans-f[a[i]]+mod)%mod;</span><br><span class="line">	ans=((ans-(<span class="number">1</span>-<span class="built_in">qmi</span>(<span class="number">2</span>,n<span class="number">-1</span>,mod)))%mod+mod)%mod;</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-2"><a href="#例题-2" class="headerlink" title="例题 2"></a>例题 2</h3><p><a href="https://www.luogu.com.cn/problem/CF850F">CF850F Rainbow Balls</a></p>
+<p>设 $\phi(A)&#x3D;\sum_{i&#x3D;1}^n f(a_i)$，然后考虑执行一步之后 $\phi$ 的变化，据此推导出 $f$ 函数的值。</p>
+<p>此处 $n$ 为颜色的数量，$a_i$ 为颜色为 $i$ 的球的数量，$m &#x3D; \sum_{i&#x3D;1}^n a_i$。</p>
+<p>则 $\phi(A)-1 &#x3D; E(\phi(A’))$，展开一下公式：<br>$$<br>\sum_{i&#x3D;1}^m f(a_i)-1&#x3D; \frac 1{m(m-1)}\sum_{i&#x3D;1}^m ((a_i(a_i-1) +(m-a_i)(m-a_i-1))f(a_i)+a_i(m-a_i)f(a_i-1)f(a_i+1))<br>$$<br>化简之后就可以得到：<br>$$<br>\sum \frac {a_i(m-a_i)}{m(m-1)} (f(a_i-1)+f(a_i+1)-2f(a_i))&#x3D;-1<br>$$<br>因为 $\sum \frac {-a_i}{m}&#x3D;-1$，所以构造 $(f(a_i-1)+f(a_i+1)-2f(a_i))&#x3D;\frac {-m+1}{m-a_i}$ 就可以满足上述条件。</p>
+<p>设 $g(i)&#x3D;f(i+1)-f(i)$，那么 $g(a_i)-g(a_i-1)&#x3D;\frac {-m+1}{m-a_i}$，所以递推 $g$ 求出 $f$ 即可，最后输出 $\phi(P_0)-\phi(P_t)$ 即可。</p>
+<p>据此不难写出代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,a[N],m,i,begg,endd,f[N],g[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t = a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i],m+=a[i];</span><br><span class="line">	g[<span class="number">0</span>]=(<span class="number">1</span>+mod-m)*<span class="built_in">qmi</span>(m,mod<span class="number">-2</span>,mod)%mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">1e5</span>;i++)&#123;</span><br><span class="line">		g[i]=(g[i<span class="number">-1</span>]+(<span class="number">1</span>+mod-m)*<span class="built_in">qmi</span>(m-i,mod<span class="number">-2</span>,mod))%mod;</span><br><span class="line">		f[i]=(f[i<span class="number">-1</span>]+g[i<span class="number">-1</span>])%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) begg=(begg+f[a[i]])%mod;</span><br><span class="line">	endd=(mod-m*(m<span class="number">-1</span>)%mod)%mod;</span><br><span class="line">	cout&lt;&lt;(begg-endd+mod)%mod&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题-3"><a href="#例题-3" class="headerlink" title="例题 3"></a>例题 3</h3><p><a href="https://www.luogu.com.cn/problem/CF1479E">CF1479E School Clubs</a></p>
+<p>依然是设 $\phi(A)&#x3D;\sum_{i&#x3D;1}^m f(a_i)$，然后考虑执行一步之后 $\phi$ 的变化，据此推导出 $f$ 函数的值。</p>
+<p>这道题的公式推导较为复杂，这里就不赘述了，留作之后复习用。</p>
+<p>代码如下，特别注意 $O(4 \times 10^8 \log)$ 是不能过的，要优化到 $O(4 \times 10^8)$。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,i,j,now,sum,a[N],begg,endd,now1,now2,now3,inv=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>,t = a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%mod;</span><br><span class="line">		t=t*t%mod;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i],sum+=a[i];</span><br><span class="line">	<span class="built_in">sort</span>(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br><span class="line">	now1=<span class="number">0</span>,now2=<span class="number">-2</span>,now3=((<span class="number">3</span>*sum<span class="number">-2</span>)*now2%mod-(<span class="number">2</span>*sum<span class="number">-1</span>)*now1%mod)%mod;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>,now=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(now&lt;a[i])&#123;</span><br><span class="line">			now++;</span><br><span class="line">			<span class="keyword">if</span>(sum-now+<span class="number">1</span>&lt;sum) inv=inv*(sum-now+<span class="number">1</span>)%mod;</span><br><span class="line">			now1=now2,now2=now3,now3=((<span class="number">3</span>*sum<span class="number">-2</span>*(now+<span class="number">1</span>))*now2-(<span class="number">2</span>*sum-(now+<span class="number">1</span>))*now1%mod*(sum-now)%mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">		begg=(begg+now1*<span class="built_in">qmi</span>(inv,mod<span class="number">-2</span>)%mod+mod)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(now&lt;sum)&#123;</span><br><span class="line">		now++;</span><br><span class="line">		<span class="keyword">if</span>(sum-now+<span class="number">1</span>&lt;sum) inv=inv*(sum-now+<span class="number">1</span>)%mod;</span><br><span class="line">		now1=now2,now2=now3,now3=((<span class="number">3</span>*sum<span class="number">-2</span>*(now+<span class="number">1</span>))*now2-(<span class="number">2</span>*sum-(now+<span class="number">1</span>))*now1%mod*(sum-now)%mod)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;(begg-now1*<span class="built_in">qmi</span>(inv,mod<span class="number">-2</span>)%mod+<span class="number">2</span>*mod)%mod&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<script src="https://giscus.app/client.js" 
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <tags>
+        <tag>数学</tag>
+        <tag>概率</tag>
+        <tag>期望</tag>
+        <tag>鞅</tag>
+        <tag>停时定理</tag>
+      </tags>
+  </entry>
 </search>

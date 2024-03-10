@@ -4122,7 +4122,7 @@
 <p>反过来，$A$ 也可以通过 $B$ 得出来：</p>
 <p>$$<br>A_n &#x3D; B_n-\sum_{i&#x3D;1}^{n-1} A_iB_{n-i}\frac in<br>$$</p>
 <p>当然，还有一种对于 $\ln(1+ax)$ 的化简公式：</p>
-<p>$$<br>\ln(1+ax) &#x3D; \sum_{i&#x3D;1}^{\infin}\frac 1i(-1)^{i-1}a^ix^i<br>$$</p>
+<p>$$<br>\ln(1+ax) &#x3D; \sum_{i&#x3D;1}^{\text{inf}}\frac 1i(-1)^{i-1}a^ix^i<br>$$</p>
 <p>如果我们需要求出第 $n$ 项在 exp 之后的值，直接保留前 $n$ 项就可以了。</p>
 <p><strong>注意：根据 $\ln,\exp$ 的定义，可得 $A_0&#x3D;0,B_0&#x3D;1$。</strong></p>
 <script src="https://giscus.app/client.js"
@@ -4180,7 +4180,7 @@
 <p>如果是计算三角形，答案取绝对值然后除以 $2$ 就可以了。</p>
 <p>因为向量可以平移，我们还可以用叉积来判断两个向量是否平行或者重合。</p>
 <h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><p>向量 $A$ 逆时针旋转 $\theta$，则得到新的向量 $A’&#x3D;(x \cos \theta-y \sin \theta,x \sin \theta+y \cos \theta)$。</p>
-<p>如果是旋转 $90\degree$ 的倍数，那么交换 $x,y$ 再视情况取反就可以了，这个分类讨论不难。</p>
+<p>如果是旋转 $\frac {\pi}{2}$ 的倍数，那么交换 $x,y$ 再视情况取反就可以了，这个分类讨论不难。</p>
 <h2 id="直线、射线和线段"><a href="#直线、射线和线段" class="headerlink" title="直线、射线和线段"></a>直线、射线和线段</h2><p>直线表达式常用的有两种写法 $ax+by+c&#x3D;0$ 和 $y&#x3D;kx+b$，两种写法都比较好用，但是我更喜欢后面的一种写法。</p>
 <p>线段可以用两个点直接表示，同时也可以写出包含此线段的直线。</p>
 <p>下面设直线 $l(A,B)$ 表示包含两个点 $A,B$ 的直线 $l$，则我们可以得到：</p>

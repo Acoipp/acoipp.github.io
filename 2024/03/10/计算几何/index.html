@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>计算几何 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,计算几何点和向量首先二维平面的点用 $(x,y)$ 表示，向量是一个具有方向和大小的线段，向量 $(x,y)$ 可以理解为从原点 $O(0,0)$ 向 $(x,y)$ 连接出去的一条线段，同时具有方,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="计算几何 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,计算几何点和向量首先二维平面的点用 $(x,y)$ 表示，向量是一个具有方向和大小的线段，向量 $(x,y)$ 可以理解为从原点 $O(0,0)$ 向 $(x,y)$ 连接出去的一条线段，同时具有方,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="计算几何 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,计算几何点和向量首先二维平面的点用 $(x,y)$ 表示，向量是一个具有方向和大小的线段，向量 $(x,y)$ 可以理解为从原点 $O(0,0)$ 向 $(x,y)$ 连接出去的一条线段，同时具有方,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">计算几何</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">计算几何</h1>
+        <div class="stuff">
+            <span>三月 10, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%87%B8%E5%8C%85/" rel="tag">凸包</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%90%91%E9%87%8F/" rel="tag">向量</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" rel="tag">计算几何</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%97%B5%E5%8F%AF%E5%A4%AB%E6%96%AF%E5%9F%BA%E5%92%8C/" rel="tag">闵可夫斯基和</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="计算几何"><a href="#计算几何" class="headerlink" title="计算几何"></a>计算几何</h1><h2 id="点和向量"><a href="#点和向量" class="headerlink" title="点和向量"></a>点和向量</h2><p>首先二维平面的点用 $(x,y)$ 表示，向量是一个具有方向和大小的线段，向量 $(x,y)$ 可以理解为从原点 $O(0,0)$ 向 $(x,y)$ 连接出去的一条线段，同时具有方向。</p>
+<p>当然，向量可以平移，平移后的向量用 $(A,B)$ 表示，$A,B$ 均为点，此时的向量等同于之前的 $(B_x-A_x,B_y-A_y)$（即把 $A$ 平移到原点的位置）</p>
+<p><strong>两点之间距离公式：$\sqrt{(A_x-B_x)^2+(A_y-B_y)^2}$，这就是一个向量的大小。</strong></p>
+<h3 id="向量的运算"><a href="#向量的运算" class="headerlink" title="向量的运算"></a>向量的运算</h3><ul>
+<li><p>向量 $(x,y)$ 加点 $A$，这个可以理解为将 $A$ 点顺着向量的方向移动，结果就是一个新的点 $(x+A_x,y+A_y)$。</p>
+</li>
+<li><p>向量 $(x,y)$ 加&#x2F;减向量 $(x’,y’)$，得到 $(x+x’,y+y’)$，这个没有太大的几何意义。</p>
+</li>
+<li><p>向量 $(x,y)$ 乘&#x2F;除实数 $k$ 得到 $(xk,yk)$，得到等比例放大&#x2F;缩小的向量。</p>
+</li>
+</ul>
+<h3 id="点积"><a href="#点积" class="headerlink" title="点积"></a>点积</h3><p>设 $|A|$ 表示向量 $A$ 的大小，那么定义向量 $A$ 和向量 $B$ 的点积是 $A\cdot B&#x3D; |A||B|\cos \theta$，其中 $\theta$ 是 $A,B$ 之间的夹角。</p>
+<p>点积的几何意义就是 $A$ 在 $B$ 上的投影长度乘以 $B$ 的模长。</p>
+<p>点积并不是很常用，计算它也不需要得到 $\theta$，只需要 $A_xB_x+A_yB_y$ 就好，公式推导需要用到三角函数，此处不再赘述。</p>
+<p>应用：若 $A \cdot B&gt;0$，则 $\theta$ 为锐角；若 $A \cdot B&#x3D;0$，则 $\theta$ 为直角，否则 $\theta$ 为钝角。</p>
+<h3 id="叉积"><a href="#叉积" class="headerlink" title="叉积"></a>叉积</h3><p>设 $|A|$ 表示向量 $A$ 的大小，那么定义向量 $A$ 和向量 $B$ 的叉积是 $A\times B&#x3D; |A||B|\sin \theta$，其中 $\theta$ 是 $A,B$ 之间的夹角。</p>
+<p>叉积的几何意义就是 $A$ 和 $B$ 两个向量形成的平行四边形的<strong>有向</strong>面积，即如果 $A$ 在 $B$ 的上方，它就是负数；否则是正数。（逆时针围成的图形面积）</p>
+<p>如果 $A$ 和 $B$ 在同一直线（方向可能不同），那么 $A \times B&#x3D;0$。</p>
+<p>计算叉积也不需要得到 $\theta$，只需要 $A_xB_y-A_yB_x$ 就好，公式推导需要用到三角函数，此处不再赘述。</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>如果 $A \times B&gt;0$，则 $B$ 在 $A$ 的逆时针方向，如果 $A \times B&lt;0$，则 $B$ 在 $A$ 的顺时针方向；否则 $A,B$ 共线。</p>
+<p>如果计算三个点构成的有向平行四边形的面积，那就让其中某个点作为原点，然后计算新的向量 $A’ \times B’$ 即可。</p>
+<p>如果是计算三角形，答案取绝对值然后除以 $2$ 就可以了。</p>
+<p>因为向量可以平移，我们还可以用叉积来判断两个向量是否平行或者重合。</p>
+<h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><p>向量 $A$ 逆时针旋转 $\theta$，则得到新的向量 $A’&#x3D;(x \cos \theta-y \sin \theta,x \sin \theta+y \cos \theta)$。</p>
+<p>如果是旋转 $90\degree$ 的倍数，那么交换 $x,y$ 再视情况取反就可以了，这个分类讨论不难。</p>
+<h2 id="直线、射线和线段"><a href="#直线、射线和线段" class="headerlink" title="直线、射线和线段"></a>直线、射线和线段</h2><p>直线表达式常用的有两种写法 $ax+by+c&#x3D;0$ 和 $y&#x3D;kx+b$，两种写法都比较好用，但是我更喜欢后面的一种写法。</p>
+<p>线段可以用两个点直接表示，同时也可以写出包含此线段的直线。</p>
+<p>下面设直线 $l(A,B)$ 表示包含两个点 $A,B$ 的直线 $l$，则我们可以得到：</p>
+<h3 id="点和直线的位置关系"><a href="#点和直线的位置关系" class="headerlink" title="点和直线的位置关系"></a>点和直线的位置关系</h3><p>直线上任取两个点 $A,B$，与另外的点 $P$ 构成两个向量 $(B,P),(A,B)$，如果这两个向量的叉积 $&gt;0$，代表 $P$ 在直线右侧；$&lt;0$ $P$ 在直线左侧；否则 $P$ 在直线上。</p>
+<p>同理可以定义点和线段的位置关系，这个用上面的分类讨论一下就可以了。</p>
+<h3 id="点到直线距离"><a href="#点到直线距离" class="headerlink" title="点到直线距离"></a>点到直线距离</h3><p>已知点 $P$ 和直线 $l(A,B)$，可以求出 $AB$ 线段的长度，和 $P,A,B$ 用叉积求出平行四边形面积，除以 $AB$ 长度就是高，即点 $P$ 到 $l$ 的距离。</p>
+<h3 id="点在直线上的投影"><a href="#点在直线上的投影" class="headerlink" title="点在直线上的投影"></a>点在直线上的投影</h3><p>已知直线上两个点 $p_1,p_2$，以及直线外一个点 $p$ 求 $p$ 在 $l$ 上的投影 $p_0$。</p>
+<p>设 $k&#x3D;\dfrac {|p_0-p_1|}{|p_2-p_1|}$，那么求得 $k$ 就知道了 $p_0$ 的位置，因为 $k$ 是这两条线段的比值。</p>
+<p>根据点积的概念有 $A(p_1,p) \cdot B(p_1,p_2)&#x3D;A(p_1,p_0) \cdot B(p_1,p_2)$，所以 $|p_0-p_1|&#x3D;\dfrac {(p-p_1)\cdot (p_2-p_1)}{|p_2-p_1|}$，带入 $k$ 得到 $k&#x3D;\dfrac {(p-p_1)\cdot (p_2-p_1)}{|p_2-p_1||p_2-p_1|}$，所以 $p_0&#x3D;p_1+k(p_2-p_1)&#x3D;p_1+\dfrac {(p-p_1)\cdot (p_2-p_1)}{|p_2-p_1||p_2-p_1|}(p_2-p_1)$。</p>
+<p>同理可以得到点对于一条直线的对称点。</p>
+<h3 id="点到线段的距离"><a href="#点到线段的距离" class="headerlink" title="点到线段的距离"></a>点到线段的距离</h3><p>下面三个取最小值：</p>
+<ul>
+<li><p>点到线段某个端点的距离。</p>
+</li>
+<li><p>点到这个直线的距离。（点的投影在线段上）</p>
+</li>
+</ul>
+<h3 id="直线的位置关系"><a href="#直线的位置关系" class="headerlink" title="直线的位置关系"></a>直线的位置关系</h3><p>两条直线的位置关系直接使用叉积判断即可。</p>
+<p>两条线段的位置关系同理可以应用叉积的判断：</p>
+<ul>
+<li>如果每条线段的两个端点都在另外一条线段的直线的两侧，那么这两条线段相交。</li>
+</ul>
+<p>于是用最简单的叉积相乘 $&lt;0$ 判断即可。</p>
+<h3 id="直线交点"><a href="#直线交点" class="headerlink" title="直线交点"></a>直线交点</h3><p>可以通过两条直线的 $y&#x3D;kx+b$ 联立得到交点，但是这样的话精度和特判有点麻烦，我们可以考虑更加简单的做法。</p>
+<p>如果第一条直线上有两个点 $A,B$，第二条直线上有两个点 $C,D$，$P$ 在 $A,B,C,D$ 构成的四边形中间，也就是对角线交点，那么就有相似 $\dfrac {|DP|}{|CP|}&#x3D;\dfrac {S \triangle ABD}{S\triangle ABC}&#x3D;\dfrac {(A,D) \times (A,B))}{(A,B) \times (A,C)}$。</p>
+<p>注意：$A$ 在 $B$ 的下方，$C$ 在 $D$ 的左方。（有的时候不需要调整顺序）</p>
+<p>那么就有 $\dfrac {|DP|}{|CP|}&#x3D;\dfrac {D_x-P_x}{P_x-C_x}&#x3D;\dfrac {D_y-P_y}{P_y-C_y}$，联立两个方程，得到：</p>
+<p>$$<br>P_x &#x3D; \dfrac {S\triangle ABD C_x+S\triangle ABC D_x}{S\triangle ABD+S\triangle ABC}\<br>-\<br>P_y &#x3D; \dfrac {S\triangle ABD C_y+S\triangle ABC D_y}{S\triangle ABD+S\triangle ABC}<br>$$</p>
+<p>于是用叉积求三角形面积即可。</p>
+<p>线段的交点也就比较简单了，判断是否有交即可，然后求直线交点。</p>
+<h2 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a>多边形</h2><h3 id="点和多边形的关系"><a href="#点和多边形的关系" class="headerlink" title="点和多边形的关系"></a>点和多边形的关系</h3><p>一种方法就是暴力枚举每条边，然后对于每条边的两个端点按照顺序与这个点 $P$ 构成的向量作叉乘，这样的话我们会得到 $n$ 个结果，这 $n$ 个结果要么都是负数，要么都是正数，如果出现其它情况那就说明这个点在多边形外面。</p>
+<p>上面这种方法只能用于凸多边形，更加常用的方法是引出来一条射线，然后判断这条射线与多少条边相交，如果是奇数，那么就在多边形内部。</p>
+<p>但是需要注意的是我们可能需要进行多次随机取值，因为如果划到了端点就不好判断了，时间复杂度依然是 $O(n)$。</p>
+<h3 id="多边形的面积"><a href="#多边形的面积" class="headerlink" title="多边形的面积"></a>多边形的面积</h3><p>直接对于每个边的两个端点与原点构成的向量按照顺序作叉乘就可以了。</p>
+<p>最后需要除以 $2$ 并且取绝对值，因为每次求出的相当于是一个三角形的面积，这些三角形因为叉乘有正负，多加的会被容斥掉，所以这么做对凸多边形和凹多边形都可以。</p>
+<h2 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h2><p>例题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2742">P2742 [USACO5.1] 圈奶牛Fencing the Cows &#x2F;【模板】二维凸包</a>。</p>
+<p>大意：给定平面上若干个点，求出包含这些点的最小凸多边形的长度，这个凸多边形被称为凸包。</p>
+<p>解法如下：</p>
+<p>首先我们将所有点按照 $x$ 坐标排序，$x$ 坐标相同的按照 $y$ 坐标排序，这两个维度都是从小到大排序，分上下凸包考虑，此处以下凸包为例，设 $p_1,p_2,\dots,p_k$ 是当前凸包的点集，容易发现排序之后最左边的点和最右边的点都在凸包上。</p>
+<p>接下来考虑加入一个点 $x$，那么如果 $(p_{k-1},p_k) \times (p_{k-1},x)&lt;0$，说明 $(p_{k-1},x)$ 在 $(p_{k-1},p_k)$ 下方，应该弹出 $p_k$。</p>
+<p>所以每个元素最多被弹出一次，最后处理完上下凸包之后拼起来就可以了。（上凸包需要倒序枚举进栈，并且最后一个点不需要重复进栈）</p>
+<p>时间复杂度 $O(n \log n)$，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> db double</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">point</span>&#123;db x,y;&#125;p[N],sta[N];</span><br><span class="line"><span class="keyword">inline</span> point <span class="keyword">operator</span>-(point a,point b)&#123;<span class="keyword">return</span> (point)&#123;a.x-b.x,a.y-b.y&#125;;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">sgn</span><span class="params">(<span class="type">double</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">fabs</span>(x)&lt;eps) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;eps) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(point a,point b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">sgn</span>(a.x-b.x)==<span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">sgn</span>(b.y-a.y);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">sgn</span>(b.x-a.x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">cross</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> a.x*b.y-a.y*b.x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> db <span class="title">lenth</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));&#125;</span><br><span class="line">ll n,i,top,pos;</span><br><span class="line">db ans;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n,cout&lt;&lt;fixed&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;p[i].x&gt;&gt;p[i].y;</span><br><span class="line">	<span class="built_in">sort</span>(p+<span class="number">1</span>,p+n+<span class="number">1</span>,cmp);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=<span class="number">2</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p[i];</span><br><span class="line">	&#125;</span><br><span class="line">	pos=top;</span><br><span class="line">	<span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=pos+<span class="number">1</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;top;i++) ans+=<span class="built_in">lenth</span>(sta[i],sta[i+<span class="number">1</span>]);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个算法被称为 Andrew 算法。</p>
+<h3 id="点是否在凸包内部"><a href="#点是否在凸包内部" class="headerlink" title="点是否在凸包内部"></a>点是否在凸包内部</h3><p>凸包内最左边的那个点作为原点，剩下的点按照逆时针通过叉积排序就可以了。</p>
+<p>查找的时候二分出来它应该插入到哪个位置，得到前后两个点，然后根据叉积判断位置关系就可以了。</p>
+<p>还要特判边界情况，即在凸包最后一个点的外侧或者第一个点的外侧或者和原点重合了。</p>
+<p>时间复杂度 $O(\log n)$，甚至不需要扫描每一条边。</p>
+<h2 id="闵可夫斯基和"><a href="#闵可夫斯基和" class="headerlink" title="闵可夫斯基和"></a>闵可夫斯基和</h2><p>给定两个凸包 $A,B$，构建一个凸包 $C$ 为 $A,B$ 闵可夫斯基和，即满足 $\forall a \in A,b \in B | a+b \in C$，其中 $a,b$ 均为向量，$a \in A$ 为在凸包 $A$ 中的向量，$a+b$ 为向量加法。</p>
+<p>首先有一个性质就是两个凸包的闵可夫斯基和还是凸包，并且 $C$ 的边的条数恰好是 $A,B$ 两个凸包的边的数量之和，更明确一点，$C$ 的边集构成的向量集合就是 $A,B$ 两个凸包构成的向量集合的并集。</p>
+<p>因此我们可以直接对于所有 $A,B$ 中的边按照逆时针排序，这个可以用叉积解决，然后固定一下 $C$ 中的一个点，这里一般选择 $A$ 的第一个点和 $B$ 的第一个点加起来的结果。（可以看成是一个向量）</p>
+<p>特别注意：$C$ 中的第一个点连接的边也得是 $A$ 中的第一条边和 $B$ 中的第一条边作为向量靠下面（逆时针排序后的第一个）的那一个，因此我们不能直接 <code>sort</code> 排序，而是使用归并排序来合并 $A,B$ 两个向量集合。</p>
+<p>最后我们就在 $O(n)$ 的时间复杂度内求出了这个凸包 $C$。</p>
+<p><strong>最后还要再对闵可夫斯基和求一遍凸包才能通过，因为有可能存在三点共线的情况。</strong></p>
+<p>例题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4557">P4557 [JSOI2018] 战争</a>。</p>
+<p>这道题让你求出每次 $A$ 沿着向量 $w$ 平移之后与 $B$ 有没有公共点，$A$ 和 $B$ 是我们根据给定的点集算出来的凸包。</p>
+<p>那么若有公共点则存在 $a \in A,b \in B$ 满足 $b+w&#x3D;a$，移项得 $w&#x3D;a-b$，那么就是求 $w$ 在不在 $A$ 和 $-B$ 的闵可夫斯基和内部，直接用 $O(\log n)$ 求点是否在闵可夫斯基和内部即可。</p>
+<p>时间复杂度 $O(n \log n)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> eps 1e-8</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> db double</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 200005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">point</span>&#123;ll x,y;&#125;p1[N],p2[N],sta[N],g[N],p3[N],p4[N],st;</span><br><span class="line"><span class="keyword">inline</span> point <span class="keyword">operator</span>+(point a,point b)&#123;<span class="keyword">return</span> (point)&#123;a.x+b.x,a.y+b.y&#125;;&#125;</span><br><span class="line"><span class="keyword">inline</span> point <span class="keyword">operator</span>-(point a,point b)&#123;<span class="keyword">return</span> (point)&#123;a.x-b.x,a.y-b.y&#125;;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">sgn</span><span class="params">(<span class="type">double</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">fabs</span>(x)&lt;eps) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;eps) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(point a,point b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">sgn</span>(a.x-b.x)==<span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">sgn</span>(b.y-a.y);</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">sgn</span>(b.x-a.x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">cross</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> a.x*b.y-a.y*b.x;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">lenth</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmps</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> <span class="built_in">cross</span>(a,b)&gt;<span class="number">0</span>;&#125;</span><br><span class="line">ll n,m,q,i,j,top,pos,x,y,tot;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">andrew</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">sort</span>(p1+<span class="number">1</span>,p1+n+<span class="number">1</span>,cmp),<span class="built_in">sort</span>(p2+<span class="number">1</span>,p2+m+<span class="number">1</span>,cmp);</span><br><span class="line">	top=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=<span class="number">2</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p1[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p1[i];</span><br><span class="line">	&#125;</span><br><span class="line">	pos=top;</span><br><span class="line">	<span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=pos+<span class="number">1</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p1[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p1[i];</span><br><span class="line">	&#125;</span><br><span class="line">	n=top<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;top;i++) p1[i]=sta[i];</span><br><span class="line">	top=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=<span class="number">2</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p2[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	pos=top;</span><br><span class="line">	<span class="keyword">for</span>(i=m<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=pos+<span class="number">1</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],p2[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=p2[i];</span><br><span class="line">	&#125;</span><br><span class="line">	m=top<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;top;i++) p2[i]=sta[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Minkovski</span><span class="params">()</span></span>&#123;</span><br><span class="line">	g[++tot] = (point)&#123;p1[<span class="number">1</span>].x+p2[<span class="number">1</span>].x,p1[<span class="number">1</span>].y+p2[<span class="number">1</span>].y&#125;;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) p3[i]=p1[i%n+<span class="number">1</span>]-p1[i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) p4[i]=p2[i%m+<span class="number">1</span>]-p2[i];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>,j=<span class="number">1</span>;i&lt;=n&amp;&amp;j&lt;=m;) tot++,g[tot]=g[tot<span class="number">-1</span>]+(<span class="built_in">cross</span>(p3[i],p4[j])&gt;<span class="number">0</span>?p3[i++]:p4[j++]);</span><br><span class="line">	<span class="keyword">for</span>(;i&lt;=n;i++) tot++,g[tot]=g[tot<span class="number">-1</span>]+p3[i];</span><br><span class="line">	<span class="keyword">for</span>(;j&lt;=m;j++) tot++,g[tot]=g[tot<span class="number">-1</span>]+p4[j];</span><br><span class="line">	tot--,<span class="built_in">sort</span>(g+<span class="number">1</span>,g+tot+<span class="number">1</span>,cmp);</span><br><span class="line">	top=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=<span class="number">2</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],g[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=g[i];</span><br><span class="line">	&#125;</span><br><span class="line">	pos=top;</span><br><span class="line">	<span class="keyword">for</span>(i=tot<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">while</span>(top&gt;=pos+<span class="number">1</span>&amp;&amp;<span class="built_in">cross</span>(sta[top]-sta[top<span class="number">-1</span>],g[i]-sta[top<span class="number">-1</span>])&lt;=<span class="number">0</span>) top--;</span><br><span class="line">		sta[++top]=g[i];</span><br><span class="line">	&#125;</span><br><span class="line">	tot=top<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=tot;i++) g[i]=sta[i];</span><br><span class="line">	st=g[<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=tot;i++) g[i]=g[i]-st;</span><br><span class="line">	<span class="built_in">sort</span>(g+<span class="number">2</span>,g+tot+<span class="number">1</span>,cmps);</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(point x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(tot==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(x.x==g[<span class="number">1</span>].x&amp;&amp;x.y==g[<span class="number">1</span>].y) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">cross</span>(x,g[<span class="number">2</span>])&gt;<span class="number">0</span>||<span class="built_in">cross</span>(g[tot],x)&gt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ll res = <span class="built_in">lower_bound</span>(g+<span class="number">2</span>,g+tot+<span class="number">1</span>,x,cmps)-g<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">cross</span>(g[res+<span class="number">1</span>]-g[res],x-g[res])&gt;=<span class="number">0</span>||(<span class="built_in">cross</span>(g[res+<span class="number">1</span>],x)==<span class="number">0</span>&amp;&amp;((g[res+<span class="number">1</span>].x&gt;<span class="number">0</span>&amp;&amp;x.x&gt;<span class="number">0</span>&amp;&amp;x.x&lt;=g[res+<span class="number">1</span>].x)||(g[res+<span class="number">1</span>].x&lt;<span class="number">0</span>&amp;&amp;x.x&lt;<span class="number">0</span>&amp;&amp;x.x&gt;=g[res+<span class="number">1</span>].x)));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;q;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;p1[i].x&gt;&gt;p1[i].y;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++) cin&gt;&gt;p2[i].x&gt;&gt;p2[i].y,p2[i].x=-p2[i].x,p2[i].y=-p2[i].y;</span><br><span class="line">	<span class="built_in">andrew</span>();</span><br><span class="line">	<span class="built_in">Minkovski</span>();</span><br><span class="line">	<span class="keyword">while</span>(q--)&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		cout&lt;&lt;<span class="built_in">query</span>((point)&#123;x,y&#125;-st)&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意上面那份代码最后还要求一次凸包，原因在于可能用重复计算的点。</p>
+<p>例题 2：<a target="_blank" rel="noopener" href="http://oi.nks.edu.cn/zh/Problem/Details?cid=2674&tid=Q">here</a></p>
+<p>题目大意：给定长度为 $n$ 的序列 $A$，定义长度为 $k$ 的子序列的权值为奇数位上的和减去偶数位上的和，求出所有长度为 $1 \le k \le n$ 的子序列的最大权值。</p>
+<p>其中：$1 \le n \le 10^5$，$0 \le A_i \le 2 \times 10^4$。</p>
+<p>首先如果 $k$ 是偶数情况的话，我们可以令 $B_i \gets A_{i}-A_{i+1}$，然后选出连续的 $k$ 段区间使得区间和最大，这个可以用费用流解决，所以设 $f(i)$ 表示 $k&#x3D;i$ 的答案，那么对于 $i \bmod 2&#x3D;0$ 的情况 $f$ 明显是凸函数，因为费用流每次增广的流量是递减的，奇数的情况同理。</p>
+<p>于是就可以设 $(x,y)$ 坐标表示当 $i&#x3D;x$ 的时候存在 $f(i)&#x3D;y$，于是我们发现所有 $i \bmod 2 &#x3D; 1$ 对于所有区间都有凸性，所以我们合并的时候用闵可夫斯基和就好。</p>
+<p>因为凸包和凸包的闵可夫斯基和也是凸包，并且根据它的定义我们知道这么做一定是正确的。</p>
+<p>具体来说，线段树每个节点维护一个平面直角坐标系上的凸包，凸包每个点的定义就是上面说的那样，然后在 <code>pushup</code> 的过程中根据题目的要求（一正一负）记录一下正负的情况合并就可以了。</p>
+<p>记得特判掉边界情况。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(<span class="string">&quot;Ofast&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">point</span>&#123;ll x,y;&#125;g[N],p3[N],p4[N];</span><br><span class="line">vector&lt;point&gt; tr[N&lt;&lt;<span class="number">2</span>][<span class="number">2</span>][<span class="number">2</span>],st;</span><br><span class="line"><span class="keyword">inline</span> point <span class="keyword">operator</span>+(point a,point b)&#123;<span class="keyword">return</span> (point)&#123;a.x+b.x,a.y+b.y&#125;;&#125;</span><br><span class="line"><span class="keyword">inline</span> point <span class="keyword">operator</span>-(point a,point b)&#123;<span class="keyword">return</span> (point)&#123;a.x-b.x,a.y-b.y&#125;;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">lenth</span><span class="params">(point a)</span></span>&#123;<span class="keyword">return</span> a.x*a.x+a.y*a.y;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(point a,point b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a.x==b.x) <span class="keyword">return</span> a.y&lt;b.y;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> a.x&lt;b.x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">cross</span><span class="params">(point a,point b)</span></span>&#123;<span class="keyword">return</span> a.x*b.y-a.y*b.x;&#125;</span><br><span class="line">ll n,i,j,a[N],tot,ans[N],temp[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> vector&lt;point&gt; <span class="title">Minkovski</span><span class="params">(vector&lt;point&gt; as,vector&lt;point&gt; bs)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(as.<span class="built_in">size</span>()==<span class="number">0</span>) <span class="keyword">return</span> bs;</span><br><span class="line">	<span class="keyword">if</span>(bs.<span class="built_in">size</span>()==<span class="number">0</span>) <span class="keyword">return</span> as;</span><br><span class="line">	ll i,j;</span><br><span class="line">	tot=<span class="number">0</span>,st.<span class="built_in">clear</span>();</span><br><span class="line">	g[++tot] = (point)&#123;as[<span class="number">0</span>].x+bs[<span class="number">0</span>].x,as[<span class="number">0</span>].y+bs[<span class="number">0</span>].y&#125;;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;as.<span class="built_in">size</span>();i++) p3[i]=as[i]-as[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;bs.<span class="built_in">size</span>();i++) p4[i]=bs[i]-bs[i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>,j=<span class="number">1</span>;i&lt;as.<span class="built_in">size</span>()&amp;&amp;j&lt;bs.<span class="built_in">size</span>();)&#123;</span><br><span class="line">		tot++;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">cross</span>(p3[i],p4[j])&lt;<span class="number">0</span>) g[tot]=g[tot<span class="number">-1</span>]+p3[i++];</span><br><span class="line">		<span class="keyword">else</span> g[tot]=g[tot<span class="number">-1</span>]+p4[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(;i&lt;as.<span class="built_in">size</span>();i++) tot++,g[tot]=g[tot<span class="number">-1</span>]+p3[i];</span><br><span class="line">	<span class="keyword">for</span>(;j&lt;bs.<span class="built_in">size</span>();j++) tot++,g[tot]=g[tot<span class="number">-1</span>]+p4[j];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=tot;i++) st.<span class="built_in">push_back</span>(g[i]);</span><br><span class="line">	<span class="keyword">return</span> st;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">inline</span> vector&lt;point&gt; <span class="title">max</span><span class="params">(vector&lt;point&gt; a,vector&lt;point&gt; b,vector&lt;point&gt; c,vector&lt;point&gt; d,ll len)</span></span>&#123;</span><br><span class="line">	ll beg = (len%<span class="number">2</span>==<span class="number">0</span>?<span class="number">2</span>:<span class="number">1</span>);</span><br><span class="line">	st.<span class="built_in">clear</span>();</span><br><span class="line">	<span class="keyword">for</span>(ll i=beg;i&lt;=len;i+=<span class="number">2</span>) temp[i]=<span class="number">-0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line">	temp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;a.<span class="built_in">size</span>();i++) temp[a[i].x]=<span class="built_in">max</span>(temp[a[i].x],a[i].y);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;b.<span class="built_in">size</span>();i++) temp[b[i].x]=<span class="built_in">max</span>(temp[b[i].x],b[i].y);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;c.<span class="built_in">size</span>();i++) temp[c[i].x]=<span class="built_in">max</span>(temp[c[i].x],c[i].y);</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">0</span>;i&lt;d.<span class="built_in">size</span>();i++) temp[d[i].x]=<span class="built_in">max</span>(temp[d[i].x],d[i].y);</span><br><span class="line">	<span class="keyword">for</span>(ll i=beg;i&lt;=len;i+=<span class="number">2</span>) st.<span class="built_in">push_back</span>((point)&#123;i,temp[i]&#125;);</span><br><span class="line">	<span class="keyword">return</span> st;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">build</span><span class="params">(ll s,ll t,ll p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(s==t)&#123;</span><br><span class="line">		tr[p][<span class="number">0</span>][<span class="number">0</span>].<span class="built_in">push_back</span>((point)&#123;<span class="number">1</span>,a[s]&#125;);</span><br><span class="line">		tr[p][<span class="number">1</span>][<span class="number">1</span>].<span class="built_in">push_back</span>((point)&#123;<span class="number">1</span>,-a[s]&#125;);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">build</span>(s,(s+t)/<span class="number">2</span>,<span class="number">2</span>*p),<span class="built_in">build</span>((s+t)/<span class="number">2</span>+<span class="number">1</span>,t,<span class="number">2</span>*p+<span class="number">1</span>);</span><br><span class="line">	ll len1,len2;</span><br><span class="line">	<span class="keyword">if</span>((t-s+<span class="number">1</span>)%<span class="number">2</span>==<span class="number">0</span>) len1=t-s,len2=t-s+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> len1=t-s+<span class="number">1</span>,len2=t-s;</span><br><span class="line">	tr[p][<span class="number">0</span>][<span class="number">0</span>] = <span class="built_in">max</span>(<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>]),<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]),tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>],len1);</span><br><span class="line">	tr[p][<span class="number">0</span>][<span class="number">1</span>] = <span class="built_in">max</span>(<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>]),<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>]),tr[<span class="number">2</span>*p][<span class="number">0</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>],len2);</span><br><span class="line">	tr[p][<span class="number">1</span>][<span class="number">0</span>] = <span class="built_in">max</span>(<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>]),<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]),tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>],len2);	</span><br><span class="line">	tr[p][<span class="number">1</span>][<span class="number">1</span>] = <span class="built_in">max</span>(<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>]),<span class="built_in">Minkovski</span>(tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">0</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>]),tr[<span class="number">2</span>*p][<span class="number">1</span>][<span class="number">1</span>],tr[<span class="number">2</span>*p+<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>],len1);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">	<span class="built_in">build</span>(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">memset</span>(ans,<span class="number">-0x3f</span>,<span class="built_in">sizeof</span>(ans));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>].<span class="built_in">size</span>();i++) ans[tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>][i].x]=<span class="built_in">max</span>(ans[tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>][i].x],tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>][i].y);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>].<span class="built_in">size</span>();i++) ans[tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][i].x]=<span class="built_in">max</span>(ans[tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][i].x],tr[<span class="number">1</span>][<span class="number">0</span>][<span class="number">1</span>][i].y);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="极坐标系"><a href="#极坐标系" class="headerlink" title="极坐标系"></a>极坐标系</h2><p>一个点的位置在极坐标系上可以用下面的方式表示：</p>
+<ul>
+<li>原点 $(0,\varphi)$。</li>
+</ul>
+<p>设 $A$ 为平面上一点。</p>
+<p>极点 $O$ 与 $A$ 之间的距离 $|OA|$ 称为 极径，记为 $\rho$；<br>以极轴为始边，$OA$ 为终边的角 $\angle xOA$ 称为 极角，记为 $\varphi$；</p>
+<p>$A&#x3D;(\rho,\varphi)$。</p>
+<p>我们可以很简单的将所有点按照极角排序，我们可以直接使用 <code>atan</code> 还原极角，但是这样的话分类讨论的情况较多，我们可以直接使用系统自带的函数 <code>atan2</code> 解决。</p>
+<p>即设 $A&#x3D;(x,y)$（平面直角坐标系），$A$ 的极角就是 $\operatorname{atan2}(y,x)$，$A$ 的极径就是 $\sqrt{x^2+y^2}$。</p>
+<p>有时候极角排序比用叉积排序更加方便。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu2.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="true"
+        data-ci="5716fc2235b32d5b5e82"
+        data-cs="907f96f6afbbcc0aca96b83eb204923010538f26"
+        data-r="acoipp.github.io-"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="true"
+        data-p="https://proxy-gitalk-api.netlify.app/github_access_token"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

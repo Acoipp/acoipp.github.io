@@ -2396,9 +2396,14 @@
 <h1 id="保序回归"><a href="#保序回归" class="headerlink" title="保序回归"></a>保序回归</h1><p>给定若干组限制条件，这些限制条件构成了一个 DAG，形如：$a_x \ge a_y$。</p>
 <p>需要求出一组 $a$ 满足 $\sum_{i&#x3D;1}^n |a_i-c_i|$ 最小。</p>
 <h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>如果我们强制所有 $a$ 在一个区间 $[l,r]$，那么 $a’$（新求出的答案）与 $a$（不限制取值区间的答案）有下面的关系：</p>
-<p>$$<br>a’_i &#x3D; \begin{cases}<br>l &amp; a_i &lt;l \<br>r &amp; a_i &gt; r\<br>a_i &amp; l \le a_i \le r<br>\end{cases}<br>$$</p>
+<p>$$<br>a’_i &#x3D; \begin{cases}<br>l &amp; a_i &lt;l \\<br>r &amp; a_i &gt; r\\<br>a_i &amp; l \le a_i \le r<br>\end{cases}<br>$$</p>
 <p>因此我们可以使用整体二分法解决，即是每次选取区间 $[mid,mid+1]$，然后用特定的算法判断点的取值在 $[1,mid]$ 还是在 $[mid+1,\text{inf}]$，最后递归下去即可，时间复杂度为 $O(V \log n )$。</p>
 <p>当然，大部分的时候 $c$ 中的值在 $a$ 中都有出现，于是离散化即可，时间复杂度就是 $O(n \log n)$。</p>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p>直径的一些性质，需要积累一下：</p>
+<ul>
+<li>一个点所在树中最远的节点一定是这棵树的直径的两个端点之一。</li>
+<li>如果两棵树合并成了一棵新的树，那么设旧树的直径是 $(a,b),(c,d)$，那么新树的直径的端点一定在 $a,b,c,d$ 中，因此，直径具有可合并性。</li>
+</ul>
 <script src="https://giscus.app/client.js"
         data-repo="acoipp/blog_pl"
         data-repo-id="R_kgDOLPCpEQ"
@@ -2424,6 +2429,8 @@
         <tag>技巧</tag>
         <tag>光速乘</tag>
         <tag>快速读写</tag>
+        <tag>保序回归</tag>
+        <tag>树的直径</tag>
       </tags>
   </entry>
   <entry>

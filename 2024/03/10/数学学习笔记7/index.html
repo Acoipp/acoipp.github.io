@@ -11,7 +11,8 @@
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
     <meta name="description" content="OI/ACM 相关笔记,多项式备注：多项式基本操作此处不再说明，都比较简略，此处只介绍重要结论以及算法。
-多项式 ln&amp;#x2F;exp暴力解法首先引入概念设 $A(x)&amp;#x3D;\ln(B(x)),B(x)&amp;#x3D;,"> 
+Warning：这篇文章有的公式是无法显示的，建议在洛谷 “多项式科技” 中查看。
+多项式 ln&amp;#x2F;exp暴,"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -21,7 +22,8 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="数学学习笔记7 - Acoipp 的个人博客"/>
     <meta name="twitter:description" content="OI/ACM 相关笔记,多项式备注：多项式基本操作此处不再说明，都比较简略，此处只介绍重要结论以及算法。
-多项式 ln&amp;#x2F;exp暴力解法首先引入概念设 $A(x)&amp;#x3D;\ln(B(x)),B(x)&amp;#x3D;,"/>
+Warning：这篇文章有的公式是无法显示的，建议在洛谷 “多项式科技” 中查看。
+多项式 ln&amp;#x2F;exp暴,"/>
     
     
     
@@ -30,7 +32,8 @@
     <meta property="og:type" content="object"/>
     <meta property="og:title" content="数学学习笔记7 - Acoipp 的个人博客"/>
     <meta property="og:description" content="OI/ACM 相关笔记,多项式备注：多项式基本操作此处不再说明，都比较简略，此处只介绍重要结论以及算法。
-多项式 ln&amp;#x2F;exp暴力解法首先引入概念设 $A(x)&amp;#x3D;\ln(B(x)),B(x)&amp;#x3D;,"/>
+Warning：这篇文章有的公式是无法显示的，建议在洛谷 “多项式科技” 中查看。
+多项式 ln&amp;#x2F;exp暴,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -73,6 +76,7 @@
         </div>
         <div class="content markdown">
             <h1 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h1><p>备注：多项式基本操作此处不再说明，都比较简略，此处只介绍重要结论以及算法。</p>
+<p><strong>Warning：这篇文章有的公式是无法显示的，建议在洛谷 “多项式科技” 中查看。</strong></p>
 <h2 id="多项式-ln-exp"><a href="#多项式-ln-exp" class="headerlink" title="多项式 ln&#x2F;exp"></a>多项式 ln&#x2F;exp</h2><h3 id="暴力解法"><a href="#暴力解法" class="headerlink" title="暴力解法"></a>暴力解法</h3><p>首先引入概念设 $A(x)&#x3D;\ln(B(x)),B(x)&#x3D;\exp(A(x))$，那么我们可以看做 $A_x$ 是 $x$ 个点的带标号无向连通图，$B_x$ 是 $x$ 个点的带标号无向普通图，于是我们根据组合意义得到下面的公式：<br>$$<br>n!B_n &#x3D; \sum_{i&#x3D;1}^n C_{n-1}^{i-1}i!A_i(n-i)!B_{n-i}<br>$$</p>
 <p>可以化简成：</p>
 <p>$$<br>B_n &#x3D; \sum_{i&#x3D;1}^n A_iB_{n-i}\frac in<br>$$</p>

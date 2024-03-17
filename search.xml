@@ -4177,8 +4177,8 @@
 
 <p>然后我们每次执行运算 $f(\omega_n) \to f(\omega_{2n})$ 只需要直接在原位置上进行计算就可以了。</p>
 <h3 id="点值得到系数"><a href="#点值得到系数" class="headerlink" title="点值得到系数"></a>点值得到系数</h3><p>得到了最终多项式的点值之后我们要知道各个项数的系数是多少，于是我们还得学习快速傅里叶逆变换。</p>
-<p>IDFT（傅里叶反变换）的作用，是把目标多项式的点值形式转换成系数形式。而 DFT 本身是个线性变换，可以理解为将目标多项式当作向量，左乘一个矩阵得到变换后的向量，以模拟把单位复根代入多项式的过程：</p>
-<h1 id="begin-bmatrix-y-0-y-1-y-2-y-3-vdots-y-n-1-end-bmatrix"><a href="#begin-bmatrix-y-0-y-1-y-2-y-3-vdots-y-n-1-end-bmatrix" class="headerlink" title="$$\begin{bmatrix}y_0 \\ y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{n-1} \end{bmatrix}"></a>$$<br>\begin{bmatrix}y_0 \\ y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_{n-1} \end{bmatrix}</h1><p>\begin{bmatrix}1 &amp; 1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1 \\<br>1 &amp; \omega_n^1 &amp; \omega_n^2 &amp; \omega_n^3 &amp; \cdots &amp; \omega_n^{n-1} \\<br>1 &amp; \omega_n^2 &amp; \omega_n^4 &amp; \omega_n^6 &amp; \cdots &amp; \omega_n^{2(n-1)} \\<br>1 &amp; \omega_n^3 &amp; \omega_n^6 &amp; \omega_n^9 &amp; \cdots &amp; \omega_n^{3(n-1)} \\<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>1 &amp; \omega_n^{n-1} &amp; \omega_n^{2(n-1)} &amp; \omega_n^{3(n-1)} &amp; \cdots &amp; \omega_n^{(n-1)^2} \end{bmatrix}<br>\begin{bmatrix} a_0 \\ a_1 \\ a_2 \\ a_3 \\ \vdots \\ a_{n-1} \end{bmatrix}<br>$$<br>现在我们已经得到最左边的结果了，中间的 $x$ 值在目标多项式的点值表示中也是一一对应的，所以，根据矩阵的基础知识，我们只要在式子两边左乘中间那个大矩阵的逆矩阵就行了。</p>
+<p>IDFT（傅里叶反变换）的作用，是把目标多项式的点值形式转换成系数形式。而 DFT 本身是个线性变换，可以理解为将目标多项式当作向量，左乘一个矩阵得到变换后的向量。</p>
+<p>现在我们已经得到最左边的结果了，中间的 $x$ 值在目标多项式的点值表示中也是一一对应的，所以，根据矩阵的基础知识，我们只要在式子两边左乘中间那个大矩阵的逆矩阵就行了。</p>
 <p>由于这个矩阵的元素非常特殊，它的逆矩阵也有特殊的性质，就是每一项取倒数，再除以变换的长度 $n$，就能得到它的逆矩阵。</p>
 <p>为了使计算的结果为原来的倒数，根据欧拉公式，可以得到</p>
 <p>$$\frac{1}{\omega_k}&#x3D;\omega_k^{-1}&#x3D;e^{-\frac{2\pi i}{k}}&#x3D;\cos\left(\frac{2\pi}{k}\right)+i \sin\left(-\frac{2\pi}{k}\right)$$<br>因此我们可以尝试着把单位根 $\omega_k$ 取成 $e^{-\frac{2\pi \mathrm{i}}{k}}$，这样我们的计算结果就会变成原来的倒数，之后唯一多的操作就只有再除以它的长度 $n$，而其它的操作过程与 DFT 是完全相同的。我们可以定义一个函数，在里面加一个参数 $1$ 或者是 $-1$，然后把它乘到 $\pi$ 上。传入 $1$ 就是 DFT，传入 $-1$ 就是 IDFT。</p>
@@ -4195,7 +4195,7 @@
 <p>上面这几个可以在 $O(n \log n),O(n),O(n \log n)$ 范围内解决，都很优秀，做题的时候偏重在于转化模型得到上面的答案，再应用工具输出最终结果。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>FFT 同时可以利用一些循环的性质来解决（证明用到了单位根的循环性质，自证不难）</p>
 <p>如果我们前两遍 FFT 的时候长度为 $N(N&gt;n,N&gt;m)$ 但是 $N&lt;n+m-1$，即第三遍合并的时候项数不够，那么最后的结果就是一个循环移位的结果，设标准结果为 $C$，此方法得到的结果为 $C’$，则有：</p>
-<p>$$<br>C’<em>i &#x3D; \sum</em>{k \ge 0} C_{i+kN}<br>$$</p>
+<p>$$<br>D_i &#x3D; \sum_{k \ge 0} C_{i+kN}<br>$$</p>
 <p>于是我们可以通过这个方法来去掉不需要的项来减少常数消耗。</p>
 <h2 id="NTT-（快速数论变换）"><a href="#NTT-（快速数论变换）" class="headerlink" title="NTT （快速数论变换）"></a>NTT （快速数论变换）</h2><p>相比于 FFT，每个数值都需要对 $mod$ 取模，这个的处理方式也很简单。</p>
 <p>$mod$ 如果是质数就可以找到一个原根，满足原根的 $\varphi$ 次方对 $mod$ 取模后是 $1$ 和一些其它的性质。</p>

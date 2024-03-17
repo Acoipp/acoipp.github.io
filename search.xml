@@ -4215,11 +4215,11 @@
 <p>我们考虑化一下公式：</p>
 <p>$$<br>\begin{aligned}<br>A(x) \cdot B(x) \equiv 1 \pmod {x^n}<br>\end{aligned}<br>$$</p>
 <p>设 $A(x) \cdot B’(x) \equiv 1 \pmod {x^{\lceil \frac n2 \rceil}}$，则有：</p>
-<p>$$<br>\begin{aligned}<br>A(x) \cdot (B(x)-B’(x)) &amp;\equiv 0 \pmod {x^{\lceil \frac n2 \rceil}} \\<br>(B(x)-B’(x)) &amp;\equiv 0 \pmod {x^{\lceil \frac n2 \rceil}} \\</p>
-<p>(B(x)-B’(x))^2 &amp;\equiv 0 \pmod {x^n} \\</p>
-<p>B(x)^2+B’(x)^2-2B(x)B’(x) &amp;\equiv 0 \pmod {x^n} \\</p>
-<p>B(x)+A(x)B’(x)^2-2B’(x) &amp;\equiv 0 \pmod {x^n} \\</p>
-<p>B(x) &amp;\equiv 2B’(x)-A(x)B’(x)^2 \pmod {x^n} \\<br>\end{aligned}<br>$$</p>
+<p>$$<br>A(x) \cdot (B(x)-B’(x)) \equiv 0 \pmod {x^{\lceil \frac n2 \rceil}} \\<br>(B(x)-B’(x)) \equiv 0 \pmod {x^{\lceil \frac n2 \rceil}} \\</p>
+<p>(B(x)-B’(x))^2 \equiv 0 \pmod {x^n} \\</p>
+<p>B(x)^2+B’(x)^2-2B(x)B’(x) \equiv 0 \pmod {x^n} \\</p>
+<p>B(x)+A(x)B’(x)^2-2B’(x) \equiv 0 \pmod {x^n} \\</p>
+<p>B(x) \equiv 2B’(x)-A(x)B’(x)^2 \pmod {x^n} \\<br>$$</p>
 <p>于是我们就得到了 $B(x)$ 的递归式，每一层递归式使用 NTT 求解即可，时间复杂度为 $T(n)&#x3D;T(\frac n2)+O(n \log n)$，所以 $T(n)&#x3D;O(n \log n)$。</p>
 <p>边界条件就是常数项 $B(0)&#x3D;A(0)^{-1}$。</p>
 <p>以 <a href="https://www.luogu.com.cn/problem/P4238">P4238 【模板】多项式乘法逆</a> 参考一下代码：</p>

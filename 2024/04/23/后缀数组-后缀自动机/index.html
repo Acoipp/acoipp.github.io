@@ -171,7 +171,57 @@
 <p>最后得到了 $(p,q,a,b)$ 的四元组，我们可以用它们来做很多事情，因题而异。这道题中，我们维护主席树，即为当询问的 $r \ge q$ 的时候，这个时候我们对于 $b \le i \le a$ 讨论一下，发现 $l \le p-i+1$ 的时候这个字符串的贡献已经处理了，所以我们需要让 $p-i+1&lt;l \le q-i+1$ 的 $l$ 点加上 $1$，然后我们把它转化为差分+前缀查询，就变成了让 $p-i+2$ 位置 $+1$，让 $q-i+2$ 位置 $-1$，然后考虑 $[b,a]$，问题转化为了让 $p-a+2 \sim p-b+2$ 位置 $+1$，$q-a+2 \sim q-b+2$ 位置 $-1$，这个可以用主席树轻松维护。</p>
 <p>最后就是需要注意一下 $p&#x3D;0$ 的情况，这个情况更好处理，此处不再赘述。</p>
 <p>下面给一个非强制在线版的提交记录：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/156477055">代码 here</a>。</p>
-<h3 id="SAM-1-题解"><a href="#SAM-1-题解" class="headerlink" title="SAM 1 题解"></a>SAM 1 题解</h3><h3 id="SAM-2-题解"><a href="#SAM-2-题解" class="headerlink" title="SAM 2 题解"></a>SAM 2 题解</h3><h3 id="SAM-3-题解"><a href="#SAM-3-题解" class="headerlink" title="SAM 3 题解"></a>SAM 3 题解</h3><h3 id="SAM-4-题解"><a href="#SAM-4-题解" class="headerlink" title="SAM 4 题解"></a>SAM 4 题解</h3><h3 id="SAM-5-题解"><a href="#SAM-5-题解" class="headerlink" title="SAM 5 题解"></a>SAM 5 题解</h3><h3 id="SAM-6-题解"><a href="#SAM-6-题解" class="headerlink" title="SAM 6 题解"></a>SAM 6 题解</h3><p>待补。</p>
+<h3 id="SAM-1-题面"><a href="#SAM-1-题面" class="headerlink" title="SAM 1 题面"></a>SAM 1 题面</h3><p>给出一个字符串 $S$，定义函数 $f(l,r)$ 为 $S[l,r]$ 的每个后缀与 $S[l,r]$ 的 LCP 之和。现在询问 $q$ 次，每次给出 $l,r$，请输出 $f(l,r)$，非强制在线。</p>
+<p>数据范围：$|S|,q \le 2 \times 10^5$，时间复杂度要求低于 $O(n \sqrt{n})$。</p>
+<h3 id="SAM-1-题解"><a href="#SAM-1-题解" class="headerlink" title="SAM 1 题解"></a>SAM 1 题解</h3><p>把整个串反过来，题目就变成了求 $\sum_{x&#x3D;l}^r \min(x-l+1,len)$，$len$ 表示以 $x$ 为结尾的前缀和 $s[l,r]$ 的 LCS。</p>
+<p>首先建立这个字符串的 fail 树，找到 $s[l,r]$ 在 fail 树上的节点，这个部分可以倍增单 $\log$ 解决，同时我们需要处理每个前缀 $[1,i]$ 在 fail 树上的节点编号，这个标记一下就可以了。</p>
+<p>那么 $len$ 实际上就是 $[1,x]$ 在 fail 树上的节点和 $[l,r]$ 在 fail 树上的节点的 LCA 的 $len$ 值。</p>
+<p>我们首先不管 $x$ 的上下界，那么就要求 $\sum_{x&#x3D;1}^n \min(x-l+1,len)$，这个我们可以先将 fail 树重链剖分一下，然后我们考虑下面这一种剖分方式（先不管轻重儿子，以图片为准，方框是重链）：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/vzkg96q1.png"></p>
+<p>如果 $[l,r]$ 代表的节点是 $5$ 号节点，那么首先我们需要加上 $5$ 号节点子树内部对答案的贡献，然后跳到 $6$ 号节点，加上 $6$ 号节点子树内部对答案的贡献，但是这个时候我们发现 $5$ 号节点子树内部对答案的贡献算重复了，所以要减去 $5$ 号节点子树内部对答案的贡献（这里有一些细节留给读者思考）。再跳到 $2$ 号节点，加上 $1$ 号节点本身以及他附属轻子树中所有节点对答案的贡献，然后加上 $2$ 号节点子树对答案的贡献，减去 $6$ 号节点子树对答案的贡献。</p>
+<p>首先子树内部我们可以预处理子树的 endpos 集合（线段树合并），然后对于所有询问一起处理就可以了，因为 $len$ 确定，所以上面的 $\min(x-l+1,len)$ 变成 $\min(x,len+l-1)-l+1$，然后发现 $\min$ 具有单调性，于是用线段树维护区间信息就可以轻松完成，这一部分甚至可以强制令贡献的 $x$ 在 $[l,r]$ 区间内。</p>
+<p>然后考虑链上的贡献，轻儿子子树可以暴力遍历，就会得到一部分点对 $x,len$，然后令 $\min(x-l+1,len)$ 变成 $\min(x-len,l-1)-l+1+len$，注意到这个也具有单调性，所以我们可以直接处理 $1 \le x \le n$ 的答案，考虑减去 $1 \le x &lt; l$ 和 $r&lt;x \le n$ 的答案。</p>
+<p>当 $1 \le x &lt; l$ 的时候上式一定等于 $x-l+1$，因为 $len \ge 0,x-l+1 \le 0$，这个统计多出来的贡献是简单的。</p>
+<p>当 $r&lt;x \le n$ 的时候上式一定等于 $len$，因为 $len \le r-l+1,x-l+1 \ge r-l+1$，这个统计也是简单的。</p>
+<p>因此我们这道题就在 $O(n \log^2 n)$ 的时间复杂度内解决了。</p>
+<p>同理，这个方法可以适用于 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4482">P4482 Border 的四种求法</a>，只不过是把求和符号换了一下，然后强制要求 $x-l+1 \le len$ 求最大的 $x-l+1$，某种意义上来说其实更为简单。</p>
+<p>总的来说，时间复杂度为大常数 $O(n \log^2 n)$，差点就 TLE 了。</p>
+<h3 id="SAM-2-题面"><a href="#SAM-2-题面" class="headerlink" title="SAM 2 题面"></a>SAM 2 题面</h3><p>给定一个字符串 $S$ 和一个权值数组 $w$，设函数 $f(l,r)$ 表示用 $S[l,r]$ 构建 KMP 前缀 fail 树，其中 $S[l,i]$ 在树上的深度是 $dep_i$，空节点在树上的深度是 $0$，$f(l,r)&#x3D;\sum_{i&#x3D;l}^r dep_iw_i$，询问 $q$ 次，每次输出 $f(l,r)$，非强制在线。</p>
+<p>数据范围：$|S|,q \le 2 \times 10^5$，时间复杂度要求低于 $O(n \sqrt{n})$。</p>
+<h3 id="SAM-2-题解"><a href="#SAM-2-题解" class="headerlink" title="SAM 2 题解"></a>SAM 2 题解</h3><p>考虑分块求解，首先根据 KMP 的 fail 树的定义把题目要求 $f(l,r)$ 转化为求出 $S[l,r]$ 的每个前缀在 $S[l,r]$ 中所有出现位置的结束位置的 $w$ 之和。</p>
+<p>设块长为 $B$，当 $r-l \le 2B$ 的时候可以暴力 KMP 处理。</p>
+<p>否则我们首先设 $l$ 右边第一个块的左端点为 $x$，那么我们考虑处理 $S[l,r]$ 长度小于等于 $x-l$ 的前缀所贡献的答案，如果它们的 endpos 在 $S[l,x-1]$ 内，这个可以直接在 $S[l,x-1]$ 上 KMP 暴力处理，然后它们的 endpos 就只能在 $S[x,r]$ 内，于是我们可以用后缀和优化，用 endpos 在 $S[x,n]$ 的答案减去 $S[r+1,n]$ 的答案，这个并不困难，用 dfs 序维护即可。注意此处不能使用树状数组支持链加单点查询，需要使用 $O(\sqrt{n})-O(1)$ 的分块来支持链加单点查询平衡时间复杂度。</p>
+<p>最后就是处理 $S[l,r]$ 中前缀长度大于 $x-l$ 对答案造成的贡献了，容易发现，这些贡献一定是形如下面这个样子：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/j3eab7sz.png"></p>
+<p>也就是如果蓝色的是满足题目条件的一个字符串，那么容易发现 $S[X,M]&#x3D;S[P,N]$，即 $S[X,R]$ 的答案一定包含 $S[L,R]$ 中前缀长度大于 $X-L$ 的答案，于是我们先让 $S[L,R]$ 的答案加上 $S[X,R]$ 的答案，再考虑减去不合法的答案。这一部分可以处理出 KMP 用前缀和统计答案。</p>
+<p>什么情况不合法呢？即为上面的 $\operatorname{lcs}(X-1,P-1) &lt; X-L$ 就不合法了，那么当 $P$ 固定且假设它合法的时候计算多的答案就是 $w_{P}+w_{P+1}+w_{P+2}+\dots+w_{\min(P+\operatorname{lcp}(P,X)-1,R)}$。</p>
+<p>其中 $\operatorname{lcp}(P,X)$ 可以预处理 Z 函数算出来是多少，然后我们要统计的答案就是 $\sum_{P&#x3D;X}^R <a href="w_%7BP%7D+w_%7BP+1%7D+w_%7BP+2%7D+%5Cdots+w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D">\operatorname{lcs}(X-1,P-1) &lt; X-L</a>$。</p>
+<p>把 $w$ 做一个前缀和就是 $\sum_{P&#x3D;X}^R <a href="w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D-w_%7BP-1%7D">\operatorname{lcs}(X-1,P-1) &lt; X-L</a>$。</p>
+<p>于是我们对同一个 $X$ 的所有询问按照 $R$ 双指针即可，然后因为 $X-L \le \sqrt{n}$，前面的可以暴力枚举前缀算，后面的 $\min(P+\operatorname{lcp}(P,X)-1,R)$ 需要打一个标记，再在标记处修改一下答案就可以了。 </p>
+<p>总的时间复杂度是 $O(n \sqrt{n})$，有的时候需要卡一下常数才能通过，特别注意的是递归是不能有太多次的。</p>
+<h3 id="SAM-3-题面"><a href="#SAM-3-题面" class="headerlink" title="SAM 3 题面"></a>SAM 3 题面</h3><p>给定一个串 $S$，再给 $n$ 个模式串 $S[l_i,r_i]$，还有 $q$ 次询问所有模式串在 $S[a_i,b_i]$ 中出现了多少次。</p>
+<p>数据范围：$|S| \le 4 \times 10^5,n \le 10^6,q \le 10^5$，时间复杂度要求小于等于 $O(|S| \log^2 |S|)$。</p>
+<h3 id="SAM-3-题解"><a href="#SAM-3-题解" class="headerlink" title="SAM 3 题解"></a>SAM 3 题解</h3><p>考虑基本子串结构，于是问题就变成了平面上 $S[a_i,b_i]$ 右下角出现了多少次模式串。</p>
+<p>接下来容斥，首先答案需要加上 $S[a_i,b_i]$ 这个等价类中右下角出现了多少次字符串，这个用二维数点即可解决，因为同一个等价类形态完全相同，所以找最左下角的代表元即可。</p>
+<p>然后我们发现答案还需要加上 $S[a_i,b_i]$ 这个等价类下面出现的字符串的次数，根据基本子串结构的性质，就是在反串 Parent 树上这个等价类的后缀的所有节点祖先所包含的模式串的数量，这个因为等价类周长之和为 $O(n)$ 所以可以预处理，然后 $O(1)$ 查询。</p>
+<p>答案还有等价类右边的出现的模式串的次数，这一部分我们需要用到容斥，如下图所示：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/x8em2oup.png"></p>
+<p>相当于加上右面绿色的所有答案，容易发现右面的一定是一个等价类的代表元的子串，现在我们处理出来每个代表元的答案就可以了，这个比较好处理，一个代表元所在等价类右边相邻一定只有一个上边界对齐的等价类，于是我们依照这个建立出来拓扑关系，然后递推处理即可，同时需要记得加上等价类下面所有部分的答案。</p>
+<p>最后要减去绿色区域不在红框之内的方案数，容易发现这是等价类的一个前缀所代表的节点在正串 Parent 树上的祖先的答案，于是直接像蓝色部分一样维护前缀和就可以了。</p>
+<p>总的时间复杂度为 $O(n \log n)$，但是常数较大，实现不好还跑不过 $O(n \log^2 n)$ 的。</p>
+<h3 id="SAM-4-题面"><a href="#SAM-4-题面" class="headerlink" title="SAM 4 题面"></a>SAM 4 题面</h3><p>给定 $n$ 个模式串 $S_i$ 和一个文本串 $T$，还有 $m$ 次询问所有模式串在 $T[a_i,b_i]$ 中出现了多少次。</p>
+<p>数据范围：$|T| \le 5 \times 10^5,1 \le n,m \le 5 \times 10^5,\sum |S| \le 10^6$，时间复杂度要求小于等于 $O(|S| \log |S|+|T| \log |T|)$。</p>
+<h3 id="SAM-4-题解"><a href="#SAM-4-题解" class="headerlink" title="SAM 4 题解"></a>SAM 4 题解</h3><p>首先把这 $n$ 个模式串放到 AC 自动机上建立出来一棵成型的 fail 树，然后考虑计算 $T[a_i,b_i]$ 的贡献。</p>
+<p>我们需要处理出在 $T_i$ 结尾的模式串的最长的一个，那么代表 $T[j,i]$ 是相同后缀中最长的一个能够和模式串匹配的。得到了这个东西之后，我们可以预先处理出来 $T[a_i,b_i]$ 中最靠后的 $T[j,i]$ 并且满足 $a_i \le i \le b_i,j&lt;a_i$，找到这个答案之后，容易发现，所有 $i&lt;k \le b_i$ 结尾的模式串左端点一定都不会超过 $a_i$，因此这一部分可以直接计算。</p>
+<p>然后就是找到的 $T[j,i]$，那么这个时候问题就变成了求出来这个字符串的某一个后缀出现了多少次模式串，这个也是非常好预处理的，所以这道题就做完了。</p>
+<p>时间复杂度是 $O(|T| \log |T|)$ 和小常数，时间是能够通过的。</p>
+<h3 id="SAM-5-题面"><a href="#SAM-5-题面" class="headerlink" title="SAM 5 题面"></a>SAM 5 题面</h3><p>给定两个字符串 $S_1$ 和 $S_2$，多次询问字符串 $S_1[L,R]$ 的所有子串的长度乘上它在 $S_2$ 中出现的次数的最大值。</p>
+<p>如果长度和询问同阶，要求时间复杂度小于等于 $O(n \sqrt{n})$，$n \le 10^5$。</p>
+<h3 id="SAM-5-题解"><a href="#SAM-5-题解" class="headerlink" title="SAM 5 题解"></a>SAM 5 题解</h3><p>考虑一下先分块，设 $L$ 右边第一个块的左端点为 $X$，那么 $S_1[X,R]$ 的答案可以直接双指针计算，$S_1[L,X-1]$ 的答案也可以直接暴力计算，然后接下来需要计算左端点在 $[L,X-1]$ 右端点在 $[X,R]$ 的答案。</p>
+<p>这样的话询问可以拆分成 $n\sqrt{n}$ 个，每个形如 $[l,r]$ 表示左端点为 $l$，右端点不能超过 $r$ 的在 $S_2$ 中的权值的最大值。这样的话，我们可以直接用反串的 Parent 树来处理左端点固定的时候的答案，这样的话就可以直接在 SAM 上得到这 $n\sqrt{n}$ 个节点就可以了。</p>
+<p>然后 $O(n)$ 遍历计算即可，时间复杂度是 $O(n \sqrt{n})$。</p>
+<h3 id="SAM-6-题解"><a href="#SAM-6-题解" class="headerlink" title="SAM 6 题解"></a>SAM 6 题解</h3><p>待补。</p>
+<p><a href="/text/t2.zip">代码包（不含 SAM 6）</a></p>
 <script src="https://giscus.app/client.js"
         data-repo="acoipp/blog_pl"
         data-repo-id="R_kgDOLPCpEQ"

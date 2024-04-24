@@ -3970,9 +3970,9 @@
 <p>最后就是处理 $S[l,r]$ 中前缀长度大于 $x-l$ 对答案造成的贡献了，容易发现，这些贡献一定是形如下面这个样子：</p>
 <p><img src="https://cdn.luogu.com.cn/upload/image_hosting/j3eab7sz.png"></p>
 <p>也就是如果蓝色的是满足题目条件的一个字符串，那么容易发现 $S[X,M]&#x3D;S[P,N]$，即 $S[X,R]$ 的答案一定包含 $S[L,R]$ 中前缀长度大于 $X-L$ 的答案，于是我们先让 $S[L,R]$ 的答案加上 $S[X,R]$ 的答案，再考虑减去不合法的答案。这一部分可以处理出 KMP 用前缀和统计答案。</p>
-<p>什么情况不合法呢？即为上面的 $\operatorname{lcs}(X-1,P-1) &lt; X-L$ 就不合法了，那么当 $P$ 固定且假设它合法的时候计算多的答案就是 $w_{P}+w_{P+1}+w_{P+2}+\dots+w_{\min(P+\operatorname{lcp}(P,X)-1,R)}$。</p>
-<p>其中 $\operatorname{lcp}(P,X)$ 可以预处理 Z 函数算出来是多少，然后我们要统计的答案就是 $\sum_{P&#x3D;X}^R <a href="w_%7BP%7D+w_%7BP+1%7D+w_%7BP+2%7D+%5Cdots+w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D">\operatorname{lcs}(X-1,P-1) &lt; X-L</a>$。</p>
-<p>把 $w$ 做一个前缀和就是 $\sum_{P&#x3D;X}^R <a href="w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D-w_%7BP-1%7D">\operatorname{lcs}(X-1,P-1) &lt; X-L</a>$。</p>
+<p>什么情况不合法呢？即为上面的 $\operatorname{lcs}(X-1,P-1) &lt; X-L$ 就不合法了，那么当 $P$ 固定且假设它合法的时候计算多的答案就是 $ w_{P}+w_{P+1}+w_{P+2}+\dots+w_{\min(P+\operatorname{lcp}(P,X)-1,R)} $。</p>
+<p>其中 $\operatorname{lcp}(P,X)$ 可以预处理 Z 函数算出来是多少，然后我们要统计的答案就是 $ \sum_{P&#x3D;X}^R <a href="w_%7BP%7D+w_%7BP+1%7D+w_%7BP+2%7D+%5Cdots+w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D"> \operatorname{lcs}(X-1,P-1) &lt; X-L </a> $。</p>
+<p>把 $w$ 做一个前缀和就是 $ \sum_{P&#x3D;X}^R <a href="w_%7B%5Cmin(P+%5Coperatorname%7Blcp%7D(P,X)-1,R)%7D-w_%7BP-1%7D"> \operatorname{lcs}(X-1,P-1) &lt; X-L </a> $。</p>
 <p>于是我们对同一个 $X$ 的所有询问按照 $R$ 双指针即可，然后因为 $X-L \le \sqrt{n}$，前面的可以暴力枚举前缀算，后面的 $\min(P+\operatorname{lcp}(P,X)-1,R)$ 需要打一个标记，再在标记处修改一下答案就可以了。 </p>
 <p>总的时间复杂度是 $O(n \sqrt{n})$，有的时候需要卡一下常数才能通过，特别注意的是递归是不能有太多次的。</p>
 <h3 id="SAM-3-题面"><a href="#SAM-3-题面" class="headerlink" title="SAM 3 题面"></a>SAM 3 题面</h3><p>给定一个串 $S$，再给 $n$ 个模式串 $S[l_i,r_i]$，还有 $q$ 次询问所有模式串在 $S[a_i,b_i]$ 中出现了多少次。</p>

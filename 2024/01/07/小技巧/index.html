@@ -67,7 +67,7 @@
         <div class="stuff">
             <span>一月 07, 2024</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E4%BF%9D%E5%BA%8F%E5%9B%9E%E5%BD%92/" rel="tag">保序回归</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%85%89%E9%80%9F%E4%B9%98/" rel="tag">光速乘</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E8%AF%BB%E5%86%99/" rel="tag">快速读写</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/" rel="tag">树的直径</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%9F%93%E8%89%B2/" rel="tag">随机染色</a></li></ul>
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/OI/" rel="tag">OI</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E4%BF%9D%E5%BA%8F%E5%9B%9E%E5%BD%92/" rel="tag">保序回归</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%85%89%E9%80%9F%E4%B9%98/" rel="tag">光速乘</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E8%AF%BB%E5%86%99/" rel="tag">快速读写</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/" rel="tag">树的直径</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%9F%93%E8%89%B2/" rel="tag">随机染色</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0/" rel="tag">随机游走</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a></li></ul>
 
 
         </div>
@@ -105,6 +105,21 @@
 <li>一个点所在树中最远的节点一定是这棵树的直径的两个端点之一。</li>
 <li>如果两棵树合并成了一棵新的树，那么设旧树的直径是 $(a,b),(c,d)$，那么新树的直径的端点一定在 $a,b,c,d$ 中，因此，直径具有可合并性。</li>
 </ul>
+<h1 id="图上随机游走"><a href="#图上随机游走" class="headerlink" title="图上随机游走"></a>图上随机游走</h1><p>此处主要介绍网格图的随机游走问题，此问题可以简化为下面的版本：</p>
+<blockquote>
+<p>有一个长 $n$ 宽 $m$ 的网格图，如果身处节点 $(i,j)$ 那么走到 $(i-1,j)$ 的概率是 $p_{i,j,1}$，走到 $(i,j-1)$ 的概率是 $p_{i,j,2}$，走到 $(i+1,j)$ 的概率是 $p_{i,j,3}$，走到 $(i,j+1)$ 的概率是 $p_{i,j,4}$，问每个节点走到 $(n,m)$ 的期望步数是多少，对 $10^9+7$ 取模。</p>
+</blockquote>
+<h2 id="方法-1-高斯消元"><a href="#方法-1-高斯消元" class="headerlink" title="方法 1 高斯消元"></a>方法 1 高斯消元</h2><p>对于每个节点都可以建立一个方程，设 $f_{i,j}$ 表示 $(i,j)$ 到 $(n,m)$ 的期望步数，那么有：<br>$$<br>f_{i,j} &#x3D;<br>\begin{cases}</p>
+<p>0 &amp; i&#x3D;n,j&#x3D;m \\<br>p_{i,j,1}f_{i-1,j}+p_{i,j,2}f_{i,j-1}+p_{i,j,3}f_{i+1,j}+p_{i,j,4}f_{i,j+1} &amp; \text{Otherwise}</p>
+<p>\end{cases}<br>$$<br>然后对 $nm$ 个方程暴力消元即可，时间复杂度 $O(n^6)$。</p>
+<h2 id="方法-2-高斯消元—优化"><a href="#方法-2-高斯消元—优化" class="headerlink" title="方法 2 高斯消元—优化"></a>方法 2 高斯消元—优化</h2><p>注意到高斯消元的时候有很多地方的值都是 $0$，重复计算它们并不优，于是我们考虑跳过这些不必计算的元素。</p>
+<p>假如当前在对位置 $(i,j)$ 的方程消元（消去其他方程中 $(i,j)$ 项的系数），此处的消元指的是消成阶梯型矩阵，然后最后再 $O(n^4)$ 反过来带入求值，令下图中绿色节点为位置 $(i,j)$：</p>
+<p><img src="/img/gauss1.png"></p>
+<p>那么位置 $(i,j)$ 这个方程仅有橙色、绿色位置是有值的，并且位置 $(i,j)$ 有值的方程也只有橙色、绿色位置的方程，因此我们单次消元的时间复杂度就是 $O(n^2)$，一共 $O(n^2)$ 次消元，最后带入即可，总的时间复杂度为 $O(n^4)$。</p>
+<h2 id="方法-3-主元法"><a href="#方法-3-主元法" class="headerlink" title="方法 3 主元法"></a>方法 3 主元法</h2><p>我们发现，如果设第一行的未知数为 $x_1,x_2,\dots,x_n$，那么剩下 $n-1$ 行每个 $f$ 都可以唯一的用 $x_1,x_2,\dots,x_n$ 表示出来，最后再根据最后一行 $n$ 个方程 $n$ 个未知数来得到 $x_1,x_2,\dots,x_n$，最后对每个位置带入求值即可。</p>
+<p>因为：<br>$$<br>f_{i,j} &#x3D;<br>\begin{cases}</p>
+<p>0 &amp; i&#x3D;n,j&#x3D;m \\<br>p_{i,j,1}f_{i-1,j}+p_{i,j,2}f_{i,j-1}+p_{i,j,3}f_{i+1,j}+p_{i,j,4}f_{i,j+1} &amp; \text{Otherwise}</p>
+<p>\end{cases}<br>$$<br>所以有：$-p_{i,j,3}f_{i+1,j}&#x3D;p_{i,j,1}f_{i-1,j}+p_{i,j,2}f_{i,j-1}+p_{i,j,4}f_{i,j+1}-f_{i,j}$，然后直接根据一行计算出下一行的值，再用边界为 $0$ 的情况解 $n$ 个未知数的方程即可，时间复杂度 $O(n^3)$。</p>
 <script src="https://giscus.app/client.js"
         data-repo="acoipp/blog_pl"
         data-repo-id="R_kgDOLPCpEQ"

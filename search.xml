@@ -4943,8 +4943,8 @@
       </tags>
   </entry>
   <entry>
-    <title>THUSC &amp; PKUSC 2024 部分题解</title>
-    <url>/2024/05/23/THUSC-PKUSC-2024-%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</url>
+    <title>THUSC 2024 部分题解</title>
+    <url>/2024/05/23/THUSC-2024-%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="THUSC-2024-简要题解"><a href="#THUSC-2024-简要题解" class="headerlink" title="THUSC 2024 简要题解"></a>THUSC 2024 简要题解</h1><h2 id="T1-弃光魔使的能量塔"><a href="#T1-弃光魔使的能量塔" class="headerlink" title="T1 弃光魔使的能量塔"></a>T1 弃光魔使的能量塔</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>题目大意，给定 $T,d$，$T$ 组数据，每组数据给出 $n_1,n_2,\dots,n_d,p,l$，求 $\sum_{i_1&#x3D;0}^{n_1-1}\sum_{i_2&#x3D;0}^{n_2-1} \dots \sum_{i_d&#x3D;0}^{n_d-1} \max(0,i_1 \operatorname{xor} i_2 \operatorname{xor} \dots \operatorname{xor} i_d -l) \bmod p$。</p>
 <p>其中 $T \le 10,d \le 10$，其余数据在 long long 范围内，$p,l$ 在 int 范围内。</p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>处理出三个数组即可，$f_{i,S}$ 表示到第 $i$ 位，前面不管填了什么，这一位填完之后这 $d$ 个数的数位情况为 $S$，其中如果 $S_j&#x3D;0$ 代表 $i_j$ 这个数第 $i-1$ 及以下都没有填 0&#x2F;1 的限制了；否则就相当于 $i_j$ 在 $i$ 位及以上都完全与 $n_j-1$ 相同，就有限制。（这一部分可以根据数位 dp 来理解）</p>

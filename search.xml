@@ -5030,4 +5030,63 @@
         <tag>夏令营</tag>
       </tags>
   </entry>
+  <entry>
+    <title>带权二分（wqs 二分）解析</title>
+    <url>/2024/06/16/%E5%B8%A6%E6%9D%83%E4%BA%8C%E5%88%86%EF%BC%88wqs-%E4%BA%8C%E5%88%86%EF%BC%89%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><blockquote>
+<p>现在给出 $n$ 个物品和 $k$ 的限制，要求从 $n$ 个物品中选出恰好 $k$ 个物品满足物品权值之和最大&#x2F;小。</p>
+</blockquote>
+<p>这是 wqs 二分的经典模型，或者说：</p>
+<blockquote>
+<p>给出 $n$ 个物品，要求划分为 $k$ 组，任意物品组都有权值，要求每组的权值之和最大&#x2F;小。</p>
+</blockquote>
+<p>用数学语言表达就是：</p>
+<blockquote>
+<p>构造 $k$ 个集合 $S_1,S_2,\dots,S_k$ 满足任意两个集合交为空，所有集合并为全集，此时求 $\max{w_{S_1}+w_{S_2}+\dots+w_{S_k}}$​。</p>
+</blockquote>
+<p>但是在大部分时候 $S$ 的划分都有贪心在里面，所以实际上 $S$ 的每个集合都是 $n$ 个物品按照一定顺序排列后的区间，在后面的例子中会见到它。</p>
+<h2 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h2><p>下面我们用两个用例来更好地解释一下 wqs 二分模型以及其原理，上面讲述了 wqs 二分的两种常见模型，接下来是第一种模型，由于没有较好的例子，因此我们选择一个“简单”的题目：</p>
+<blockquote>
+<p>给定 $n$ 个物品，每个物品有权值 $w_i$，要求选恰好 $k$ 个满足物品权值和最大。</p>
+</blockquote>
+<p>一个简单的做法就是排序后选就可以了，这显然不是 wqs 二分，时间复杂度为 $O(n \log n)$，我们考虑不用排序，转而 dp：<br>$$<br>f_{i,j} &#x3D; \max(f_{i-1,j},f_{i-1,j-1}+w_i)<br>$$<br>这就是最简单的 dp 式，但是它是二维的，时间复杂度也是 $O(n^2)$，我们观察 $f_{n,i}$ 在图上以 $i$ 为 $x$ 轴，$f_{n,i}$ 为 $y$ 轴的图像：</p>
+<p><img src="/img/wqs.png"></p>
+<p>这个时候它是一个上凸壳的样子，意味着我们可以用一条线去截它，并且每个点都有可能被线截到（三点共线除外），并且我们发现截取每个点的直线斜率是单调的，于是我们直接二分这条直线的斜率，然后考虑 dp 求出这条直线截凸包时的截距是多少，容易发现，设截距为 $p$，那么第 $i$ 个点截出来的截距就是 $f_{n,i}-ip$，于是我们令每个物体的代价减去 $k$，最后再额外记录选了多少个物品就是这条线截出来的点，即：<br>$$<br>f_i &#x3D; \max(f_{i-1},f_{i-1}+(w_i-p))<br>$$<br>然后再记一个 $g$ 表示选了多少个物品即可，最终 $(g_n,f_n)$ 就是截出来直线与凸包相交的点，对于这道题而言，如果 $g_n&#x3D;k$，直接输出答案即可；如果 $g_n&lt;k$，那么代表当前直线截距太大了；如果 $g_n&gt;k$，那么代表当前直线斜率太小了；但是有三点共线的情况截不到 $k$ 这个点，因为都知道斜率了，所以直接得到 $f_{n,k}$ 的答案并不难，直接加上 $kp$ 即可。</p>
+<p>具体实现上，二分到一定精度，直接四舍五入输出 $f_n+kp$ 就可以了，不需要一定截取到 $k$​​ 这个点。</p>
+<p>那么这样就用 wqs 二分实现了这个简单的问题，但是它的精髓是将二维 dp 转化为一维 dp 然后解决，十分巧妙。</p>
+<p>通过一道简单的题目得知 wqs 二分的具体作用之后，我们可以上一点层次了，尝试解决之前提到的那个问题：</p>
+<blockquote>
+<p>有 $n$ 个小镇，你需要从中恰好选择 $k$ 个不重复的小镇，$\sum_{i&#x3D;1}^n dis_i$ 最小，其中 $dis_i$ 表示距离 $i$ 号小镇最近的被选择的小镇距离它多少单位。</p>
+</blockquote>
+<p>首先，贪心地将这些小镇按照数轴顺序排序，设 $w_{l,r}$ 表示 $l \sim r$ 号小镇中选择一个，其他小镇（$l \sim r$）到这一个小镇的距离和最小是多少，容易发现选中位数就可以了。</p>
+<p>那么得到：<br>$$<br>f_{i,j} &#x3D; \min_{k&#x3D;1}^i {f_{k-1,j-1}+w_{k,i}}<br>$$<br>因为 $w$ 函数具有四边形不等式（证明略）并且观察得到 $f_{n,i}$ 具有凸性，于是直接二分斜率 $p$ 即可，二分之后按照普通的优化四边形不等式的 dp 就可以了，下面给出参考代码，时间复杂度 $O(n \log^2 n)$​​。</p>
+<p>原题：<a href="https://www.luogu.com.cn/problem/P6246">P6246 IOI2000 邮局 加强版 加强版</a>。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll n,m,i,a[N],f2[N],ans2,beg[N],head,tail,pos[N],pro[N];</span><br><span class="line"><span class="type">double</span> f1[N],ans1;</span><br><span class="line"><span class="type">double</span> l,r,mid;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">calc</span><span class="params">(ll l,ll r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l&gt;r) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(l==r) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	ll pos = (l+r)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">return</span> a[pos]*(pos-l+<span class="number">1</span>)-(pro[pos]-pro[l<span class="number">-1</span>])+(pro[r]-pro[pos])-(r-pos)*(a[pos]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">double</span> val)</span></span>&#123;</span><br><span class="line">	ans1=<span class="number">1e18</span>,ans2=<span class="number">-1</span>,f1[<span class="number">0</span>]=<span class="number">0</span>,f2[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	head=<span class="number">1</span>,tail=<span class="number">1</span>,beg[head]=<span class="number">1</span>,pos[head]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(head&lt;tail&amp;&amp;beg[head+<span class="number">1</span>]&lt;=i) head++;</span><br><span class="line">		f1[i]=f1[pos[head]]+<span class="built_in">calc</span>(pos[head]+<span class="number">1</span>,i)+val,f2[i]=f2[pos[head]]+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(head&lt;=tail&amp;&amp;f1[pos[tail]]+<span class="built_in">calc</span>(pos[tail]+<span class="number">1</span>,beg[tail])&gt;f1[i]+<span class="built_in">calc</span>(i+<span class="number">1</span>,beg[tail])) tail--;</span><br><span class="line">		<span class="keyword">if</span>(head&lt;=tail)&#123;</span><br><span class="line">			<span class="keyword">if</span>(f1[pos[tail]]+<span class="built_in">calc</span>(pos[tail]+<span class="number">1</span>,n)&lt;f1[i]+<span class="built_in">calc</span>(i+<span class="number">1</span>,n)) <span class="keyword">continue</span>;</span><br><span class="line">			ll l=<span class="built_in">max</span>(beg[tail],i),r=n;</span><br><span class="line">			<span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">				ll mid = (l+r+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">				<span class="keyword">if</span>(f1[pos[tail]]+<span class="built_in">calc</span>(pos[tail]+<span class="number">1</span>,mid)&lt;f1[i]+<span class="built_in">calc</span>(i+<span class="number">1</span>,mid)) l=mid;</span><br><span class="line">				<span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			tail++,beg[tail]=l+<span class="number">1</span>,pos[tail]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> tail++,beg[tail]=i+<span class="number">1</span>,pos[tail]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	ans1 = f1[n],ans2 = f2[n];</span><br><span class="line">	<span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i],pro[i]=(pro[i<span class="number">-1</span>]+a[i]);</span><br><span class="line">	l=<span class="number">0</span>,r=<span class="number">1e10</span>;</span><br><span class="line">	<span class="keyword">while</span>(r-l&gt;<span class="number">1e-8</span>)&#123;</span><br><span class="line">		mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">		<span class="built_in">solve</span>(mid);</span><br><span class="line">		<span class="keyword">if</span>(ans2&lt;m) r=mid;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(ans2==m)&#123;</span><br><span class="line">			cout&lt;&lt;(ll)(<span class="built_in">round</span>(ans1-m*mid))&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> l=mid;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;(ll)(<span class="built_in">round</span>(ans1-m*mid))&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>wqs 二分应用的场景还很多，特别是在一些大型比赛中，只要函数有凸性（可以是整个上凸壳，不一定单调；或者下凸壳），都可以把二维状态压缩成一维。</p>
+<p>不过要特别注意的是，函数单调不代表其具有凸性，这里需要特别注意。</p>
+<p>上面就是 wqs 二分，也称带权二分的大部分用法，还算比较容易理解的了。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+        <tag>动态规划</tag>
+        <tag>wqs二分</tag>
+        <tag>凸函数</tag>
+      </tags>
+  </entry>
 </search>

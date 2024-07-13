@@ -5320,4 +5320,57 @@
         <tag>学期总结</tag>
       </tags>
   </entry>
+  <entry>
+    <title>单位根反演</title>
+    <url>/2024/07/13/%E5%8D%95%E4%BD%8D%E6%A0%B9%E5%8F%8D%E6%BC%94/</url>
+    <content><![CDATA[<h1 id="单位根反演"><a href="#单位根反演" class="headerlink" title="单位根反演"></a>单位根反演</h1><p>单位根的定义此处不再赘述，根据单位根的相关性质，我们可以得到：</p>
+<p>$$<br>[m \mid i] &#x3D; \frac 1m \sum_{k&#x3D;0}^{m-1} \omega_{m}^{ki}<br>$$</p>
+<p>证明如下：</p>
+<p>考虑等比数列求和 $S&#x3D; \dfrac{\omega_m^{im}-1}{\omega_m^i -1}$，当 $m \nmid i$ 的时候，分子为 $0$，分母不为 $0$，$S&#x3D;0$；当 $m \mid i$ 的时候，分母为 $0$，需要特判，这个时候 $\omega_{m}^{ki}&#x3D;1$，所以 $S&#x3D;1$，得证。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="https://www.luogu.com.cn/problem/P10084">P10084 [GDKOI2024 提高组] 计算</a></p>
+<p>转化后，题意变为求出在 $[1,n]$ 内选出若干个数，和是 $m$ 的倍数的选数方案。其中 $m \mid n$，$1 \le n \le 10^{18}$，$1 \le m \le 10^7$，多测 $T \le 10^4$。</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>首先设 $f(x)&#x3D;(1+x)(1+x^2)\dots(1+x^n)$，设其展开后的式子为 $a_0+a_1x+a_2x^2+\dots+a_kx^k$，那么答案就是 $\sum_{m \mid i} a_i$。</p>
+<p>因为前面提到 $[m \mid i] &#x3D; \frac 1m \sum_{k&#x3D;0}^{m-1} \omega_{m}^{ki}$，所以答案就是 $\sum_{i&#x3D;0}^{m-1} f(\omega_m^i)$。</p>
+<p>问题转化为如何快速计算该式子。</p>
+<p>当 $m$ 为奇质数的时候，根据单位根的定义，我们对于 $z^m-1$ 在复数域上进行分解有 $z^m-1&#x3D;(z-\omega_m^{1})(z-\omega_m^2)\dots(z-\omega_m^m)$，带入 $z&#x3D;-1$，得到 $(1+\omega_m^1)(1+\omega_m^2)\dots(1+\omega_m^m)&#x3D;2$，因为 $m$ 是奇质数，所以 $(1+\omega_m^{i})(1+\omega_m^{2i})\dots(1+\omega_m^{mi})&#x3D;2$。</p>
+<blockquote>
+<p>当 $m$ 为偶数的时候同理等于 $0$。</p>
+</blockquote>
+<p>又因为 $m \mid n$，所以：$f(\omega_m^i) &#x3D; 2^{\frac nm}$，当 $i&#x3D;0$ 的时候需要特判，答案为 $2^n$，所以 $\sum_{i&#x3D;0}^{m-1} f(\omega_m^i)&#x3D;\frac 1m((m-1)2^{\frac nm}+2^n)$。</p>
+<p>如果 $m$ 不是奇质数又怎么办呢，设 $(i,m)&#x3D;p$，那么 $i \sim mi$ 按照模 $m$ 分成 $((1+\omega_m^p)(1+\omega_m^{2p})\dots(1+\omega_m^m))^{p}$，所以 $f(\omega_{m}^i)&#x3D;((1+\omega_m^p)(1+\omega_m^{2p})\dots(1+\omega_m^m))^{p \frac nm}$。</p>
+<p>因为单位根有 $\omega_{bk}^{ak}&#x3D;\omega_b^a$，所以 $f(\omega_{m}^i)&#x3D;((1+\omega_{\frac mp}^1)(1+\omega_{\frac mp}^{2})\dots(1+\omega_{\frac mp}^{\frac mp}))^{p \frac nm}$，根据上文，如果 $\frac mp$ 是偶数，那么结果为 $0$，否则结果为 $2$。</p>
+<p>所以式子变成：<br>$$<br>\frac 1m(\sum_{i&#x3D;0}^{m-1} 2^{p \frac nm}[2 \nmid \frac mp])<br>$$</p>
+<p>注意到 $i&#x3D;0$ 的答案恰好就是 $2^n$，因此不需要特判。</p>
+<p>因为 $2 \nmid \frac mp$，我们发现如果设 $m&#x3D;2^k \times u$，$k$ 最大，那么只有 $i&#x3D;2^k \times q$ 的时候 $2 \nmid p$，所以直接枚举 $q \le u$，得到：</p>
+<p>$$<br>\begin{aligned}<br>\frac 1m(\sum_{i&#x3D;0}^{m-1} 2^{p \frac nm}[2 \nmid \frac mp]) &amp;&#x3D; \frac 1m(\sum_{i&#x3D;1}^{u}2^{\frac{n}{2^ku}\gcd(2^ku,2^ki)}) \<br>&amp;&#x3D; \frac 1m(\sum_{i&#x3D;1}^{u}2^{\frac{n}{u}\gcd(u,i)}) \<br>\end{aligned}<br>$$</p>
+<p>于是考虑枚举 $\gcd(u,i)&#x3D;d$，则：</p>
+<p>$$<br>\frac 1m(\sum_{d \mid u}2^{\frac nu d} \varphi(\frac ud))<br>$$</p>
+<p>因为 $u$ 不含 $2$ 因子，所以 $u$ 的因数特别少，直接枚举即可，时间复杂度就是 $O(Td(u))$，$d(u)$ 可能大概在 $200$ 左右。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>代码如下，仅供参考：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 10000005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll T,m,a,b,c,d,i,l,r,up,u,ans,tot;</span><br><span class="line"><span class="type">int</span> phi[N],pri[N];</span><br><span class="line"><span class="type">bool</span> vis[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">qmi</span><span class="params">(ll a,ll b,ll p)</span></span>&#123;</span><br><span class="line">	ll res = <span class="number">1</span>%p,t = a;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*t%p;</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	phi[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">2</span>;i&lt;=<span class="number">1e7</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i]) pri[++tot]=i,phi[i]=i<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(ll j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i*pri[j]&gt;<span class="number">1e7</span>) <span class="keyword">break</span>;</span><br><span class="line">			vis[i*pri[j]]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>)&#123;</span><br><span class="line">				phi[i*pri[j]]=phi[i]*pri[j];</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> phi[i*pri[j]]=phi[i]*(pri[j]<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">init</span>();</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		ans=<span class="number">0</span>;</span><br><span class="line">		cin&gt;&gt;m&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line">		<span class="keyword">if</span>(a&amp;&amp;b) l = <span class="built_in">qmi</span>(m,__gcd(a,b),LLONG_MAX)+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> l=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(c&amp;&amp;d) r = <span class="built_in">qmi</span>(m,__gcd(c,d),LLONG_MAX);</span><br><span class="line">		<span class="keyword">else</span> r=<span class="number">0</span>;</span><br><span class="line">		up = r-l+<span class="number">1</span>,u = m;</span><br><span class="line">		<span class="keyword">while</span>(u%<span class="number">2</span>==<span class="number">0</span>) u/=<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i*i&lt;=u;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(u%i==<span class="number">0</span>)&#123;</span><br><span class="line">				ans = (ans+<span class="built_in">qmi</span>(<span class="number">2</span>,up/u*i,mod)*phi[u/i])%mod;</span><br><span class="line">				<span class="keyword">if</span>(i!=u/i) ans = (ans+<span class="built_in">qmi</span>(<span class="number">2</span>,up/u*(u/i),mod)*phi[u/(u/i)])%mod;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;<span class="function">ans*<span class="title">qmi</span><span class="params">(m,mod<span class="number">-2</span>,mod)</span>%mod&lt;&lt;endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+        <tag>数学</tag>
+        <tag>数论</tag>
+        <tag>单位根</tag>
+        <tag>反演</tag>
+      </tags>
+  </entry>
 </search>

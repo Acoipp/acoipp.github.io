@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2024 年 7 月集训总结 - Acoipp 的个人博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="OI/ACM 相关笔记,主要通过这八场比赛找找感觉。
+做题是 DFS，讲题是 BFS，听题量力而为。
+做题的时候很容易浪费太多时间在一道得分期望低的题目上，这样会导致很炸裂的比赛成绩。
+还好代码力能够拯救我，基本上没有调试,"> 
+    <meta name="author" content="Acoipp"> 
+    <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="2024 年 7 月集训总结 - Acoipp 的个人博客"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,主要通过这八场比赛找找感觉。
+做题是 DFS，讲题是 BFS，听题量力而为。
+做题的时候很容易浪费太多时间在一道得分期望低的题目上，这样会导致很炸裂的比赛成绩。
+还好代码力能够拯救我，基本上没有调试,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Acoipp 的个人博客"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="2024 年 7 月集训总结 - Acoipp 的个人博客"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,主要通过这八场比赛找找感觉。
+做题是 DFS，讲题是 BFS，听题量力而为。
+做题的时候很容易浪费太多时间在一道得分期望低的题目上，这样会导致很炸裂的比赛成绩。
+还好代码力能够拯救我，基本上没有调试,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Acoipp 的个人博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">2024 年 7 月集训总结</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">2024 年 7 月集训总结</h1>
+        <div class="stuff">
+            <span>七月 13, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%AD%A6%E6%9C%9F%E6%80%BB%E7%BB%93/" rel="tag">学期总结</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>主要通过这八场比赛找找感觉。</p>
+<p>做题是 DFS，讲题是 BFS，听题量力而为。</p>
+<p>做题的时候很容易浪费太多时间在一道得分期望低的题目上，这样会导致很炸裂的比赛成绩。</p>
+<p>还好代码力能够拯救我，基本上没有调试太久就过了大样例，不过仍然有一两道题目没有对拍挂掉。（那两道其实可以对拍的）</p>
+<p>很多代码的细节，以及偷换概念的代码写法就会让自己认为代码是对的，实际上连逻辑都有问题。不过我很少犯没开 <code>long long</code> 的问题，因为 <code>#define ll long long</code>，有的时候需要用 <code>__int128</code> 基本上也是没什么太多细节问题的。主要还是注意以下写代码的时候脑子一定要清醒，否则容易在写代码的时候“自以为是”或者“漏情况”。</p>
+<p>然后是策略，NOI 级别的比赛根据往年的经验来看，T1 基本上应该能做出来，这几场比赛还是能够想出来 T1 的大致思路的，不过很遗憾的是 Day2T1，都近在眼前了但是却自己否决了这个做法。</p>
+<p>T2 是能做就一定做，如果 T1 做完有剩下的时间就会去全力啃 T2，T2 往往是区分集训队的关键。</p>
+<p>最后是 T3，T3 除非太简单，一定得去拼暴力而不是冲正解，不然到后面就会爆炸很惨。（最好的情况下是 T2 先看题，然后一边想，一边把 T3 的暴力打了）</p>
+<p>最后就是大佬太强了，膜拜他们。</p>
+<p>%%% dyh %%% jly %%% gyc %%% djq</p>
+<p>附录 1（成绩表）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">#</th>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+<th align="center">Rank（同分同排名）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$1$</td>
+<td align="center">$7$</td>
+<td align="center">$29$</td>
+<td align="center">$29$</td>
+<td align="center">$17$</td>
+</tr>
+<tr>
+<td align="center">$2$</td>
+<td align="center">$13$</td>
+<td align="center">$45$</td>
+<td align="center">$30$</td>
+<td align="center">$9$</td>
+</tr>
+<tr>
+<td align="center">$3$</td>
+<td align="center">$100$</td>
+<td align="center">$100$</td>
+<td align="center">$40$</td>
+<td align="center">$8$</td>
+</tr>
+<tr>
+<td align="center">$4$</td>
+<td align="center">$100$</td>
+<td align="center">$10$</td>
+<td align="center">$30$</td>
+<td align="center">$6$</td>
+</tr>
+<tr>
+<td align="center">$5$</td>
+<td align="center">$20$</td>
+<td align="center">$80$</td>
+<td align="center">$100$</td>
+<td align="center">$23$</td>
+</tr>
+<tr>
+<td align="center">$6$</td>
+<td align="center">$25$</td>
+<td align="center">$0$</td>
+<td align="center">$0$</td>
+<td align="center">$49$</td>
+</tr>
+<tr>
+<td align="center">$7$</td>
+<td align="center">$60$</td>
+<td align="center">$48$</td>
+<td align="center">$0$</td>
+<td align="center">&#x2F;（数据有误，排名未更新）</td>
+</tr>
+<tr>
+<td align="center">$8$</td>
+<td align="center">$100$</td>
+<td align="center">$100$</td>
+<td align="center">$25$</td>
+<td align="center">$3$</td>
+</tr>
+</tbody></table>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="/mus/mu3.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="true"
+        data-ci="5716fc2235b32d5b5e82"
+        data-cs="907f96f6afbbcc0aca96b83eb204923010538f26"
+        data-r="acoipp.github.io-"
+        data-o="Acoipp"
+        data-a="Acoipp"
+        data-d="true"
+        data-p="https://proxy-gitalk-api.netlify.app/github_access_token"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+
+</html>

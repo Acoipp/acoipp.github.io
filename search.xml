@@ -5216,4 +5216,108 @@
         <tag>树</tag>
       </tags>
   </entry>
+  <entry>
+    <title>2024 年 7 月集训总结</title>
+    <url>/2024/07/13/2024-%E5%B9%B4-7-%E6%9C%88%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>主要通过这八场比赛找找感觉。</p>
+<p>做题是 DFS，讲题是 BFS，听题量力而为。</p>
+<p>做题的时候很容易浪费太多时间在一道得分期望低的题目上，这样会导致很炸裂的比赛成绩。</p>
+<p>还好代码力能够拯救我，基本上没有调试太久就过了大样例，不过仍然有一两道题目没有对拍挂掉。（那两道其实可以对拍的）</p>
+<p>很多代码的细节，以及偷换概念的代码写法就会让自己认为代码是对的，实际上连逻辑都有问题。不过我很少犯没开 <code>long long</code> 的问题，因为 <code>#define ll long long</code>，有的时候需要用 <code>__int128</code> 基本上也是没什么太多细节问题的。主要还是注意以下写代码的时候脑子一定要清醒，否则容易在写代码的时候“自以为是”或者“漏情况”。</p>
+<p>然后是策略，NOI 级别的比赛根据往年的经验来看，T1 基本上应该能做出来，这几场比赛还是能够想出来 T1 的大致思路的，不过很遗憾的是 Day2T1，都近在眼前了但是却自己否决了这个做法。</p>
+<p>T2 是能做就一定做，如果 T1 做完有剩下的时间就会去全力啃 T2，T2 往往是区分集训队的关键。</p>
+<p>最后是 T3，T3 除非太简单，一定得去拼暴力而不是冲正解，不然到后面就会爆炸很惨。（最好的情况下是 T2 先看题，然后一边想，一边把 T3 的暴力打了）</p>
+<p>最后就是大佬太强了，膜拜他们。</p>
+<p>%%% dyh %%% jly %%% gyc %%% djq</p>
+<p>附录 1（成绩表）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">#</th>
+<th align="center">T1</th>
+<th align="center">T2</th>
+<th align="center">T3</th>
+<th align="center">Rank（同分同排名）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$1$</td>
+<td align="center">$7$</td>
+<td align="center">$29$</td>
+<td align="center">$29$</td>
+<td align="center">$17$</td>
+</tr>
+<tr>
+<td align="center">$2$</td>
+<td align="center">$13$</td>
+<td align="center">$45$</td>
+<td align="center">$30$</td>
+<td align="center">$9$</td>
+</tr>
+<tr>
+<td align="center">$3$</td>
+<td align="center">$100$</td>
+<td align="center">$100$</td>
+<td align="center">$40$</td>
+<td align="center">$8$</td>
+</tr>
+<tr>
+<td align="center">$4$</td>
+<td align="center">$100$</td>
+<td align="center">$10$</td>
+<td align="center">$30$</td>
+<td align="center">$6$</td>
+</tr>
+<tr>
+<td align="center">$5$</td>
+<td align="center">$20$</td>
+<td align="center">$80$</td>
+<td align="center">$100$</td>
+<td align="center">$23$</td>
+</tr>
+<tr>
+<td align="center">$6$</td>
+<td align="center">$25$</td>
+<td align="center">$0$</td>
+<td align="center">$0$</td>
+<td align="center">$49$</td>
+</tr>
+<tr>
+<td align="center">$7$</td>
+<td align="center">$60$</td>
+<td align="center">$48$</td>
+<td align="center">$0$</td>
+<td align="center">&#x2F;（数据有误，排名未更新）</td>
+</tr>
+<tr>
+<td align="center">$8$</td>
+<td align="center">$100$</td>
+<td align="center">$100$</td>
+<td align="center">$25$</td>
+<td align="center">$3$</td>
+</tr>
+</tbody></table>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
+      <tags>
+        <tag>学期总结</tag>
+      </tags>
+  </entry>
 </search>

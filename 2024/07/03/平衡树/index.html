@@ -10,10 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
-例如下面这棵树：
-
-它的中序遍历就是 $1,2,3,4,5,6,7$，并且树高是 $\log n$，这样的话我们,"> 
+    <meta name="description" content="OI/ACM 相关笔记,平衡树本文章中的部分代码和思路来自于 Treap - OI Wiki 和 Splay 树 - OI Wiki。
+平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下,"> 
     <meta name="author" content="Acoipp"> 
     <link rel="alternative" href="atom.xml" title="Acoipp 的个人博客" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -22,10 +21,9 @@
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="平衡树 - Acoipp 的个人博客"/>
-    <meta name="twitter:description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
-例如下面这棵树：
-
-它的中序遍历就是 $1,2,3,4,5,6,7$，并且树高是 $\log n$，这样的话我们,"/>
+    <meta name="twitter:description" content="OI/ACM 相关笔记,平衡树本文章中的部分代码和思路来自于 Treap - OI Wiki 和 Splay 树 - OI Wiki。
+平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下,"/>
     
     
     
@@ -33,10 +31,9 @@
     <meta property="og:site_name" content="Acoipp 的个人博客"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content="平衡树 - Acoipp 的个人博客"/>
-    <meta property="og:description" content="OI/ACM 相关笔记,平衡树平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
-例如下面这棵树：
-
-它的中序遍历就是 $1,2,3,4,5,6,7$，并且树高是 $\log n$，这样的话我们,"/>
+    <meta property="og:description" content="OI/ACM 相关笔记,平衡树本文章中的部分代码和思路来自于 Treap - OI Wiki 和 Splay 树 - OI Wiki。
+平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：中序遍历的结果是单调的。
+例如下,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -78,7 +75,8 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
+            <h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>本文章中的部分代码和思路来自于 <a target="_blank" rel="noopener" href="https://oi.wiki/ds/treap/">Treap - OI Wiki</a> 和 <a target="_blank" rel="noopener" href="https://oi.wiki/ds/splay/">Splay 树 - OI Wiki</a>。</p>
+<p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
 <p>例如下面这棵树：</p>
 <p><img src="/img/1.png"></p>
 <p>它的中序遍历就是 $1,2,3,4,5,6,7$，并且树高是 $\log n$，这样的话我们在树上就算暴力跳边，时间复杂度也是 $\log$ 级别的。</p>

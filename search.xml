@@ -3170,7 +3170,8 @@
   <entry>
     <title>平衡树</title>
     <url>/2024/07/03/%E5%B9%B3%E8%A1%A1%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
+    <content><![CDATA[<h1 id="平衡树"><a href="#平衡树" class="headerlink" title="平衡树"></a>平衡树</h1><p>本文章中的部分代码和思路来自于 <a href="https://oi.wiki/ds/treap/">Treap - OI Wiki</a> 和 <a href="https://oi.wiki/ds/splay/">Splay 树 - OI Wiki</a>。</p>
+<p>平衡树是二叉查找树的一种，二叉查找树有一个很强的性质：<strong>中序遍历的结果是单调的。</strong></p>
 <p>例如下面这棵树：</p>
 <p><img src="/img/1.png"></p>
 <p>它的中序遍历就是 $1,2,3,4,5,6,7$，并且树高是 $\log n$，这样的话我们在树上就算暴力跳边，时间复杂度也是 $\log$ 级别的。</p>

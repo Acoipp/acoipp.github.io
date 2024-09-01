@@ -5497,4 +5497,65 @@
         <tag>Splay</tag>
       </tags>
   </entry>
+  <entry>
+    <title>矩阵的转置原理</title>
+    <url>/2024/09/01/%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BD%AC%E7%BD%AE%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p>​     </p>
+<h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><p>矩阵乘法故名思议是两个矩阵之间的乘法操作，定义为矩阵 $A$ 和矩阵 $B$ 相乘得到矩阵 $C$，其中 $A,B,C$ 的规模分别是 $n \times m,m \times k,n \times k$，每个位置上的值为：<br>$$<br>C_{i,j} &#x3D; \sum_{k&#x3D;1}^m A_{i,k}B_{k,j}<br>$$<br>可以理解为 $A$ 中第 $i$ 行向量与 $B$ 中第 $j$ 列向量点积的结果得到 $C$。</p>
+<p>特别的，矩阵也可以和向量相乘，向量也可以看做是某一个维度是 $1$ 的矩阵。</p>
+<p><strong>矩阵乘法具有结合律，但不满足交换律：$(AB)C&#x3D;A(BC)$，但是 $AB \ne BA$。</strong></p>
+<h2 id="矩阵的转置原理"><a href="#矩阵的转置原理" class="headerlink" title="矩阵的转置原理"></a>矩阵的转置原理</h2><p>转置原理一般是和矩阵联系在一起的，设 $V$ 是一个矩阵，$f$ 是一个列向量，即 $V$ 的大小为 $n \times n$，$f$ 的大小为 $n \times 1$，如果我们要求 $Vf$ 的值，我们可以考虑通过求 $V^T f$ 的值求出来。（这种做法完全摒弃了组合意义，无法直接解释，只能通过数学逻辑一步一步推导）</p>
+<p>首先，设 $V&#x3D;\prod_{i&#x3D;1}^k E_i$，其中 $E$ 是一个初等变换，包括把 $f$ 的一个位的值乘上一个常数 $k$ 加到另一位上。</p>
+<p>那么 $V^T &#x3D; \prod_{i&#x3D;1}^k E_{k-i+1}^T$，$E^T$ 表示设 $E$ 把 $x$ 位的值乘上一个常数 $k$ 加到 $y$ 上，那么 $E^T$ 的含义就是把 $y$ 位的值乘上一个常数 $k$ 加到 $x$ 上。</p>
+<p>特别的，多项式 $A \times B&#x3D;C$ 的转置是 $C \times ^T B&#x3D;A$，即 $c_ib_j \to a_{i-j}$，做了 NTT 乘法之后 $A$ 从 $len_B$ 位开始取数。</p>
+<p>从另一方面去解释 $Vf$ 可以直接看做 $V$ 的每一行的行向量去乘上 $f$ 这个向量的点积，而 $V^Tf$ 可以直接看做 $V$ 的每一列的列向量去乘上 $f$ 这个向量的点积。</p>
+<p>在通常情况下，我们都要先探索 $V^Tf$ 的求法，然后根据上文初等变换的分解，再得到 $Vf$ 的求法，尽管最后 $Vf$ 的求法有可能无法用组合意义理解，但严谨的数学推理可以证明其正确性。</p>
+<p>下面有两道例题：</p>
+<h3 id="例题-1-多项式多点求值"><a href="#例题-1-多项式多点求值" class="headerlink" title="例题 1-多项式多点求值"></a>例题 1-多项式多点求值</h3><p>给出 $n-1$ 次多项式 $F$ 求出其在 $a_1,a_2,\dots,a_n$ 处的点值。</p>
+<p>本质上即是求矩阵乘法 $Af$ 的值，其中：<br>$$<br>A&#x3D;\begin{bmatrix}<br>a_1^0 &amp; a_1^1 &amp; a_1^2 &amp; \cdots &amp; a_1^{n-1} \<br>a_2^0 &amp; a_2^1 &amp; a_2^2 &amp; \cdots &amp; a_2^{n-1} \<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>a_n^0 &amp; a_n^1 &amp; a_n^2 &amp; \cdots &amp; a_n^{n-1} \<br>\end{bmatrix}<br>f&#x3D;\begin{bmatrix}<br>F_0 \F_1 \ \vdots \ F_{n-1}<br>\end{bmatrix}<br>$$<br>我们考虑求 $A^Tf$ 的值，即 $A$ 的每一列向量乘上 $f$，即求 $g_i &#x3D; \sum_{j&#x3D;1}^n a_j^i F_{j-1}$。</p>
+<p>这个的求法本质也很简单，即多项式 $\sum_{i&#x3D;1}^n \frac{F_{i-1}}{1-a_ix}$ 的第 $0 \sim n$ 项系数（证明只需要用到公式 $\sum_{i} a_j^ix^i&#x3D;\frac 1{1-a_jx}$），具体的来说，我们进行类似于线段树的分治过程，每次求出 $\sum_{i&#x3D;l}^{mid} \frac{F_{i-1}}{1-a_ix}$ 的分子和分母以及 $\sum_{i&#x3D;mid+1}^r \frac{F_{i-1}}{1-a_ix}$ 的分子分母，最后通分合并即可，在末尾设分子多项式为 $f_1$，设分母多项式为 $f_2$，那么答案就是 $f_1f_2^{-1}$。</p>
+<p>需要注意的是通分合并的时候需要预处理一下分母的乘积，即 $\prod_{i&#x3D;l}^r \frac 1{1-a_ix}$。（这里貌似可以不用预处理，只一层层的向上递归就行了，但是注意到此处求的是 $V^Tf$，后面求 $Vf$ 的时候需要预处理）</p>
+<p>这就是求  $V^Tf$ 的方法了，接下来我们考虑求 $Vf$，求 $Vf$​ 的时候根据矩阵的转置原理，首先需要把整个过程反过来，然后还要乘每个多项式的转置，即系数数组翻转。</p>
+<p>我们就得到了一个递归算法：</p>
+<ul>
+<li>最开始的时候预处理出 $\prod_{i&#x3D;l}^r \frac 1{1-a_ix}$。</li>
+<li>在线段树上合并的时候有 $f&#x3D;f_1R+f_2L$，根据转置原理，写成矩阵之后翻转，有 $f_1 &#x3D; f \times^T R$，$f_2&#x3D;f \times ^T L$。</li>
+<li>在上述过程中，线段树上一层一层向下递归，到某一层的时候有用的多项式长度只有该层大小。</li>
+<li>最后递归到叶子节点即为答案。</li>
+</ul>
+<p>时间复杂度为 $T(n)&#x3D;2T(\frac n2)+O(n \log n)&#x3D;O(n \log^2 n)$，并且常数有显著提升。</p>
+<h3 id="例题-2-CF-GYM-102978D"><a href="#例题-2-CF-GYM-102978D" class="headerlink" title="例题 2-CF GYM 102978D"></a>例题 2-CF GYM 102978D</h3><p>请对于每个 $k \in [1,n]$ 快速求出下列式子的值（$n \le 10^5$）：<br>$$<br>\sum_{i&#x3D;1}^n c_i \prod_{j&#x3D;1}^k (a_i+b_j)<br>$$<br>首先，写成矩阵的形式，设多项式 $F_i&#x3D;\prod_{j&#x3D;1}^i (x+b_j)$，那么答案可以写成下面这个样子：<br>$$<br>\begin{bmatrix}<br>[x^0]F_1 &amp; [x^1]F_1 &amp; \cdots &amp; [x^n]F_1 \<br>[x^0]F_2 &amp; [x^1]F_2 &amp; \cdots &amp; [x^n]F_2 \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>[x^0]F_n &amp; [x^1]F_n &amp; \cdots &amp; [x^n]F_n \<br>\end{bmatrix}<br>\begin{bmatrix}<br>a_1^0 &amp; a_2^0 &amp; \cdots &amp; a_n^0 \<br>a_1^1 &amp; a_2^1 &amp; \cdots &amp; a_n^1 \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>a_1^n &amp; a_2^n &amp; \cdots &amp; a_n^n \<br>\end{bmatrix}<br>\begin{bmatrix}<br>c_1 \ c_2 \ \vdots \ c_n<br>\end{bmatrix}<br>$$<br>根据上文所述矩阵乘法的结合律，我们可以先算后两个矩阵的乘积，即为 $f_i &#x3D; \sum_{j&#x3D;1}^n a_j^i c_j$，这个跟多项式多点求值里面提到的方法一样，直接分治下去做即可。</p>
+<p>然后问题就变成了求：<br>$$<br>\begin{bmatrix}<br>[x^0]F_1 &amp; [x^1]F_1 &amp; \cdots &amp; [x^n]F_1 \<br>[x^0]F_2 &amp; [x^1]F_2 &amp; \cdots &amp; [x^n]F_2 \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>[x^0]F_n &amp; [x^1]F_n &amp; \cdots &amp; [x^n]F_n \<br>\end{bmatrix}<br>\begin{bmatrix}<br>f_0 \ f_1 \ \vdots \ f_n<br>\end{bmatrix}<br>$$<br>这里就要用到转置原理了，考虑求出 $ans_i&#x3D;\sum_{j&#x3D;1}^n f_j[x^i]F_j$，这个我们仍然可以用线段树做，具体过程就不赘述了。</p>
+<p>我们最后仍然可以得到一个类似于多项式多点求值的算法，但是这个算法的答案并不是递归到叶子的那个 $0$ 次多项式，我们需要保留 $0 \sim 1$ 次的东西，因为这道题的递归起点是 $(x+b_j)$，所以得到了叶子的 $1$ 次多项式之后，设其为 $f_0+f_1x$，我们直接类似 $C \times ^T B \to A$ 即可，答案就是 $f_0b_j+f_1$。</p>
+<p>总的时间复杂度仍然是 $O(n \log^2 n)$。</p>
+<p>综上，转置原理是一个好的 Trick，像生成函数一样，摒弃了原本所有的组合意义，具有数学美，而不具有形象美，值得了解。</p>
+<script src="https://giscus.app/client.js"
+        data-repo="acoipp/blog_pl"
+        data-repo-id="R_kgDOLPCpEQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOLPCpEc4CdAa7"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OI</tag>
+        <tag>数学</tag>
+        <tag>多项式</tag>
+        <tag>矩阵</tag>
+        <tag>FFT</tag>
+        <tag>NTT</tag>
+        <tag>转置原理</tag>
+      </tags>
+  </entry>
 </search>
